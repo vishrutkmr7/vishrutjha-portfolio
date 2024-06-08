@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <Head>
           <title>Vishrut Jha</title>
-          <link rel="icon" href="/halo.png" />
+          {/* <link rel="icon" href="/favicon.ico" sizes="any" /> */}
         </Head>
       </head>
       <body>
