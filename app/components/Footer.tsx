@@ -8,10 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-200 dark:bg-gray-800 py-6 mt-auto">
       <div className="container mx-auto text-center">
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
-          Made using Vercel and Next.js
-        </p>
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center space-x-4 mb-4">
           <Link
             href="https://github.com/vishrutkmr7"
             passHref
@@ -48,8 +45,8 @@ const Footer = () => {
             </a>
           </Link>
         </div>
-        <p className="text-gray-500 dark:text-gray-400 mt-4">
-          {"© "}
+        <p className="text-gray-700 dark:text-gray-300">
+          Made using Vercel and Next.js <span className="mx-2">|</span> ©{" "}
           {new Date().getFullYear()} Vishrut Jha. All rights reserved.
         </p>
       </div>

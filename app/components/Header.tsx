@@ -13,12 +13,16 @@ const Header = () => {
   return (
     <header className="bg-gray-200 dark:bg-gray-800 py-4">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-white text-xl font-bold">Vishrut Jha</div>
+        <div className="text-gray-800 dark:text-white text-xl font-bold">
+          Vishrut Jha
+        </div>
         <nav className="flex space-x-4">
           <Link href="/" legacyBehavior={true}>
             <a
-              className={`text-white px-3 py-2 rounded ${
-                value === 0 ? "bg-blue-700" : "hover:bg-blue-500"
+              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
+                value === 0
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
               }`}
               onClick={() => handleChange(0)}
             >
@@ -27,8 +31,10 @@ const Header = () => {
           </Link>
           <Link href="/journey" legacyBehavior={true}>
             <a
-              className={`text-white px-3 py-2 rounded ${
-                value === 1 ? "bg-blue-700" : "hover:bg-blue-500"
+              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
+                value === 1
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
               }`}
               onClick={() => handleChange(1)}
             >
@@ -37,8 +43,10 @@ const Header = () => {
           </Link>
           <Link href="/projects" legacyBehavior={true}>
             <a
-              className={`text-white px-3 py-2 rounded ${
-                value === 2 ? "bg-blue-700" : "hover:bg-blue-500"
+              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
+                value === 2
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
               }`}
               onClick={() => handleChange(2)}
             >
@@ -47,8 +55,10 @@ const Header = () => {
           </Link>
           <Link href="/achievements" legacyBehavior={true}>
             <a
-              className={`text-white px-3 py-2 rounded ${
-                value === 3 ? "bg-blue-700" : "hover:bg-blue-500"
+              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
+                value === 3
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
               }`}
               onClick={() => handleChange(3)}
             >
