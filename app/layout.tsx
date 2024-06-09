@@ -4,7 +4,8 @@ import Head from "next/head";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
-import Navigation from "./components/navigation";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,8 +30,9 @@ export default function RootLayout({
       <Analytics />
       <SpeedInsights />
       <body className={inter.className}>
-        <Navigation />
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
