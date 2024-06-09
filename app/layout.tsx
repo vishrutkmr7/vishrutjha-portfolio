@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Metadata } from "next";
 import Head from "next/head";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
+import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./globals.css";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
@@ -16,20 +16,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <head>
-        <Head>
-          <title>Vishrut Jha</title>
-          <link rel="icon" href="/public/favicon.ico" sizes="any" />
-        </Head>
-      </head>
-      <Analytics />
-      <SpeedInsights />
+      <Head>
+        <title>Vishrut Jha</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body className={inter.className}>
+        <Analytics />
+        <SpeedInsights />
         <Header />
         {children}
         <Footer />
