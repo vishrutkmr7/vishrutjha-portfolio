@@ -31,6 +31,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <script async src="/node_modules/flowbite/dist/flowbite.min.js" />
       </body>
     </html>
   );
