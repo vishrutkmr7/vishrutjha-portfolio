@@ -2,8 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Navbar, Dropdown, Avatar } from "flowbite-react";
 
-const Header = () => {
+const Header: React.FC = () => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (index: number): void => {
@@ -11,63 +13,30 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-200 dark:bg-gray-800 py-4">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-gray-800 dark:text-white text-xl font-bold">
-          Vishrut Jha
-        </div>
-        <nav className="flex space-x-4">
-          <Link href="/" legacyBehavior={true}>
-            <a
-              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
-                value === 0
-                  ? "bg-gray-400 dark:bg-gray-600"
-                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
-              onClick={() => handleChange(0)}
-            >
-              About Me
-            </a>
-          </Link>
-          <Link href="/journey" legacyBehavior={true}>
-            <a
-              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
-                value === 1
-                  ? "bg-gray-400 dark:bg-gray-600"
-                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
-              onClick={() => handleChange(1)}
-            >
-              My Journey
-            </a>
-          </Link>
-          <Link href="/projects" legacyBehavior={true}>
-            <a
-              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
-                value === 2
-                  ? "bg-gray-400 dark:bg-gray-600"
-                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
-              onClick={() => handleChange(2)}
-            >
-              Projects
-            </a>
-          </Link>
-          <Link href="/achievements" legacyBehavior={true}>
-            <a
-              className={`text-gray-800 dark:text-white px-3 py-2 rounded ${
-                value === 3
-                  ? "bg-gray-400 dark:bg-gray-600"
-                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
-              onClick={() => handleChange(3)}
-            >
-              Achievements
-            </a>
-          </Link>
-        </nav>
-      </div>
-    </header>
+    <Navbar fluid={true} rounded={true}>
+      <Navbar.Brand href="https://flowbite.com/">
+        <Image
+          src="https://flowbite.com/docs/images/logo.svg"
+          className="mr-3 h-6 sm:h-9"
+          height={120}
+          width={120}
+          alt="Flowbite Logo"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite
+        </span>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Navbar.Link href="/navbars" active={true}>
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">About</Navbar.Link>
+        <Navbar.Link href="/navbars">Services</Navbar.Link>
+        <Navbar.Link href="/navbars">Pricing</Navbar.Link>
+        <Navbar.Link href="/navbars">Contact</Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
