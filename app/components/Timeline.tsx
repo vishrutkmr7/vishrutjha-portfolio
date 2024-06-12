@@ -30,7 +30,9 @@ const JourneyTimeline: React.FC = () => {
           <Timeline.Point icon={FaCalendar} />
           <Timeline.Content>
             <Timeline.Time>{item.time}</Timeline.Time>
-            <Timeline.Title>{item.title}</Timeline.Title>
+            <Timeline.Title className="text-white dark:text-white">
+              {item.title}
+            </Timeline.Title>
             <Timeline.Body>{item.body}</Timeline.Body>
             {item.link && (
               <Button color="gray" href={item.link.url}>
