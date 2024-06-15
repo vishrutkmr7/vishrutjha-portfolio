@@ -1,23 +1,39 @@
 [
   {
-    "time": "February 2022",
-    "title": "Application UI code in Tailwind CSS",
-    "body": "Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.",
-    "link": {
-      "text": "Learn More",
-      "url": "#"
-    }
-  },
-  {
-    "time": "March 2022",
-    "title": "Marketing UI design in Figma",
-    "body": "All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.",
+    "time": "September 2023 - Present",
+    "title": "Software Engineer - iOS at PNYX",
+    "body": "Headed the development of the PNYX iOS app using SwiftUI and AVFoundation for high-quality music playback. Enhanced the app’s user experience by integrating personalized AI music recommendations using Harmix.AI, handling large-scale data (10,000 songs) with content-based filtering techniques and CoreML. Implemented creative functionalities, such as Live Activities, interactive widgets, and App Clips for quick onboarding.",
     "link": null
   },
   {
-    "time": "April 2022",
-    "title": "E-Commerce UI code in Tailwind CSS",
-    "body": "Get started with dozens of web components and interactive elements built on top of Tailwind CSS.",
+    "time": "June 2023 - September 2023",
+    "title": "Software Development Engineer - I at Dhan AI Pvt. Ltd.",
+    "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
+    "link": null
+  },
+
+  {
+    "time": "August 2021 - May 2023",
+    "title": "Master of Science in Computer Science at Arizona State University",
+    "body": "Executed Hot-zone and Hot-cell analyses on a dataset from a New York taxi company, using Apache Spark for advanced geographic data processing. Integrated ArcGIS for enhanced spatial analysis and visualization capabilities. Optimized PostgreSQL and ArcGIS queries to analyze distances and determine optimal routes, enhancing the application’s decision-making algorithms through improved spatial data manipulation and mapping techniques.",
+    "link": null
+  },
+  {
+    "time": "June 2019 - July 2021",
+    "title": "Full-stack Developer at Compliance Group Inc.",
+    "body": "Played a key role in the backend development of FDAlytics and iQuality using Python, Django REST Framework and later, GraphQL, contributing to a 20% uplift in data processing efficiency. Collaborated with a team of 6 developers to develop a data categorization module, significantly enhancing data retrieval speed and accuracy using Azure Search. Contributed to the implementation testing and deployment pipelines using PyTest, Jest, and GitHub Actions for CI/CD processes, which cut down deployment errors by 50% and improved the quality of the deliverables.",
+    "link": null
+  },
+  {
+    "time": "September 2018 - May 2019",
+    "title": "Software Engineer at AuthBase Inc.",
+    "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of over 10,000 DLLs (Dynamic Link Libraries), enhancing real-time security analytics, and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD (National Vulnerability Database) and CVE (Common Vulnerabilities and Exposures) for robust threat management. Achieved a 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
+    "link": null
+  },
+  {
+    "time": "August 2014 - May 2018",
+    "title": "Bachelor of Engineering in Computer Science and Engineering at Panjab University",
+    "body": "Developed and maintained back end API using Graph QL, functionalities and test-cases using React JS and Jest, for various modules of the product iQuality. Helped improve the performance metrics by 30%. Collaborated with the development team of 25 members in maintaining the MySQL database and UI bug-fixing tasks for an efficient workflow.",
     "link": null
   }
 ]
