@@ -6,7 +6,8 @@
     "link": null,
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   },
   {
     "time": "June 2023 - September 2023",
@@ -15,7 +16,8 @@
     "link": null,
     "type": "work",
     "color": "green-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   },
 
   {
@@ -25,7 +27,8 @@
     "link": null,
     "type": "education",
     "color": "maroon-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   },
   {
     "time": "June 2019 - July 2021",
@@ -34,7 +37,8 @@
     "link": null,
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   },
   {
     "time": "September 2018 - May 2019",
@@ -43,7 +47,8 @@
     "link": null,
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   },
   {
     "time": "August 2014 - May 2018",
@@ -52,6 +57,7 @@
     "link": null,
     "type": "education",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "haaland.png",
+    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
   }
 ]
