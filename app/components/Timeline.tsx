@@ -2,39 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Button, Timeline, Card, Badge } from "flowbite-react";
-import {
-  FaGraduationCap,
-  FaBriefcase,
-  FaPython,
-  FaSwift,
-  FaDatabase,
-  FaJs,
-  FaReact,
-  FaNodeJs,
-  FaGithub,
-  FaDocker,
-  FaCss3,
-  FaHtml5,
-  FaCode,
-} from "react-icons/fa";
-
-const techIconMap: { [key: string]: any } = {
-  Python: FaPython,
-  Swift: FaSwift,
-  SwiftUI: FaSwift,
-  SwiftData: FaSwift,
-  CoreML: FaSwift,
-  JavaScript: FaJs,
-  SQL: FaDatabase,
-  DB: FaDatabase,
-  React: FaReact,
-  NodeJS: FaNodeJs,
-  GitHub: FaGithub,
-  Git: FaGithub,
-  Docker: FaDocker,
-  CSS: FaCss3,
-  HTML: FaHtml5,
-};
+import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
 
 interface TimelineItem {
   time: string;
@@ -47,7 +15,6 @@ interface TimelineItem {
   type: "education" | "work";
   logo: string;
   color: string;
-  technologies: string[];
 }
 
 const JourneyTimeline: React.FC = () => {
@@ -85,16 +52,6 @@ const JourneyTimeline: React.FC = () => {
                     {item.link.text}
                   </Button>
                 )}
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {item.technologies.map((tech, techIndex) => {
-                    const Icon = techIconMap[tech] || FaCode;
-                    return (
-                      <Badge key={techIndex} icon={Icon}>
-                        {tech}
-                      </Badge>
-                    );
-                  })}
-                </div>
               </Card>
             </Timeline.Content>
           </Timeline.Item>
