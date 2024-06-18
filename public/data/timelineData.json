@@ -1,63 +1,83 @@
 [
   {
-    "time": "September 2023 - Present",
-    "title": "Software Engineer - iOS at PNYX",
-    "body": "Headed the development of the PNYX iOS app using SwiftUI and AVFoundation for high-quality music playback. Enhanced the app’s user experience by integrating personalized AI music recommendations using Harmix.AI, handling large-scale data (10,000 songs) with content-based filtering techniques and CoreML. Implemented creative functionalities, such as Live Activities, interactive widgets, and App Clips for quick onboarding.",
+    "time": "June 2023 - May 2024",
+    "title": "Software Development Engineer - I at Dhan AI Pvt. Ltd.",
+    "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
+    "link": {
+      "text": "Dhan AI",
+      "url": "https://dhan.ai/"
+    },
+    "type": "work",
+    "color": "green-900",
+    "logo": "haaland.png"
+  },
+  {
+    "time": "July 2022 - May 2023",
+    "title": "Student Software Developer at Decision Theater Lab at Arizona State University",
+    "body": "Contributed to Project SHELDUS, in coordination with the Department of Defense, to maintain and categorize data related to natural disasters from 1960 to the present. Developed REST APIs using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for users.",
+    "link": {
+      "text": "Decision Theater Lab",
+      "url": "https://dt.asu.edu"
+    },
+    "type": "work",
+    "color": "blue-900",
+    "logo": "haaland.png"
+  },
+  {
+    "time": "August 2021 - July 2022",
+    "title": "Graduate Teaching Assistant at Arizona State University",
+    "body": "Served as a Graduate Teaching Assistant to Prof. Maria Chavez and Prof. Mohd. Taher, instructing over 150 students in the Fulton School of Engineering at ASU. Taught programming in MATLAB and Python to over 100 undergraduate and graduate students, and guided them through their master's project utilizing Raspberry Pi, as part of the course (FSE-100) Introduction to Engineering.",
     "link": null,
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
+    "logo": "haaland.png"
   },
-  {
-    "time": "June 2023 - September 2023",
-    "title": "Software Development Engineer - I at Dhan AI Pvt. Ltd.",
-    "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
-    "link": null,
-    "type": "work",
-    "color": "green-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
-  },
-
   {
     "time": "August 2021 - May 2023",
     "title": "Master of Science in Computer Science at Arizona State University",
-    "body": "Executed Hot-zone and Hot-cell analyses on a dataset from a New York taxi company, using Apache Spark for advanced geographic data processing. Integrated ArcGIS for enhanced spatial analysis and visualization capabilities. Optimized PostgreSQL and ArcGIS queries to analyze distances and determine optimal routes, enhancing the application’s decision-making algorithms through improved spatial data manipulation and mapping techniques.",
-    "link": null,
+    "body": "Relevant Coursework: (CSE-539) Applied Cryptography, (CSE-511) Data Processing at Scale, (CSE-575) Statistical Machine Learning, (CSE-576) Natural Language Processing, and (CSE-545) Software Security.",
     "type": "education",
+    "link": {
+      "text": "Arizona State University",
+      "url": "https://asu.edu/"
+    },
     "color": "maroon-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
+    "logo": "haaland.png"
   },
   {
     "time": "June 2019 - July 2021",
     "title": "Full-stack Developer at Compliance Group Inc.",
     "body": "Played a key role in the backend development of FDAlytics and iQuality using Python, Django REST Framework and later, GraphQL, contributing to a 20% uplift in data processing efficiency. Collaborated with a team of 6 developers to develop a data categorization module, significantly enhancing data retrieval speed and accuracy using Azure Search. Contributed to the implementation testing and deployment pipelines using PyTest, Jest, and GitHub Actions for CI/CD processes, which cut down deployment errors by 50% and improved the quality of the deliverables.",
-    "link": null,
+    "link": {
+      "text": "FDAlytics",
+      "url": "https://fdalytics.com/"
+    },
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
+    "logo": "haaland.png"
   },
   {
     "time": "September 2018 - May 2019",
     "title": "Software Engineer at AuthBase Inc.",
     "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of over 10,000 DLLs (Dynamic Link Libraries), enhancing real-time security analytics, and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD (National Vulnerability Database) and CVE (Common Vulnerabilities and Exposures) for robust threat management. Achieved a 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
-    "link": null,
+    "link": {
+      "text": "AuthBase",
+      "url": "https://authbase.net/"
+    },
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
+    "logo": "haaland.png"
   },
   {
     "time": "August 2014 - May 2018",
     "title": "Bachelor of Engineering in Computer Science and Engineering at Panjab University",
     "body": "Developed and maintained back end API using Graph QL, functionalities and test-cases using React JS and Jest, for various modules of the product iQuality. Helped improve the performance metrics by 30%. Collaborated with the development team of 25 members in maintaining the MySQL database and UI bug-fixing tasks for an efficient workflow.",
-    "link": null,
+    "link": {
+      "text": "Panjab University, Chandigarh",
+      "url": "https://puchd.ac.in/"
+    },
     "type": "education",
     "color": "blue-900",
-    "logo": "haaland.png",
-    "technologies": ["SwiftUI", "AVFoundation", "CoreML"]
+    "logo": "haaland.png"
   }
 ]
