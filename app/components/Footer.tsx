@@ -13,7 +13,8 @@ const Footer = () => {
     >
       <FlowbiteFooter.Copyright
         href="#"
-        by="Vishrut Jha™ | Made with ❤️ using Vercel and Next.js"
+        by="Vishrut Jha™"
+        title="Made with ❤️ using Next.js, Flowbite and Vercel"
         year={new Date().getFullYear()}
       />
       <FlowbiteFooter.LinkGroup>

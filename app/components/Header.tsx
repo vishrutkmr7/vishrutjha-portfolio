@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Navbar } from "flowbite-react";
 
 const Header: React.FC = () => {
@@ -10,22 +9,8 @@ const Header: React.FC = () => {
     <Navbar
       fluid
       rounded
-      className="bg-gray-900 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600"
+      className="bg-gray-900 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600 flex items-center justify-center"
     >
-      <Navbar.Brand as={Link} href="/">
-        <div className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image
-            src="/halo.png"
-            alt="Vishrut Jha"
-            width={40}
-            height={40}
-            className="rounded-full mr-3 h-6 sm:h-9"
-          />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Vishrut Jha
-          </span>
-        </div>
-      </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Navbar.Link

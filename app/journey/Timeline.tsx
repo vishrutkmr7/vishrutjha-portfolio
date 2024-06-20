@@ -28,7 +28,10 @@ const JourneyTimeline: React.FC = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 my-8">
+      <h1 className="text-4xl sm:text-5xl font-bold mb-8 mt-4">
+        How did I get here?
+      </h1>
       <Timeline>
         {timelineData.map((item, index) => (
           <Timeline.Item key={index}>
