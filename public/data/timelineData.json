@@ -17,7 +17,7 @@
     "body": "Contributed to Project SHELDUS, in coordination with the Department of Defense, to maintain and categorize data related to natural disasters from 1960 to the present. Developed REST APIs using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for users.",
     "link": {
       "text": "Decision Theater Lab",
-      "url": "https://dt.asu.edu"
+      "url": "https://dt.asu.edu/"
     },
     "type": "work",
     "color": "blue-900",

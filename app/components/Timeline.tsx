@@ -48,7 +48,12 @@ const JourneyTimeline: React.FC = () => {
                 </Timeline.Title>
                 <Timeline.Body>{item.body}</Timeline.Body>
                 {item.link && (
-                  <Button color="gray" href={item.link.url}>
+                  <Button
+                    color="gray"
+                    href={item.link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {item.link.text}
                   </Button>
                 )}
