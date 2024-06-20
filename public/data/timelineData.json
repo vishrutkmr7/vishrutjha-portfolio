@@ -4,24 +4,24 @@
     "title": "Software Development Engineer - I at Dhan AI Pvt. Ltd.",
     "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
     "link": {
-      "text": "Dhan AI",
+      "text": "Dhan AI Pvt. Ltd.",
       "url": "https://dhan.ai/"
     },
     "type": "work",
     "color": "green-900",
-    "logo": "haaland.png"
+    "logo": "dhan.jpeg"
   },
   {
     "time": "July 2022 - May 2023",
     "title": "Student Software Developer at Decision Theater Lab at Arizona State University",
     "body": "Contributed to Project SHELDUS, in coordination with the Department of Defense, to maintain and categorize data related to natural disasters from 1960 to the present. Developed REST APIs using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for users.",
     "link": {
-      "text": "Decision Theater Lab",
+      "text": "Decision Theater Lab at ASU",
       "url": "https://dt.asu.edu/"
     },
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "fulton.jpeg"
   },
   {
     "time": "August 2021 - July 2022",
@@ -30,7 +30,7 @@
     "link": null,
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "fulton.jpeg"
   },
   {
     "time": "August 2021 - May 2023",
@@ -38,11 +38,11 @@
     "body": "Relevant Coursework: (CSE-539) Applied Cryptography, (CSE-511) Data Processing at Scale, (CSE-575) Statistical Machine Learning, (CSE-576) Natural Language Processing, and (CSE-545) Software Security.",
     "type": "education",
     "link": {
-      "text": "Arizona State University",
+      "text": "Arizona State University, Tempe AZ",
       "url": "https://asu.edu/"
     },
     "color": "maroon-900",
-    "logo": "haaland.png"
+    "logo": "asu.jpeg"
   },
   {
     "time": "June 2019 - July 2021",
@@ -54,19 +54,43 @@
     },
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "fdalytics.jpeg"
   },
   {
     "time": "September 2018 - May 2019",
     "title": "Software Engineer at AuthBase Inc.",
     "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of over 10,000 DLLs (Dynamic Link Libraries), enhancing real-time security analytics, and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD (National Vulnerability Database) and CVE (Common Vulnerabilities and Exposures) for robust threat management. Achieved a 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
     "link": {
-      "text": "AuthBase",
+      "text": "AuthBase Inc.",
       "url": "https://authbase.net/"
     },
     "type": "work",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "authbase.jpeg"
+  },
+  {
+    "time": "May 2017 - July 2017",
+    "title": "Software Engineering Intern at Nuclear Fuel Complex, Department of Atomic Energy, Government of India",
+    "body": "Developed a Job Scheduling and Inventory Management application for the Zirconium Fabrication Plant at NFC. Had the distinction of being the only CS-major intern in the department. Implemented a REST API using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for the workers at the plant.",
+    "link": {
+      "text": "Nuclear Fuel Complex",
+      "url": "https://www.nfc.gov.in/"
+    },
+    "type": "work",
+    "color": "blue-900",
+    "logo": "nfc.jpeg"
+  },
+  {
+    "time": "May 2016 - July 2016",
+    "title": "Software Engineering Intern at HCL Computers Ltd.",
+    "body": "Built the Proof of Concept Application for the IEEE Standard: Privacy Preserving, Data Sharing with Anonymous ID Assignment, for the healthcare sector. Using ASP.Net and C#, developed a web application for hospitals and clinics to register patients and maintain their records securely.",
+    "link": {
+      "text": "HCL Computers Ltd.",
+      "url": "https://www.hcltech.com/"
+    },
+    "type": "work",
+    "color": "blue-900",
+    "logo": "hcl.jpeg"
   },
   {
     "time": "August 2014 - May 2018",
@@ -78,6 +102,6 @@
     },
     "type": "education",
     "color": "blue-900",
-    "logo": "haaland.png"
+    "logo": "uiet.jpeg"
   }
 ]

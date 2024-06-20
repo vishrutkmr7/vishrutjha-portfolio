@@ -24,10 +24,11 @@ export default function RootLayout({
       <Head>
         <title>Vishrut Jha</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <body className={inter.className}>
+
         <Analytics />
         <SpeedInsights />
+      </Head>
+      <body className={inter.className}>
         <Header />
         {children}
         <Footer />

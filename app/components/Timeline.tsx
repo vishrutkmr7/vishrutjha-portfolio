@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Button, Timeline, Card, Badge } from "flowbite-react";
 import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
 
@@ -33,19 +34,27 @@ const JourneyTimeline: React.FC = () => {
           <Timeline.Item key={index}>
             <Timeline.Point
               icon={item.type === "education" ? FaGraduationCap : FaBriefcase}
-              className="ring-offset-0"
             />
             <Timeline.Content className="w-full">
-              <Card
-                className={`bg-${item.color} dark:bg-${item.color} text-gray-300`}
-                horizontal
-                imgSrc={item.logo}
-                imgAlt={item.title}
+              <div
+                className={`bg-${item.color} dark:bg-${item.color} text-gray-300 p-4 rounded-lg border border-gray-600`}
               >
-                <Timeline.Time>{item.time}</Timeline.Time>
-                <Timeline.Title className="text-gray-300 dark:text-white">
-                  {item.title}
-                </Timeline.Title>
+                <div className="flex items-center">
+                  <Image
+                    src={`/${item.logo}`}
+                    alt={item.title}
+                    className="rounded-lg mr-4"
+                    width={64}
+                    height={64}
+                  />
+                  <div>
+                    <Timeline.Time>{item.time}</Timeline.Time>
+                    <Timeline.Title className="text-gray-300 dark:text-white">
+                      {item.title}
+                    </Timeline.Title>
+                  </div>
+                </div>
+                <br />
                 <Timeline.Body>{item.body}</Timeline.Body>
                 {item.link && (
                   <Button
@@ -57,7 +66,7 @@ const JourneyTimeline: React.FC = () => {
                     {item.link.text}
                   </Button>
                 )}
-              </Card>
+              </div>
             </Timeline.Content>
           </Timeline.Item>
         ))}
