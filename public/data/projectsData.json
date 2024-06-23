@@ -1,0 +1,97 @@
+[
+  {
+    "title": "Project Alpha",
+    "description": "A project to develop an innovative solution for problem X.",
+    "date": "2023-01-15",
+    "image": "alpha.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-alpha"
+    },
+    "tech": ["JavaScript", "React", "Node.js"]
+  },
+  {
+    "title": "Project Beta",
+    "description": "An application designed to improve efficiency in Y.",
+    "date": "2023-03-22",
+    "image": "beta.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-beta"
+    },
+    "tech": ["Python", "Django", "PostgreSQL"]
+  },
+  {
+    "title": "Project Gamma",
+    "description": "A mobile app to enhance user experience in Z.",
+    "date": "2023-05-10",
+    "image": "gamma.jpg",
+    "tech": ["Kotlin", "Android", "Firebase"]
+  },
+  {
+    "title": "Project Delta",
+    "description": "A web platform to streamline process A.",
+    "date": "2023-07-01",
+    "image": "delta.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-delta"
+    },
+    "tech": ["Ruby", "Rails", "MySQL"]
+  },
+  {
+    "title": "Project Epsilon",
+    "description": "A tool to automate task B.",
+    "date": "2023-08-15",
+    "image": "epsilon.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-epsilon"
+    },
+    "tech": ["Go", "Docker", "Kubernetes"]
+  },
+  {
+    "title": "Project Zeta",
+    "description": "A service to enhance feature C.",
+    "date": "2023-09-30",
+    "image": "zeta.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-zeta"
+    },
+    "tech": ["PHP", "Laravel", "Redis"]
+  },
+  {
+    "title": "Project Eta",
+    "description": "An AI solution for problem D.",
+    "date": "2023-11-05",
+    "image": "eta.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-eta"
+    },
+    "tech": ["Python", "TensorFlow", "Keras"]
+  },
+  {
+    "title": "Project Theta",
+    "description": "A blockchain application for process E.",
+    "date": "2023-12-20",
+    "image": "theta.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-theta"
+    },
+    "tech": ["Solidity", "Ethereum", "Web3.js"]
+  },
+  {
+    "title": "Project Iota",
+    "description": "A cloud-based solution for service F.",
+    "date": "2024-01-10",
+    "image": "iota.jpg",
+    "link": {
+      "text": "View Project",
+      "url": "https://example.com/project-iota"
+    },
+    "tech": ["Java", "Spring Boot", "AWS"]
+  }
+]
