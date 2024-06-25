@@ -45,11 +45,10 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff"></meta>
-
-        <Analytics />
-        <SpeedInsights />
       </Head>
       <body className={inter.className}>
+        <Analytics />
+        <SpeedInsights />
         <Header />
         {children}
         <Footer />
