@@ -1,5 +1,16 @@
 [
   {
+    "title": "vishrutjha.com | My Portfolio Website",
+    "description": "This very portfolio website that you're looking at, which I started working on while traveling across Texas.",
+    "date": "06/22/2024 - Present",
+    "image": "favicon.png",
+    "link": {
+      "text": "Visit vishrutjha.com",
+      "url": "https://vishrutjha.com"
+    },
+    "tech": ["React", "NextJS", "Vercel"]
+  },
+  {
     "title": "Rock Paper Scissors Lizard Spock",
     "description": "My take on the classic Rock Paper Scissors game with a twist.",
     "date": "04/22/2024",
@@ -12,7 +23,7 @@
   },
   {
     "title": "Simple Node Editor",
-    "description": "A basic node editor app on macOS to create and connect nodes. Supports document types and export to JSON",
+    "description": "A basic node editor app on macOS to create and connect nodes. Supports document types and export to JSON.",
     "date": "05/13/2024",
     "image": "simpleNodeEditor.png",
     "link": {
@@ -23,7 +34,7 @@
   },
   {
     "title": "FIFAWC22",
-    "description": "A simple app to keep track of the 2022 FIFA World Cup matches, scores, standings and key stats.",
+    "description": "A simple app to keep track of the 2022 FIFA World Cup matches, scores, standings, and key stats.",
     "date": "04/22/2024",
     "image": "fifawc22.png",
     "link": {
@@ -33,8 +44,19 @@
     "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
+    "title": "AppliFly",
+    "description": "An open-source collaborative effort with Kshitij Dhyani, to automate the process of apply to on-campus jobs at ASU quickly",
+    "date": "11/15/2023 - Present",
+    "image": "appImage.png",
+    "link": {
+      "text": "Visit Applifly",
+      "url": "https://kshitijdhyani.com/appliFLY/"
+    },
+    "tech": ["Python", "Selenium"]
+  },
+  {
     "title": "Ziply Fiber",
-    "description": "App to manage your Ziply Fiber accounts, connection and payments on iPhone and iPad.",
+    "description": "App to manage your Ziply Fiber accounts, connection, and payments on iPhone and iPad.",
     "date": "05/15/2023 - 04/22/2024",
     "image": "ziply.png",
     "link": {
@@ -44,26 +66,15 @@
     "tech": ["Swift", "SwiftUI", "iOS", "iPadOS", "Python", "React"]
   },
   {
-    "title": "My Opinion on ASU's stance on the war in Ukraine",
-    "description": "My opinion piece on ASU's involvement in the Ukraine issue published at ASU's campus newspaper State Press.",
-    "date": "03/01/2022",
-    "image": "ukraine.png",
+    "title": "Hot Cell and Hot Zone analysis of Spatial Data",
+    "description": "An academic project as a part of the course Data Processing at Scale to perform Hotzone and Hotcell analysis on Spatial data from a NYC based taxicab company.",
+    "date": "04/25/2022",
+    "image": "carousel-5.svg",
     "link": {
-      "text": "Read Article",
-      "url": "https://www.statepress.com/article/2022/03/opinion-asu-and-ukraine"
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/ASU_CSE_511_DPS_Project_Group_15_Spring_22"
     },
-    "tech": []
-  },
-  {
-    "title": "FIFA World Cup, ESL and more with Adrian from Rabona TV",
-    "description": "My interview with Adrian from Rabona TV talking about the 2022 FIFA World Cup, ESL and more.",
-    "date": "07/16/2021",
-    "image": "pzb.jpg",
-    "link": {
-      "text": "Listen",
-      "url": "https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862"
-    },
-    "tech": []
+    "tech": ["Java", "Scala"]
   },
   {
     "title": "FDAlytics",
@@ -78,7 +89,7 @@
   },
   {
     "title": "LiveSHIELD",
-    "description": "A real-time antivirus software that uses Nessus, NMap and NVD to scan for vulnerabilities across the network and visualizes it to highlight the most severe nodes...",
+    "description": "A real-time antivirus software that uses Nessus, NMap, and NVD to scan for vulnerabilities across the network and visualizes it to highlight the most severe nodes.",
     "date": "09/15/2018 - 06/18/2019",
     "image": "LiveShield.gif",
     "link": {

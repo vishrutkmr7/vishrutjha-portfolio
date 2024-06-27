@@ -56,6 +56,7 @@ const JourneyTimeline: React.FC = () => {
                     <Image
                       src={`/${item.logo}`}
                       alt={item.title}
+                      loading="lazy"
                       className="rounded-lg mr-4"
                       width={64}
                       height={64}

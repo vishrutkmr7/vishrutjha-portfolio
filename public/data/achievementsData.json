@@ -1,0 +1,22 @@
+[
+  {
+    "title": "My Opinion on ASU's stance on the war in Ukraine",
+    "description": "My opinion piece on ASU's involvement in the Ukraine issue published at ASU's campus newspaper State Press.",
+    "date": "03/01/2022",
+    "image": "ukraine.png",
+    "link": {
+      "text": "Read Article",
+      "url": "https://www.statepress.com/article/2022/03/opinion-asu-and-ukraine"
+    }
+  },
+  {
+    "title": "FIFA World Cup, ESL and more with Adrian from Rabona TV",
+    "description": "My interview with Adrian from Rabona TV talking about the 2022 FIFA World Cup, ESL and more.",
+    "date": "07/16/2021",
+    "image": "pzb.jpg",
+    "link": {
+      "text": "Listen on Apple Podcasts",
+      "url": "https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862"
+    }
+  }
+]

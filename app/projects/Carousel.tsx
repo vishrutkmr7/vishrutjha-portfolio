@@ -15,7 +15,7 @@ import {
   FaReact,
   FaAngular,
   FaAppStoreIos,
-  FaPodcast,
+  // FaPodcast,
   FaMobile,
   FaLaptop,
   FaTablet,
@@ -49,6 +49,7 @@ const techIconMap: { [key: string]: any } = {
   HTML: FaHtml5,
   CSS: FaCss3Alt,
   JavaScript: FaJs,
+  NextJS: FaJs,
   TypeScript: FaJs,
   React: FaReact,
   Angular: FaAngular,
@@ -109,7 +110,7 @@ const ProjectsCarousel: React.FC = () => {
                   loading="lazy"
                   src={`/${project.image}`}
                   alt={project.title}
-                  className="w-full rounded-lg h-full object-cover object-center"
+                  className="w-full relative rounded-lg h-full object-cover object-center overflow-hidden"
                 />
               )}
               className={`bg-grey-600 dark:bg-grey-900 text-gray-300 p-4 rounded-lg border border-gray-600`}
@@ -132,9 +133,9 @@ const ProjectsCarousel: React.FC = () => {
                   {project.link.text === "App Store" && (
                     <FaAppStoreIos className="mr-2 h-5 w-5" />
                   )}
-                  {project.link.text === "Listen" && (
+                  {/* {project.link.text === "Listen" && (
                     <FaPodcast className="mr-2 h-5 w-5" />
-                  )}
+                  )} */}
                   {project.link.text}
                 </Button>
               )}
