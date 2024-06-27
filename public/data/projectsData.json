@@ -1,97 +1,90 @@
 [
   {
-    "title": "Project Alpha",
-    "description": "A project to develop an innovative solution for problem X.",
-    "date": "2023-01-15",
-    "image": "alpha.jpg",
+    "title": "Rock Paper Scissors Lizard Spock",
+    "description": "My take on the classic Rock Paper Scissors game with a twist.",
+    "date": "04/22/2024",
+    "image": "rpsls.png",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-alpha"
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/Rock-Paper-Scissors-Lizard-Spock"
     },
-    "tech": ["JavaScript", "React", "Node.js"]
+    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
-    "title": "Project Beta",
-    "description": "An application designed to improve efficiency in Y.",
-    "date": "2023-03-22",
-    "image": "beta.jpg",
+    "title": "Simple Node Editor",
+    "description": "A basic node editor app on macOS to create and connect nodes. Supports document types and export to JSON",
+    "date": "05/13/2024",
+    "image": "simpleNodeEditor.png",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-beta"
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/SimpleNodeEditor"
     },
-    "tech": ["Python", "Django", "PostgreSQL"]
+    "tech": ["Swift", "SwiftUI", "macOS"]
   },
   {
-    "title": "Project Gamma",
-    "description": "A mobile app to enhance user experience in Z.",
-    "date": "2023-05-10",
-    "image": "gamma.jpg",
-    "tech": ["Kotlin", "Android", "Firebase"]
+    "title": "FIFAWC22",
+    "description": "A simple app to keep track of the 2022 FIFA World Cup matches, scores, standings and key stats.",
+    "date": "04/22/2024",
+    "image": "fifawc22.png",
+    "link": {
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/FIFAWC2022"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
-    "title": "Project Delta",
-    "description": "A web platform to streamline process A.",
-    "date": "2023-07-01",
-    "image": "delta.jpg",
+    "title": "Ziply Fiber",
+    "description": "App to manage your Ziply Fiber accounts, connection and payments on iPhone and iPad.",
+    "date": "05/15/2023 - 04/22/2024",
+    "image": "ziply.png",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-delta"
+      "text": "App Store",
+      "url": "https://apps.apple.com/us/app/ziply-fiber/id6451298186"
     },
-    "tech": ["Ruby", "Rails", "MySQL"]
+    "tech": ["Swift", "SwiftUI", "iOS", "iPadOS", "Python", "React"]
   },
   {
-    "title": "Project Epsilon",
-    "description": "A tool to automate task B.",
-    "date": "2023-08-15",
-    "image": "epsilon.jpg",
+    "title": "My Opinion on ASU's stance on the war in Ukraine",
+    "description": "My opinion piece on ASU's involvement in the Ukraine issue published at ASU's campus newspaper State Press.",
+    "date": "03/01/2022",
+    "image": "ukraine.png",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-epsilon"
+      "text": "Read Article",
+      "url": "https://www.statepress.com/article/2022/03/opinion-asu-and-ukraine"
     },
-    "tech": ["Go", "Docker", "Kubernetes"]
+    "tech": []
   },
   {
-    "title": "Project Zeta",
-    "description": "A service to enhance feature C.",
-    "date": "2023-09-30",
-    "image": "zeta.jpg",
+    "title": "FIFA World Cup, ESL and more with Adrian from Rabona TV",
+    "description": "My interview with Adrian from Rabona TV talking about the 2022 FIFA World Cup, ESL and more.",
+    "date": "07/16/2021",
+    "image": "pzb.jpg",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-zeta"
+      "text": "Listen",
+      "url": "https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862"
     },
-    "tech": ["PHP", "Laravel", "Redis"]
+    "tech": []
   },
   {
-    "title": "Project Eta",
-    "description": "An AI solution for problem D.",
-    "date": "2023-11-05",
-    "image": "eta.jpg",
+    "title": "FDAlytics",
+    "description": "An ML-powered tool to track FDA inspections and inform pharma companies' SOPs.",
+    "date": "08/28/2019 - 02/16/2021",
+    "image": "fdalytics.jpg",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-eta"
+      "text": "Visit FDAlytics",
+      "url": "https://www.fdalytics.com/"
     },
-    "tech": ["Python", "TensorFlow", "Keras"]
+    "tech": ["Python", "React", "Machine Learning"]
   },
   {
-    "title": "Project Theta",
-    "description": "A blockchain application for process E.",
-    "date": "2023-12-20",
-    "image": "theta.jpg",
+    "title": "LiveSHIELD",
+    "description": "A real-time antivirus software that uses Nessus, NMap and NVD to scan for vulnerabilities across the network and visualizes it to highlight the most severe nodes...",
+    "date": "09/15/2018 - 06/18/2019",
+    "image": "LiveShield.gif",
     "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-theta"
+      "text": "Visit LiveShield",
+      "url": "https://www.authbasenetworks.com/shield"
     },
-    "tech": ["Solidity", "Ethereum", "Web3.js"]
-  },
-  {
-    "title": "Project Iota",
-    "description": "A cloud-based solution for service F.",
-    "date": "2024-01-10",
-    "image": "iota.jpg",
-    "link": {
-      "text": "View Project",
-      "url": "https://example.com/project-iota"
-    },
-    "tech": ["Java", "Spring Boot", "AWS"]
+    "tech": ["Python", "Angular"]
   }
 ]
