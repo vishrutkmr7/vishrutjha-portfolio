@@ -68,7 +68,10 @@ const chartOptions = {
 
 // Components
 const LeetCodeCard: React.FC<{ stats: LeetCodeStats | null }> = ({ stats }) => (
-  <Card className="bg-gray-800 text-gray-300 border border-gray-700 flex flex-col h-full">
+  <Card
+    title="Not that it matters..."
+    className="bg-gray-800 text-gray-300 border border-gray-700 flex flex-col h-full"
+  >
     <h2 className="text-xl font-bold mb-4 text-gray-200">LeetCode Stats</h2>
     <div className="flex items-center justify-between mb-4">
       <div className="space-y-2 flex-grow">
