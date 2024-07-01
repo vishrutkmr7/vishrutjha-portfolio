@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Card, Button, Badge, Spinner } from "flowbite-react";
+import { ProjectItem } from "@/app/types";
 import {
   FaCode,
   FaPython,
@@ -15,24 +16,11 @@ import {
   FaReact,
   FaAngular,
   FaAppStoreIos,
-  // FaPodcast,
   FaMobile,
   FaLaptop,
   FaTablet,
 } from "react-icons/fa";
 import { useSwipeable } from "react-swipeable";
-
-interface projectItem {
-  title: string;
-  description: string;
-  date: string;
-  image: string;
-  link?: {
-    text: string;
-    url: string;
-  };
-  tech: string[];
-}
 
 const techIconMap: { [key: string]: any } = {
   Python: FaPython,
@@ -56,7 +44,7 @@ const techIconMap: { [key: string]: any } = {
 };
 
 const ProjectsCarousel: React.FC = () => {
-  const [projects, setProjects] = useState<projectItem[]>([]);
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -87,7 +75,7 @@ const ProjectsCarousel: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 my-8">
-      <h1 className="text-4xl sm:text-5xl font-bold mb-8 mt-4">
+      <h1 className="text-4xl sm:text-5xl font-bold mb-8 mt-4 text-gray-200">
         What did I build...
       </h1>
       {loading ? (
@@ -103,29 +91,44 @@ const ProjectsCarousel: React.FC = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              renderImage={() => (
+              className="bg-gray-800 text-gray-300 p-4 rounded-lg border border-gray-700 flex flex-col h-full"
+            >
+              <div className="relative w-full h-48 mb-4">
                 <Image
-                  width={500}
-                  height={500}
-                  loading="lazy"
                   src={`/${project.image}`}
                   alt={project.title}
-                  className="w-full relative rounded-lg h-full object-cover object-center overflow-hidden"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
                 />
-              )}
-              className={`bg-grey-600 dark:bg-grey-900 text-gray-300 p-4 rounded-lg border border-gray-600`}
-            >
-              <h2 className="text-xl font-bold tracking-tight text-gray-300 dark:text-white">
+              </div>
+              <h2 className="text-xl font-bold tracking-tight text-gray-200 mb-2">
                 {project.title}
               </h2>
-              <p>{project.description}</p>
-              <p className="text-gray-500">{project.date}</p>
+              <p className="mb-2 flex-grow text-gray-300">
+                {project.description}
+              </p>
+              <p className="text-gray-400 mb-4">{project.date}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tech.map((tech, techIndex) => {
+                  const Icon = techIconMap[tech] || FaCode;
+                  return (
+                    <Badge
+                      key={techIndex}
+                      icon={Icon}
+                      className="bg-gray-700 text-gray-300"
+                    >
+                      {tech}
+                    </Badge>
+                  );
+                })}
+              </div>
               {project.link && (
                 <Button
                   href={project.link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2"
+                  className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center space-x-2 w-full"
                 >
                   {project.link.text === "Source Code" && (
                     <FaGithub className="mr-2 h-5 w-5" />
@@ -133,22 +136,9 @@ const ProjectsCarousel: React.FC = () => {
                   {project.link.text === "App Store" && (
                     <FaAppStoreIos className="mr-2 h-5 w-5" />
                   )}
-                  {/* {project.link.text === "Listen" && (
-                    <FaPodcast className="mr-2 h-5 w-5" />
-                  )} */}
                   {project.link.text}
                 </Button>
               )}
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech, techIndex) => {
-                  const Icon = techIconMap[tech] || FaCode;
-                  return (
-                    <Badge key={techIndex} icon={Icon}>
-                      {tech}
-                    </Badge>
-                  );
-                })}
-              </div>
             </Card>
           ))}
         </div>
