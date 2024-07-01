@@ -1,7 +1,7 @@
 [
   {
-    "title": "My Opinion on ASU's stance on the war in Ukraine",
-    "description": "My opinion piece on ASU's involvement in the Ukraine issue published at ASU's campus newspaper State Press.",
+    "title": "My Opinion on ASU's stance on the war in Ukraine for The State Press",
+    "description": "The war in Ukraine had significantly impacted Ukrainian students and faculty at ASU, causing stress and financial difficulties. Although ASU had provided some support, the students felt more aid was needed, including flexible academic arrangements and better financial assistance.",
     "date": "03/01/2022",
     "image": "ukraine.png",
     "link": {
@@ -11,12 +11,22 @@
   },
   {
     "title": "FIFA World Cup, ESL and more with Adrian from Rabona TV",
-    "description": "My interview with Adrian from Rabona TV talking about the 2022 FIFA World Cup, ESL and more.",
+    "description": "My interview with Adrian from Rabona TV talking about the 2022 FIFA World Cup, ESL, and more.",
     "date": "07/16/2021",
     "image": "pzb.jpg",
     "link": {
       "text": "Listen on Apple Podcasts",
       "url": "https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862"
+    }
+  },
+  {
+    "title": "Tour of ASU with YouTuber Yudi J",
+    "description": "I gave Yudi (Pritesh Jagani) a tour of Arizona State University's Tempe Campus. Apart from discussing my journey through my Master's education, my TA'ship, and the tuition waiver, we talked about the campus, the student life, and the future of higher education.",
+    "date": "04/20/2021",
+    "image": "yudi.png",
+    "link": {
+      "text": "Watch on YouTube",
+      "url": "https://www.youtube.com/watch?v=DULKwBtXDQM"
     }
   }
 ]

@@ -5,7 +5,15 @@ import Image from "next/image";
 import { Card, Button, Spinner } from "flowbite-react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { FaPodcast, FaGithub, FaAppStoreIos, FaCode } from "react-icons/fa";
+import {
+  FaPodcast,
+  FaGithub,
+  FaAppStoreIos,
+  FaCode,
+  FaEnvelope,
+  FaTwitter,
+  FaLinkedin,
+} from "react-icons/fa";
 
 import { Achievement, LeetCodeStats } from "@/app/types";
 
@@ -142,6 +150,54 @@ const AchievementCard: React.FC<{ achievement: Achievement }> = ({
   </Card>
 );
 
+const ContactCard: React.FC = () => (
+  <Card className="bg-gray-800 text-gray-300 border border-gray-700 col-span-full">
+    <h2 className="text-2xl font-bold mb-4 text-gray-200">Reach Out To Me</h2>
+    <div className="flex flex-wrap justify-center gap-4">
+      <Button
+        href="#"
+        onClick={() => {
+          window.location.href =
+            "mailto:" + "me" + "@" + "vishrutjha" + "." + "com";
+        }}
+        rel="noopener noreferrer"
+        className="bg-blue-600 hover:bg-blue-700 text-white flex items-center"
+      >
+        <FaEnvelope className="mr-2 h-5 w-5" />
+        Email
+      </Button>
+
+      <Button
+        href="https://www.x.com/vishrutkmr7"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-blue-400 hover:bg-blue-500 text-white flex items-center"
+      >
+        <FaTwitter className="mr-2 h-5 w-5" />
+        Twitter
+      </Button>
+      <Button
+        href="https://www.github.com/vishrutkmr7"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-gray-700 hover:bg-gray-600 text-white flex items-center"
+      >
+        <FaGithub className="mr-2 h-5 w-5" />
+        GitHub
+      </Button>
+      <Button
+        href="https://www.linkedin.com/in/vishrutkmr7/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-blue-700 hover:bg-blue-800 text-white flex items-center"
+      >
+        <FaLinkedin className="mr-2 h-5 w-5" />
+        LinkedIn
+      </Button>
+    </div>
+  </Card>
+);
+
 // Main Component
 const AchievementList: React.FC = () => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
@@ -179,6 +235,7 @@ const AchievementList: React.FC = () => {
           ))}
 
           <LeetCodeCard stats={leetCodeStats} />
+          <ContactCard />
         </div>
       )}
     </div>
