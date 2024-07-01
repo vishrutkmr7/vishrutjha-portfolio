@@ -37,10 +37,10 @@ const Header: React.FC = () => {
           </Navbar.Link>
           <Navbar.Link
             as={Link}
-            href="/achievements"
+            href="/media"
             className="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0"
           >
-            Achievements/Media Presence
+            Media
           </Navbar.Link>
         </Navbar.Collapse>
       </div>

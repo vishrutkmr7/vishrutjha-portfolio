@@ -38,7 +38,7 @@ const AchievementList: React.FC = () => {
     "https://leetcode-stats-api.herokuapp.com/vishrutjha";
 
   useEffect(() => {
-    fetch("/data/achievementsData.json")
+    fetch("/data/mediaData.json")
       .then((response) => response.json())
       .then((data) => setAchievements(data));
   }, []);
