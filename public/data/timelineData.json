@@ -1,7 +1,10 @@
 [
   {
     "time": "June 2023 - May 2024",
-    "title": "Software Development Engineer - I at Dhan AI Pvt. Ltd.",
+    "title": {
+      "company": "Dhan AI Pvt. Ltd.",
+      "role": "Software Development Engineer - I"
+    },
     "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
     "link": {
       "text": "Dhan AI Pvt. Ltd.",
@@ -13,7 +16,10 @@
   },
   {
     "time": "July 2022 - May 2023",
-    "title": "Student Software Developer at Decision Theater Lab at Arizona State University",
+    "title": {
+      "company": "Decision Theater Lab at Arizona State University",
+      "role": "Student Software Developer"
+    },
     "body": "Contributed to Project SHELDUS, in coordination with the Department of Defense, to maintain and categorize data related to natural disasters from 1960 to the present. Developed REST APIs using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for users.",
     "link": {
       "text": "Decision Theater Lab at ASU",
@@ -25,16 +31,25 @@
   },
   {
     "time": "August 2021 - July 2022",
-    "title": "Graduate Teaching Assistant at Arizona State University",
+    "title": {
+      "company": "Arizona State University, Ira A Fulton Schools of Engineering",
+      "role": "Graduate Teaching Assistant"
+    },
     "body": "Served as a Graduate Teaching Assistant to Prof. Maria Chavez and Prof. Mohd. Taher, instructing over 150 students in the Fulton School of Engineering at ASU. Taught programming in MATLAB and Python to over 100 undergraduate and graduate students, and guided them through their master's project utilizing Raspberry Pi, as part of the course (FSE-100) Introduction to Engineering.",
-    "link": null,
+    "link": {
+      "text": "One of my lecture videos",
+      "url": "https://www.youtube.com/watch?v=QZYDNiXelfc"
+    },
     "type": "work",
     "color": "blue-900",
     "logo": "fulton.jpeg"
   },
   {
     "time": "August 2021 - May 2023",
-    "title": "Master of Science in Computer Science at Arizona State University",
+    "title": {
+      "company": "Arizona State University",
+      "role": "Master of Science in Computer Science"
+    },
     "body": "Relevant Coursework: (CSE-539) Applied Cryptography, (CSE-511) Data Processing at Scale, (CSE-575) Statistical Machine Learning, (CSE-576) Natural Language Processing, and (CSE-545) Software Security.",
     "type": "education",
     "link": {
@@ -46,7 +61,10 @@
   },
   {
     "time": "June 2019 - July 2021",
-    "title": "Full-stack Developer at Compliance Group Inc.",
+    "title": {
+      "company": "Compliance Group Inc.",
+      "role": "Full-stack Developer"
+    },
     "body": "Played a key role in the backend development of FDAlytics and iQuality using Python, Django REST Framework and later, GraphQL, contributing to a 20% uplift in data processing efficiency. Collaborated with a team of 6 developers to develop a data categorization module, significantly enhancing data retrieval speed and accuracy using Azure Search. Contributed to the implementation testing and deployment pipelines using PyTest, Jest, and GitHub Actions for CI/CD processes, which cut down deployment errors by 50% and improved the quality of the deliverables.",
     "link": {
       "text": "FDAlytics",
@@ -58,7 +76,10 @@
   },
   {
     "time": "September 2018 - May 2019",
-    "title": "Software Engineer at AuthBase Inc.",
+    "title": {
+      "company": "AuthBase Inc.",
+      "role": "Software Engineer"
+    },
     "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of over 10,000 DLLs (Dynamic Link Libraries), enhancing real-time security analytics, and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD (National Vulnerability Database) and CVE (Common Vulnerabilities and Exposures) for robust threat management. Achieved a 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
     "link": {
       "text": "AuthBase Inc.",
@@ -70,7 +91,10 @@
   },
   {
     "time": "May 2017 - July 2017",
-    "title": "Software Engineering Intern at Nuclear Fuel Complex, Department of Atomic Energy, Government of India",
+    "title": {
+      "company": "Nuclear Fuel Complex, Department of Atomic Energy, Government of India",
+      "role": "Software Engineering Intern"
+    },
     "body": "Developed a Job Scheduling and Inventory Management application for the Zirconium Fabrication Plant at NFC. Had the distinction of being the only CS-major intern in the department. Implemented a REST API using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for the workers at the plant.",
     "link": {
       "text": "Nuclear Fuel Complex",
@@ -82,7 +106,10 @@
   },
   {
     "time": "May 2016 - July 2016",
-    "title": "Software Engineering Intern at HCL Computers Ltd.",
+    "title": {
+      "company": "HCL Computers Ltd.",
+      "role": "Software Engineering Intern"
+    },
     "body": "Built the Proof of Concept Application for the IEEE Standard: Privacy Preserving, Data Sharing with Anonymous ID Assignment, for the healthcare sector. Using ASP.Net and C#, developed a web application for hospitals and clinics to register patients and maintain their records securely.",
     "link": {
       "text": "HCL Computers Ltd.",
@@ -94,7 +121,10 @@
   },
   {
     "time": "August 2014 - May 2018",
-    "title": "Bachelor of Engineering in Computer Science and Engineering at Panjab University",
+    "title": {
+      "company": "Panjab University",
+      "role": "Bachelor of Engineering in Computer Science and Engineering"
+    },
     "body": "Relevant Coursework: (CS-505) Computation and Automata theory, (CS-705) Cyber Law, (CS-503) Artificial Intelligence and Expert Systems, (CS-703) Digital Image Processing, and (CS-605D) Mobile Application Development (iOS)",
     "link": {
       "text": "Panjab University, Chandigarh",

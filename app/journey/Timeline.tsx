@@ -7,7 +7,10 @@ import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
 
 interface TimelineItem {
   time: string;
-  title: string;
+  title: {
+    company: string;
+    role: string;
+  };
   body: string;
   link?: {
     text: string;
@@ -51,25 +54,26 @@ const JourneyTimeline: React.FC = () => {
               <Timeline.Content className="w-full">
                 <div
                   className={`bg-${item.color} dark:bg-${item.color} text-gray-300 p-4 rounded-lg border border-gray-600`}
+                  title={item.body}
                 >
                   <div className="flex items-center">
                     <Image
                       src={`/${item.logo}`}
-                      alt={item.title}
+                      alt={item.title.company}
                       loading="lazy"
                       className="rounded-lg mr-4"
-                      width={64}
-                      height={64}
+                      width={69}
+                      height={69}
                     />
                     <div>
                       <Timeline.Time>{item.time}</Timeline.Time>
                       <Timeline.Title className="tracking-tight text-gray-300 dark:text-white">
-                        {item.title}
+                        {item.title.company}
                       </Timeline.Title>
+                      <Timeline.Body>{item.title.role}</Timeline.Body>
                     </div>
                   </div>
                   <br />
-                  <Timeline.Body>{item.body}</Timeline.Body>
                   {item.link && (
                     <Button
                       href={item.link.url}
