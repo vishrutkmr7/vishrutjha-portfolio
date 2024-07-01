@@ -1,5 +1,5 @@
-import React from "react";
 import ProjectsCarousel from "./Carousel";
+import React from "react";
 
 const ProjectsPage: React.FC = () => {
   return (

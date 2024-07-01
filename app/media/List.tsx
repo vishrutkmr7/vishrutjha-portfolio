@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { Card, Button, Spinner } from "flowbite-react";
-import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 import {
-  FaPodcast,
-  FaGithub,
   FaAppStoreIos,
   FaCode,
   FaEnvelope,
-  FaTwitter,
+  FaGithub,
   FaLinkedin,
+  FaPodcast,
+  FaTwitter,
 } from "react-icons/fa";
 
 import { Achievement, LeetCodeStats } from "@/app/types";

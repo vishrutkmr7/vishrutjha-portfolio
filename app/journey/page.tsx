@@ -1,5 +1,5 @@
-import React from "react";
 import JourneyTimeline from "./Timeline";
+import React from "react";
 
 const JourneyPage: React.FC = () => {
   return (

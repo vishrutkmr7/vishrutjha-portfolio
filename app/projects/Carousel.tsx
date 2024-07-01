@@ -1,46 +1,46 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import React, { useEffect, useState, useRef } from "react";
 import { Card, Button, Badge, Spinner } from "flowbite-react";
 import { ProjectItem } from "@/app/types";
+import { useSwipeable } from "react-swipeable";
 import {
-  FaCode,
-  FaPython,
-  FaSwift,
-  FaGithub,
-  FaDatabase,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
   FaAngular,
   FaAppStoreIos,
-  FaMobile,
+  FaCode,
+  FaCss3Alt,
+  FaDatabase,
+  FaGithub,
+  FaHtml5,
+  FaJs,
   FaLaptop,
+  FaMobile,
+  FaPython,
+  FaReact,
+  FaSwift,
   FaTablet,
 } from "react-icons/fa";
-import { useSwipeable } from "react-swipeable";
 
 const techIconMap: { [key: string]: any } = {
-  Python: FaPython,
-  Swift: FaSwift,
-  SwiftUI: FaSwift,
-  iOS: FaMobile,
-  macOS: FaLaptop,
-  iPadOS: FaTablet,
-  Git: FaGithub,
-  Database: FaDatabase,
-  SQL: FaDatabase,
-  Redis: FaDatabase,
-  Code: FaCode,
-  HTML: FaHtml5,
+  Angular: FaAngular,
   CSS: FaCss3Alt,
+  Code: FaCode,
+  Database: FaDatabase,
+  Git: FaGithub,
+  HTML: FaHtml5,
   JavaScript: FaJs,
   NextJS: FaJs,
-  TypeScript: FaJs,
+  Python: FaPython,
   React: FaReact,
-  Angular: FaAngular,
+  Redis: FaDatabase,
+  SQL: FaDatabase,
+  Swift: FaSwift,
+  SwiftUI: FaSwift,
+  TypeScript: FaJs,
+  iOS: FaMobile,
+  iPadOS: FaTablet,
+  macOS: FaLaptop,
 };
 
 const ProjectsCarousel: React.FC = () => {
