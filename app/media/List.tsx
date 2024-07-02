@@ -122,8 +122,10 @@ const AchievementCard: React.FC<{ achievement: Achievement }> = ({
       <Image
         src={`/${achievement.image}`}
         alt={achievement.title}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{
+          objectFit: "cover",
+        }}
         className="rounded-t-lg"
       />
     </div>

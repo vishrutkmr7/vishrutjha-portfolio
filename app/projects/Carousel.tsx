@@ -86,8 +86,10 @@ const ProjectsCarousel: React.FC = () => {
                   <Image
                     src={`/${project.image}`}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{
+                      objectFit: "cover",
+                    }}
                     className="rounded-lg"
                   />
                 </div>

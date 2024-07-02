@@ -23,9 +23,10 @@ const Bio = () => {
         <Image
           src="/pfp.png"
           alt="Vishrut Jha"
-          layout="fill"
-          objectFit="cover"
+          width={256}
+          height={256}
           className="rounded-full"
+          priority
         />
       </div>
 
