@@ -13,6 +13,9 @@ const inter = Inter({ subsets: ["latin"], display: "swap", preload: true });
 export const metadata: Metadata = {
   title: "Vishrut Jha",
   description: "iOS, Full-Stack Developer and Software Engineer",
+  alternates: {
+    canonical: "https://vishrutjha.com/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Media & Achievements | Vishrut Jha",
   description:
     "Explore the media appearances, publications, and achievements of Vishrut Jha in the field of software development.",
+  alternates: {
+    canonical: "https://vishrutjha.com/media",
+  },
   openGraph: {
     title: "Media & Achievements | Vishrut Jha",
     description:

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "My Journey | Vishrut Jha",
   description:
     "Explore the professional journey of Vishrut Jha, from education to career milestones in iOS and full-stack development.",
+  alternates: {
+    canonical: "https://vishrutjha.com/journey",
+  },
   openGraph: {
     title: "My Journey | Vishrut Jha",
     description:
