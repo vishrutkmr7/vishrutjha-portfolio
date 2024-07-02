@@ -1,5 +1,19 @@
 [
   {
+    "time": "July 2024 - Present",
+    "title": {
+      "company": "Prickly Pear Health Inc.",
+      "role": "Founding Engineer"
+    },
+    "body": "Building the next generation of healthcare tools for improving the mental health of post-menopausal women using the latest advancements in AI.",
+    "link": {
+      "text": "Prickly Pear Health Inc",
+      "url": "https://www.pricklypear.io/"
+    },
+    "type": "work",
+    "logo": "pphealth.jpeg"
+  },
+  {
     "time": "June 2023 - May 2024",
     "title": {
       "company": "Dhan AI Pvt. Ltd.",
@@ -11,7 +25,6 @@
       "url": "https://dhan.ai/"
     },
     "type": "work",
-    "color": "green-900",
     "logo": "dhan.jpeg"
   },
   {
@@ -26,7 +39,6 @@
       "url": "https://dt.asu.edu/"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "fulton.jpeg"
   },
   {
@@ -41,7 +53,6 @@
       "url": "https://www.youtube.com/watch?v=QZYDNiXelfc"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "fulton.jpeg"
   },
   {
@@ -56,7 +67,6 @@
       "text": "Arizona State University, Tempe AZ",
       "url": "https://asu.edu/"
     },
-    "color": "maroon-900",
     "logo": "asu.jpeg"
   },
   {
@@ -71,7 +81,6 @@
       "url": "https://fdalytics.com/"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "fdalytics.jpeg"
   },
   {
@@ -86,7 +95,6 @@
       "url": "https://authbase.net/"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "authbase.jpeg"
   },
   {
@@ -101,7 +109,6 @@
       "url": "https://www.nfc.gov.in/"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "nfc.jpeg"
   },
   {
@@ -116,7 +123,6 @@
       "url": "https://www.hcltech.com/"
     },
     "type": "work",
-    "color": "blue-900",
     "logo": "hcl.jpeg"
   },
   {
@@ -131,7 +137,6 @@
       "url": "https://puchd.ac.in/"
     },
     "type": "education",
-    "color": "blue-900",
     "logo": "uiet.jpeg"
   }
 ]
