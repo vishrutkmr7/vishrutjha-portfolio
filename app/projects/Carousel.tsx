@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import { Card, Button, Badge, Spinner } from "flowbite-react";
 import { ProjectItem } from "@/app/types";
-import { useSwipeable } from "react-swipeable";
 import {
   FaAngular,
   FaAppStoreIos,
@@ -46,7 +45,6 @@ const techIconMap: { [key: string]: any } = {
 const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -60,30 +58,6 @@ const ProjectsCarousel: React.FC = () => {
       .catch(() => setLoading(false)); // Ensure loading is stopped even if there is an error
   }, []);
 
-  useEffect(() => {
-    if (carouselRef.current) {
-      const cardWidth = carouselRef.current.offsetWidth;
-      carouselRef.current.scrollTo({
-        left: currentIndex * cardWidth,
-        behavior: "smooth",
-      });
-    }
-  }, [currentIndex]);
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      if (currentIndex < projects.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-      }
-    },
-    onSwipedRight: () => {
-      if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 1);
-      }
-    },
-    trackMouse: true,
-  });
-
   return (
     <div className="container mx-auto p-4 my-8">
       <h1 className="text-4xl sm:text-5xl font-bold mb-8 mt-4 text-gray-200">
@@ -95,7 +69,6 @@ const ProjectsCarousel: React.FC = () => {
         </div>
       ) : (
         <div
-          {...handlers}
           ref={carouselRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex overflow-x-auto snap-x snap-mandatory touch-pan-x"
         >
