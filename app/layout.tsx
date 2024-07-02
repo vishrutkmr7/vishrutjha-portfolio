@@ -8,7 +8,7 @@ import "flowbite";
 
 import ClientComponents from "@/app/components/ClientComponents";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap", preload: true });
 
 export const metadata: Metadata = {
   title: "Vishrut Jha",

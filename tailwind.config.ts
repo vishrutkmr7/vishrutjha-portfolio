@@ -24,6 +24,10 @@ const config: Config = {
   plugins: [require("flowbite/plugin"), flowbite.plugin()],
   exports: {
     darkMode: "class",
+    purge: [
+      "./pages/**/*.{js,ts,jsx,tsx}",
+      "./components/**/*.{js,ts,jsx,tsx}",
+    ],
   },
 };
 export default config;

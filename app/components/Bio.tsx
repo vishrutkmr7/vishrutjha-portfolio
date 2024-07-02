@@ -27,7 +27,6 @@ const Bio = () => {
           height={256}
           className="rounded-full"
           priority
-          loading="lazy"
         />
       </div>
 
