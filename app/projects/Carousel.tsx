@@ -73,7 +73,11 @@ const ProjectsCarousel: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex overflow-x-auto snap-x snap-mandatory touch-pan-x"
         >
           {projects.map((project, index) => (
-            <div key={index} className="w-full flex-shrink-0 snap-center">
+            <div
+              key={index}
+              className="w-full flex-shrink-0 snap-center"
+              id={project.title}
+            >
               <Card
                 // key={index}
                 className="bg-gray-800 text-gray-300 p-4 rounded-lg border border-gray-700 flex flex-col h-full"

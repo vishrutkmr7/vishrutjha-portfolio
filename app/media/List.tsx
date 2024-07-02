@@ -114,7 +114,10 @@ const LeetCodeCard: React.FC<{ stats: LeetCodeStats | null }> = ({ stats }) => (
 const AchievementCard: React.FC<{ achievement: Achievement }> = ({
   achievement,
 }) => (
-  <Card className="bg-gray-800 text-gray-300 border border-gray-700 flex flex-col h-full">
+  <Card
+    className="bg-gray-800 text-gray-300 border border-gray-700 flex flex-col h-full"
+    id={achievement.title}
+  >
     <div className="relative w-full h-48 mb-4">
       <Image
         src={`/${achievement.image}`}

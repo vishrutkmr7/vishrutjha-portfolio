@@ -31,7 +31,7 @@ const JourneyTimeline: React.FC = () => {
       ) : (
         <Timeline>
           {timelineData.map((item, index) => (
-            <Timeline.Item key={index}>
+            <Timeline.Item key={index} id={item.title.company}>
               <Timeline.Point
                 icon={item.type === "education" ? FaGraduationCap : FaBriefcase}
               />
