@@ -27,6 +27,7 @@ const Bio = () => {
           height={256}
           className="rounded-full"
           priority
+          loading="lazy"
         />
       </div>
 
@@ -36,6 +37,7 @@ const Bio = () => {
           alt="Hi"
           width={40}
           height={40}
+          loading="lazy"
           title="Huge Culer and Messi fan! Hit me up anytime if you want to discuss soccer"
         />
         <TypeAnimation

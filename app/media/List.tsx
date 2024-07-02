@@ -123,6 +123,7 @@ const AchievementCard: React.FC<{ achievement: Achievement }> = ({
         src={`/${achievement.image}`}
         alt={achievement.title}
         fill
+        loading="lazy"
         style={{
           objectFit: "cover",
         }}

@@ -90,6 +90,7 @@ const ProjectsCarousel: React.FC = () => {
                     style={{
                       objectFit: "cover",
                     }}
+                    loading="lazy"
                     className="rounded-lg"
                   />
                 </div>

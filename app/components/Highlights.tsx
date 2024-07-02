@@ -29,6 +29,7 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
             src={imageSrc}
             alt={altText}
             fill
+            loading="lazy"
             className="rounded-full object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
