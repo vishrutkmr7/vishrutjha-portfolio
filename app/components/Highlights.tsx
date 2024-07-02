@@ -97,7 +97,7 @@ const Highlights: React.FC = () => {
 
   return (
     <div className="mt-8 w-full max-w-4xl">
-      <h2 className="text-2xl font-bold mb-4">Highlights</h2>
+      {/* <h2 className="text-2xl font-bold mb-4">Highlights</h2> */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <HighlightCard
           title="My current role"
