@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button, Badge, Spinner } from "flowbite-react";
 import { ProjectItem } from "@/app/types";
 import {
@@ -46,8 +46,6 @@ const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const carouselRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     fetch("/data/projectsData.json")
       .then((response) => response.json())
@@ -68,20 +66,14 @@ const ProjectsCarousel: React.FC = () => {
           <Spinner aria-label="Cookin' up some projects!" />
         </div>
       ) : (
-        <div
-          ref={carouselRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex overflow-x-auto snap-x snap-mandatory touch-pan-x"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex overflow-x-auto snap-x snap-mandatory touch-pan-x">
           {projects.map((project, index) => (
             <div
               key={index}
               className="w-full flex-shrink-0 snap-center"
               id={project.title}
             >
-              <Card
-                // key={index}
-                className="bg-gray-800 text-gray-300 p-4 rounded-lg border border-gray-700 flex flex-col h-full"
-              >
+              <Card className="bg-gray-800 text-gray-300 p-4 rounded-lg border border-gray-700 flex flex-col h-full">
                 <div className="relative w-full h-48 mb-4">
                   <Image
                     src={`/${project.image}`}
