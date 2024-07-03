@@ -1,10 +1,11 @@
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import "flowbite/dist/flowbite.min.css";
 import "flowbite";
+import "flowbite/dist/flowbite.min.css";
+import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
+import Script from "next/script";
+import { Inter } from "next/font/google";
+import { Metadata } from "next";
 
 import ClientComponents from "@/app/components/ClientComponents";
 
@@ -61,7 +62,23 @@ export default function RootLayout({
           ></iframe>
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-
+        {/* Google tag (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EM96FL2J50');
+          `,
+          }}
+        />
         <ClientComponents />
         <Header />
         <main>{children}</main>
