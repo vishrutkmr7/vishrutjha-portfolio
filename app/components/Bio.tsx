@@ -79,7 +79,7 @@ const Bio = () => {
           Work Experience
         </Button>
         <Button
-          href="/vishrut_jha_resume.pdf"
+          href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-green-600 hover:bg-green-700 text-white flex items-center space-x-2"
