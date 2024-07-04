@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Spinner } from "flowbite-react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { LEETCODE_API_ENDPOINT } from "@/app/constants";
 import {
   FaAppStoreIos,
   FaCode,
@@ -18,10 +19,6 @@ import {
 import { Achievement, LeetCodeStats } from "@/app/types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-// Constants
-const LEETCODE_API_ENDPOINT =
-  "https://leetcode-stats-api.herokuapp.com/vishrutjha";
 
 // Helper Functions
 const getLeetCodeChartData = (stats: LeetCodeStats | null) => ({

@@ -6,6 +6,7 @@ import Header from "@/app/components/Header";
 import Script from "next/script";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
+import { DOMAIN } from "@/app/constants";
 
 import ClientComponents from "@/app/components/ClientComponents";
 
@@ -15,19 +16,19 @@ export const metadata: Metadata = {
   title: "Vishrut Jha",
   description: "iOS, Full-Stack Developer and Software Engineer",
   alternates: {
-    canonical: "https://vishrutjha.com/",
+    canonical: `${DOMAIN}/`,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://vishrutjha.com",
+    url: DOMAIN,
     siteName: "Vishrut Jha",
     title: "Vishrut Jha - iOS & Full-Stack Developer",
     description:
       "Portfolio of Vishrut Jha, an experienced iOS and Full-Stack Developer based in Phoenix, AZ.",
     images: [
       {
-        url: "https://vishrutjha.com/favicon.png",
+        url: `${DOMAIN}/favicon.png`,
         width: 1080,
         height: 1080,
         alt: "Vishrut Jha",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     title: "Vishrut Jha - iOS & Full-Stack Developer",
     description:
       "Portfolio of Vishrut Jha, an experienced iOS and Full-Stack Developer based in Phoenix, AZ.",
-    images: ["https://vishrutjha.com/favicon.png"],
+    images: [`${DOMAIN}/favicon.png`],
     creator: "@vishrutkmr7",
   },
 };

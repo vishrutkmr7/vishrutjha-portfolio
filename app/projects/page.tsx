@@ -1,22 +1,23 @@
 import ProjectsCarousel from "./Carousel";
 import React from "react";
 import type { Metadata } from "next";
+import { DOMAIN } from "@/app/constants";
 
 export const metadata: Metadata = {
   title: "Projects | Vishrut Jha",
   description:
     "Explore the innovative projects developed by Vishrut Jha, showcasing expertise in iOS and full-stack development.",
   alternates: {
-    canonical: "https://vishrutjha.com/projects",
+    canonical: `${DOMAIN}/projects`,
   },
   openGraph: {
     title: "Projects | Vishrut Jha",
     description:
       "Explore the innovative projects developed by Vishrut Jha, showcasing expertise in iOS and full-stack development.",
-    url: "https://vishrutjha.com/projects",
+    url: `${DOMAIN}/projects`,
     images: [
       {
-        url: "https://vishrutjha.com/fifawc22.png",
+        url: `${DOMAIN}/fifawc22.png`,
         width: 1350,
         height: 730,
         alt: "Vishrut Jha Projects",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     title: "Projects | Vishrut Jha",
     description:
       "Explore the innovative projects developed by Vishrut Jha, showcasing expertise in iOS and full-stack development.",
-    images: ["https://vishrutjha.com/fifawc22.png"],
+    images: [`${DOMAIN}/fifawc22.png`],
   },
 };
 
