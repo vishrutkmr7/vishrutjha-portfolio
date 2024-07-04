@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { DOMAIN } from "@/app/constants";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Résumé | Vishrut Jha",
@@ -33,5 +34,5 @@ export const metadata: Metadata = {
 };
 
 export default function ResumePage() {
-  return null; // This component doesn't render anything visible
+  redirect("resume.pdf");
 }
