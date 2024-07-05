@@ -40,7 +40,7 @@ const Bio = () => {
           title="Huge Culer and Messi fan! Hit me up anytime if you want to discuss soccer"
         />
         <TypeAnimation
-          sequence={["Hi, I'm Vishrut Jha", 1000]}
+          sequence={["I'm Vishrut Jha", 1000]}
           wrapper="h1"
           cursor={true}
           repeat={1}
