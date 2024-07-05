@@ -30,13 +30,14 @@ const Bio = () => {
         />
       </div>
 
-      <div className="flex items-center mb-4 gap-2">
+      <div className="flex items-center mb-4">
         <Image
           src="/hi.png"
           alt="Hi"
           width={40}
           height={40}
           loading="lazy"
+          className="p-1"
           title="Huge Culer and Messi fan! Hit me up anytime if you want to discuss soccer"
         />
         <TypeAnimation
