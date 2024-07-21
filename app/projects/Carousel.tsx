@@ -66,7 +66,7 @@ const ProjectsCarousel: React.FC = () => {
           <Spinner aria-label="Cookin' up some projects!" />
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex overflow-x-auto snap-x snap-mandatory touch-pan-x">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex">
           {projects.map((project, index) => (
             <div
               key={index}
