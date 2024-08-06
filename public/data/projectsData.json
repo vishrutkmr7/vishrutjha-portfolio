@@ -1,5 +1,27 @@
 [
   {
+    "title": "Passifier #BuildInPublic 🚀",
+    "description": "An app to add any barcode/QR Code to your Apple Wallet, allowing you to use the latest metadata features introduced in iOS 18.",
+    "date": "08/02/2024 - Present",
+    "image": "passifier.png",
+    "link": {
+      "text": "Coming Soon!",
+      "url": "https://vishrutjha.com/projects?#passifier"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS"]
+  },
+  {
+    "title": "Prickly Pear Health",
+    "description": "Building the next generation of healthcare tools for improving the mental health of post-menopausal women using the latest advancements in AI.",
+    "date": "08/02/2024 - Present",
+    "image": "pphealth.jpeg",
+    "link": {
+      "text": "TestFlight beta coming soon!",
+      "url": "https://pricklypear.io/"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS", "Bun", "Hono"]
+  },
+  {
     "title": "vishrutjha.com | My Portfolio Website",
     "description": "This very portfolio website that you're looking at, which I started working on while traveling across Texas.",
     "date": "06/22/2024 - Present",

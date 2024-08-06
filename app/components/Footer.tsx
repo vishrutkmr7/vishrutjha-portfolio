@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <FlowbiteFooter
       container
-      className="bg-gray-900 dark:bg-gray-900 text-gray-300 py-6 mt-auto"
+      className="bg-gray-900 dark:bg-gray-900 text-gray-300 py-6"
     >
       <div className="w-full flex flex-col sm:flex-row justify-between items-center">
         <FlowbiteFooter.Copyright
