@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/hey",
+        destination: "https://nohello.net",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
