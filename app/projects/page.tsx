@@ -1,5 +1,5 @@
 import ProjectsCarousel from "./Carousel";
-import React from "react";
+import type React from "react";
 import type { Metadata } from "next";
 import { DOMAIN } from "@/app/constants";
 

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { DOMAIN } from "@/app/constants";
 import { redirect } from "next/navigation";
 

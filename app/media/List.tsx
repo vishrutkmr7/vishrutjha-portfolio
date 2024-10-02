@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Spinner } from "flowbite-react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -16,7 +17,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-import { Achievement, LeetCodeStats } from "@/app/types";
+import type { Achievement, LeetCodeStats } from "@/app/types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

@@ -1,5 +1,5 @@
 import AchievementList from "./List";
-import React from "react";
+import type React from "react";
 import type { Metadata } from "next";
 import { DOMAIN, LEETCODE_API_ENDPOINT } from "@/app/constants";
 

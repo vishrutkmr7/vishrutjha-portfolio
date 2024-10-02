@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { Button, Timeline, Spinner } from "flowbite-react";
 import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
-import { TimelineItem } from "@/app/types";
+import type { TimelineItem } from "@/app/types";
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItem[]>([]);
   const [loading, setLoading] = useState(true);

@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Badge, Spinner } from "flowbite-react";
-import { ProjectItem } from "@/app/types";
+import type { ProjectItem } from "@/app/types";
 import {
   FaAngular,
   FaAppStoreIos,

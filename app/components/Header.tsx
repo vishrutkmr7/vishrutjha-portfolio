@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import type React from "react";
 import { Navbar } from "flowbite-react";
 import { usePathname } from "next/navigation";
 

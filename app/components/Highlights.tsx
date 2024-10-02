@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Card, Spinner } from "flowbite-react";
-import { TimelineItem, Achievement, ProjectItem } from "@/app/types";
+import type { TimelineItem, Achievement, ProjectItem } from "@/app/types";
 
 interface HighlightCardProps {
   title: string;
