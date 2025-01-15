@@ -1,5 +1,16 @@
 [
   {
+    "title": "LlamaStack iOS",
+    "description": "An iMessage-style AI chatbot application leveraging Llama Stack for local inference, providing a native iOS messaging experience with on-device AI capabilities.",
+    "date": "12/01/2024 - Present",
+    "image": "llama-stack-ios.png",
+    "link": {
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/llama-stack-ios"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack"]
+  },
+  {
     "title": "Passifier #BuildInPublic 🚀",
     "description": "An app to add any barcode/QR Code to your Apple Wallet, allowing you to use the latest metadata features introduced in iOS 18.",
     "date": "08/02/2024 - Present",
@@ -9,6 +20,17 @@
       "url": "https://vishrutjha.com/projects?#passifier"
     },
     "tech": ["Swift", "SwiftUI", "iOS"]
+  },
+  {
+    "title": "Programming Language Benchmarks",
+    "description": "Contributed Swift benchmarks to a comprehensive programming language performance comparison repository, helping developers understand Swift's performance characteristics across various computational tasks.",
+    "date": "11/01/2024 - 12/31/2024",
+    "image": "language-benchmarks.png",
+    "link": {
+      "text": "View Repository",
+      "url": "https://github.com/bddicken/languages"
+    },
+    "tech": ["Swift"]
   },
   {
     "title": "Prickly Pear Health",

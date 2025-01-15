@@ -86,6 +86,7 @@ const ProjectsCarousel: React.FC = () => {
                     }}
                     loading="lazy"
                     className="rounded-lg"
+                    unoptimized={project.image.endsWith('.gif')}
                   />
                 </div>
                 <h2 className="text-xl font-bold tracking-tight text-gray-200 mb-2">
