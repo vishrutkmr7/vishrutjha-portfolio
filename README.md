@@ -1,15 +1,67 @@
 # Vishrut Jha's Portfolio Website
 
-Welcome to the repository of my portfolio website, [vishrutjha.com](https://vishrutjha.com). This website is built using [React.js](https://reactjs.org/), [Next.js](https://nextjs.org/), and [Flowbite](https://flowbite.com/). It is deployed on [Vercel](https://vercel.com/).
-
 [![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=vishrutjha-portfolio)](https://vercel.com/vishrutkmr7s-projects/vishrutjha-portfolio)
 
-## Technologies Used
+Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishrutjha.com) to see it live. This modern, responsive portfolio showcases my projects, professional journey, and media appearances.
 
-- [React.js](https://reactjs.org/): A JavaScript library for building user interfaces.
-- [Next.js](https://nextjs.org/): A React framework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.
-- [Flowbite](https://flowbite.com/): A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.
+## 🚀 Features
 
-## Deployment
+- Modern, responsive design
+- Project showcase with interactive carousel
+- Professional journey timeline
+- Media appearances and publications
+- Dynamic charting and visualizations
+- Type animations and smooth transitions
+- SEO optimized with sitemap generation
+- Performance analytics and insights
 
-The website is deployed on [Vercel](https://vercel.com/), the best place to deploy any frontend app. You can check out the live website [here](https://vishrutjha.com).
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) with React 18
+- **Package Manager**: [Bun](https://bun.sh/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [Flowbite](https://flowbite.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Charts**: Chart.js with react-chartjs-2
+- **Animations**: react-type-animation
+- **Icons**: react-icons
+- **Analytics**: Vercel Analytics and Speed Insights
+- **Deployment**: [Vercel](https://vercel.com/)
+
+## 🏃‍♂️ Running Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/vishrutkmr7/vishrutjha-portfolio.git
+
+# Navigate to the directory
+cd vishrutjha-portfolio
+
+# Install dependencies
+bun install
+
+# Start the development server
+bun dev
+```
+
+Visit `http://localhost:3000` to see the website.
+
+## 📦 Build and Deploy
+
+```bash
+# Create a production build
+bun run build
+
+# Start the production server
+bun start
+```
+
+The website is automatically deployed to Vercel on every push to the main branch.
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 🔗 Connect with Me
+
+- Website: [vishrutjha.com](https://vishrutjha.com)
+- GitHub: [@vishrutkmr7](https://github.com/vishrutkmr7)
