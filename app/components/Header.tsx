@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Home, Map, FolderGit2, Image } from "lucide-react";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -21,75 +21,79 @@ const Header: React.FC = () => {
     );
   };
 
+  const getMobileLinkClass = (href: string) => {
+    return cn(
+      "flex flex-col items-center justify-center transition-colors hover:text-primary w-full",
+      pathname === href
+        ? "text-primary"
+        : "text-muted-foreground"
+    );
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <nav className="flex items-center space-x-2 text-sm font-medium">
-            <Link href="/" className={getLinkClass("/")}>
-              Home
-            </Link>
-            <Link href="/journey" className={getLinkClass("/journey")}>
-              Journey
-            </Link>
-            <Link href="/projects" className={getLinkClass("/projects")}>
-              Projects
-            </Link>
-            <Link href="/media" className={getLinkClass("/media")}>
-              Media
-            </Link>
-          </nav>
-        </div>
-        <Button
-          className="mr-6 md:hidden"
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle menu</span>
-        </Button>
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-background border-b md:hidden">
-            <nav className="flex flex-col p-4 space-y-2">
-              <Link
-                href="/"
-                className={getLinkClass("/")}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/journey"
-                className={getLinkClass("/journey")}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Journey
-              </Link>
-              <Link
-                href="/projects"
-                className={getLinkClass("/projects")}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Projects
-              </Link>
-              <Link
-                href="/media"
-                className={getLinkClass("/media")}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Media
-              </Link>
-            </nav>
+    <>
+      <div className="pb-16 md:pb-0">
+        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:block hidden">
+          <div className="container flex h-14 items-center">
+            <div className="mr-4 flex">
+              <nav className="flex items-center space-x-2 text-sm font-medium">
+                <Link href="/" className={getLinkClass("/")}>
+                  <span className="flex items-center gap-2">
+                    <Home className="h-4 w-4" />
+                    Home
+                  </span>
+                </Link>
+                <Link href="/journey" className={getLinkClass("/journey")}>
+                  <span className="flex items-center gap-2">
+                    <Map className="h-4 w-4" />
+                    Journey
+                  </span>
+                </Link>
+                <Link href="/projects" className={getLinkClass("/projects")}>
+                  <span className="flex items-center gap-2">
+                    <FolderGit2 className="h-4 w-4" />
+                    Projects
+                  </span>
+                </Link>
+                <Link href="/media" className={getLinkClass("/media")}>
+                  <span className="flex items-center gap-2">
+                    <Image className="h-4 w-4" />
+                    Media
+                  </span>
+                </Link>
+              </nav>
+            </div>
+            <div className="flex flex-1 items-center justify-end">
+              <nav className="flex items-center">
+                <ThemeToggle />
+              </nav>
+            </div>
           </div>
-        )}
-        <div className="flex flex-1 items-center justify-end">
-          <nav className="flex items-center">
-            <ThemeToggle />
-          </nav>
-        </div>
+        </header>
       </div>
-    </header>
+
+      {/* Mobile Bottom Navigation Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t z-50">
+        <nav className="flex justify-between px-3 py-2 max-w-md mx-auto w-full">
+          <Link href="/" className={getMobileLinkClass("/")}>
+            <Home className="h-5 w-5" />
+            <span className="text-[10px] mt-0.5">Home</span>
+          </Link>
+          <Link href="/journey" className={getMobileLinkClass("/journey")}>
+            <Map className="h-5 w-5" />
+            <span className="text-[10px] mt-0.5">Journey</span>
+          </Link>
+          <Link href="/projects" className={getMobileLinkClass("/projects")}>
+            <FolderGit2 className="h-5 w-5" />
+            <span className="text-[10px] mt-0.5">Projects</span>
+          </Link>
+          <Link href="/media" className={getMobileLinkClass("/media")}>
+            <Image className="h-5 w-5" />
+            <span className="text-[10px] mt-0.5">Media</span>
+          </Link>
+        </nav>
+      </div>
+    </>
   );
 };
 

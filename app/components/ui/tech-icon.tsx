@@ -33,16 +33,43 @@ const techIconClasses: Record<string, string> = {
     LlamaStack: "text-[#FF9A00]",
 };
 
+const techIconEmojis: Record<string, string> = {
+    Python: "🐍",
+    JavaScript: "💛",
+    TypeScript: "💙",
+    React: "⚛️",
+    NextJS: "▲",
+    Swift: "🦅",
+    SwiftUI: "🎨",
+    Angular: "🅰️",
+    CSS: "🎨",
+    HTML: "📄",
+    Git: "🔄",
+    Redis: "🗄️",
+    SQL: "🗃️",
+    Java: "☕",
+    Scala: "🌟",
+    Bun: "🐰",
+    Hono: "⚡",
+    Vercel: "▲",
+    iOS: "📱",
+    iPadOS: "📱",
+    macOS: "🍎",
+    "Machine Learning": "🤖",
+    Selenium: "🤖",
+    LlamaStack: "🦙",
+};
+
 export function TechIcon({ name, className, ...props }: TechIconProps) {
     return (
-        <span className={cn("inline-block", className)} {...props}>
+        <span className={cn("inline-flex items-center justify-center", className)} {...props}>
             <Image
                 src={`/icons/tech/${name.toLowerCase().replace(/\s+/g, '-')}.svg`}
-                alt={`${name} logo`}
+                alt={`${name} ${techIconEmojis[name] || ''} logo`}
                 width={16}
                 height={16}
                 className={cn(
-                    "h-4 w-4 inline-block",
+                    "h-4 w-4 transition-transform duration-200 hover:scale-110",
                     techIconClasses[name] || "text-current"
                 )}
             />

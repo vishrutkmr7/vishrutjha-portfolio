@@ -70,10 +70,19 @@ const JourneyTimeline: React.FC = () => {
                     <div className="flex-grow">
                       <TimelineTime className="text-sm text-muted-foreground flex items-center gap-2">
                         <socialIconMap.Calendar className="h-4 w-4" />
-                        {item.time}
+                        {item.time} {item.type === 'work' ? '💼' : item.type === 'education' ? '🎓' : '🏆'}
                       </TimelineTime>
-                      <TimelineTitle className="text-lg sm:text-xl">{item.title.company}</TimelineTitle>
-                      <TimelineBody className="text-muted-foreground">{item.title.role}</TimelineBody>
+                      <TimelineTitle className="text-lg sm:text-xl">
+                        {item.title.company} {item.title.company.toLowerCase().includes('microsoft') ? '🪟' :
+                          item.title.company.toLowerCase().includes('amazon') ? '📦' :
+                            item.title.company.toLowerCase().includes('google') ? '🔍' :
+                              item.title.company.toLowerCase().includes('apple') ? '🍎' : ''}
+                      </TimelineTitle>
+                      <TimelineBody className="text-muted-foreground">
+                        {item.title.role} {item.title.role.toLowerCase().includes('senior') ? '👨‍💻' :
+                          item.title.role.toLowerCase().includes('lead') ? '👨‍💼' :
+                            item.title.role.toLowerCase().includes('engineer') ? '⚡' : ''}
+                      </TimelineBody>
                     </div>
                   </div>
                   {item.link && (

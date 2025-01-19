@@ -126,8 +126,9 @@ const LeetCodeCard: React.FC<{ stats: LeetCodeStats | null }> = ({ stats }) => (
   </Card>
 );
 
-const AchievementCard: React.FC<{ achievement: Achievement }> = ({
+const AchievementCard: React.FC<{ achievement: Achievement; isFirst?: boolean }> = ({
   achievement,
+  isFirst = false,
 }) => (
   <Card className="flex flex-col h-full group hover:shadow-lg transition-shadow duration-200" id={achievement.title}>
     <CardHeader className="flex-none p-0">
@@ -137,7 +138,8 @@ const AchievementCard: React.FC<{ achievement: Achievement }> = ({
           alt={achievement.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          loading="lazy"
+          priority={isFirst}
+          loading={isFirst ? undefined : "lazy"}
           className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
         />
       </div>
@@ -274,7 +276,7 @@ const AchievementList: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
           {achievements.map((achievement, index) => (
-            <AchievementCard key={index} achievement={achievement} />
+            <AchievementCard key={index} achievement={achievement} isFirst={index === 0} />
           ))}
           <LeetCodeCard stats={leetCodeStats} />
           <ContactCard />

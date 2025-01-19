@@ -7,18 +7,19 @@ import { socialIconMap } from "@/app/lib/icons";
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t">
-      <div className="container flex flex-col sm:flex-row justify-between items-center py-6">
-        <div className="text-sm text-muted-foreground">
-          <span>© {new Date().getFullYear()} Vishrut Jha™. </span>
-          <span>Made with ❤️ using Next.js and Vercel</span>
+    <footer className="bg-background border-t mb-[60px] md:mb-0">
+      <div className="container flex flex-col items-center py-4 space-y-3 md:space-y-0 md:py-6 md:flex-row md:justify-between">
+        <div className="text-center md:text-left">
+          <div className="text-xs md:text-sm text-muted-foreground">
+            <span>© {new Date().getFullYear()} Vishrut Jha. </span>
+          </div>
         </div>
-        <div className="flex items-center space-x-4 mt-3 sm:mt-0">
+        <div className="flex items-center space-x-3 md:space-x-4">
           <Button
             variant="ghost"
             size="icon"
             asChild
-            className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+            className="h-8 w-8 md:h-9 md:w-9 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
           >
             <Link href="https://github.com/vishrutkmr7">
               <socialIconMap.GitHub className="h-4 w-4" />
@@ -29,7 +30,7 @@ const Footer = () => {
             variant="ghost"
             size="icon"
             asChild
-            className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+            className="h-8 w-8 md:h-9 md:w-9 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
           >
             <Link href="https://linkedin.com/in/vishrutkmr7">
               <socialIconMap.LinkedIn className="h-4 w-4" />
@@ -40,7 +41,7 @@ const Footer = () => {
             variant="ghost"
             size="icon"
             asChild
-            className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+            className="h-8 w-8 md:h-9 md:w-9 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
           >
             <Link href="https://x.com/vishrutkmr7">
               <socialIconMap.Twitter className="h-4 w-4" />

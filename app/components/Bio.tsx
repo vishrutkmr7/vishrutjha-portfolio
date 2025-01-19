@@ -25,26 +25,29 @@ const Bio = () => {
 
       {/* Name and Memoji */}
       <div className="text-center mb-6">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-2 flex items-center justify-center gap-3">
-          Vishrut Jha
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 flex flex-wrap items-center justify-center">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">Vishrut</span>
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Jha</span>
+          </div>
           <Image
             src="/hi.png"
             alt="Memoji"
-            width={48}
-            height={48}
-            className="inline-block animate-wave"
+            width={40}
+            height={40}
+            className="inline-block animate-wave ml-2 sm:ml-3 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"
           />
         </h1>
-        <div className="text-xl sm:text-2xl text-muted-foreground font-medium">
+        <div className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
           <TypeAnimation
             sequence={[
-              "iOS Developer",
+              "iOS Developer 📱",
               2000,
-              "Full-Stack Developer",
+              "Full-Stack Developer 🚀",
               2000,
-              "Software Engineer",
+              "Software Engineer 💻",
               2000,
-              "Founding Engineer",
+              "Founding Engineer ⚡",
               2000,
             ]}
             wrapper="span"
@@ -55,11 +58,16 @@ const Bio = () => {
       </div>
 
       {/* Location */}
-      <div className="text-lg text-muted-foreground mb-8 flex items-center gap-3 bg-muted/50 px-4 py-2 rounded-full">
-        <span>Phoenix, Arizona</span>
-        <span className="text-2xl transform hover:rotate-12 transition-transform duration-300">🌵</span>
-        <span>USA</span>
-        <span className="text-xl">🇺🇸</span>
+      <div className="text-base sm:text-lg text-muted-foreground mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-muted/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span>Phoenix</span>
+          <span className="text-xl sm:text-2xl transform hover:rotate-12 transition-transform duration-300">🌵</span>
+        </div>
+        <span className="text-muted-foreground/60">•</span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span>Arizona, USA</span>
+          <span className="text-lg sm:text-xl">🇺🇸</span>
+        </div>
       </div>
 
       {/* Bio Description */}
