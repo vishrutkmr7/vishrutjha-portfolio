@@ -15,14 +15,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 
-interface AchievementCardProps {
-  achievement: Achievement;
-  isFirst: boolean;
-}
-
-export default function AchievementCard({ achievement, isFirst }: AchievementCardProps) {
-  const { title, description, image, link, date } = achievement;
-
+export default function AchievementCard({ title, description, date, image, link }: Achievement) {
   return (
     <DraggableCard
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -32,22 +25,19 @@ export default function AchievementCard({ achievement, isFirst }: AchievementCar
       variants={dragVariants}
       className="h-full"
     >
-      <Card
-        className="flex flex-col h-full group hover:shadow-lg transition-all duration-300"
-        id={title}
-      >
+      <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
         <CardHeader className="flex-none p-0">
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
-            <Image
-              src={`/${image}`}
-              alt={title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={isFirst}
-              loading={isFirst ? undefined : 'lazy'}
-              className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
-            />
-          </div>
+          {image && (
+            <div className="relative w-full aspect-[16/9] overflow-hidden">
+              <Image
+                src={`/${image}`}
+                alt={title}
+                fill
+                className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          )}
           <div className="p-6 pb-2 space-y-1.5">
             <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
             <CardDescription className="flex items-center gap-2">
@@ -57,10 +47,10 @@ export default function AchievementCard({ achievement, isFirst }: AchievementCar
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
-          <p className="text-muted-foreground line-clamp-3 min-h-[4.5rem]">{description}</p>
+          <p className="text-muted-foreground">{description}</p>
         </CardContent>
         {link && (
-          <CardFooter className="flex-none mt-auto pt-0 pb-6 px-6">
+          <CardFooter className="flex-none mt-auto pt-0 pb-6">
             <Button asChild variant="default" className="w-full">
               <a
                 href={link.url}
@@ -68,13 +58,7 @@ export default function AchievementCard({ achievement, isFirst }: AchievementCar
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2"
               >
-                {link.text === 'Source Code' && <socialIconMap.github className="h-4 w-4" />}
-                {link.text === 'App Store' && <socialIconMap.AppStore className="h-4 w-4" />}
-                {link.text === 'Listen on Apple Podcasts' && (
-                  <socialIconMap.Apple className="h-4 w-4" />
-                )}
-                {link.text === 'Watch on YouTube' && <socialIconMap.YouTube className="h-4 w-4" />}
-                {link.text === 'Read Article' && <socialIconMap.External className="h-4 w-4" />}
+                <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
                 {link.text}
               </a>
             </Button>

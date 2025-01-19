@@ -21,6 +21,36 @@ export interface LeetCodeStats {
   acceptanceRate: number;
   ranking: number;
   contributionPoints: number;
+  streak: number;
+  totalActiveDays: number;
+  reputation: number;
+  solutionCount: number;
+  languages: Array<{
+    name: string;
+    solved: number;
+  }>;
+  beatsPercentage: {
+    easy: number;
+    medium: number;
+    hard: number;
+  };
+  profile: {
+    realName: string;
+    company: string;
+    school: string;
+    countryName: string;
+    skillTags: string[];
+    avatar: string;
+  };
+  socialLinks: {
+    github: string;
+    twitter: string;
+    linkedin: string;
+  };
+  badges: Array<{
+    name: string;
+    icon: string;
+  }>;
 }
 
 export interface TimelineItem {

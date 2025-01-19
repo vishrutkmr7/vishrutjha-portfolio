@@ -27,16 +27,30 @@ const Header: React.FC = () => {
     );
   };
 
+  const ResumeButton = React.forwardRef<HTMLAnchorElement>((props, ref) => (
+    <a
+      {...props}
+      ref={ref}
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+      className="inline-flex items-center justify-center"
+      aria-expanded={false}
+    >
+      <FileDown className="h-5 w-5" aria-hidden="true" />
+      <span className="sr-only">Download Resume</span>
+    </a>
+  ));
+  ResumeButton.displayName = 'ResumeButton';
+
   return (
     <>
       <div className="pb-16 md:pb-0">
         {/* Mobile buttons */}
         <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-lg border p-1.5">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
-            <Link href="/resume.pdf" target="_blank" download>
-              <FileDown className="h-5 w-5" aria-hidden="true" />
-              <span className="sr-only">Download Resume</span>
-            </Link>
+            <ResumeButton />
           </Button>
           <ThemeToggle />
         </div>
@@ -74,10 +88,7 @@ const Header: React.FC = () => {
             <div className="flex flex-1 items-center justify-end">
               <nav className="flex items-center space-x-2">
                 <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
-                  <Link href="/resume.pdf" target="_blank" download>
-                    <FileDown className="h-5 w-5" aria-hidden="true" />
-                    <span className="sr-only">Download Resume</span>
-                  </Link>
+                  <ResumeButton />
                 </Button>
                 <ThemeToggle />
               </nav>

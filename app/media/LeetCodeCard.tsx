@@ -1,10 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, TooltipItem } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
-import { socialIconMap, Icons } from '@/app/lib/icons';
+import { socialIconMap, Icons, techIconMap } from '@/app/lib/icons';
 import type { LeetCodeStats } from '@/app/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -16,6 +18,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -62,7 +65,7 @@ const chartOptions = {
           const label = context.label || '';
           const value = context.parsed || 0;
           const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-          const percentage = ((value / total) * 100).toFixed(1);
+          const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
           return `${label}: ${value} (${percentage}%)`;
         },
       },
@@ -70,10 +73,31 @@ const chartOptions = {
   },
 };
 
-const { code: CodeIcon } = Icons;
+const { code: CodeIcon, calendar: CalendarIcon } = Icons;
+
+// Helper function to get the correct language name and icon
+const getLanguageInfo = (lang: { name: string; solved: number }) => {
+  const name = lang.name.toLowerCase();
+  const displayName =
+    name === 'python3' || name === 'python'
+      ? 'Python'
+      : name.charAt(0).toUpperCase() + name.slice(1);
+  const iconKey = name === 'python3' || name === 'python' ? 'Python' : displayName;
+  const Icon = techIconMap[iconKey as keyof typeof techIconMap] || techIconMap.code;
+  return { displayName, Icon };
+};
 
 export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
-  if (!stats) return null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !stats) return null;
+
+  // Get top 3 most used languages
+  const topLanguages = [...(stats.languages || [])].sort((a, b) => b.solved - a.solved).slice(0, 3);
 
   return (
     <DraggableCard
@@ -98,40 +122,76 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="space-y-3 flex-grow">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="space-y-3 flex-grow">
+                <div className="flex items-center gap-2">
+                  <Badge variant="default" className="text-sm">
+                    Total: {stats.totalSolved}/{stats.totalQuestions}
+                  </Badge>
+                  <Badge variant="secondary" className="text-sm">
+                    Rank: {(stats.ranking || 0).toLocaleString()}
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  <Badge variant="outline" className="text-sm">
+                    Easy: {stats.easySolved}/{stats.totalEasy}
+                  </Badge>
+                  <Badge variant="outline" className="text-sm">
+                    Medium: {stats.mediumSolved}/{stats.totalMedium}
+                  </Badge>
+                  <Badge variant="outline" className="text-sm">
+                    Hard: {stats.hardSolved}/{stats.totalHard}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Acceptance Rate: {(stats.acceptanceRate || 0).toFixed(1)}%
+                </p>
+              </div>
+              <div className="w-28 h-28 flex-shrink-0">
+                <Doughnut data={getLeetCodeChartData(stats)} options={chartOptions} />
+              </div>
+            </div>
+            <Separator />
+            <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Badge variant="default" className="text-sm">
-                  Total: {stats.totalSolved}/{stats.totalQuestions}
-                </Badge>
-                <Badge variant="secondary" className="text-sm">
-                  Rank: {stats.ranking.toLocaleString()}
-                </Badge>
+                <CalendarIcon className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">
+                  {stats.streak} day streak · {stats.totalActiveDays} total active days
+                </span>
               </div>
               <div className="grid grid-cols-3 gap-2">
-                <Badge variant="outline" className="text-sm">
-                  Easy: {stats.easySolved}/{stats.totalEasy}
+                <Badge variant="secondary" className="text-xs">
+                  Beats {(stats.beatsPercentage.easy || 0).toFixed(1)}% in Easy
                 </Badge>
-                <Badge variant="outline" className="text-sm">
-                  Medium: {stats.mediumSolved}/{stats.totalMedium}
+                <Badge variant="secondary" className="text-xs">
+                  Beats {(stats.beatsPercentage.medium || 0).toFixed(1)}% in Medium
                 </Badge>
-                <Badge variant="outline" className="text-sm">
-                  Hard: {stats.hardSolved}/{stats.totalHard}
+                <Badge variant="secondary" className="text-xs">
+                  Beats {(stats.beatsPercentage.hard || 0).toFixed(1)}% in Hard
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Acceptance Rate: {stats.acceptanceRate.toFixed(2)}%
-              </p>
-            </div>
-            <div className="w-28 h-28 flex-shrink-0">
-              <Doughnut data={getLeetCodeChartData(stats)} options={chartOptions} />
+              {topLanguages.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                  <span>Top languages:</span>
+                  {topLanguages.map(lang => {
+                    const { displayName, Icon } = getLanguageInfo(lang);
+                    return (
+                      <Badge key={lang.name} variant="outline" className="text-xs">
+                        <Icon className="h-3 w-3 mr-1" />
+                        {displayName} ({lang.solved})
+                      </Badge>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
         <CardFooter className="flex-none mt-auto pt-0 pb-6">
           <Button asChild variant="default" className="w-full">
             <a
-              href="https://leetcode.com/vishrutkmr7"
+              href="https://leetcode.com/vishrutjha"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2"

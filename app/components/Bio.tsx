@@ -134,12 +134,12 @@ const Bio = () => {
       <div className="flex gap-4 mb-10">
         {[
           {
-            icon: 'Email',
+            icon: 'email',
             href: 'mailto:me@vishrutjha.com',
             title: 'me [at] vishrutjha [dot] com',
           },
           { icon: 'Twitter', href: 'https://twitter.com/vishrutkmr7', title: '@vishrutkmr7' },
-          { icon: 'GitHub', href: 'https://github.com/vishrutkmr7', title: '@vishrutkmr7' },
+          { icon: 'github', href: 'https://github.com/vishrutkmr7', title: '@vishrutkmr7' },
           { icon: 'Instagram', href: 'https://instagram.com/vishrutkmr7', title: '@vishrutkmr7' },
           { icon: 'LinkedIn', href: 'https://linkedin.com/in/vishrutkmr7', title: 'Vishrut Jha' },
         ].map(social => {
@@ -158,7 +158,7 @@ const Bio = () => {
                 rel="noopener noreferrer"
                 title={social.title}
                 onClick={
-                  social.icon === 'Email'
+                  social.icon === 'email'
                     ? e => {
                         window.location.href = social.href;
                         e.preventDefault();

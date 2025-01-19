@@ -14,7 +14,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'react-icons'],
   },
-  swcMinify: true,
   reactStrictMode: true,
   images: {
     remotePatterns: [
