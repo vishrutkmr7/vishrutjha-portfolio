@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from 'react';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 interface ScrollAnimationProps {
   children: ReactNode;
@@ -10,14 +10,20 @@ interface ScrollAnimationProps {
 }
 
 export const ScrollAnimation = ({ children, className }: ScrollAnimationProps) => {
+  const prefersReducedMotion = useReducedMotion();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 0.4]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  // Reduce animation intensity and respect motion preferences
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.6]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -35,7 +41,12 @@ export const ScrollAnimation = ({ children, className }: ScrollAnimationProps) =
 
 // Progress bar component that grows as you scroll
 export const ScrollProgressBar = () => {
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
+
+  if (prefersReducedMotion) {
+    return null;
+  }
 
   return (
     <motion.div

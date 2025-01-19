@@ -48,17 +48,17 @@ const Bio = () => {
           <TypeAnimation
             sequence={[
               'iOS Developer 📱',
-              2000,
+              3000,
               'Full-Stack Developer 🚀',
-              2000,
+              3000,
               'Software Engineer 💻',
-              2000,
+              3000,
               'Founding Engineer ⚡',
-              2000,
+              3000,
             ]}
             wrapper="span"
-            speed={50}
-            repeat={Infinity}
+            speed={40}
+            repeat={2}
           />
         </div>
       </div>
