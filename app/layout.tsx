@@ -1,12 +1,11 @@
 import "./globals.css";
-import "flowbite";
-import "flowbite/dist/flowbite.min.css";
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 import Script from "next/script";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import { DOMAIN } from "@/app/constants";
+import { ThemeProvider } from "@/components/theme-provider";
 
 import ClientComponents from "@/app/components/ClientComponents";
 
@@ -51,39 +50,46 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex flex-col min-h-screen`}>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PVC7X77Z"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-        {/* Google tag (gtag.js) */}
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-EM96FL2J50');
-          `,
-          }}
-        />
-        <ClientComponents />
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} flex flex-col min-h-screen`} suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PVC7X77Z"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
+          {/* End Google Tag Manager (noscript) */}
+          {/* Google tag (gtag.js) */}
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-EM96FL2J50');
+            `,
+            }}
+          />
+          <ClientComponents />
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

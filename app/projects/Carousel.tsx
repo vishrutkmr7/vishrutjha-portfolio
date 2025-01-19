@@ -3,45 +3,18 @@
 import Image from "next/image";
 import type React from "react";
 import { useEffect, useState } from "react";
-import { Card, Button, Badge, Spinner } from "flowbite-react";
 import type { ProjectItem } from "@/app/types";
+import { Button } from "@/components/ui/button";
 import {
-  FaAngular,
-  FaAppStoreIos,
-  FaCode,
-  FaCss3Alt,
-  FaDatabase,
-  FaGithub,
-  FaHtml5,
-  FaJs,
-  FaLaptop,
-  FaMobile,
-  FaPython,
-  FaReact,
-  FaSwift,
-  FaTablet,
-} from "react-icons/fa";
-
-const techIconMap: { [key: string]: any } = {
-  Angular: FaAngular,
-  CSS: FaCss3Alt,
-  Code: FaCode,
-  Database: FaDatabase,
-  Git: FaGithub,
-  HTML: FaHtml5,
-  JavaScript: FaJs,
-  NextJS: FaJs,
-  Python: FaPython,
-  React: FaReact,
-  Redis: FaDatabase,
-  SQL: FaDatabase,
-  Swift: FaSwift,
-  SwiftUI: FaSwift,
-  TypeScript: FaJs,
-  iOS: FaMobile,
-  iPadOS: FaTablet,
-  macOS: FaLaptop,
-};
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { techIconMap, socialIconMap } from "@/app/lib/icons";
 
 const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -54,80 +27,88 @@ const ProjectsCarousel: React.FC = () => {
         setProjects(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false)); // Ensure loading is stopped even if there is an error
+      .catch(() => setLoading(false));
   }, []);
 
   return (
     <div className="container mx-auto p-4 my-8">
-      <h1 className="text-4xl sm:text-5xl font-bold mb-8 mt-4 text-gray-200">
-        What did I build...
-      </h1>
+      <h1 className="text-4xl sm:text-5xl font-bold mb-2 mt-4">My Projects</h1>
+      <p className="text-muted-foreground mb-8">Things I've built that I'm proud of</p>
       {loading ? (
-        <div className="text-center">
-          <Spinner aria-label="Cookin' up some projects!" />
+        <div className="flex justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="w-full flex-shrink-0 snap-center"
-              id={project.title}
-            >
-              <Card className="bg-gray-800 text-gray-300 p-4 rounded-lg border border-gray-700 flex flex-col h-full">
-                <div className="relative w-full h-48 mb-4">
-                  <Image
-                    src={`/${project.image}`}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    style={{
-                      objectFit: "cover",
-                    }}
-                    loading="lazy"
-                    className="rounded-lg"
-                    unoptimized={project.image.endsWith('.gif')}
-                  />
+            <Card key={index} className="flex flex-col h-full group hover:shadow-lg transition-shadow duration-200">
+              <CardHeader className="flex-none p-0">
+                {project.image && (
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <Image
+                      src={`/${project.image}`}
+                      alt={project.title}
+                      fill
+                      className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      unoptimized={project.image.endsWith('.gif')}
+                    />
+                  </div>
+                )}
+                <div className="p-6 space-y-1.5">
+                  <CardTitle className="line-clamp-2">{project.title}</CardTitle>
+                  <CardDescription className="flex items-center gap-2">
+                    <socialIconMap.Calendar className="h-4 w-4" />
+                    {project.date}
+                  </CardDescription>
                 </div>
-                <h2 className="text-xl font-bold tracking-tight text-gray-200 mb-2">
-                  {project.title}
-                </h2>
-                <p className="mb-2 flex-grow text-gray-300">
-                  {project.description}
-                </p>
-                <p className="text-gray-400 mb-4">{project.date}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="mb-4 text-muted-foreground line-clamp-3">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, techIndex) => {
-                    const Icon = techIconMap[tech] || FaCode;
+                    const TechIcon = techIconMap[tech as keyof typeof techIconMap];
                     return (
                       <Badge
                         key={techIndex}
-                        icon={Icon}
-                        className="bg-gray-700 text-gray-300"
+                        variant="secondary"
+                        className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200"
                       >
+                        {TechIcon && <TechIcon className="h-3.5 w-3.5" />}
                         {tech}
                       </Badge>
                     );
                   })}
                 </div>
+              </CardContent>
+              <CardFooter className="flex-none pt-6">
                 {project.link && (
-                  <Button
-                    href={project.link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center space-x-2 w-full"
-                  >
-                    {project.link.text === "Source Code" && (
-                      <FaGithub className="mr-2 h-5 w-5" />
-                    )}
-                    {project.link.text === "App Store" && (
-                      <FaAppStoreIos className="mr-2 h-5 w-5" />
-                    )}
-                    {project.link.text}
+                  <Button asChild variant="default" className="w-full">
+                    <a
+                      href={project.link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      {project.link.text === "Source Code" && (
+                        <socialIconMap.GitHub className="h-4 w-4" />
+                      )}
+                      {project.link.text === "App Store" && (
+                        <socialIconMap.AppStore className="h-4 w-4" />
+                      )}
+                      {project.link.text === "TestFlight" && (
+                        <socialIconMap.TestFlight className="h-4 w-4" />
+                      )}
+                      {project.link.text === "Website" && (
+                        <socialIconMap.Website className="h-4 w-4" />
+                      )}
+                      {project.link.text}
+                      <socialIconMap.External className="h-4 w-4" />
+                    </a>
                   </Button>
                 )}
-              </Card>
-            </div>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       )}

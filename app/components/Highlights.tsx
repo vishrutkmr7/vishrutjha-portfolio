@@ -3,8 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Card, Spinner } from "flowbite-react";
 import type { TimelineItem, Achievement, ProjectItem } from "@/app/types";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 interface HighlightCardProps {
   title: string;
@@ -22,9 +28,9 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   altText,
 }) => (
   <Link href={linkHref} className="block h-full">
-    <Card className="bg-gray-800 text-gray-300 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 h-full">
-      <div className="flex flex-col items-center justify-between h-full">
-        <div className="relative w-16 h-16 mb-4">
+    <Card className="h-full hover:bg-muted/50 transition-colors duration-200">
+      <CardHeader className="flex flex-col items-center space-y-4">
+        <div className="relative w-16 h-16">
           <Image
             src={imageSrc}
             alt={altText}
@@ -34,11 +40,11 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <div>
-          <h3 className="text-xl font-bold mb-2">{title}</h3>
-          <p className="text-sm">{subtitle}</p>
+        <div className="space-y-1 text-center">
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{subtitle}</CardDescription>
         </div>
-      </div>
+      </CardHeader>
     </Card>
   </Link>
 );
@@ -83,8 +89,8 @@ const Highlights: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="mt-8">
-        <Spinner aria-label="Loading highlights" />
+      <div className="mt-8 flex justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
   }
