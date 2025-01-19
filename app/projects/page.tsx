@@ -38,7 +38,7 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="text-muted-foreground">
-            A collection of projects I've worked on, both personal and professional.
+            A collection of projects I&apos;ve worked on, both personal and professional.
           </p>
         </div>
         <MotionList className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

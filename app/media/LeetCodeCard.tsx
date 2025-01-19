@@ -71,7 +71,7 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
                         </CardTitle>
                         <CardDescription className="flex flex-col gap-1">
                             <span>Because apparently this matters...</span>
-                            <span className="text-xs text-muted-foreground">(Spoiler: It doesn't)</span>
+                            <span className="text-xs text-muted-foreground">(Spoiler: It doesn&apos;t)</span>
                         </CardDescription>
                     </div>
                 </CardHeader>
