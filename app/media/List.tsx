@@ -75,7 +75,7 @@ const LeetCodeCard: React.FC<{ stats: LeetCodeStats | null }> = ({ stats }) => (
         </CardTitle>
         <CardDescription className="flex flex-col gap-1">
           <span>Because apparently this matters...</span>
-          <span className="text-xs text-muted-foreground">(Spoiler: It doesn't)</span>
+          <span className="text-xs text-muted-foreground">(Spoiler: It doesn&apos;t)</span>
         </CardDescription>
       </div>
     </CardHeader>
@@ -188,7 +188,7 @@ const ContactCard: React.FC = () => (
     <CardHeader className="flex-none">
       <CardTitle className="line-clamp-1 flex items-center gap-2">
         <socialIconMap.Email className="h-5 w-5" />
-        Let's Connect
+        Let&apos;s Connect
       </CardTitle>
     </CardHeader>
     <CardContent className="flex-grow">

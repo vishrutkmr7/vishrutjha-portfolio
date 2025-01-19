@@ -33,7 +33,7 @@ const ProjectsCarousel: React.FC = () => {
   return (
     <div className="container mx-auto p-4 my-8">
       <h1 className="text-4xl sm:text-5xl font-bold mb-2 mt-4">My Projects</h1>
-      <p className="text-muted-foreground mb-8">Things I've built that I'm proud of</p>
+      <p className="text-muted-foreground mb-8">Things I&apos;ve built that I&apos;m proud of</p>
       {loading ? (
         <div className="flex justify-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
