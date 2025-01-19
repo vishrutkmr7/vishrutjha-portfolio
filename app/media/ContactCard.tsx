@@ -23,7 +23,7 @@ export default function ContactCard() {
                             Get in Touch
                         </CardTitle>
                         <CardDescription>
-                            Let's connect and build something amazing together!
+                            Let&apos;s connect and build something amazing together!
                         </CardDescription>
                     </div>
                 </CardHeader>
