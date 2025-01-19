@@ -27,7 +27,12 @@ export const metadata: Metadata = {
     title: 'Résumé | Vishrut Jha',
     description: 'Professional Résumé of Vishrut Jha - Full Stack and iOS Developer',
     creator: '@vishrutkmr7',
-    images: [`${DOMAIN}/resume-preview.png`],
+    images: {
+      url: `${DOMAIN}/resume-preview.png`,
+      alt: 'Vishrut Jha Résumé Preview',
+      width: 1336,
+      height: 1732,
+    },
   },
 };
 

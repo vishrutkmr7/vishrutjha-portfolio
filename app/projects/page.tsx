@@ -27,6 +27,30 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Projects - Vishrut Jha',
     description: "A collection of projects I've worked on, both personal and professional.",
+    url: `${DOMAIN}/projects`,
+    siteName: 'Vishrut Jha Portfolio',
+    images: [
+      {
+        url: `${DOMAIN}/llama-stack-ios.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Vishrut Jha Projects',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects - Vishrut Jha',
+    description: "A collection of projects I've worked on, both personal and professional.",
+    creator: '@vishrutkmr7',
+    images: {
+      url: `${DOMAIN}/llama-stack-ios.png`,
+      alt: 'Vishrut Jha Projects',
+      width: 1200,
+      height: 630,
+    },
   },
 };
 

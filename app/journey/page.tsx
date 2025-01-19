@@ -7,31 +7,35 @@ import { DOMAIN } from '@/app/constants';
 import JourneyTimeline from './Timeline';
 
 export const metadata: Metadata = {
-  title: 'My Journey | Vishrut Jha',
-  description:
-    'Explore the professional journey of Vishrut Jha, from education to career milestones in iOS and full-stack development.',
-  alternates: {
-    canonical: `${DOMAIN}/journey`,
-  },
+  title: 'Journey | Vishrut Jha',
+  description: 'My professional journey and career milestones',
   openGraph: {
-    title: 'My Journey | Vishrut Jha',
-    description:
-      'Explore the professional journey of Vishrut Jha, from education to career milestones in iOS and full-stack development.',
+    title: 'Journey | Vishrut Jha',
+    description: 'My professional journey and career milestones',
     url: `${DOMAIN}/journey`,
+    siteName: 'Vishrut Jha Portfolio',
     images: [
       {
         url: `${DOMAIN}/pphealth.jpeg`,
-        width: 200,
-        height: 200,
+        width: 1200,
+        height: 630,
         alt: 'Vishrut Jha Journey',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    title: 'My Journey | Vishrut Jha',
-    description:
-      'Explore the professional journey of Vishrut Jha, from education to career milestones in iOS and full-stack development.',
-    images: [`${DOMAIN}/pphealth.jpeg`],
+    card: 'summary_large_image',
+    title: 'Journey | Vishrut Jha',
+    description: 'My professional journey and career milestones',
+    creator: '@vishrutkmr7',
+    images: {
+      url: `${DOMAIN}/pphealth.jpeg`,
+      alt: 'Vishrut Jha Journey',
+      width: 1200,
+      height: 630,
+    },
   },
 };
 

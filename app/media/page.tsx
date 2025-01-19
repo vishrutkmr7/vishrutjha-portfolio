@@ -2,14 +2,50 @@
 
 import { useEffect, useState } from 'react';
 
+import type { Metadata } from 'next';
+
 import { MotionList, MotionItem, scaleInVariants } from '@/app/components/MotionList';
 import PageTransition from '@/app/components/PageTransition';
 import { ScrollAnimation } from '@/app/components/ScrollAnimation';
+import { DOMAIN } from '@/app/constants';
 import type { Achievement, LeetCodeStats } from '@/app/types';
 
 import AchievementCard from './AchievementCard';
 import ContactCard from './ContactCard';
 import LeetCodeCard from './LeetCodeCard';
+
+export const metadata: Metadata = {
+  title: 'Media | Vishrut Jha',
+  description: 'Media presence, achievements, and contact information of Vishrut Jha',
+  openGraph: {
+    title: 'Media | Vishrut Jha',
+    description: 'Media presence, achievements, and contact information of Vishrut Jha',
+    url: `${DOMAIN}/media`,
+    siteName: 'Vishrut Jha Portfolio',
+    images: [
+      {
+        url: `${DOMAIN}/yudi.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Vishrut Jha Media',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Media | Vishrut Jha',
+    description: 'Media presence, achievements, and contact information of Vishrut Jha',
+    creator: '@vishrutkmr7',
+    images: {
+      url: `${DOMAIN}/yudi.png`,
+      alt: 'Vishrut Jha Media',
+      width: 1200,
+      height: 630,
+    },
+  },
+};
 
 // Client-side only content wrapper
 function ClientContent({
