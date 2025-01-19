@@ -59,6 +59,7 @@ const Bio = () => {
             wrapper="span"
             speed={40}
             repeat={2}
+            className="font-mono"
           />
         </div>
       </div>

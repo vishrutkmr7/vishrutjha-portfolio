@@ -33,8 +33,8 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <PageTransition>
-      <div className="space-y-8">
-        <div className="flex flex-col items-start gap-4">
+      <div className="space-y-6">
+        <div className="flex flex-col items-start gap-2">
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
             Projects
           </h1>

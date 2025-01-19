@@ -165,9 +165,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
             <ClientComponents />
-            <Header />
-            <main className="flex-1 container py-8 md:py-12">{children}</main>
-            <Footer />
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1 container py-4 md:py-6 mt-14">{children}</main>
+              <Footer />
+            </div>
           </ThemeProvider>
         </Suspense>
       </body>

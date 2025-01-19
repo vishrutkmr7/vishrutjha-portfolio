@@ -41,9 +41,13 @@ const JourneyTimeline: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="container mx-auto p-4 my-8">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-2 mt-4">My Journey</h1>
-        <p className="text-muted-foreground mb-8">The path that led me here</p>
+      <div className="container mx-auto p-4">
+        <div className="flex flex-col items-start gap-2">
+          <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
+            My Journey
+          </h1>
+          <p className="text-muted-foreground">The path that led me here</p>
+        </div>
         {loading ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -69,7 +73,7 @@ const JourneyTimeline: React.FC = () => {
                 >
                   <TimelineItem
                     id={item.title.company}
-                    className="before:absolute before:left-[-9px] before:top-[24px] before:h-2 before:w-4 before:bg-muted"
+                    className="relative"
                     icon={
                       item.type === 'education' ? (
                         <socialIconMap.education className="h-5 w-5 text-muted-foreground" />
@@ -87,10 +91,10 @@ const JourneyTimeline: React.FC = () => {
                         variants={dragVariants}
                       >
                         <div
-                          className="bg-card p-4 rounded-lg border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200"
+                          className="bg-card p-4 rounded-lg border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200 w-full sm:w-auto"
                           title={item.body}
                         >
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
                             <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg">
                               <Image
                                 src={`/${item.logo}`}
@@ -101,9 +105,9 @@ const JourneyTimeline: React.FC = () => {
                                 sizes="(max-width: 768px) 64px, 64px"
                               />
                             </div>
-                            <div className="flex-grow">
-                              <TimelineTime className="text-sm text-muted-foreground flex items-center gap-2">
-                                <socialIconMap.calendar className="h-4 w-4" />
+                            <div className="flex-grow w-full">
+                              <TimelineTime className="text-sm text-muted-foreground flex items-center gap-2 flex-wrap">
+                                <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
                                 {item.time}{' '}
                                 {item.type === 'work'
                                   ? '💼'
@@ -111,7 +115,7 @@ const JourneyTimeline: React.FC = () => {
                                     ? '🎓'
                                     : '🏆'}
                               </TimelineTime>
-                              <TimelineTitle className="text-lg sm:text-xl">
+                              <TimelineTitle className="text-lg sm:text-xl break-words">
                                 {item.title.company}{' '}
                                 {item.title.company.toLowerCase().includes('microsoft')
                                   ? '🪟'
@@ -123,7 +127,7 @@ const JourneyTimeline: React.FC = () => {
                                         ? '🍎'
                                         : ''}
                               </TimelineTitle>
-                              <TimelineBody className="text-muted-foreground">
+                              <TimelineBody className="text-muted-foreground break-words">
                                 {item.title.role}{' '}
                                 {item.title.role.toLowerCase().includes('senior')
                                   ? '👨‍💻'
@@ -136,20 +140,20 @@ const JourneyTimeline: React.FC = () => {
                             </div>
                           </div>
                           {item.link && (
-                            <div className="mt-4 max-w-full">
+                            <div className="mt-4 w-full">
                               <Button
                                 asChild
                                 variant="outline"
                                 size="sm"
-                                className="w-full sm:w-auto hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+                                className="w-full min-h-[32px] h-auto whitespace-normal text-left hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
                               >
                                 <a
                                   href={item.link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center gap-2 break-words"
+                                  className="flex items-center gap-2 break-words py-1.5 px-2"
                                 >
-                                  <span className="line-clamp-1">{item.link.text}</span>
+                                  <span className="flex-grow">{item.link.text}</span>
                                   <socialIconMap.External className="h-3 w-3 flex-shrink-0" />
                                 </a>
                               </Button>

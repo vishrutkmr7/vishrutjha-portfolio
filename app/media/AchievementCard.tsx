@@ -39,7 +39,9 @@ export default function AchievementCard({ title, description, date, image, link 
             </div>
           )}
           <div className="p-6 pb-2 space-y-1.5">
-            <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
+            <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem]">
+              {title}
+            </CardTitle>
             <CardDescription className="flex items-center gap-2">
               <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
               {date}

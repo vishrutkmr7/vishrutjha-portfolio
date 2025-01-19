@@ -75,11 +75,13 @@ export default function MediaPage() {
 
   return (
     <PageTransition>
-      <div className="container mx-auto p-4 my-8" suppressHydrationWarning>
-        <h1 className="text-4xl sm:text-5xl font-bold mb-2 mt-4">Media Presence</h1>
-        <p className="text-muted-foreground mb-8">
-          Featured articles, interviews, and achievements
-        </p>
+      <div className="container mx-auto p-4">
+        <div className="flex flex-col items-start gap-2">
+          <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
+            Media Presence
+          </h1>
+          <p className="text-muted-foreground">Featured articles, interviews, and achievements</p>
+        </div>
         {loading ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
