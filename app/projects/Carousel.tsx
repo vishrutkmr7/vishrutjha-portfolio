@@ -41,10 +41,10 @@ const ProjectsCarousel: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <Card key={index} className="flex flex-col h-full group hover:shadow-lg transition-shadow duration-200">
+            <Card key={index} className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
               <CardHeader className="flex-none p-0">
                 {project.image && (
-                  <div className="relative w-full h-48 overflow-hidden">
+                  <div className="relative w-full aspect-[16/9] overflow-hidden">
                     <Image
                       src={`/${project.image}`}
                       alt={project.title}
@@ -55,16 +55,16 @@ const ProjectsCarousel: React.FC = () => {
                     />
                   </div>
                 )}
-                <div className="p-6 space-y-1.5">
-                  <CardTitle className="line-clamp-2">{project.title}</CardTitle>
+                <div className="p-6 pb-2 space-y-1.5">
+                  <CardTitle className="line-clamp-2 min-h-[3.5rem]">{project.title}</CardTitle>
                   <CardDescription className="flex items-center gap-2">
-                    <socialIconMap.Calendar className="h-4 w-4" />
+                    <socialIconMap.Calendar className="h-4 w-4 flex-shrink-0" />
                     {project.date}
                   </CardDescription>
                 </div>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="mb-4 text-muted-foreground line-clamp-3">{project.description}</p>
+              <CardContent className="flex-grow pb-6">
+                <p className="mb-4 text-muted-foreground line-clamp-3 min-h-[4.5rem]">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, techIndex) => {
                     const TechIcon = techIconMap[tech as keyof typeof techIconMap];
@@ -74,14 +74,14 @@ const ProjectsCarousel: React.FC = () => {
                         variant="secondary"
                         className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200"
                       >
-                        {TechIcon && <TechIcon className="h-3.5 w-3.5" />}
+                        {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
                         {tech}
                       </Badge>
                     );
                   })}
                 </div>
               </CardContent>
-              <CardFooter className="flex-none pt-6">
+              <CardFooter className="flex-none mt-auto pt-0 pb-6 px-6">
                 {project.link && (
                   <Button asChild variant="default" className="w-full">
                     <a
@@ -91,19 +91,19 @@ const ProjectsCarousel: React.FC = () => {
                       className="flex items-center justify-center gap-2"
                     >
                       {project.link.text === "Source Code" && (
-                        <socialIconMap.GitHub className="h-4 w-4" />
+                        <socialIconMap.GitHub className="h-4 w-4 flex-shrink-0" />
                       )}
                       {project.link.text === "App Store" && (
-                        <socialIconMap.AppStore className="h-4 w-4" />
+                        <socialIconMap.AppStore className="h-4 w-4 flex-shrink-0" />
                       )}
                       {project.link.text === "TestFlight" && (
-                        <socialIconMap.TestFlight className="h-4 w-4" />
+                        <socialIconMap.TestFlight className="h-4 w-4 flex-shrink-0" />
                       )}
                       {project.link.text === "Website" && (
-                        <socialIconMap.Website className="h-4 w-4" />
+                        <socialIconMap.Website className="h-4 w-4 flex-shrink-0" />
                       )}
                       {project.link.text}
-                      <socialIconMap.External className="h-4 w-4" />
+                      <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
                     </a>
                   </Button>
                 )}

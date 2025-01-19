@@ -11,6 +11,9 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface HighlightCardProps {
   title: string;
@@ -18,6 +21,7 @@ interface HighlightCardProps {
   imageSrc: string;
   linkHref: string;
   altText: string;
+  index: number;
 }
 
 const HighlightCard: React.FC<HighlightCardProps> = ({
@@ -26,27 +30,54 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   imageSrc,
   linkHref,
   altText,
+  index,
 }) => (
-  <Link href={linkHref} className="block h-full">
-    <Card className="h-full hover:bg-muted/50 transition-colors duration-200">
-      <CardHeader className="flex flex-col items-center space-y-4">
-        <div className="relative w-16 h-16">
-          <Image
-            src={imageSrc}
-            alt={altText}
-            fill
-            loading="lazy"
-            className="rounded-full object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.2 }}
+  >
+    <Link href={linkHref} className="block h-full group">
+      <Card className="h-full transform transition-all duration-300 hover:scale-[1.02]">
+        <CardHeader className="p-6">
+          <div className="flex gap-4">
+            <div className="relative w-20 h-full aspect-square rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300 flex-shrink-0">
+              <Image
+                src={imageSrc}
+                alt={altText}
+                fill
+                loading="lazy"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                sizes="80px"
+              />
+            </div>
+            <div className="flex flex-col justify-center flex-grow">
+              <CardTitle className="text-lg font-semibold tracking-tight line-clamp-1 mb-2">
+                {title}
+              </CardTitle>
+              <CardDescription className="text-sm leading-snug line-clamp-2">
+                {subtitle}
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
+    </Link>
+  </motion.div>
+);
+
+const HighlightSkeleton = () => (
+  <Card className="h-full">
+    <CardHeader className="p-6">
+      <div className="flex gap-4">
+        <Skeleton className="w-20 aspect-square rounded-full flex-shrink-0" />
+        <div className="flex flex-col justify-center flex-grow">
+          <Skeleton className="h-4 w-3/4 mb-2" />
+          <Skeleton className="h-3 w-full" />
         </div>
-        <div className="space-y-1 text-center">
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{subtitle}</CardDescription>
-        </div>
-      </CardHeader>
-    </Card>
-  </Link>
+      </div>
+    </CardHeader>
+  </Card>
 );
 
 interface HighlightData {
@@ -89,8 +120,12 @@ const Highlights: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="mt-8 flex justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <div className="mt-8 w-full max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[...Array(3)].map((_, i) => (
+            <HighlightSkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
@@ -101,31 +136,36 @@ const Highlights: React.FC = () => {
     return null;
   }
 
+  const highlightCards = [
+    {
+      title: "Current Role",
+      subtitle: `${journey.title.company} - ${journey.title.role}`,
+      imageSrc: `/${journey.logo}`,
+      linkHref: `/journey?#${journey.title.company}`,
+      altText: journey.title.company,
+    },
+    {
+      title: "Latest Update",
+      subtitle: media.title,
+      imageSrc: `/${media.image}`,
+      linkHref: `/media?#${media.title}`,
+      altText: media.title,
+    },
+    {
+      title: "Active Project",
+      subtitle: project.title,
+      imageSrc: `/${project.image}`,
+      linkHref: `/projects?#${project.title}`,
+      altText: project.title,
+    },
+  ];
+
   return (
-    <div className="mt-8 w-full max-w-4xl">
-      {/* <h2 className="text-2xl font-bold mb-4">Highlights</h2> */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <HighlightCard
-          title="My current role"
-          subtitle={`${journey.title.company} - ${journey.title.role}`}
-          imageSrc={`/${journey.logo}`}
-          linkHref={`/journey?#${journey.title.company}`}
-          altText={journey.title.company}
-        />
-        <HighlightCard
-          title="Latest from me"
-          subtitle={media.title}
-          imageSrc={`/${media.image}`}
-          linkHref={`/media?#${media.title}`}
-          altText={media.title}
-        />
-        <HighlightCard
-          title="Currently working on"
-          subtitle={project.title}
-          imageSrc={`/${project.image}`}
-          linkHref={`/projects?#${project.title}`}
-          altText={project.title}
-        />
+    <div className="mt-8 w-full max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {highlightCards.map((card, index) => (
+          <HighlightCard key={card.title} {...card} index={index} />
+        ))}
       </div>
     </div>
   );

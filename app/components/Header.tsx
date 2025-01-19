@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Home, Map, FolderGit2, Image } from "lucide-react";
+import { Home, Map, FolderGit2, Image, FileDown } from "lucide-react";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -33,6 +33,22 @@ const Header: React.FC = () => {
   return (
     <>
       <div className="pb-16 md:pb-0">
+        {/* Mobile buttons */}
+        <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-lg border p-1.5">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-primary/10"
+            asChild
+          >
+            <Link href="/resume.pdf" target="_blank" download>
+              <FileDown className="h-5 w-5" />
+              <span className="sr-only">Download Resume</span>
+            </Link>
+          </Button>
+          <ThemeToggle />
+        </div>
+
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:block hidden">
           <div className="container flex h-14 items-center">
             <div className="mr-4 flex">
@@ -64,7 +80,18 @@ const Header: React.FC = () => {
               </nav>
             </div>
             <div className="flex flex-1 items-center justify-end">
-              <nav className="flex items-center">
+              <nav className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-primary/10"
+                  asChild
+                >
+                  <Link href="/resume.pdf" target="_blank" download>
+                    <FileDown className="h-5 w-5" />
+                    <span className="sr-only">Download Resume</span>
+                  </Link>
+                </Button>
                 <ThemeToggle />
               </nav>
             </div>

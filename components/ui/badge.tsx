@@ -27,30 +27,18 @@ export interface BadgeProps
     extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
     icon?: React.ElementType;
-    emoji?: string;
 }
-
-const defaultEmojis: Record<string, string> = {
-    default: "✨",
-    secondary: "🔹",
-    destructive: "⚠️",
-    outline: "📌",
-};
 
 function Badge({
     className,
     variant,
     icon: Icon,
-    emoji,
     children,
     ...props
 }: BadgeProps) {
-    const variantEmoji = emoji || (variant && defaultEmojis[variant]) || "";
-
     return (
         <div className={cn(badgeVariants({ variant }), className)} {...props}>
             {Icon && <Icon className="mr-1 h-3 w-3" />}
-            {variantEmoji && <span className="mr-1">{variantEmoji}</span>}
             {children}
         </div>
     )

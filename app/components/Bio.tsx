@@ -10,21 +10,21 @@ import { Briefcase, Download } from "lucide-react";
 
 const Bio = () => {
   return (
-    <div className="container mx-auto px-4 py-12 flex flex-col items-center">
+    <div className="container mx-auto px-4 py-8 flex flex-col items-center">
       {/* Profile Section */}
-      <div className="relative w-36 h-36 mb-8">
+      <div className="relative w-44 h-44 mb-6">
         <Image
           src="/pfp.png"
           alt="Vishrut Jha"
           fill
           priority
           className="rounded-full object-cover ring-2 ring-primary/20 transition-transform duration-300 hover:scale-105"
-          sizes="(max-width: 768px) 144px, 144px"
+          sizes="(max-width: 768px) 176px, 176px"
         />
       </div>
 
       {/* Name and Memoji */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 flex flex-wrap items-center justify-center">
           <div className="flex items-center gap-2 sm:gap-3">
             <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">Vishrut</span>
@@ -58,7 +58,7 @@ const Bio = () => {
       </div>
 
       {/* Location */}
-      <div className="text-base sm:text-lg text-muted-foreground mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-muted/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+      <div className="text-base sm:text-lg text-muted-foreground mb-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-muted/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span>Phoenix</span>
           <span className="text-xl sm:text-2xl transform hover:rotate-12 transition-transform duration-300">🌵</span>
@@ -71,7 +71,7 @@ const Bio = () => {
       </div>
 
       {/* Bio Description */}
-      <div className="text-lg text-muted-foreground text-center max-w-2xl mb-10 space-y-3">
+      <div className="text-lg text-muted-foreground text-center max-w-2xl mb-8 space-y-3">
         <p className="flex items-center justify-center gap-2 flex-wrap">
           <span>Founding Engineer at</span>
           <Button
@@ -88,7 +88,7 @@ const Bio = () => {
             </Link>
           </Button>
         </p>
-        <p>Currently building the next generation of healthcare tools</p>
+        {/* <p>Currently building the next generation of healthcare tools</p> */}
         <p className="flex items-center justify-center gap-2">
           Building in Public!
           <span className="inline-block animate-bounce">🚀</span>
@@ -96,7 +96,7 @@ const Bio = () => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full max-w-md">
+      <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-md">
         <Button
           asChild
           variant="default"
@@ -127,7 +127,7 @@ const Bio = () => {
       </div>
 
       {/* Social Links */}
-      <div className="flex gap-4 mb-12">
+      <div className="flex gap-4 mb-10">
         {[
           { icon: "Email", href: "mailto:me@vishrutjha.com", title: "me [at] vishrutjha [dot] com" },
           { icon: "Twitter", href: "https://twitter.com/vishrutkmr7", title: "@vishrutkmr7" },
