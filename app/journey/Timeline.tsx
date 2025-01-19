@@ -49,7 +49,7 @@ const JourneyTimeline: React.FC = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <MotionList className="relative border-l border-muted">
+          <MotionList className="relative border-l-2 border-muted">
             {timelineData.map((item, index) => (
               <ScrollAnimation key={`${item.title.company}-${index}`}>
                 <MotionItem
@@ -58,7 +58,7 @@ const JourneyTimeline: React.FC = () => {
                   animate="show"
                   exit="exit"
                   layout
-                  className="mb-10 ml-6"
+                  className="relative mb-8"
                   custom={index}
                   transition={{
                     delay: index * 0.1,
@@ -67,11 +67,9 @@ const JourneyTimeline: React.FC = () => {
                     damping: 15,
                   }}
                 >
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 ring-8 ring-background">
-                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                  </span>
                   <TimelineItem
                     id={item.title.company}
+                    className="before:absolute before:left-[-9px] before:top-[24px] before:h-2 before:w-4 before:bg-muted"
                     icon={
                       item.type === 'education' ? (
                         <socialIconMap.education className="h-5 w-5 text-muted-foreground" />
@@ -138,21 +136,21 @@ const JourneyTimeline: React.FC = () => {
                             </div>
                           </div>
                           {item.link && (
-                            <div className="mt-4">
+                            <div className="mt-4 max-w-full">
                               <Button
                                 asChild
                                 variant="outline"
                                 size="sm"
-                                className="hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+                                className="w-full sm:w-auto hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
                               >
                                 <a
                                   href={item.link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center gap-2"
+                                  className="flex items-center gap-2 break-words"
                                 >
-                                  <span>{item.link.text}</span>
-                                  <socialIconMap.External className="h-3 w-3" />
+                                  <span className="line-clamp-1">{item.link.text}</span>
+                                  <socialIconMap.External className="h-3 w-3 flex-shrink-0" />
                                 </a>
                               </Button>
                             </div>
