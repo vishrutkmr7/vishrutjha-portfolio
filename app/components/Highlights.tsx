@@ -1,19 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import type { TimelineItem, Achievement, ProjectItem } from "@/app/types";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useState, useEffect } from 'react';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import type { TimelineItem, Achievement, ProjectItem } from '@/app/types';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface HighlightCardProps {
   title: string;
@@ -98,9 +93,9 @@ const Highlights: React.FC = () => {
     const fetchHighlights = async () => {
       try {
         const [journeyData, mediaData, projectsData] = await Promise.all([
-          fetch("/data/timelineData.json").then((res) => res.json()),
-          fetch("/data/mediaData.json").then((res) => res.json()),
-          fetch("/data/projectsData.json").then((res) => res.json()),
+          fetch('/data/timelineData.json').then(res => res.json()),
+          fetch('/data/mediaData.json').then(res => res.json()),
+          fetch('/data/projectsData.json').then(res => res.json()),
         ]);
 
         setHighlights({
@@ -109,7 +104,7 @@ const Highlights: React.FC = () => {
           project: projectsData[0],
         });
       } catch (error) {
-        console.error("Error fetching highlights:", error);
+        console.error('Error fetching highlights:', error);
       } finally {
         setLoading(false);
       }
@@ -138,21 +133,21 @@ const Highlights: React.FC = () => {
 
   const highlightCards = [
     {
-      title: "Current Role",
+      title: 'Current Role',
       subtitle: `${journey.title.company} - ${journey.title.role}`,
       imageSrc: `/${journey.logo}`,
       linkHref: `/journey?#${journey.title.company}`,
       altText: journey.title.company,
     },
     {
-      title: "Latest Update",
+      title: 'Latest Update',
       subtitle: media.title,
       imageSrc: `/${media.image}`,
       linkHref: `/media?#${media.title}`,
       altText: media.title,
     },
     {
-      title: "Active Project",
+      title: 'Active Project',
       subtitle: project.title,
       imageSrc: `/${project.image}`,
       linkHref: `/projects?#${project.title}`,

@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { Card } from "@/components/ui/card";
-import type { Achievement } from "@/app/types";
+import Image from 'next/image';
+import Link from 'next/link';
+
+import type { Achievement } from '@/app/types';
+import { Card } from '@/components/ui/card';
 
 export function MediaItem({ title, description, image, link }: Achievement) {
   return (

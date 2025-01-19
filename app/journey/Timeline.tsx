@@ -1,31 +1,38 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import type React from "react";
-import { useEffect, useState } from "react";
-import type { TimelineItem as TimelineItemType } from "@/app/types";
-import { Button } from "@/components/ui/button";
-import { socialIconMap } from "@/app/lib/icons";
+import type React from 'react';
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
 import {
-  Timeline,
+  MotionList,
+  MotionItem,
+  fadeInVariants,
+  DraggableCard,
+  dragVariants,
+} from '@/app/components/MotionList';
+import PageTransition from '@/app/components/PageTransition';
+import { ScrollAnimation } from '@/app/components/ScrollAnimation';
+import { socialIconMap } from '@/app/lib/icons';
+import type { TimelineItem as TimelineItemType } from '@/app/types';
+import { Button } from '@/components/ui/button';
+import {
   TimelineItem,
   TimelineContent,
   TimelineTitle,
   TimelineTime,
   TimelineBody,
-} from "@/components/ui/timeline";
-import { MotionList, MotionItem, fadeInVariants, DraggableCard, dragVariants } from "@/app/components/MotionList";
-import PageTransition from "@/app/components/PageTransition";
-import { ScrollAnimation } from "@/app/components/ScrollAnimation";
+} from '@/components/ui/timeline';
 
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItemType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/data/timelineData.json")
-      .then((response) => response.json())
-      .then((data) => {
+    fetch('/data/timelineData.json')
+      .then(response => response.json())
+      .then(data => {
         setTimelineData(data);
         setLoading(false);
       })
@@ -55,7 +62,7 @@ const JourneyTimeline: React.FC = () => {
                   custom={index}
                   transition={{
                     delay: index * 0.1,
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 100,
                     damping: 15,
                   }}
@@ -66,10 +73,10 @@ const JourneyTimeline: React.FC = () => {
                   <TimelineItem
                     id={item.title.company}
                     icon={
-                      item.type === "education" ? (
-                        <socialIconMap.Education className="h-5 w-5 text-muted-foreground" />
+                      item.type === 'education' ? (
+                        <socialIconMap.education className="h-5 w-5 text-muted-foreground" />
                       ) : (
-                        <socialIconMap.Work className="h-5 w-5 text-muted-foreground" />
+                        <socialIconMap.work className="h-5 w-5 text-muted-foreground" />
                       )
                     }
                   >
@@ -98,19 +105,35 @@ const JourneyTimeline: React.FC = () => {
                             </div>
                             <div className="flex-grow">
                               <TimelineTime className="text-sm text-muted-foreground flex items-center gap-2">
-                                <socialIconMap.Calendar className="h-4 w-4" />
-                                {item.time} {item.type === 'work' ? '💼' : item.type === 'education' ? '🎓' : '🏆'}
+                                <socialIconMap.calendar className="h-4 w-4" />
+                                {item.time}{' '}
+                                {item.type === 'work'
+                                  ? '💼'
+                                  : item.type === 'education'
+                                    ? '🎓'
+                                    : '🏆'}
                               </TimelineTime>
                               <TimelineTitle className="text-lg sm:text-xl">
-                                {item.title.company} {item.title.company.toLowerCase().includes('microsoft') ? '🪟' :
-                                  item.title.company.toLowerCase().includes('amazon') ? '📦' :
-                                    item.title.company.toLowerCase().includes('google') ? '🔍' :
-                                      item.title.company.toLowerCase().includes('apple') ? '🍎' : ''}
+                                {item.title.company}{' '}
+                                {item.title.company.toLowerCase().includes('microsoft')
+                                  ? '🪟'
+                                  : item.title.company.toLowerCase().includes('amazon')
+                                    ? '📦'
+                                    : item.title.company.toLowerCase().includes('google')
+                                      ? '🔍'
+                                      : item.title.company.toLowerCase().includes('apple')
+                                        ? '🍎'
+                                        : ''}
                               </TimelineTitle>
                               <TimelineBody className="text-muted-foreground">
-                                {item.title.role} {item.title.role.toLowerCase().includes('senior') ? '👨‍💻' :
-                                  item.title.role.toLowerCase().includes('lead') ? '👨‍💼' :
-                                    item.title.role.toLowerCase().includes('engineer') ? '⚡' : ''}
+                                {item.title.role}{' '}
+                                {item.title.role.toLowerCase().includes('senior')
+                                  ? '👨‍💻'
+                                  : item.title.role.toLowerCase().includes('lead')
+                                    ? '👨‍💼'
+                                    : item.title.role.toLowerCase().includes('engineer')
+                                      ? '⚡'
+                                      : ''}
                               </TimelineBody>
                             </div>
                           </div>

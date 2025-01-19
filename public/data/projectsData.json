@@ -8,12 +8,7 @@
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/llama-stack-ios"
     },
-    "tech": [
-      "Swift",
-      "SwiftUI",
-      "iOS",
-      "LlamaStack"
-    ]
+    "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack"]
   },
   {
     "title": "Passifier #BuildInPublic 🚀",
@@ -24,11 +19,7 @@
       "text": "Coming Soon!",
       "url": "https://vishrutjha.com/projects?#passifier"
     },
-    "tech": [
-      "Swift",
-      "SwiftUI",
-      "iOS"
-    ]
+    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
     "title": "Programming Language Benchmarks",
@@ -39,9 +30,7 @@
       "text": "View Repository",
       "url": "https://github.com/bddicken/languages"
     },
-    "tech": [
-      "Swift"
-    ]
+    "tech": ["Swift"]
   },
   {
     "title": "Prickly Pear Health",
@@ -52,12 +41,7 @@
       "text": "TestFlight beta coming soon!",
       "url": "https://pricklypear.io/"
     },
-    "tech": [
-      "SwiftUI",
-      "iOS",
-      "Bun",
-      "Hono"
-    ]
+    "tech": ["SwiftUI", "iOS", "Bun", "Hono"]
   },
   {
     "title": "vishrutjha.com | My Portfolio Website",
@@ -68,11 +52,7 @@
       "text": "Visit vishrutjha.com",
       "url": "https://vishrutjha.com"
     },
-    "tech": [
-      "React",
-      "NextJS",
-      "Vercel"
-    ]
+    "tech": ["React", "NextJS", "Vercel"]
   },
   {
     "title": "Rock Paper Scissors Lizard Spock",
@@ -83,11 +63,7 @@
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/Rock-Paper-Scissors-Lizard-Spock"
     },
-    "tech": [
-      "Swift",
-      "SwiftUI",
-      "iOS"
-    ]
+    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
     "title": "Simple Node Editor",
@@ -98,11 +74,7 @@
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/SimpleNodeEditor"
     },
-    "tech": [
-      "Swift",
-      "SwiftUI",
-      "macOS"
-    ]
+    "tech": ["Swift", "SwiftUI", "macOS"]
   },
   {
     "title": "FIFAWC22",
@@ -113,11 +85,7 @@
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/FIFAWC2022"
     },
-    "tech": [
-      "Swift",
-      "SwiftUI",
-      "iOS"
-    ]
+    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
     "title": "AppliFly",
@@ -128,10 +96,7 @@
       "text": "Visit Applifly",
       "url": "https://kshitijdhyani.com/appliFLY/"
     },
-    "tech": [
-      "Python",
-      "Selenium"
-    ]
+    "tech": ["Python", "Selenium"]
   },
   {
     "title": "Ziply Fiber",
@@ -142,12 +107,7 @@
       "text": "App Store",
       "url": "https://apps.apple.com/us/app/ziply-fiber/id6451298186"
     },
-    "tech": [
-      "SwiftUI",
-      "iOS",
-      "Python",
-      "React"
-    ]
+    "tech": ["SwiftUI", "iOS", "Python", "React"]
   },
   {
     "title": "Hot Cell and Hot Zone analysis of Spatial Data",
@@ -158,10 +118,7 @@
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/ASU_CSE_511_DPS_Project_Group_15_Spring_22"
     },
-    "tech": [
-      "Java",
-      "Scala"
-    ]
+    "tech": ["Java", "Scala"]
   },
   {
     "title": "FDAlytics",
@@ -172,11 +129,7 @@
       "text": "Visit FDAlytics",
       "url": "https://www.fdalytics.com/"
     },
-    "tech": [
-      "Python",
-      "React",
-      "Machine Learning"
-    ]
+    "tech": ["Python", "React", "Machine Learning"]
   },
   {
     "title": "LiveSHIELD",
@@ -187,9 +140,6 @@
       "text": "Visit LiveShield",
       "url": "https://www.authbasenetworks.com/shield"
     },
-    "tech": [
-      "Python",
-      "Angular"
-    ]
+    "tech": ["Python", "Angular"]
   }
 ]

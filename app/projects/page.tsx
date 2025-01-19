@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import { DOMAIN } from "@/app/constants";
-import { MotionList, MotionItem, scaleInVariants } from "@/app/components/MotionList";
-import { ProjectCard } from "./ProjectCard";
-import projectsData from "@/public/data/projectsData.json";
-import type { ProjectItem } from "@/app/types";
-import PageTransition from "@/app/components/PageTransition";
-import { ScrollAnimation } from "@/app/components/ScrollAnimation";
+import type { Metadata } from 'next';
+
+import { MotionList, MotionItem, scaleInVariants } from '@/app/components/MotionList';
+import PageTransition from '@/app/components/PageTransition';
+import { ScrollAnimation } from '@/app/components/ScrollAnimation';
+import { DOMAIN } from '@/app/constants';
+import projectsData from '@/public/data/projectsData.json';
+
+import { ProjectCard } from './ProjectCard';
 
 // Update ProjectItem interface to match the actual data structure
 interface ProjectItemData {
@@ -18,13 +19,13 @@ interface ProjectItemData {
 }
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: 'Projects',
   description: "A collection of projects I've worked on, both personal and professional.",
   alternates: {
     canonical: `${DOMAIN}/projects`,
   },
   openGraph: {
-    title: "Projects - Vishrut Jha",
+    title: 'Projects - Vishrut Jha',
     description: "A collection of projects I've worked on, both personal and professional.",
   },
 };
@@ -53,7 +54,7 @@ export default function ProjectsPage() {
                 custom={index}
                 transition={{
                   delay: index * 0.05,
-                  type: "spring",
+                  type: 'spring',
                   stiffness: 100,
                   damping: 15,
                 }}

@@ -1,10 +1,14 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import type React from "react";
-import { useEffect, useState } from "react";
-import type { ProjectItem } from "@/app/types";
-import { Button } from "@/components/ui/button";
+import type React from 'react';
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
+import { techIconMap, socialIconMap } from '@/app/lib/icons';
+import type { ProjectItem } from '@/app/types';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -12,18 +16,16 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { techIconMap, socialIconMap } from "@/app/lib/icons";
+} from '@/components/ui/card';
 
 const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/data/projectsData.json")
-      .then((response) => response.json())
-      .then((data) => {
+    fetch('/data/projectsData.json')
+      .then(response => response.json())
+      .then(data => {
         setProjects(data);
         setLoading(false);
       })
@@ -41,7 +43,10 @@ const ProjectsCarousel: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <Card key={index} className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
+            <Card
+              key={index}
+              className="flex flex-col h-full group hover:shadow-lg transition-all duration-300"
+            >
               <CardHeader className="flex-none p-0">
                 {project.image && (
                   <div className="relative w-full aspect-[16/9] overflow-hidden">
@@ -58,13 +63,15 @@ const ProjectsCarousel: React.FC = () => {
                 <div className="p-6 pb-2 space-y-1.5">
                   <CardTitle className="line-clamp-2 min-h-[3.5rem]">{project.title}</CardTitle>
                   <CardDescription className="flex items-center gap-2">
-                    <socialIconMap.Calendar className="h-4 w-4 flex-shrink-0" />
+                    <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
                     {project.date}
                   </CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="flex-grow pb-6">
-                <p className="mb-4 text-muted-foreground line-clamp-3 min-h-[4.5rem]">{project.description}</p>
+                <p className="mb-4 text-muted-foreground line-clamp-3 min-h-[4.5rem]">
+                  {project.description}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, techIndex) => {
                     const TechIcon = techIconMap[tech as keyof typeof techIconMap];
@@ -90,17 +97,17 @@ const ProjectsCarousel: React.FC = () => {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2"
                     >
-                      {project.link.text === "Source Code" && (
-                        <socialIconMap.GitHub className="h-4 w-4 flex-shrink-0" />
+                      {project.link.text === 'Source Code' && (
+                        <socialIconMap.github className="h-4 w-4 flex-shrink-0" />
                       )}
-                      {project.link.text === "App Store" && (
+                      {project.link.text === 'App Store' && (
                         <socialIconMap.AppStore className="h-4 w-4 flex-shrink-0" />
                       )}
-                      {project.link.text === "TestFlight" && (
+                      {project.link.text === 'TestFlight' && (
                         <socialIconMap.TestFlight className="h-4 w-4 flex-shrink-0" />
                       )}
-                      {project.link.text === "Website" && (
-                        <socialIconMap.Website className="h-4 w-4 flex-shrink-0" />
+                      {project.link.text === 'Website' && (
+                        <socialIconMap.website className="h-4 w-4 flex-shrink-0" />
                       )}
                       {project.link.text}
                       <socialIconMap.External className="h-4 w-4 flex-shrink-0" />

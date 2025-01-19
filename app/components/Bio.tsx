@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { TypeAnimation } from "react-type-animation";
-import Highlights from "./Highlights";
-import { Button } from "@/components/ui/button";
-import { socialIconMap } from "@/app/lib/icons";
-import { Briefcase, Download } from "lucide-react";
+import { Briefcase, Download } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { TypeAnimation } from 'react-type-animation';
+
+import { socialIconMap } from '@/app/lib/icons';
+import { Button } from '@/components/ui/button';
+
+import Highlights from './Highlights';
 
 const Bio = () => {
   return (
@@ -27,8 +29,12 @@ const Bio = () => {
       <div className="text-center mb-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 flex flex-wrap items-center justify-center">
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">Vishrut</span>
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Jha</span>
+            <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
+              Vishrut
+            </span>
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              Jha
+            </span>
           </div>
           <Image
             src="/hi.png"
@@ -41,13 +47,13 @@ const Bio = () => {
         <div className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
           <TypeAnimation
             sequence={[
-              "iOS Developer 📱",
+              'iOS Developer 📱',
               2000,
-              "Full-Stack Developer 🚀",
+              'Full-Stack Developer 🚀',
               2000,
-              "Software Engineer 💻",
+              'Software Engineer 💻',
               2000,
-              "Founding Engineer ⚡",
+              'Founding Engineer ⚡',
               2000,
             ]}
             wrapper="span"
@@ -61,7 +67,9 @@ const Bio = () => {
       <div className="text-base sm:text-lg text-muted-foreground mb-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-muted/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span>Phoenix</span>
-          <span className="text-xl sm:text-2xl transform hover:rotate-12 transition-transform duration-300">🌵</span>
+          <span className="text-xl sm:text-2xl transform hover:rotate-12 transition-transform duration-300">
+            🌵
+          </span>
         </div>
         <span className="text-muted-foreground/60">•</span>
         <div className="flex items-center gap-1.5 sm:gap-2">
@@ -79,11 +87,7 @@ const Bio = () => {
             asChild
             className="text-primary font-medium p-0 h-auto text-lg hover:no-underline"
           >
-            <Link
-              href="https://pricklypear.io"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href="https://pricklypear.io" target="_blank" rel="noopener noreferrer">
               Prickly Pear
             </Link>
           </Button>
@@ -129,12 +133,16 @@ const Bio = () => {
       {/* Social Links */}
       <div className="flex gap-4 mb-10">
         {[
-          { icon: "Email", href: "mailto:me@vishrutjha.com", title: "me [at] vishrutjha [dot] com" },
-          { icon: "Twitter", href: "https://twitter.com/vishrutkmr7", title: "@vishrutkmr7" },
-          { icon: "GitHub", href: "https://github.com/vishrutkmr7", title: "@vishrutkmr7" },
-          { icon: "Instagram", href: "https://instagram.com/vishrutkmr7", title: "@vishrutkmr7" },
-          { icon: "LinkedIn", href: "https://linkedin.com/in/vishrutkmr7", title: "Vishrut Jha" },
-        ].map((social) => {
+          {
+            icon: 'Email',
+            href: 'mailto:me@vishrutjha.com',
+            title: 'me [at] vishrutjha [dot] com',
+          },
+          { icon: 'Twitter', href: 'https://twitter.com/vishrutkmr7', title: '@vishrutkmr7' },
+          { icon: 'GitHub', href: 'https://github.com/vishrutkmr7', title: '@vishrutkmr7' },
+          { icon: 'Instagram', href: 'https://instagram.com/vishrutkmr7', title: '@vishrutkmr7' },
+          { icon: 'LinkedIn', href: 'https://linkedin.com/in/vishrutkmr7', title: 'Vishrut Jha' },
+        ].map(social => {
           const Icon = socialIconMap[social.icon as keyof typeof socialIconMap];
           return (
             <Button
@@ -149,10 +157,14 @@ const Bio = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={social.title}
-                onClick={social.icon === "Email" ? (e) => {
-                  window.location.href = social.href;
-                  e.preventDefault();
-                } : undefined}
+                onClick={
+                  social.icon === 'Email'
+                    ? e => {
+                        window.location.href = social.href;
+                        e.preventDefault();
+                      }
+                    : undefined
+                }
               >
                 <Icon className="h-5 w-5" />
               </Link>

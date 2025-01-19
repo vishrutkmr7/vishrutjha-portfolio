@@ -34,7 +34,7 @@ export interface TimelineItem {
     text: string;
     url: string;
   };
-  type: "education" | "work";
+  type: 'education' | 'work';
   logo: string;
 }
 

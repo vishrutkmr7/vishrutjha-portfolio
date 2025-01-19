@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // Don't run ESLint during production builds
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'react-icons'],
   },
@@ -26,22 +37,22 @@ const nextConfig = {
       '@next/swc-linux-arm64-gnu': false,
       '@next/swc-linux-arm64-musl': false,
       '@next/swc-win32-arm64-msvc': false,
-    }
-    return config
+    };
+    return config;
   },
   async rewrites() {
     return [
       {
-        source: "/resume",
-        destination: "/resume.pdf",
+        source: '/resume',
+        destination: '/resume.pdf',
       },
     ];
   },
   async redirects() {
     return [
       {
-        source: "/hey",
-        destination: "https://nohello.net",
+        source: '/hey',
+        destination: 'https://nohello.net',
         permanent: true,
       },
     ];

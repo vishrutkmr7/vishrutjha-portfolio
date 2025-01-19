@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { socialIconMap } from "@/app/lib/icons";
+import React from 'react';
+
+import Link from 'next/link';
+
+import { socialIconMap } from '@/app/lib/icons';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   return (
@@ -22,7 +24,7 @@ const Footer = () => {
             className="h-8 w-8 md:h-9 md:w-9 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
           >
             <Link href="https://github.com/vishrutkmr7">
-              <socialIconMap.GitHub className="h-4 w-4" />
+              <socialIconMap.github className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </Link>
           </Button>

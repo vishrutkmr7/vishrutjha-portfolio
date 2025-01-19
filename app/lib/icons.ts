@@ -1,4 +1,38 @@
-import { Github, Globe, Mail, ExternalLink, Bot, BrainCircuit, Server, Database, Code, FileCode, Blocks, Infinity, Flame, FileJson, Laptop, Phone, Tablet, MonitorSmartphone, Rocket, Webhook, Cpu, CircuitBoard, TestTube, AppWindow, GraduationCap, Briefcase, Calendar, Globe as Website } from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
+import {
+  // Only keep the icons that are actually used in your components
+  // Remove or comment out unused icons
+  // Globe,
+  // Server,
+  // FileCode,
+  // Blocks,
+  // Infinity,
+  // Flame,
+  // FileJson,
+  // Laptop,
+  // Tablet,
+  // Rocket,
+  // Cpu,
+  // CircuitBoard,
+  // TestTube,
+  // AppWindow,
+  // Add any icons that are actually used in your components
+  Github,
+  Globe as Website,
+  Mail,
+  ExternalLink,
+  Bot,
+  BrainCircuit,
+  Database,
+  Code,
+  MonitorSmartphone,
+  Phone,
+  GraduationCap,
+  Briefcase,
+  Calendar,
+  Webhook,
+} from 'lucide-react';
+import { FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import {
   SiSwift,
   SiApple,
@@ -39,10 +73,19 @@ import {
   SiScikitlearn,
   SiSpringboot,
   SiYoutube,
-} from "react-icons/si";
-import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+} from 'react-icons/si';
+
+export type Icon = LucideIcon;
 
 export const techIconMap = {
+  database: Database,
+  ai: BrainCircuit,
+  bot: Bot,
+  code: Code,
+  mobile: MonitorSmartphone,
+  phone: Phone,
+  database_alt: Database,
+  api: Webhook,
   Swift: SiSwift,
   SwiftUI: SiSwift,
   iOS: SiApple,
@@ -70,7 +113,6 @@ export const techIconMap = {
   MongoDB: SiMongodb,
   SQLite: SiSqlite,
   PostgreSQL: SiPostgresql,
-  Database: Database,
   Node: SiNodedotjs,
   Express: SiExpress,
   Django: SiDjango,
@@ -81,22 +123,20 @@ export const techIconMap = {
   GCP: SiGooglecloud,
   Firebase: SiFirebase,
   Hono: SiHono,
-  "Machine Learning": BrainCircuit,
+  'Machine Learning': BrainCircuit,
   TensorFlow: SiTensorflow,
   PyTorch: SiPytorch,
-  "Scikit Learn": SiScikitlearn,
+  'Scikit Learn': SiScikitlearn,
   LlamaStack: Bot,
-  Code: Code,
   API: Webhook,
-  "Full Stack": MonitorSmartphone,
-  Mobile: Phone,
+  'Full Stack': MonitorSmartphone,
   Data: Database,
 } as const;
 
 export const socialIconMap = {
-  GitHub: Github,
-  Website: Website,
-  Email: Mail,
+  github: Github,
+  website: Website,
+  email: Mail,
   AppStore: SiAppstore,
   TestFlight: SiApple,
   Apple: SiApple,
@@ -105,12 +145,22 @@ export const socialIconMap = {
   LinkedIn: FaLinkedin,
   External: ExternalLink,
   YouTube: SiYoutube,
-  Code: Code,
-  Education: GraduationCap,
-  Work: Briefcase,
-  Calendar: Calendar,
+  code: Code,
+  education: GraduationCap,
+  work: Briefcase,
+  calendar: Calendar,
 } as const;
 
 // Add type definitions to help catch undefined icons at compile time
 export type TechIconType = keyof typeof techIconMap;
-export type SocialIconType = keyof typeof socialIconMap; 
+export type SocialIconType = keyof typeof socialIconMap;
+
+export const Icons = {
+  // Only keep the icons that are actually used
+  // Remove unused icon exports
+  link: ExternalLink,
+  code: Code,
+  education: GraduationCap,
+  work: Briefcase,
+  calendar: Calendar,
+} as const;
