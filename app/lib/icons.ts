@@ -32,7 +32,7 @@ import {
   Calendar,
   Webhook,
 } from 'lucide-react';
-import { FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaTwitter, FaInstagram, FaLinkedin, FaPodcast, FaNewspaper } from 'react-icons/fa';
 import {
   SiSwift,
   SiApple,
@@ -140,6 +140,8 @@ export const socialIconMap = {
   AppStore: SiAppstore,
   TestFlight: SiApple,
   Apple: SiApple,
+  Podcasts: FaPodcast,
+  Newspaper: FaNewspaper,
   Twitter: FaTwitter,
   Instagram: FaInstagram,
   LinkedIn: FaLinkedin,

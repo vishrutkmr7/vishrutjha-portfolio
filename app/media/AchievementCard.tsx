@@ -60,8 +60,17 @@ export default function AchievementCard({ title, description, date, image, link 
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2"
               >
-                <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
+                {link.text === 'Read Article' && (
+                  <socialIconMap.Newspaper className="h-4 w-4 flex-shrink-0" />
+                )}
+                {link.text === 'Listen on Apple Podcasts' && (
+                  <socialIconMap.Podcasts className="h-4 w-4 flex-shrink-0" />
+                )}
+                {link.text === 'Watch on YouTube' && (
+                  <socialIconMap.YouTube className="h-4 w-4 flex-shrink-0" />
+                )}
                 {link.text}
+                <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
               </a>
             </Button>
           </CardFooter>

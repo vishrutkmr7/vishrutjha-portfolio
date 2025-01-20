@@ -75,7 +75,7 @@ export default function MediaPage() {
 
   return (
     <PageTransition>
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 pt-6 md:pt-4">
         <div className="flex flex-col items-start gap-2">
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
             Media Presence

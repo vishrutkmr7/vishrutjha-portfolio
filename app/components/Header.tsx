@@ -46,7 +46,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <div className="pb-16 md:pb-0">
+      <div className="pb-0">
         {/* Mobile buttons */}
         <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-lg border p-1.5">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
