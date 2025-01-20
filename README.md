@@ -6,24 +6,29 @@ Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishr
 
 ## 🚀 Features
 
-- Modern, responsive design
-- Project showcase with interactive carousel
-- Professional journey timeline
-- Media appearances and publications
+- Modern, responsive design with dark mode support
+- Project showcase with detailed cards and links
+- Professional journey timeline with interactive elements
+- Media appearances and publications section
+- LeetCode statistics integration
 - Dynamic charting and visualizations
-- Type animations and smooth transitions
-- SEO optimized with sitemap generation
+- Smooth animations and transitions using Framer Motion
+- Type animations for dynamic text
+- SEO optimized with automatic sitemap generation
 - Performance analytics and insights
+- Fully accessible UI components
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 14](https://nextjs.org/) with React 18
+- **Framework**: [Next.js 15](https://nextjs.org/) with React 18.3
 - **Package Manager**: [Bun](https://bun.sh/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [Flowbite](https://flowbite.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **UI Components**: Radix UI primitives
 - **Charts**: Chart.js with react-chartjs-2
-- **Animations**: react-type-animation
-- **Icons**: react-icons
+- **Animations**: Framer Motion and react-type-animation
+- **Icons**: Lucide React and React Icons
+- **Code Quality**: ESLint, Prettier, Husky, lint-staged
 - **Analytics**: Vercel Analytics and Speed Insights
 - **Deployment**: [Vercel](https://vercel.com/)
 
