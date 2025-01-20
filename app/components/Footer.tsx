@@ -28,7 +28,7 @@ const Footer = () => {
                   height={16}
                   className="group-hover:scale-110 transition-transform duration-200"
                 />
-                <span>Visca El Barça y Visca Catalunya! 🔵🔴</span>
+                <span>Visca El Barça i Visca Catalunya! 🔵🔴</span>
               </span>
             </TooltipSimple>
             <TooltipSimple content="The 🐐 - Leo Messi" side="top">
