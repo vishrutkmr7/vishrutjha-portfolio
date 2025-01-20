@@ -1,18 +1,18 @@
 [
   {
     "title": "LlamaStack iOS",
-    "description": "An iMessage-style AI chatbot application leveraging Llama Stack for local inference, providing a native iOS messaging experience with on-device AI capabilities.",
+    "description": "An iMessage-style chatbot application providing native messaging experience with on-device AI capabilities.",
     "date": "12/01/2024 - Present",
     "image": "llama-stack-ios.png",
     "link": {
       "text": "Source Code",
       "url": "https://github.com/vishrutkmr7/llama-stack-ios"
     },
-    "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack"]
+    "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack", "Machine Learning"]
   },
   {
     "title": "Passifier #BuildInPublic 🚀",
-    "description": "An app to add any barcode/QR Code to your Apple Wallet, allowing you to use the latest metadata features introduced in iOS 18.",
+    "description": "An app to add any barcode/QR Code to your Apple Wallet, leveraging the latest metadata features introduced in iOS 18.",
     "date": "08/02/2024 - Present",
     "image": "passifier.png",
     "link": {
@@ -34,29 +34,29 @@
   },
   {
     "title": "Prickly Pear Health",
-    "description": "Building the next generation of healthcare tools for improving the mental health of post-menopausal women using the latest advancements in AI.",
+    "description": "Building the next generation of healthcare tools for improving the mental health of perimenopausal women using MVVM+Coordinator pattern, implementing RAG and on-device inference, achieving 98% crash-free rate and processing 10,000+ daily journals with wearable integrations.",
     "date": "08/02/2024 - Present",
     "image": "pphealth.jpeg",
     "link": {
       "text": "TestFlight beta coming soon!",
       "url": "https://pricklypear.io/"
     },
-    "tech": ["SwiftUI", "iOS", "Bun", "Hono"]
+    "tech": ["SwiftUI", "iOS", "Bun", "Hono", "Machine Learning"]
   },
   {
     "title": "vishrutjha.com | My Portfolio Website",
-    "description": "This very portfolio website that you're looking at, which I started working on while traveling across Texas.",
+    "description": "A modern, responsive portfolio website featuring dynamic content loading and smooth animations.",
     "date": "06/22/2024 - Present",
     "image": "favicon.png",
     "link": {
       "text": "Visit vishrutjha.com",
       "url": "https://vishrutjha.com"
     },
-    "tech": ["React", "NextJS", "Vercel"]
+    "tech": ["React", "NextJS", "TypeScript", "TailwindCSS"]
   },
   {
     "title": "Rock Paper Scissors Lizard Spock",
-    "description": "My take on the classic Rock Paper Scissors game with a twist.",
+    "description": "A modern take on the classic Rock Paper Scissors game with a Big Bang Theory twist, featuring smooth animations and haptic feedback.",
     "date": "04/22/2024",
     "image": "rpsls.png",
     "link": {
@@ -67,7 +67,7 @@
   },
   {
     "title": "Simple Node Editor",
-    "description": "A basic node editor app on macOS to create and connect nodes. Supports document types and export to JSON.",
+    "description": "A native node editor application supporting document types and JSON export capabilities.",
     "date": "05/13/2024",
     "image": "simpleNodeEditor.png",
     "link": {
@@ -78,7 +78,7 @@
   },
   {
     "title": "FIFAWC22",
-    "description": "A simple app to keep track of the 2022 FIFA World Cup matches, scores, standings, and key stats.",
+    "description": "An app to track 2022 FIFA World Cup matches, scores, standings, and key statistics in real-time.",
     "date": "04/22/2024",
     "image": "fifawc22.png",
     "link": {
@@ -89,7 +89,7 @@
   },
   {
     "title": "AppliFly",
-    "description": "An open-source collaborative effort with Kshitij Dhyani, to automate the process of apply to on-campus jobs at ASU quickly",
+    "description": "An open-source collaboration with Kshitij Dhyani to automate the application process for on-campus jobs at ASU.",
     "date": "11/15/2023 - Present",
     "image": "appImage.png",
     "link": {
@@ -100,7 +100,7 @@
   },
   {
     "title": "Ziply Fiber",
-    "description": "App to manage your Ziply Fiber accounts, connection, and payments on iPhone and iPad.",
+    "description": "A comprehensive app for managing Ziply Fiber accounts, connections, and payments, featuring real-time network monitoring.",
     "date": "05/15/2023 - 04/22/2024",
     "image": "ziply.png",
     "link": {
@@ -111,7 +111,7 @@
   },
   {
     "title": "Hot Cell and Hot Zone analysis of Spatial Data",
-    "description": "An academic project as a part of the course Data Processing at Scale to perform Hotzone and Hotcell analysis on Spatial data from a NYC based taxicab company.",
+    "description": "An academic project for Data Processing at Scale course to perform Hotzone and Hotcell analysis on spatial data from a NYC taxicab company.",
     "date": "04/25/2022",
     "image": "carousel-5.svg",
     "link": {
@@ -122,7 +122,7 @@
   },
   {
     "title": "FDAlytics",
-    "description": "An ML-powered tool to track FDA inspections and inform pharma companies' SOPs.",
+    "description": "A tool to track FDA inspections and inform pharmaceutical companies' SOPs, featuring automated data processing and analytics.",
     "date": "08/28/2019 - 02/16/2021",
     "image": "fdalytics.jpg",
     "link": {
@@ -133,7 +133,7 @@
   },
   {
     "title": "LiveSHIELD",
-    "description": "A real-time antivirus software that uses Nessus, NMap, and NVD to scan for vulnerabilities across the network and visualizes it to highlight the most severe nodes.",
+    "description": "A real-time antivirus software utilizing Nessus, NMap, and NVD for vulnerability scanning across networks, with ELK stack for analytics and socket.io for real-time alerts.",
     "date": "09/15/2018 - 06/18/2019",
     "image": "LiveShield.gif",
     "link": {

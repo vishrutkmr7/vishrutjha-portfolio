@@ -5,7 +5,7 @@
       "company": "Prickly Pear Health Inc.",
       "role": "Founding Engineer"
     },
-    "body": "Building the next generation of healthcare tools for improving the mental health of post-menopausal women using the latest advancements in AI.",
+    "body": "Architected iOS app for perimenopausal women using MVVM+Coordinator in SwiftUI, implementing RAG with GPT-4o and on-device LLM using MLX, achieving 98% crash-free rate and processing 10,000+ daily journals with HealthKit, Oura Ring and Fitbit integration. Engineered voice processing pipeline (AVFoundation, Speech) with <100ms latency and offline-first SwiftData architecture, while scaling backend with Bun/Hono to handle 500+ concurrent users at 99.9% uptime. Deployed HIPAA-compliant AWS infrastructure (EC2, ECS, RDS, S3) using Terraform, contributed to LlamaStack iOS framework, and implemented end-to-end encryption with Supabase auth.",
     "link": {
       "text": "Prickly Pear Health Inc",
       "url": "https://www.pricklypear.io/"
@@ -19,7 +19,7 @@
       "company": "Dhan AI Pvt. Ltd.",
       "role": "Software Development Engineer - I"
     },
-    "body": "Led the OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and the web backend, enhancing Identity and Access Management (IAM) security for 50,000 users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
+    "body": "Led OAuth migration from SAP Gigya to Firebase Auth for the iOS/iPadOS app and web backend, enhancing Identity and Access Management (IAM) security for 50,000+ users without necessitating password resets. Synchronized data across 3 platforms in real-time, utilizing multi-threading, RabbitMQ, and Redis for caching, to ensure seamless integration and data consistency. Developed an innovative admin system using JSON Web Tokens (JWT) to simulate user sessions, significantly improving debugging capabilities while maintaining single sign-on (SSO) and two-factor authentication standards.",
     "link": {
       "text": "Dhan AI Pvt. Ltd.",
       "url": "https://dhan.ai/"
@@ -33,7 +33,7 @@
       "company": "Decision Theater Lab at Arizona State University",
       "role": "Student Software Developer"
     },
-    "body": "Contributed to Project SHELDUS, in coordination with the Department of Defense, to maintain and categorize data related to natural disasters from 1960 to the present. Developed REST APIs using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for users.",
+    "body": "Contributed to Project SHELDUS in coordination with the Department of Defense, maintaining and categorizing natural disaster data from 1960 to present. Developed REST APIs using Flask and Python, implementing efficient queries for data retrieval and analysis. Collaborated with researchers to enhance data visualization and reporting capabilities.",
     "link": {
       "text": "Decision Theater Lab at ASU",
       "url": "https://dt.asu.edu/"
@@ -47,7 +47,7 @@
       "company": "Arizona State University, Ira A Fulton Schools of Engineering",
       "role": "Graduate Teaching Assistant"
     },
-    "body": "Served as a Graduate Teaching Assistant to Prof. Maria Chavez and Prof. Mohd. Taher, instructing over 150 students in the Fulton School of Engineering at ASU. Taught programming in MATLAB and Python to over 100 undergraduate and graduate students, and guided them through their master's project utilizing Raspberry Pi, as part of the course (FSE-100) Introduction to Engineering.",
+    "body": "Served as a Graduate Teaching Assistant to Prof. Maria Chavez and Prof. Mohd. Taher, instructing over 150 students in the Fulton School of Engineering. Taught programming fundamentals using MATLAB and Python to 100+ undergraduate and graduate students, and guided them through hands-on projects with Raspberry Pi as part of FSE-100: Introduction to Engineering.",
     "link": {
       "text": "One of my lecture videos",
       "url": "https://www.youtube.com/watch?v=QZYDNiXelfc"
@@ -61,7 +61,7 @@
       "company": "Arizona State University",
       "role": "Master of Science in Computer Science"
     },
-    "body": "Relevant Coursework: (CSE-539) Applied Cryptography, (CSE-511) Data Processing at Scale, (CSE-575) Statistical Machine Learning, (CSE-576) Natural Language Processing, and (CSE-545) Software Security.",
+    "body": "Relevant Coursework: CSE-539 Applied Cryptography, CSE-511 Data Processing at Scale, CSE-575 Statistical Machine Learning, CSE-576 Natural Language Processing, and CSE-545 Software Security. GPA: 3.89/4.00",
     "type": "education",
     "link": {
       "text": "Arizona State University, Tempe AZ",
@@ -75,7 +75,7 @@
       "company": "Compliance Group Inc.",
       "role": "Full-stack Developer"
     },
-    "body": "Played a key role in the backend development of FDAlytics and iQuality using Python, Django REST Framework and later, GraphQL, contributing to a 20% uplift in data processing efficiency. Collaborated with a team of 6 developers to develop a data categorization module, significantly enhancing data retrieval speed and accuracy using Azure Search. Contributed to the implementation testing and deployment pipelines using PyTest, Jest, and GitHub Actions for CI/CD processes, which cut down deployment errors by 50% and improved the quality of the deliverables.",
+    "body": "Led backend development of FDAlytics and iQuality using Python, Django REST Framework, and GraphQL, achieving 20% improvement in data processing efficiency. Collaborated with a team of 6 developers to create a data categorization module, significantly enhancing retrieval speed and accuracy using Azure Search. Implemented testing and deployment pipelines using PyTest, Jest, and GitHub Actions for CI/CD, reducing deployment errors by 50% and improving deliverable quality.",
     "link": {
       "text": "FDAlytics",
       "url": "https://fdalytics.com/"
@@ -89,7 +89,7 @@
       "company": "AuthBase Inc.",
       "role": "Software Engineer"
     },
-    "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of over 10,000 DLLs (Dynamic Link Libraries), enhancing real-time security analytics, and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD (National Vulnerability Database) and CVE (Common Vulnerabilities and Exposures) for robust threat management. Achieved a 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
+    "body": "Developed LiveShield, leveraging ElasticSearch, Logstash, and Kibana (ELK) for dynamic scanning of 10,000+ DLLs, enhancing real-time security analytics and alerts using socket.io. Integrated Nessus and NMap-based packet sniffers for in-depth vulnerability scans, utilizing NVD and CVE for robust threat management. Achieved 40% improvement in security effectiveness, aligning with NVD advisories and CVSS risk assessments.",
     "link": {
       "text": "AuthBase Inc.",
       "url": "https://authbase.net/"
@@ -103,7 +103,7 @@
       "company": "Nuclear Fuel Complex, Department of Atomic Energy, Government of India",
       "role": "Software Engineering Intern"
     },
-    "body": "Developed a Job Scheduling and Inventory Management application for the Zirconium Fabrication Plant at NFC. Had the distinction of being the only CS-major intern in the department. Implemented a REST API using Flask and Python, and wrote queries to efficiently retrieve and calculate the required data values for the workers at the plant.",
+    "body": "Developed a Job Scheduling and Inventory Management application for the Zirconium Fabrication Plant. Distinguished as the only Computer Science major intern in the department. Implemented REST APIs using Flask and Python, with efficient database queries for real-time data retrieval and processing.",
     "link": {
       "text": "Nuclear Fuel Complex",
       "url": "https://www.nfc.gov.in/"
@@ -117,7 +117,7 @@
       "company": "HCL Computers Ltd.",
       "role": "Software Engineering Intern"
     },
-    "body": "Built the Proof of Concept Application for the IEEE Standard: Privacy Preserving, Data Sharing with Anonymous ID Assignment, for the healthcare sector. Using ASP.Net and C#, developed a web application for hospitals and clinics to register patients and maintain their records securely.",
+    "body": "Built a Proof of Concept application implementing the IEEE Standard for Privacy-Preserving Data Sharing with Anonymous ID Assignment in healthcare. Developed a secure web application using ASP.NET and C# for hospitals and clinics to manage patient records with robust privacy controls.",
     "link": {
       "text": "HCL Computers Ltd.",
       "url": "https://www.hcltech.com/"
@@ -131,7 +131,7 @@
       "company": "Panjab University",
       "role": "Bachelor of Engineering in Computer Science and Engineering"
     },
-    "body": "Relevant Coursework: (CS-505) Computation and Automata theory, (CS-705) Cyber Law, (CS-503) Artificial Intelligence and Expert Systems, (CS-703) Digital Image Processing, and (CS-605D) Mobile Application Development (iOS)",
+    "body": "Relevant Coursework: CS-505 Computation and Automata Theory, CS-705 Cyber Law, CS-503 Artificial Intelligence and Expert Systems, CS-703 Digital Image Processing, and CS-605D Mobile Application Development (iOS). GPA: 7.77/10.00",
     "link": {
       "text": "Panjab University, Chandigarh",
       "url": "https://puchd.ac.in/"
