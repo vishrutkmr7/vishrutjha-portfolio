@@ -14,6 +14,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { TooltipSimple } from '@/components/ui/tooltip';
 
 export default function AchievementCard({ title, description, date, image, link }: Achievement) {
   return (
@@ -28,51 +29,63 @@ export default function AchievementCard({ title, description, date, image, link 
       <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
         <CardHeader className="flex-none p-0">
           {image && (
-            <div className="relative w-full aspect-[16/9] overflow-hidden">
-              <Image
-                src={`/${image}`}
-                alt={title}
-                fill
-                className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
+            <TooltipSimple content={title} side="top">
+              <div className="relative w-full aspect-[16/9] overflow-hidden">
+                <Image
+                  src={`/${image}`}
+                  alt={title}
+                  fill
+                  className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            </TooltipSimple>
           )}
           <div className="p-6 pb-2 space-y-1.5">
-            <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem]">
-              {title}
-            </CardTitle>
+            <TooltipSimple content={title} side="top">
+              <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem] hover:cursor-help">
+                {title}
+              </CardTitle>
+            </TooltipSimple>
             <CardDescription className="flex items-center gap-2">
-              <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
-              {date}
+              <TooltipSimple content="Date" side="right">
+                <div className="flex items-center gap-2">
+                  <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
+                  {date}
+                </div>
+              </TooltipSimple>
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
-          <p className="text-muted-foreground">{description}</p>
+          <TooltipSimple content={description} side="top">
+            <p className="text-muted-foreground hover:cursor-help">{description}</p>
+          </TooltipSimple>
         </CardContent>
         {link && (
           <CardFooter className="flex-none mt-auto pt-0 pb-6">
-            <Button asChild variant="default" className="w-full">
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2"
-              >
-                {link.text === 'Read Article' && (
-                  <socialIconMap.Newspaper className="h-4 w-4 flex-shrink-0" />
-                )}
-                {link.text === 'Listen on Apple Podcasts' && (
-                  <socialIconMap.Podcasts className="h-4 w-4 flex-shrink-0" />
-                )}
-                {link.text === 'Watch on YouTube' && (
-                  <socialIconMap.YouTube className="h-4 w-4 flex-shrink-0" />
-                )}
-                {link.text}
-                <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
-              </a>
-            </Button>
+            <TooltipSimple content={`View on ${link.text.split(' ').pop()}`} side="bottom">
+              <Button asChild variant="default" className="w-full">
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  {link.text === 'Read Article' && (
+                    <socialIconMap.Newspaper className="h-4 w-4 flex-shrink-0" />
+                  )}
+                  {link.text === 'Listen on Apple Podcasts' && (
+                    <socialIconMap.Podcasts className="h-4 w-4 flex-shrink-0" />
+                  )}
+                  {link.text === 'Watch on YouTube' && (
+                    <socialIconMap.YouTube className="h-4 w-4 flex-shrink-0" />
+                  )}
+                  {link.text}
+                  <socialIconMap.External className="h-4 w-4 flex-shrink-0" />
+                </a>
+              </Button>
+            </TooltipSimple>
           </CardFooter>
         )}
       </Card>

@@ -2,18 +2,40 @@
 
 import React from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { socialIconMap } from '@/app/lib/icons';
 import { Button } from '@/components/ui/button';
+import { TooltipSimple } from '@/components/ui/tooltip';
 
 const Footer = () => {
   return (
     <footer className="bg-background border-t mb-[60px] md:mb-0">
-      <div className="container flex flex-col items-center py-4 space-y-3 md:space-y-0 md:py-6 md:flex-row md:justify-between">
-        <div className="text-center md:text-left">
-          <div className="text-xs md:text-sm text-muted-foreground">
-            <span>© {new Date().getFullYear()} Vishrut Jha. </span>
+      <div className="container flex flex-col items-center py-4 space-y-3 md:space-y-4 md:py-6">
+        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+          <div className="text-xs md:text-sm text-muted-foreground text-center">
+            <span>© {new Date().getFullYear()} Vishrut Jha</span>
+          </div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <TooltipSimple content="Més que un club 🔵🔴" side="top">
+              <span className="flex items-center gap-1.5 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 cursor-help group">
+                <span className="text-red-500">❤️</span>
+                <Image
+                  src="/FC_Barcelona_(crest).svg"
+                  alt="FC Barcelona Crest"
+                  width={16}
+                  height={16}
+                  className="group-hover:scale-110 transition-transform duration-200"
+                />
+                <span>Visca El Barça y Visca Catalunya! 🔵🔴</span>
+              </span>
+            </TooltipSimple>
+            <TooltipSimple content="The 🐐 - Leo Messi" side="top">
+              <span className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 cursor-help">
+                𝕄¹⁰
+              </span>
+            </TooltipSimple>
           </div>
         </div>
         <div className="flex items-center space-x-3 md:space-x-4">

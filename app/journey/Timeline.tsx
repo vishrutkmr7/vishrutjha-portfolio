@@ -24,6 +24,7 @@ import {
   TimelineTime,
   TimelineBody,
 } from '@/components/ui/timeline';
+import { TooltipSimple } from '@/components/ui/tooltip';
 
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItemType[]>([]);
@@ -75,11 +76,18 @@ const JourneyTimeline: React.FC = () => {
                     id={item.title.company}
                     className="relative"
                     icon={
-                      item.type === 'education' ? (
-                        <socialIconMap.education className="h-5 w-5 text-muted-foreground" />
-                      ) : (
-                        <socialIconMap.work className="h-5 w-5 text-muted-foreground" />
-                      )
+                      <TooltipSimple
+                        content={item.type === 'education' ? 'Education' : 'Work Experience'}
+                        side="right"
+                      >
+                        <div>
+                          {item.type === 'education' ? (
+                            <socialIconMap.education className="h-5 w-5 text-muted-foreground" />
+                          ) : (
+                            <socialIconMap.work className="h-5 w-5 text-muted-foreground" />
+                          )}
+                        </div>
+                      </TooltipSimple>
                     }
                   >
                     <TimelineContent>
@@ -90,73 +98,104 @@ const JourneyTimeline: React.FC = () => {
                         whileHover="hover"
                         variants={dragVariants}
                       >
-                        <div
-                          className="bg-card p-4 rounded-lg border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200 w-full sm:w-auto"
-                          title={item.body}
-                        >
+                        <div className="bg-card p-4 rounded-lg border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200 w-full sm:w-auto">
                           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
-                            <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg">
-                              <Image
-                                src={`/${item.logo}`}
-                                alt={item.title.company}
-                                fill
-                                loading="lazy"
-                                className="object-contain group-hover:scale-105 transition-transform duration-200"
-                                sizes="(max-width: 768px) 64px, 64px"
-                              />
-                            </div>
+                            <TooltipSimple content={item.title.company} side="top">
+                              <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg">
+                                <Image
+                                  src={`/${item.logo}`}
+                                  alt={item.title.company}
+                                  fill
+                                  loading="lazy"
+                                  className="object-contain group-hover:scale-105 transition-transform duration-200"
+                                  sizes="(max-width: 768px) 64px, 64px"
+                                />
+                              </div>
+                            </TooltipSimple>
                             <div className="flex-grow w-full">
                               <TimelineTime className="text-sm text-muted-foreground flex items-center gap-2 flex-wrap">
-                                <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
-                                {item.time}{' '}
-                                {item.type === 'work'
-                                  ? '💼'
-                                  : item.type === 'education'
-                                    ? '🎓'
-                                    : '🏆'}
+                                <TooltipSimple content="Duration" side="top">
+                                  <span className="flex items-center gap-2">
+                                    <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
+                                    {item.time}
+                                  </span>
+                                </TooltipSimple>
+                                {item.type === 'work' ? (
+                                  <TooltipSimple content="Work Experience" side="top">
+                                    <span>💼</span>
+                                  </TooltipSimple>
+                                ) : item.type === 'education' ? (
+                                  <TooltipSimple content="Education" side="top">
+                                    <span>🎓</span>
+                                  </TooltipSimple>
+                                ) : (
+                                  <TooltipSimple content="Achievement" side="top">
+                                    <span>🏆</span>
+                                  </TooltipSimple>
+                                )}
                               </TimelineTime>
-                              <TimelineTitle className="text-lg sm:text-xl break-words">
-                                {item.title.company}{' '}
-                                {item.title.company.toLowerCase().includes('microsoft')
-                                  ? '🪟'
-                                  : item.title.company.toLowerCase().includes('amazon')
-                                    ? '📦'
-                                    : item.title.company.toLowerCase().includes('google')
-                                      ? '🔍'
-                                      : item.title.company.toLowerCase().includes('apple')
-                                        ? '🍎'
-                                        : ''}
-                              </TimelineTitle>
-                              <TimelineBody className="text-muted-foreground break-words">
-                                {item.title.role}{' '}
-                                {item.title.role.toLowerCase().includes('senior')
-                                  ? '👨‍💻'
-                                  : item.title.role.toLowerCase().includes('lead')
-                                    ? '👨‍💼'
-                                    : item.title.role.toLowerCase().includes('engineer')
-                                      ? '⚡'
-                                      : ''}
-                              </TimelineBody>
+                              <TooltipSimple content={item.body} side="top" align="start">
+                                <div>
+                                  <TimelineTitle className="text-lg sm:text-xl break-words">
+                                    {item.title.company}{' '}
+                                    {item.title.company.toLowerCase().includes('microsoft') ? (
+                                      <TooltipSimple content="Microsoft" side="right">
+                                        <span>🪟</span>
+                                      </TooltipSimple>
+                                    ) : item.title.company.toLowerCase().includes('amazon') ? (
+                                      <TooltipSimple content="Amazon" side="right">
+                                        <span>📦</span>
+                                      </TooltipSimple>
+                                    ) : item.title.company.toLowerCase().includes('google') ? (
+                                      <TooltipSimple content="Google" side="right">
+                                        <span>🔍</span>
+                                      </TooltipSimple>
+                                    ) : item.title.company.toLowerCase().includes('apple') ? (
+                                      <TooltipSimple content="Apple" side="right">
+                                        <span>🍎</span>
+                                      </TooltipSimple>
+                                    ) : null}
+                                  </TimelineTitle>
+                                  <TimelineBody className="text-muted-foreground break-words">
+                                    {item.title.role}{' '}
+                                    {item.title.role.toLowerCase().includes('senior') ? (
+                                      <TooltipSimple content="Senior Role" side="right">
+                                        <span>👨‍💻</span>
+                                      </TooltipSimple>
+                                    ) : item.title.role.toLowerCase().includes('lead') ? (
+                                      <TooltipSimple content="Leadership Role" side="right">
+                                        <span>👨‍💼</span>
+                                      </TooltipSimple>
+                                    ) : item.title.role.toLowerCase().includes('engineer') ? (
+                                      <TooltipSimple content="Engineering Role" side="right">
+                                        <span>⚡</span>
+                                      </TooltipSimple>
+                                    ) : null}
+                                  </TimelineBody>
+                                </div>
+                              </TooltipSimple>
                             </div>
                           </div>
                           {item.link && (
                             <div className="mt-4 w-full">
-                              <Button
-                                asChild
-                                variant="outline"
-                                size="sm"
-                                className="w-full min-h-[32px] h-auto whitespace-normal text-left hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-                              >
-                                <a
-                                  href={item.link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 break-words py-1.5 px-2"
+                              <TooltipSimple content={`Visit ${item.title.company}`} side="bottom">
+                                <Button
+                                  asChild
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full min-h-[32px] h-auto whitespace-normal text-left hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
                                 >
-                                  <span className="flex-grow">{item.link.text}</span>
-                                  <socialIconMap.External className="h-3 w-3 flex-shrink-0" />
-                                </a>
-                              </Button>
+                                  <a
+                                    href={item.link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 break-words py-1.5 px-2"
+                                  >
+                                    <span className="flex-grow">{item.link.text}</span>
+                                    <socialIconMap.External className="h-3 w-3 flex-shrink-0" />
+                                  </a>
+                                </Button>
+                              </TooltipSimple>
                             </div>
                           )}
                         </div>

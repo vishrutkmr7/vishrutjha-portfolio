@@ -74,14 +74,14 @@ const TimelineTitle = React.forwardRef<HTMLHeadingElement, TimelineTitleProps>(
 );
 TimelineTitle.displayName = 'TimelineTitle';
 
-interface TimelineTimeProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+interface TimelineTimeProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const TimelineTime = React.forwardRef<HTMLParagraphElement, TimelineTimeProps>(
+const TimelineTime = React.forwardRef<HTMLDivElement, TimelineTimeProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <p ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props}>
+      <div ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props}>
         {children}
-      </p>
+      </div>
     );
   }
 );

@@ -15,6 +15,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { TooltipSimple } from '@/components/ui/tooltip';
 
 interface ProjectCardProps {
   title: string;
@@ -40,48 +41,58 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
       className="h-full"
     >
       <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
-        <CardHeader className="flex-none p-0">
+        <div className="flex-none">
           {image && (
-            <div className="relative w-full aspect-[16/9] overflow-hidden">
+            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-lg">
               <Image
                 src={`/${image}`}
                 alt={title}
                 fill
-                className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                className="object-cover group-hover:scale-105 transition-transform duration-200"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 unoptimized={image.endsWith('.gif')}
               />
             </div>
           )}
-          <div className="p-6 pb-2 space-y-1.5">
-            <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
-            <CardDescription className="flex items-center gap-2">
-              <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
-              {date}
-            </CardDescription>
-          </div>
+        </div>
+        <CardHeader className="flex-none space-y-1.5 p-6 pb-2">
+          <TooltipSimple content={<p className="max-w-xs">{title}</p>} side="top" align="start">
+            <CardTitle
+              className="line-clamp-2 min-h-[3.5rem] flex items-start hover:cursor-help"
+              aria-label={title}
+            >
+              {title}
+            </CardTitle>
+          </TooltipSimple>
+          <CardDescription className="flex items-center gap-2 h-6">
+            <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
+            {date}
+          </CardDescription>
         </CardHeader>
-        <CardContent className="flex-grow pb-6">
-          <p className="mb-4 text-muted-foreground line-clamp-3 min-h-[4.5rem]">{description}</p>
-          <div className="flex flex-wrap gap-2">
-            {tech.map((tech, techIndex) => {
-              const TechIcon = techIconMap[tech as keyof typeof techIconMap];
-              return (
-                <Badge
-                  key={techIndex}
-                  variant="secondary"
-                  className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200"
-                >
-                  {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
-                  {tech}
-                </Badge>
-              );
-            })}
+        <CardContent className="flex-grow flex flex-col gap-4 p-6 pt-2">
+          <p className="text-muted-foreground line-clamp-3 min-h-[4.5rem]">{description}</p>
+          <div className="relative">
+            <div className="flex overflow-x-auto pb-2 gap-2 no-scrollbar mask-fade-right">
+              {tech.map((tech, techIndex) => {
+                const TechIcon = techIconMap[tech as keyof typeof techIconMap];
+                return (
+                  <TooltipSimple key={techIndex} content={tech} side="bottom" delayDuration={0}>
+                    <Badge
+                      variant="secondary"
+                      className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200 flex-shrink-0"
+                    >
+                      {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
+                      {tech}
+                    </Badge>
+                  </TooltipSimple>
+                );
+              })}
+            </div>
           </div>
         </CardContent>
         {link && (
-          <CardFooter className="flex-none mt-auto pt-0 pb-6 px-6">
-            <Button asChild variant="default" className="w-full">
+          <CardFooter className="flex-none p-6 pt-0">
+            <Button asChild variant="default" className="w-full h-10">
               <Link
                 href={link.url}
                 target="_blank"
