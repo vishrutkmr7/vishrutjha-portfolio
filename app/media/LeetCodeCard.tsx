@@ -79,9 +79,11 @@ const { code: CodeIcon, calendar: CalendarIcon } = Icons;
 const getLanguageInfo = (lang: { name: string; solved: number }) => {
   const name = lang.name.toLowerCase();
   const displayName =
-    name === 'python3' || name === 'python'
-      ? 'Python'
-      : name.charAt(0).toUpperCase() + name.slice(1);
+    name === 'python3'
+      ? 'Python 3'
+      : name === 'python'
+        ? 'Python'
+        : name.charAt(0).toUpperCase() + name.slice(1);
   const iconKey = name === 'python3' || name === 'python' ? 'Python' : displayName;
   const Icon = techIconMap[iconKey as keyof typeof techIconMap] || techIconMap.code;
   return { displayName, Icon };
