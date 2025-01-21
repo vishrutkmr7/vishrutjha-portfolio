@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+
+// Suppress the punycode deprecation warning
+process.removeAllListeners('warning');
+
 const nextConfig = {
   eslint: {
     // Don't run ESLint during production builds
