@@ -169,9 +169,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
             <ClientComponents />
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-[100dvh]">
               <Header />
-              <main className="flex-1 container py-4 md:py-6 mt-14">{children}</main>
+              <main className="flex-grow container py-4 md:py-6 mt-14">{children}</main>
               <Footer />
             </div>
             <SpeedInsights />

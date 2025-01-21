@@ -14,7 +14,6 @@ import {
   dragVariants,
 } from '@/app/components/MotionList';
 import PageTransition from '@/app/components/PageTransition';
-import { ScrollAnimation, ScrollProgressBar } from '@/app/components/ScrollAnimation';
 import { socialIconMap } from '@/app/lib/icons';
 import type { TimelineItem as TimelineItemType } from '@/app/types';
 import { Badge } from '@/components/ui/badge';
@@ -51,7 +50,6 @@ const JourneyTimeline: React.FC = () => {
 
   return (
     <PageTransition>
-      <ScrollProgressBar />
       <div className="container mx-auto px-3 sm:px-4">
         <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col gap-2 w-full">
@@ -123,7 +121,15 @@ const JourneyTimeline: React.FC = () => {
                   icon={
                     <div className="absolute left-0 top-1/2 -translate-y-1/2">
                       <TooltipSimple
-                        content={item.type === 'education' ? 'Education' : 'Work Experience'}
+                        content={
+                          item.type === 'education'
+                            ? item.title.company.includes('Arizona State')
+                              ? 'Grad School'
+                              : 'College'
+                            : item.title.role.toLowerCase().includes('intern')
+                              ? 'Internship'
+                              : 'Work Experience'
+                        }
                         side="right"
                       >
                         <div className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full border bg-background">
@@ -184,25 +190,9 @@ const JourneyTimeline: React.FC = () => {
                             <div>
                               <TimelineTitle className="text-base sm:text-lg md:text-xl break-words mt-1.5 sm:mt-2 sm:truncate">
                                 {item.title.company}
-                                {item.title.company.toLowerCase().includes('microsoft')
-                                  ? '🪟'
-                                  : item.title.company.toLowerCase().includes('amazon')
-                                    ? '📦'
-                                    : item.title.company.toLowerCase().includes('google')
-                                      ? '🔍'
-                                      : item.title.company.toLowerCase().includes('apple')
-                                        ? '🍎'
-                                        : null}
                               </TimelineTitle>
                               <TimelineBody className="text-sm text-muted-foreground break-words sm:truncate">
                                 {item.title.role}
-                                {item.title.role.toLowerCase().includes('senior')
-                                  ? '👨‍💻'
-                                  : item.title.role.toLowerCase().includes('lead')
-                                    ? '👨‍💼'
-                                    : item.title.role.toLowerCase().includes('engineer')
-                                      ? '⚡'
-                                      : null}
                               </TimelineBody>
                             </div>
                           </div>

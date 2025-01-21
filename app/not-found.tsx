@@ -84,7 +84,7 @@ export default function NotFound() {
         <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md mx-auto space-y-1">
           <span>Look! Schrödinger&rsquo;s page 🐱✨</span>
           <br />
-          <span>Let&rsquo;s take a path that definitely exists!</span>
+          <span>Instead, let&rsquo;s take a path that definitely exists!</span>
         </p>
 
         {/* Action Button */}
