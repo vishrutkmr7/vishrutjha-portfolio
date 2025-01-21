@@ -29,24 +29,20 @@ export default function AchievementCard({ title, description, date, image, link 
       <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
         <CardHeader className="flex-none p-0">
           {image && (
-            <TooltipSimple content={title} side="top">
-              <div className="relative w-full aspect-[16/9] overflow-hidden">
-                <Image
-                  src={`/${image}`}
-                  alt={title}
-                  fill
-                  className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            </TooltipSimple>
+            <div className="relative w-full aspect-[16/9] overflow-hidden">
+              <Image
+                src={`/${image}`}
+                alt={title}
+                fill
+                className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
           )}
           <div className="p-6 pb-2 space-y-1.5">
-            <TooltipSimple content={title} side="top">
-              <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem] hover:cursor-help">
-                {title}
-              </CardTitle>
-            </TooltipSimple>
+            <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem]">
+              {title}
+            </CardTitle>
             <CardDescription className="flex items-center gap-2">
               <TooltipSimple content="Date" side="right">
                 <div className="flex items-center gap-2">
@@ -58,13 +54,18 @@ export default function AchievementCard({ title, description, date, image, link 
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
-          <TooltipSimple content={description} side="top">
-            <p className="text-muted-foreground hover:cursor-help">{description}</p>
-          </TooltipSimple>
+          <p className="text-muted-foreground">{description}</p>
         </CardContent>
         {link && (
           <CardFooter className="flex-none mt-auto pt-0 pb-6">
-            <TooltipSimple content={`View on ${link.text.split(' ').pop()}`} side="bottom">
+            <TooltipSimple
+              content={
+                link.text === 'Read Article'
+                  ? 'View on The State Press'
+                  : `View on ${link.text.split(' ').pop()}`
+              }
+              side="bottom"
+            >
               <Button asChild variant="default" className="w-full">
                 <a
                   href={link.url}
