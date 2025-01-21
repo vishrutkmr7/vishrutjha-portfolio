@@ -1,14 +1,26 @@
 /* app/not-found.module.css */
 
 .notFound {
-  animation: fadeIn 0.5s ease-in;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeIn {
-  from {
+@keyframes slideUp {
+  0% {
     opacity: 0;
+    transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* Add a subtle hover animation to the 404 text */
+.notFound h1 span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.notFound h1 span:hover {
+  transform: translateY(-5px) rotate(5deg);
 }

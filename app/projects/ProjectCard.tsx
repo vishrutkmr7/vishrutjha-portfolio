@@ -56,14 +56,7 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
           )}
         </div>
         <CardHeader className="flex-none space-y-1.5 p-6 pb-2">
-          <TooltipSimple content={<p className="max-w-xs">{title}</p>} side="top" align="start">
-            <CardTitle
-              className="line-clamp-2 min-h-[3.5rem] flex items-start hover:cursor-help"
-              aria-label={title}
-            >
-              {title}
-            </CardTitle>
-          </TooltipSimple>
+          <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
           <CardDescription className="flex items-center gap-2 h-6">
             <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
             {date}
@@ -76,15 +69,14 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
               {tech.map((tech, techIndex) => {
                 const TechIcon = techIconMap[tech as keyof typeof techIconMap];
                 return (
-                  <TooltipSimple key={techIndex} content={tech} side="bottom" delayDuration={0}>
-                    <Badge
-                      variant="secondary"
-                      className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200 flex-shrink-0"
-                    >
-                      {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
-                      {tech}
-                    </Badge>
-                  </TooltipSimple>
+                  <Badge
+                    key={techIndex}
+                    variant="secondary"
+                    className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200 flex-shrink-0"
+                  >
+                    {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
+                    {tech}
+                  </Badge>
                 );
               })}
             </div>
