@@ -32,20 +32,6 @@ const nextConfig = {
         source: '/:path*',
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https: blob:",
-              "font-src 'self'",
-              "connect-src 'self' https:",
-              "frame-ancestors 'none'",
-              "object-src 'none'",
-              "base-uri 'self'"
-            ].join('; ')
-          },
-          {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
           },
