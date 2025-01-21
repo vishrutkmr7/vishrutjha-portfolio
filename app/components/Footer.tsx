@@ -18,7 +18,7 @@ const Footer = () => {
             <span>© {new Date().getFullYear()} Vishrut Jha</span>
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <TooltipSimple content="Més que un club 🔵🔴" side="top">
+            <TooltipSimple content="Més que un Club 🔵🔴" side="top">
               <span className="flex items-center gap-1.5 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 cursor-help group">
                 <span className="text-red-500">❤️</span>
                 <Image
