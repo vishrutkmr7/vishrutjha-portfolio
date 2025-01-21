@@ -1,6 +1,7 @@
 import './globals.css';
 import { Suspense } from 'react';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
@@ -170,6 +171,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <main className="flex-1 container py-4 md:py-6 mt-14">{children}</main>
               <Footer />
             </div>
+            <SpeedInsights />
           </ThemeProvider>
         </Suspense>
       </body>
