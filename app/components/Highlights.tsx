@@ -47,9 +47,7 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
               />
             </div>
             <div className="flex flex-col justify-center flex-grow">
-              <CardTitle className="text-lg font-semibold tracking-tight line-clamp-1 mb-2">
-                {title}
-              </CardTitle>
+              <h2 className="text-lg font-semibold tracking-tight line-clamp-1 mb-2">{title}</h2>
               <CardDescription className="text-sm leading-snug line-clamp-2">
                 {subtitle}
               </CardDescription>

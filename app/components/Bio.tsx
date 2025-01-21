@@ -115,7 +115,7 @@ const Bio = () => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-8 w-full max-w-md">
+      <div className="grid sm:grid-cols-2 gap-4 mb-8 w-full max-w-md">
         <TooltipSimple content="View my professional journey" side="top">
           <Button
             asChild
@@ -156,11 +156,32 @@ const Bio = () => {
             icon: 'email',
             href: 'mailto:me@vishrutjha.com',
             title: 'me [at] vishrutjha [dot] com',
+            ariaLabel: 'Send email to Vishrut Jha',
           },
-          { icon: 'Twitter', href: 'https://twitter.com/vishrutkmr7', title: '@vishrutkmr7' },
-          { icon: 'github', href: 'https://github.com/vishrutkmr7', title: '@vishrutkmr7' },
-          { icon: 'Instagram', href: 'https://instagram.com/vishrutkmr7', title: '@vishrutkmr7' },
-          { icon: 'LinkedIn', href: 'https://linkedin.com/in/vishrutkmr7', title: 'Vishrut Jha' },
+          {
+            icon: 'Twitter',
+            href: 'https://twitter.com/vishrutkmr7',
+            title: '@vishrutkmr7',
+            ariaLabel: 'Follow Vishrut Jha on Twitter',
+          },
+          {
+            icon: 'github',
+            href: 'https://github.com/vishrutkmr7',
+            title: '@vishrutkmr7',
+            ariaLabel: "View Vishrut Jha's GitHub profile",
+          },
+          {
+            icon: 'Instagram',
+            href: 'https://instagram.com/vishrutkmr7',
+            title: '@vishrutkmr7',
+            ariaLabel: 'Follow Vishrut Jha on Instagram',
+          },
+          {
+            icon: 'LinkedIn',
+            href: 'https://linkedin.com/in/vishrutkmr7',
+            title: 'Vishrut Jha',
+            ariaLabel: 'Connect with Vishrut Jha on LinkedIn',
+          },
         ].map(social => {
           const Icon = socialIconMap[social.icon as keyof typeof socialIconMap];
           return (
@@ -175,6 +196,7 @@ const Bio = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.ariaLabel}
                   onClick={
                     social.icon === 'email'
                       ? e => {
@@ -184,7 +206,7 @@ const Bio = () => {
                       : undefined
                   }
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </Link>
               </Button>
             </TooltipSimple>
