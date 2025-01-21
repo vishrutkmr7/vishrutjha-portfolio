@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import { headers } from 'next/headers';
 import Script from 'next/script';
 
 import ClientComponents from '@/app/components/ClientComponents';
@@ -119,48 +118,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Create a client-side only script component
-const ThemeInitializer = ({ nonce }: { nonce?: string }) => {
-  return (
-    <script
-      id="theme-initializer"
-      nonce={nonce}
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{
-        __html: `
-          (function() {
-            try {
-              const stored = localStorage.getItem('theme');
-              const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              
-              if (stored === 'dark' || (!stored && systemPrefersDark)) {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-            } catch (e) {
-              console.warn('Theme initialization failed:', e);
-            }
-          })();
-        `,
-      }}
-    />
-  );
-};
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headersList = await headers();
-  const nonce = headersList.get('x-nonce') || undefined;
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head suppressHydrationWarning>
+      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <JsonLd />
         <RouteJsonLd />
-        <ThemeInitializer nonce={nonce} />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col antialiased`}
@@ -172,7 +138,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-            storageKey="theme"
+            storageKey="vishrutjha-theme"
           >
             <ScrollProgressBar />
             {/* Google Tag Manager (noscript) */}
@@ -184,16 +150,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 style={{ display: 'none', visibility: 'hidden' }}
               ></iframe>
             </noscript>
+            {/* End Google Tag Manager (noscript) */}
             {/* Google tag (gtag.js) */}
             <Script
               strategy="afterInteractive"
               src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
-              nonce={nonce}
             />
             <Script
               id="google-analytics"
               strategy="afterInteractive"
-              nonce={nonce}
               dangerouslySetInnerHTML={{
                 __html: `
                 window.dataLayer = window.dataLayer || [];
