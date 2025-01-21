@@ -10,6 +10,7 @@ import ClientComponents from '@/app/components/ClientComponents';
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import JsonLd from '@/app/components/JsonLd';
+import RouteJsonLd from '@/app/components/RouteJsonLd';
 import { ScrollProgressBar } from '@/app/components/ScrollAnimation';
 import { DOMAIN } from '@/app/constants';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <JsonLd />
+        <RouteJsonLd />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col antialiased`}

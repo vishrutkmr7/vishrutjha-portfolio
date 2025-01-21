@@ -1,36 +1,38 @@
 import { DOMAIN } from '@/app/constants';
 
 export default function JsonLd() {
+  const person = {
+    '@type': 'Person',
+    '@id': `${DOMAIN}/#person`,
+    name: 'Vishrut Jha',
+    givenName: 'Vishrut',
+    familyName: 'Jha',
+    jobTitle: 'iOS & Full-Stack Developer',
+    description: 'iOS, Full-Stack Developer and Software Engineer based in Phoenix, AZ',
+    url: DOMAIN,
+    sameAs: [
+      'https://github.com/vishrutkmr7',
+      'https://twitter.com/vishrutkmr7',
+      // Add other social profile URLs
+    ],
+    image: {
+      '@type': 'ImageObject',
+      url: `${DOMAIN}/favicon.png`,
+      width: 1080,
+      height: 1080,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Phoenix',
+      addressRegion: 'AZ',
+      addressCountry: 'US',
+    },
+  };
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Person',
-        '@id': `${DOMAIN}/#person`,
-        name: 'Vishrut Jha',
-        givenName: 'Vishrut',
-        familyName: 'Jha',
-        jobTitle: 'iOS & Full-Stack Developer',
-        description: 'iOS, Full-Stack Developer and Software Engineer based in Phoenix, AZ',
-        url: DOMAIN,
-        sameAs: [
-          'https://github.com/vishrutkmr7',
-          'https://twitter.com/vishrutkmr7',
-          // Add other social profile URLs
-        ],
-        image: {
-          '@type': 'ImageObject',
-          url: `${DOMAIN}/favicon.png`,
-          width: 1080,
-          height: 1080,
-        },
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Phoenix',
-          addressRegion: 'AZ',
-          addressCountry: 'US',
-        },
-      },
+      person,
       {
         '@type': 'WebSite',
         '@id': `${DOMAIN}/#website`,
@@ -65,6 +67,9 @@ export default function JsonLd() {
         },
         isPartOf: {
           '@id': `${DOMAIN}/#website`,
+        },
+        mainEntity: {
+          '@id': `${DOMAIN}/#person`,
         },
       },
     ],
