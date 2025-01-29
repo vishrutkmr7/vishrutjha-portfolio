@@ -45,7 +45,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https: wss: https://plausible.io",
+              "connect-src 'self' https: wss:",
               "frame-src 'self' https://*.doubleclick.net",
               "frame-ancestors 'none'",
               "object-src 'none'",
