@@ -63,7 +63,7 @@ const Bio = () => {
               3000,
               'Software Engineer 💻',
               3000,
-              'Culer 🔵🔴',
+              'Culér 🔵🔴',
               3000,
               'Founding Engineer ⚡',
               3000,
