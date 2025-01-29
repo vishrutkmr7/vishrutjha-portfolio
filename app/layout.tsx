@@ -127,6 +127,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <JsonLd />
         <RouteJsonLd />
+        <Script
+          defer
+          data-domain="vishrutjha.com"
+          src="https://plausible.io/js/script.file-downloads.hash.outbound-links.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="plausible-setup"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`,
+          }}
+        />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col antialiased`}
