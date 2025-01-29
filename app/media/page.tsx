@@ -51,21 +51,29 @@ function ClientContent({
 export default function MediaPage() {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [leetCodeStats, setLeetCodeStats] = useState<LeetCodeStats | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [achievementsLoading, setAchievementsLoading] = useState(true);
+  const [leetCodeLoading, setLeetCodeLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    Promise.all([
-      fetch('/data/mediaData.json').then(response => response.json()),
-      fetch('/api/leetcode').then(response => response.json()),
-    ])
-      .then(([achievementsData, leetCodeData]) => {
+    // Load achievements
+    fetch('/data/mediaData.json')
+      .then(response => response.json())
+      .then(achievementsData => {
         setAchievements(achievementsData);
-        setLeetCodeStats(leetCodeData.error ? null : leetCodeData);
-        setLoading(false);
+        setAchievementsLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => setAchievementsLoading(false));
+
+    // Load LeetCode stats separately
+    fetch('/api/leetcode')
+      .then(response => response.json())
+      .then(leetCodeData => {
+        setLeetCodeStats(leetCodeData.error ? null : leetCodeData);
+        setLeetCodeLoading(false);
+      })
+      .catch(() => setLeetCodeLoading(false));
   }, []);
 
   // Return null on server-side
@@ -82,17 +90,42 @@ export default function MediaPage() {
           </h1>
           <p className="text-muted-foreground">Featured articles, interviews, and achievements</p>
         </div>
-        {loading ? (
-          <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-          </div>
-        ) : (
-          <ClientContent
-            achievements={achievements}
-            leetCodeStats={leetCodeStats}
-            loading={loading}
-          />
-        )}
+        <div className="space-y-6">
+          <ScrollAnimation>
+            <MotionList>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {achievementsLoading
+                  ? // Show loading spinner for achievements
+                    Array.from({ length: 3 }).map((_, index) => (
+                      <MotionItem key={`achievement-loading-${index}`} variants={scaleInVariants}>
+                        <div className="h-[400px] rounded-lg bg-muted animate-pulse" />
+                      </MotionItem>
+                    ))
+                  : // Show achievements as they load
+                    achievements.map(achievement => (
+                      <MotionItem key={achievement.title} variants={scaleInVariants}>
+                        <AchievementCard {...achievement} />
+                      </MotionItem>
+                    ))}
+                <MotionItem variants={scaleInVariants}>
+                  {leetCodeLoading ? (
+                    // Show loading spinner for LeetCode card
+                    <div className="h-[400px] rounded-lg bg-muted animate-pulse" />
+                  ) : (
+                    <LeetCodeCard stats={leetCodeStats} />
+                  )}
+                </MotionItem>
+              </div>
+            </MotionList>
+          </ScrollAnimation>
+          <ScrollAnimation>
+            <MotionList>
+              <MotionItem variants={scaleInVariants}>
+                <ContactCard />
+              </MotionItem>
+            </MotionList>
+          </ScrollAnimation>
+        </div>
       </div>
     </PageTransition>
   );
