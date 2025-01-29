@@ -12,7 +12,7 @@ import { TooltipSimple } from '@/components/ui/tooltip';
 const Footer = () => {
   return (
     <footer className="bg-background border-t">
-      <div className="container flex flex-col items-center py-4 space-y-3 md:space-y-4 md:py-6">
+      <div className="container flex flex-col items-center py-4 space-y-3 md:space-y-4 md:py-6 pb-[72px] md:pb-6">
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
           <div className="text-xs md:text-sm text-muted-foreground text-center">
             <span>© {new Date().getFullYear()} Vishrut Jha</span>
