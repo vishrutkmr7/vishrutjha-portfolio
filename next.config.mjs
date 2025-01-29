@@ -41,11 +41,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.cloudflareinsights.com https://*.vercel-scripts.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.cloudflareinsights.com https://*.vercel-scripts.com https://plausible.io",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https: wss:",
+              "connect-src 'self' https: wss: https://plausible.io",
               "frame-src 'self' https://*.doubleclick.net",
               "frame-ancestors 'none'",
               "object-src 'none'",
