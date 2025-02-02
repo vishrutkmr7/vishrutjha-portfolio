@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 
 import { techIconMap } from '@/app/lib/icons';
-import { cn } from '@/lib/utils';
+import { cn } from '@/app/lib/utils';
 
 const badgeVariants = cva(
   'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',

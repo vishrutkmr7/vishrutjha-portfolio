@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/app/lib/utils';
 
 interface TechIconProps extends React.HTMLAttributes<HTMLSpanElement> {
   name: string;

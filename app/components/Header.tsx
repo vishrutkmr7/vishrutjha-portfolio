@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 
 import { ThemeToggle } from '@/app/components/theme-toggle';
 import { Button } from '@/app/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/app/lib/utils';
 
 const Header: React.FC = () => {
   const pathname = usePathname();
