@@ -7,6 +7,9 @@ Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishr
 ## 🚀 Features
 
 - Modern, responsive design with dark mode support
+- Dual AI integration:
+  - Interactive AI assistant powered by Perplexity Sonar for portfolio inquiries
+  - Streaming AI chat interface using Vercel AI SDK
 - Project showcase with detailed cards and links
 - Professional journey timeline with interactive elements
 - Media appearances and publications section
@@ -17,6 +20,9 @@ Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishr
 - SEO optimized with automatic sitemap generation
 - Performance analytics and insights
 - Fully accessible UI components
+- Real-time chat interface with structured responses
+- Smart context-aware conversations about professional experience
+- Multi-step tool calls for enhanced AI interactions
 
 ## 🛠️ Tech Stack
 
@@ -25,6 +31,9 @@ Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishr
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **UI Components**: Radix UI primitives
+- **AI Integration**:
+  - [Vercel AI SDK](https://sdk.vercel.ai/) for streaming chat interface
+  - Perplexity Sonar API for knowledge base
 - **Charts**: Chart.js with react-chartjs-2
 - **Animations**: Framer Motion and react-type-animation
 - **Icons**: Lucide React and React Icons
@@ -44,11 +53,37 @@ cd vishrutjha-portfolio
 # Install dependencies
 bun install
 
+# Set up environment variables
+cp .env.example .env.local
+# Add your Perplexity API key and other AI configurations to .env.local
+
 # Start the development server
 bun dev
 ```
 
 Visit `http://localhost:3000` to see the website.
+
+## 🤖 AI Integration
+
+The portfolio features a sophisticated dual AI system:
+
+### Vercel AI SDK Integration
+
+- Streaming chat interface with real-time responses
+- Multi-step tool calls for complex interactions
+- Structured data streaming alongside responses
+- OpenTelemetry support for observability
+- Custom request headers and body customization
+- Enhanced error handling and validation
+
+### Perplexity Sonar Assistant
+
+- Provides accurate information about my professional background
+- Answers questions about projects and experience
+- Cites relevant sources for all information
+- Maintains context-aware conversations
+- Ensures responses are focused and relevant
+- Provides structured, verifiable information
 
 ## 📦 Build and Deploy
 

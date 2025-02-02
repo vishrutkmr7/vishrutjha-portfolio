@@ -1,0 +1,18 @@
+# *
+User-agent: *
+Allow: /
+
+# PerplexityBot
+User-agent: PerplexityBot
+Allow: /
+
+# Perplexity-User
+User-agent: Perplexity-User
+Allow: /
+
+# Host
+Host: https://vishrutjha.com
+
+# Sitemaps
+Sitemap: https://vishrutjha.com/sitemap.xml
+Sitemap: https://vishrutjha.com/server-sitemap.xml
