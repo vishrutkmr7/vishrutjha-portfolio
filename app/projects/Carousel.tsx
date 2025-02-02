@@ -5,10 +5,8 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import { techIconMap, socialIconMap } from '@/app/lib/icons';
-import type { ProjectItem } from '@/app/types';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
@@ -16,7 +14,9 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card';
+} from '@/app/components/ui/card';
+import { techIconMap, socialIconMap } from '@/app/lib/icons';
+import type { ProjectItem } from '@/app/types';
 
 const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);

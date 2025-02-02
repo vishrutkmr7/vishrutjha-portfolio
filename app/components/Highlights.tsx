@@ -7,8 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import type { TimelineItem, Achievement, ProjectItem } from '@/app/types';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+
+import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Skeleton } from './ui/skeleton';
 
 interface HighlightCardProps {
   title: string;

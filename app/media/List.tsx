@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Card } from '@/app/components/ui/card';
 import type { Achievement } from '@/app/types';
-import { Card } from '@/components/ui/card';
 
 export function MediaItem({ title, description, image, link }: Achievement) {
   return (

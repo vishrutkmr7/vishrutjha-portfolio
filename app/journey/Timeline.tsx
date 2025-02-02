@@ -14,19 +14,20 @@ import {
   dragVariants,
 } from '@/app/components/MotionList';
 import PageTransition from '@/app/components/PageTransition';
-import { socialIconMap } from '@/app/lib/icons';
-import type { TimelineItem as TimelineItemType } from '@/app/types';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
+import { Separator } from '@/app/components/ui/separator';
 import {
+  Timeline,
   TimelineItem,
   TimelineContent,
   TimelineTitle,
   TimelineTime,
   TimelineBody,
-} from '@/components/ui/timeline';
-import { TooltipSimple } from '@/components/ui/tooltip';
+} from '@/app/components/ui/timeline';
+import { TooltipSimple } from '@/app/components/ui/tooltip';
+import { socialIconMap } from '@/app/lib/icons';
+import type { TimelineItem as TimelineItemType } from '@/app/types';
 
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItemType[]>([]);

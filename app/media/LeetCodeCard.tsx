@@ -6,19 +6,19 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, TooltipItem } from 'char
 import { Doughnut } from 'react-chartjs-2';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
-import { socialIconMap, Icons, techIconMap } from '@/app/lib/icons';
-import type { LeetCodeStats } from '@/app/types';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+} from '@/app/components/ui/card';
+import { Separator } from '@/app/components/ui/separator';
+import { socialIconMap, Icons, techIconMap } from '@/app/lib/icons';
+import type { LeetCodeStats } from '@/app/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

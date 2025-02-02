@@ -3,9 +3,7 @@
 import Image from 'next/image';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
-import { socialIconMap } from '@/app/lib/icons';
-import type { Achievement } from '@/app/types';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
@@ -13,8 +11,10 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card';
-import { TooltipSimple } from '@/components/ui/tooltip';
+} from '@/app/components/ui/card';
+import { TooltipSimple } from '@/app/components/ui/tooltip';
+import { socialIconMap } from '@/app/lib/icons';
+import type { Achievement } from '@/app/types';
 
 export default function AchievementCard({ title, description, date, image, link }: Achievement) {
   return (

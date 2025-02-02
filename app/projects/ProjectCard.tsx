@@ -4,9 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
-import { techIconMap, socialIconMap } from '@/app/lib/icons';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
@@ -14,8 +13,9 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card';
-import { TooltipSimple } from '@/components/ui/tooltip';
+} from '@/app/components/ui/card';
+import { TooltipSimple } from '@/app/components/ui/tooltip';
+import { techIconMap, socialIconMap } from '@/app/lib/icons';
 
 interface ProjectCardProps {
   title: string;

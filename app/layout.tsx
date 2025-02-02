@@ -13,8 +13,10 @@ import Header from '@/app/components/Header';
 import JsonLd from '@/app/components/JsonLd';
 import RouteJsonLd from '@/app/components/RouteJsonLd';
 import { ScrollProgressBar } from '@/app/components/ScrollAnimation';
+import { ThemeProvider } from '@/app/components/theme-provider';
 import { DOMAIN } from '@/app/constants';
-import { ThemeProvider } from '@/components/theme-provider';
+
+import Chat from './components/Chat';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', preload: true });
 
@@ -175,6 +177,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Header />
                 <main className="flex-grow container py-4 md:py-6 mt-14">{children}</main>
                 <Footer />
+                <Chat />
               </div>
               <SpeedInsights />
             </ThemeProvider>

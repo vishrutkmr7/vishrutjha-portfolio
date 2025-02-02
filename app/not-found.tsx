@@ -6,8 +6,8 @@ import { MoveLeft, Unlink } from 'lucide-react';
 import Link from 'next/link';
 import { TypeAnimation } from 'react-type-animation';
 
-import { Button } from '@/components/ui/button';
-import { TooltipSimple } from '@/components/ui/tooltip';
+import { Button } from '@/app/components/ui/button';
+import { TooltipSimple } from '@/app/components/ui/tooltip';
 
 import styles from './not-found.module.css';
 

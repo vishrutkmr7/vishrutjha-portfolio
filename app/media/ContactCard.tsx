@@ -1,9 +1,15 @@
 'use client';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
+import { Button } from '@/app/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/app/components/ui/card';
 import { socialIconMap } from '@/app/lib/icons';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function ContactCard() {
   return (

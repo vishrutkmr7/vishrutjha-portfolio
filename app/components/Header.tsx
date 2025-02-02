@@ -6,8 +6,8 @@ import { Home, Map, FolderGit2, Image as ImageIcon, FileDown } from 'lucide-reac
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/app/components/theme-toggle';
+import { Button } from '@/app/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const Header: React.FC = () => {

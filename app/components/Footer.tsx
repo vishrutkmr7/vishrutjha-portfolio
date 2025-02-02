@@ -6,8 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { socialIconMap } from '@/app/lib/icons';
-import { Button } from '@/components/ui/button';
-import { TooltipSimple } from '@/components/ui/tooltip';
+
+import { Button } from './ui/button';
+import { TooltipSimple } from './ui/tooltip';
 
 const Footer = () => {
   return (
