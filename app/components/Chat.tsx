@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useChat } from 'ai/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Info, Sparkles } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
 
 import { cn } from '@/app/lib/utils';
 
@@ -71,7 +70,14 @@ function ChatBubble({
 export default function Chat() {
   const [isOpen, setIsOpen] = useState(false);
   const [validationState, setValidationState] = useState<ValidationState>({ isValid: true });
-  const [sessionId] = useState(() => Math.random().toString(36).substring(7));
+  const [sessionId] = useState(() => {
+    const array = new Uint8Array(8);
+    crypto.getRandomValues(array);
+    return Array.from(array)
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('')
+      .substring(0, 7);
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
