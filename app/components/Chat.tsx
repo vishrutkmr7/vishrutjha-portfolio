@@ -35,24 +35,6 @@ interface ValidationState {
   message?: string;
 }
 
-const sanitizeContent = (content: string): string => {
-  // Remove any mentions of confidence scores with various formats
-  return (
-    content
-      // Remove decimal confidence scores (0.8, 0.95, etc)
-      .replace(/confidence(?:\s+(?:score|level|rating))?\s*(?::|is|=)\s*\d*\.?\d+/gi, '')
-      // Remove percentage confidence scores (80%, 95%, etc)
-      .replace(/confidence(?:\s+(?:score|level|rating))?\s*(?::|is|=)\s*\d+%/gi, '')
-      // Remove qualitative confidence mentions
-      .replace(/\b(?:low|medium|high)\s+confidence\b/gi, '')
-      // Remove "with X confidence" format (both decimal and percentage)
-      .replace(/with\s+(?:\d*\.?\d+|\d+%)\s+confidence/gi, '')
-      // Remove any remaining confidence mentions with numbers
-      .replace(/confidence.*?(?:\d*\.?\d+|\d+%).*?(?:\.|$)/gi, '')
-      .trim()
-  );
-};
-
 function ChatBubble({
   children,
   isAssistant,
@@ -75,15 +57,12 @@ function ChatBubble({
         {children}
       </div>
       {isAssistant && confidence && (
-        <div className="absolute -bottom-2 left-4 flex gap-1">
-          <div className={cn('w-1.5 h-1.5 rounded-full', getConfidenceColor(confidence))} />
-          <div
-            className={cn('w-1.5 h-1.5 rounded-full', getConfidenceColor(confidence), 'opacity-75')}
-          />
-          <div
-            className={cn('w-1.5 h-1.5 rounded-full', getConfidenceColor(confidence), 'opacity-50')}
-          />
-        </div>
+        <div
+          className={cn(
+            'absolute -bottom-1 left-4 w-1 h-1 rounded-full',
+            getConfidenceColor(confidence)
+          )}
+        />
       )}
     </div>
   );
@@ -321,9 +300,7 @@ export default function Chat() {
               <AnimatePresence initial={false}>
                 {messages.map(message => {
                   const structuredResponse =
-                    message.role === 'assistant'
-                      ? parseResponse(sanitizeContent(message.content))
-                      : null;
+                    message.role === 'assistant' ? parseResponse(message.content) : null;
 
                   return (
                     <motion.div
