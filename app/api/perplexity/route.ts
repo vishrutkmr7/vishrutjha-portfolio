@@ -223,7 +223,7 @@ async function checkQueryRelevance(query: string) {
         'javascript',
         'typescript',
         'java',
-        'c++',
+        'c\\+\\+', // Properly escaped c++ term
         'swift',
         'react',
         'node',
