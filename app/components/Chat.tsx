@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { useChat } from 'ai/react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,6 +38,7 @@ export default function Chat() {
   const [isOpen, setIsOpen] = useState(false);
   const [validationState, setValidationState] = useState<ValidationState>({ isValid: true });
   const [sessionId] = useState(() => Math.random().toString(36).substring(7));
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
     api: '/api/perplexity',
@@ -60,11 +61,19 @@ export default function Chat() {
     },
   });
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     if (!isOpen) {
       setMessages([]);
     }
   }, [isOpen, setMessages]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); // Scroll on new messages
 
   const parseResponse = (content: string): StructuredResponse | null => {
     try {
@@ -386,6 +395,7 @@ export default function Chat() {
                   </div>
                 </motion.div>
               )}
+              <div ref={messagesEndRef} />
             </div>
             <motion.form
               onSubmit={handleFormSubmit}

@@ -131,12 +131,14 @@ Verified Data Sources:
     headers: {
       Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       model: 'sonar',
-      temperature: 0.3,
+      temperature: 0.0,
+      frequency_penalty: 1,
       top_p: 0.95,
-      max_tokens: 500,
+      max_tokens: 1024,
       stream: false,
       response_format: {
         type: 'json_schema',
@@ -193,6 +195,15 @@ async function checkQueryRelevance(query: string) {
         'position',
         'career',
         'achievement',
+        'do',
+        'did',
+        'does',
+        'working',
+        'worked',
+        'know',
+        'use',
+        'using',
+        'used',
       ],
     },
     technical: {
@@ -208,6 +219,19 @@ async function checkQueryRelevance(query: string) {
         'language',
         'tool',
         'platform',
+        'python',
+        'javascript',
+        'typescript',
+        'java',
+        'c++',
+        'swift',
+        'react',
+        'node',
+        'aws',
+        'oci',
+        'cloud',
+        'database',
+        'api',
       ],
     },
     portfolio: {
@@ -221,11 +245,37 @@ async function checkQueryRelevance(query: string) {
         'implementation',
         'solution',
         'architecture',
+        'project',
+        'system',
+        'application',
       ],
     },
     vishrutSpecific: {
       weight: 1.5, // Higher weight for Vishrut-specific terms
-      terms: ['vishrut', 'jha', 'ios', 'mobile', 'full-stack', 'web'],
+      terms: [
+        'vishrut',
+        'jha',
+        'ios',
+        'mobile',
+        'full-stack',
+        'web',
+        'fdalytics',
+        'ziply',
+        'fiber',
+        'compliance',
+        'group',
+        'applifly',
+        'university',
+        'arizona',
+        'arizona state',
+        'arizona state university',
+        'arizona state university at tempe',
+        'arizona state university at tempe, arizona',
+        'arizona state university at tempe, arizona, united states',
+        'panjab university',
+        'panjab university chandigarh',
+        'uiet chandigarh',
+      ],
     },
     quantitative: {
       weight: 1.0,
@@ -239,6 +289,10 @@ async function checkQueryRelevance(query: string) {
         'list',
         'count',
         'number of',
+        'what',
+        'who',
+        'why',
+        'how',
       ],
     },
     metadata: {
@@ -254,6 +308,10 @@ async function checkQueryRelevance(query: string) {
         'timeline',
         'duration',
         'date',
+        'about',
+        'tell',
+        'explain',
+        'describe',
       ],
     },
   };
@@ -265,14 +323,32 @@ async function checkQueryRelevance(query: string) {
   const offTopicPatterns = [
     /\b(personal|private|family|relationship|age|salary|money|politics|religion)\b/i,
     /\b(where do you live|are you single|what do you think about|how old)\b/i,
-    /\b(chatgpt|openai|help me with|can you|general question)\b/i,
+    /\b(chatgpt|openai|general question)\b/i,
   ];
 
-  if (offTopicPatterns.some(pattern => pattern.test(normalizedQuery))) {
+  // Special handling for company-related questions
+  const companyRelatedMatch =
+    /\b(what|who|how|when|where|why|tell|about)\b.*\b(fdalytics|ziply|fiber|compliance|group|applifly|university|washington)\b/i.test(
+      normalizedQuery
+    );
+  if (companyRelatedMatch) {
     return {
-      isRelevant: false,
-      reason:
-        "This question appears to be personal or off-topic. Please ask about Vishrut's professional work and achievements.",
+      isRelevant: true,
+      confidence: 1,
+      reason: null,
+    };
+  }
+
+  // Special handling for skill-related questions
+  const skillRelatedMatch =
+    /\b(know|use|work|code|program|develop|experience)\b.*\b(python|javascript|typescript|java|c\+\+|swift|react|node|aws|cloud|database|api)\b/i.test(
+      normalizedQuery
+    );
+  if (skillRelatedMatch) {
+    return {
+      isRelevant: true,
+      confidence: 1,
+      reason: null,
     };
   }
 
@@ -313,6 +389,6 @@ async function checkQueryRelevance(query: string) {
     confidence: Math.min(totalScore / 3, 1), // Keep confidence for internal use
     reason: isRelevant
       ? null
-      : "Please ask questions specifically about Vishrut's professional background, technical projects, or work experience.",
+      : "Please ask questions about Vishrut's professional background, his work at various companies, or his educational background.",
   };
 }
