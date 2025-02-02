@@ -17,7 +17,7 @@ interface AnimatedMarkdownProps {
 
 interface CodeComponentProps {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   inline?: boolean;
 }
 
@@ -87,22 +87,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  const processContent = (content: string) => {
-    try {
-      const parsed = JSON.parse(content);
-      if (parsed.response && parsed.response.content) {
-        return parsed.response.content;
-      }
-    } catch {
-      if (content.includes('```')) {
-        return content;
-      }
-    }
-    return content;
-  };
-
-  const processedContent = processContent(content);
-  const hasCodeBlock = processedContent.includes('```');
+  const hasCodeBlock = content.includes('```');
 
   return (
     <motion.div
@@ -113,41 +98,83 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
     >
       {hasCodeBlock ? (
         <div
-          className={`prose prose-sm max-w-none ${
+          className={cn(
+            'prose prose-sm max-w-none',
             isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
-          }`}
+          )}
         >
           <ReactMarkdown
             components={{
-              // @ts-ignore
-              code({ className, children, inline }: CodeComponentProps) {
+              code: ({ className, children = '', inline }: CodeComponentProps) => {
                 if (inline) {
-                  return <code className={className}>{children}</code>;
+                  return (
+                    <code className={cn('bg-muted px-1 py-0.5 rounded text-sm', className)}>
+                      {children}
+                    </code>
+                  );
                 }
                 const match = /language-(\w+)/.exec(className || '');
                 const language = match ? match[1] : '';
                 const value = String(children).replace(/\n$/, '');
                 return <CodeBlock language={language} value={value} />;
               },
+              p: ({ children }) => (
+                <p
+                  className={cn(
+                    'my-2 leading-7',
+                    isAssistant ? 'text-foreground' : 'text-primary-foreground'
+                  )}
+                >
+                  {children}
+                </p>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc list-inside space-y-1 my-2">{children}</ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="list-decimal list-inside space-y-1 my-2">{children}</ol>
+              ),
+              li: ({ children }) => <li className="leading-7">{children}</li>,
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/90 underline underline-offset-4"
+                >
+                  {children}
+                </a>
+              ),
+              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+              em: ({ children }) => <em className="italic">{children}</em>,
+              blockquote: ({ children }) => (
+                <blockquote className="border-l-4 border-muted pl-4 italic my-2">
+                  {children}
+                </blockquote>
+              ),
             }}
           >
-            {processedContent}
+            {content}
           </ReactMarkdown>
         </div>
       ) : (
         <ChatBubble isAssistant={isAssistant}>
           <div
-            className={`prose prose-sm max-w-none ${
+            className={cn(
+              'prose prose-sm max-w-none',
               isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
-            }`}
+            )}
           >
             <ReactMarkdown
               components={{
                 p: ({ children }) => <div className="m-0">{children}</div>,
-                // @ts-ignore
-                code({ className, children, inline }: CodeComponentProps) {
+                code: ({ className, children = '', inline }: CodeComponentProps) => {
                   if (inline) {
-                    return <code className={className}>{children}</code>;
+                    return (
+                      <code className={cn('bg-muted px-1 py-0.5 rounded text-sm', className)}>
+                        {children}
+                      </code>
+                    );
                   }
                   const match = /language-(\w+)/.exec(className || '');
                   const language = match ? match[1] : '';
@@ -156,7 +183,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                 },
               }}
             >
-              {processedContent}
+              {content}
             </ReactMarkdown>
           </div>
         </ChatBubble>

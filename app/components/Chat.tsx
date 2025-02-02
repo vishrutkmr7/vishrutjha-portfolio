@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useChat } from 'ai/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Info, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 import { cn } from '@/app/lib/utils';
 
@@ -32,6 +33,39 @@ interface StructuredResponse {
 interface ValidationState {
   isValid: boolean;
   message?: string;
+}
+
+function ChatBubble({
+  children,
+  isAssistant,
+  confidence,
+}: {
+  children: React.ReactNode;
+  isAssistant: boolean;
+  confidence?: number;
+}) {
+  const getConfidenceColor = (confidence?: number) => {
+    if (!confidence || !isAssistant) return null;
+    if (confidence >= 0.8) return 'bg-green-500';
+    if (confidence >= 0.5) return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
+
+  return (
+    <div className="relative">
+      <div className={cn('max-w-[85%] w-fit', isAssistant ? 'ml-0 mr-auto' : 'ml-auto mr-0')}>
+        {children}
+      </div>
+      {isAssistant && confidence && (
+        <div
+          className={cn(
+            'absolute -bottom-1 left-4 w-1 h-1 rounded-full',
+            getConfidenceColor(confidence)
+          )}
+        />
+      )}
+    </div>
+  );
 }
 
 export default function Chat() {
@@ -77,8 +111,21 @@ export default function Chat() {
 
   const parseResponse = (content: string): StructuredResponse | null => {
     try {
-      return JSON.parse(content);
+      // If it's already a JSON string, parse it
+      const parsed = JSON.parse(content);
+      if (parsed.response?.content) {
+        // Ensure markdown formatting is preserved
+        return {
+          response: {
+            ...parsed.response,
+            // Convert **text** to proper markdown bold syntax if not already
+            content: parsed.response.content.replace(/\*\*([^*]+)\*\*/g, '**$1**'),
+          },
+        };
+      }
+      return null;
     } catch {
+      // If it's not JSON, return null
       return null;
     }
   };
@@ -271,95 +318,104 @@ export default function Chat() {
                       }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className={`flex ${
-                        message.role === 'user' ? 'justify-end' : 'justify-start'
-                      }`}
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div
-                        className={cn(
-                          'max-w-[90%] space-y-2 relative',
-                          message.role === 'user'
-                            ? "bg-primary text-primary-foreground rounded-[20px] px-4 py-2.5 before:content-[''] before:absolute before:right-[-8px] before:bottom-0 before:w-[15px] before:h-[20px] before:bg-primary before:rounded-bl-[16px] after:content-[''] after:absolute after:right-[-20px] after:bottom-0 after:w-[20px] after:h-[20px] after:bg-background after:rounded-bl-[10px] after:border-b after:border-l after:border-transparent"
-                            : ''
-                        )}
-                      >
-                        {message.role === 'user' ? (
-                          <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                      {message.role === 'user' ? (
+                        <ChatBubble isAssistant={false}>
+                          <div
+                            className={cn(
+                              'text-sm whitespace-pre-wrap leading-relaxed',
+                              'bg-primary text-primary-foreground rounded-[20px] px-4 py-2.5',
+                              'relative',
+                              "before:content-[''] before:absolute before:right-[-8px] before:bottom-0 before:w-[15px] before:h-[20px] before:bg-primary before:rounded-bl-[16px]",
+                              "after:content-[''] after:absolute after:right-[-20px] after:bottom-0 after:w-[20px] after:h-[20px] after:bg-background after:rounded-bl-[10px] after:border-b after:border-l after:border-transparent"
+                            )}
+                          >
                             {message.content}
-                          </p>
-                        ) : structuredResponse ? (
-                          <div className="space-y-3">
-                            <div className="bg-muted rounded-[20px] px-4 py-2.5">
+                          </div>
+                        </ChatBubble>
+                      ) : structuredResponse ? (
+                        <div className="max-w-[90%] space-y-3">
+                          <ChatBubble
+                            isAssistant={true}
+                            confidence={structuredResponse.response.confidence}
+                          >
+                            <div
+                              className={cn(
+                                'prose prose-sm max-w-none',
+                                'prose-neutral dark:prose-invert'
+                              )}
+                            >
                               <AnimatedMarkdown
                                 content={structuredResponse.response.content}
-                                isAssistant
+                                isAssistant={true}
                               />
                             </div>
-                            {structuredResponse.response.sources.length > 0 && (
-                              <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                transition={{ duration: 0.3, delay: 0.2 }}
-                                className="space-y-2"
-                              >
-                                <p className="text-xs text-muted-foreground font-medium">
-                                  Sources:
-                                </p>
-                                <div className="grid gap-2">
-                                  {structuredResponse.response.sources.map((source, index) => (
-                                    <motion.div
-                                      key={index}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ duration: 0.2, delay: 0.1 * (index + 1) }}
-                                      className="text-xs bg-muted/50 rounded p-2 flex items-start gap-2"
-                                    >
-                                      <div className="flex-1">
-                                        <p className="font-medium">{source.title}</p>
-                                        {source.description && (
-                                          <p className="text-muted-foreground mt-0.5">
-                                            {source.description}
-                                          </p>
-                                        )}
-                                        {source.date && (
-                                          <p className="text-muted-foreground mt-0.5">
-                                            {source.date}
-                                          </p>
-                                        )}
-                                      </div>
-                                      {source.url && (
-                                        <a
-                                          href={source.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="text-primary hover:text-primary/90"
-                                        >
-                                          <ExternalLink className="h-3 w-3" />
-                                        </a>
+                          </ChatBubble>
+                          {structuredResponse.response.sources.length > 0 && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              transition={{ duration: 0.3, delay: 0.2 }}
+                              className="space-y-2"
+                            >
+                              <p className="text-xs text-muted-foreground font-medium">Sources:</p>
+                              <div className="grid gap-2">
+                                {structuredResponse.response.sources.map((source, index) => (
+                                  <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.2, delay: 0.1 * (index + 1) }}
+                                    className="text-xs bg-muted/50 rounded p-2 flex items-start gap-2"
+                                  >
+                                    <div className="flex-1">
+                                      <p className="font-medium">{source.title}</p>
+                                      {source.description && (
+                                        <p className="text-muted-foreground mt-0.5">
+                                          {source.description}
+                                        </p>
                                       )}
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                            {structuredResponse && !structuredResponse.response.isRelevant && (
-                              <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                className="p-3 bg-yellow-100/20 rounded-lg border border-yellow-300/30 text-sm text-yellow-300"
-                              >
-                                <Info className="h-4 w-4 inline mr-2" />
-                                Let's focus on Vishrut's professional background. Ask about
-                                projects, skills, or experience.
-                              </motion.div>
-                            )}
-                          </div>
-                        ) : (
+                                      {source.date && (
+                                        <p className="text-muted-foreground mt-0.5">
+                                          {source.date}
+                                        </p>
+                                      )}
+                                    </div>
+                                    {source.url && (
+                                      <a
+                                        href={source.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-primary hover:text-primary/90"
+                                      >
+                                        <ExternalLink className="h-3 w-3" />
+                                      </a>
+                                    )}
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                          {structuredResponse && !structuredResponse.response.isRelevant && (
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              className="p-3 bg-yellow-100/20 rounded-lg border border-yellow-300/30 text-sm text-yellow-300"
+                            >
+                              <Info className="h-4 w-4 inline mr-2" />
+                              Let's focus on Vishrut's professional background. Ask about projects,
+                              skills, or experience.
+                            </motion.div>
+                          )}
+                        </div>
+                      ) : (
+                        <ChatBubble isAssistant={true}>
                           <div className="bg-muted rounded-lg p-3">
                             <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                           </div>
-                        )}
-                      </div>
+                        </ChatBubble>
+                      )}
                     </motion.div>
                   );
                 })}
