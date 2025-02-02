@@ -27,7 +27,7 @@ import {
 } from '@/app/components/ui/timeline';
 import { TooltipSimple } from '@/app/components/ui/tooltip';
 import { socialIconMap } from '@/app/lib/icons';
-import type { TimelineItem as TimelineItemType } from '@/app/types';
+import type { TimelineItem as TimelineItemType } from '@/app/types/portfolio.types';
 
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItemType[]>([]);

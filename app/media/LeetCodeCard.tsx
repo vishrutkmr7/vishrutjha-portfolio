@@ -18,7 +18,7 @@ import {
 } from '@/app/components/ui/card';
 import { Separator } from '@/app/components/ui/separator';
 import { socialIconMap, Icons, techIconMap } from '@/app/lib/icons';
-import type { LeetCodeStats } from '@/app/types';
+import type { LeetCodeStats } from '@/app/types/leetcode.types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

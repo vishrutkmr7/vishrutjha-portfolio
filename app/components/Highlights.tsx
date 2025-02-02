@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { TimelineItem, Achievement, ProjectItem } from '@/app/types';
+import type { TimelineItem, Achievement, ProjectItem } from '@/app/types/portfolio.types';
 
-import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardDescription, CardHeader } from './ui/card';
 import { Skeleton } from './ui/skeleton';
 
 interface HighlightCardProps {

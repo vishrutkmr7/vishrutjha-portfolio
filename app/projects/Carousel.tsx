@@ -16,7 +16,7 @@ import {
   CardDescription,
 } from '@/app/components/ui/card';
 import { techIconMap, socialIconMap } from '@/app/lib/icons';
-import type { ProjectItem } from '@/app/types';
+import type { ProjectItem } from '@/app/types/portfolio.types';
 
 const ProjectsCarousel: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);

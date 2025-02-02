@@ -14,7 +14,7 @@ import {
 } from '@/app/components/ui/card';
 import { TooltipSimple } from '@/app/components/ui/tooltip';
 import { socialIconMap } from '@/app/lib/icons';
-import type { Achievement } from '@/app/types';
+import type { Achievement } from '@/app/types/portfolio.types';
 
 export default function AchievementCard({ title, description, date, image, link }: Achievement) {
   return (
