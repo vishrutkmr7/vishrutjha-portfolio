@@ -144,7 +144,7 @@ export default function Chat() {
 
     // Basic client-side validation for obviously off-topic queries
     const offTopicPatterns = [
-      /\b(personal|private|family|relationship|age|salary|money|politics|religion)\b/i,
+      /\b(private|family|relationship|age|salary|money|politics|religion)\b/i,
       /\b(where do you live|are you single|what do you think about|how old)\b/i,
       /\b(chatgpt|openai|help me with|can you|general question)\b/i,
     ];
@@ -153,7 +153,7 @@ export default function Chat() {
       setValidationState({
         isValid: false,
         message:
-          "Please keep questions focused on Vishrut's professional background and technical work.",
+          "Let's keep things professional but fun! Ask about Vishrut's work, interests, or experiences.",
       });
     }
 
@@ -296,10 +296,16 @@ export default function Chat() {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center text-muted-foreground py-8"
                 >
-                  <div className="mb-2 text-2xl">👋</div>
-                  <p className="text-sm mb-1">Hi! I'm Vishrut's AI assistant.</p>
-                  <p className="text-xs">
-                    Ask me anything about his experience, projects, or skills!
+                  <div className="mb-2 text-2xl flex items-center justify-center gap-2">
+                    <span className="animate-wave">👋</span>
+                    <span className="animate-pulse">🎵</span>
+                  </div>
+                  <p className="text-sm mb-2">
+                    Hey! I'm here to fill you in on everything about Vishrut!
+                  </p>
+                  <p className="text-xs text-muted-foreground/80">
+                    From his tech projects to his favorite Travis Scott tracks, I've got the inside
+                    scoop. What would you like to know? ✨
                   </p>
                 </motion.div>
               )}
@@ -471,7 +477,7 @@ export default function Chat() {
                   <input
                     value={input}
                     onChange={handleInputValidation}
-                    placeholder="Ask me anything about Vishrut..."
+                    placeholder="Curious about Vishrut? Ask away! ✨"
                     className={cn(
                       'flex-1 min-w-0 rounded-full border bg-background/50 px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                       !validationState.isValid && 'border-red-500/50 focus-visible:ring-red-500/50'

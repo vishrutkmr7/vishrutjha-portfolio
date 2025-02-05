@@ -1,6 +1,6 @@
 import { generateSystemPrompt } from '@/app/lib/prompts';
 import { checkQueryRelevance } from '@/app/lib/utils';
-import { ChatRequest, ChatResponse } from '@/app/types/chat';
+import { ChatRequest, ChatResponse } from '@/app/types/chat.types';
 
 export const runtime = 'edge';
 
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       Accept: 'application/json',
     },
     body: JSON.stringify({
-      model: 'sonar',
+      model: 'sonar-reasoning-pro',
       temperature: 0.0,
       frequency_penalty: 1,
       top_p: 0.95,
