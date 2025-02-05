@@ -3,7 +3,7 @@ import { checkQueryRelevance } from '@/app/lib/utils';
 import { ChatRequest, ChatResponse } from '@/app/types/chat.types';
 
 export const runtime = 'edge';
-const model = 'sonar-reasoning-pro';
+const model = 'sonar-pro';
 
 const responseSchema = {
   type: 'object',
