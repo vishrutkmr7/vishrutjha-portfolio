@@ -3,6 +3,7 @@ import { checkQueryRelevance } from '@/app/lib/utils';
 import { ChatRequest, ChatResponse } from '@/app/types/chat.types';
 
 export const runtime = 'edge';
+const model = 'sonar-reasoning-pro';
 
 const responseSchema = {
   type: 'object',
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
       Accept: 'application/json',
     },
     body: JSON.stringify({
-      model: 'sonar-reasoning-pro',
+      model,
       temperature: 0.0,
       frequency_penalty: 1,
       top_p: 0.95,
