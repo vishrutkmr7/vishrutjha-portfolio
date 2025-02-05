@@ -136,7 +136,7 @@ export default function Chat() {
     }
   };
 
-  const handleInputValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputValidation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
 
     // Reset validation state when input changes
@@ -157,7 +157,7 @@ export default function Chat() {
       });
     }
 
-    handleInputChange(e);
+    handleInputChange(e as React.ChangeEvent<HTMLInputElement>);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -473,22 +473,45 @@ export default function Chat() {
               transition={{ duration: 0.2 }}
             >
               <div className="space-y-2">
-                <div className="flex gap-2 items-center">
-                  <input
-                    value={input}
-                    onChange={handleInputValidation}
-                    placeholder="Curious about Vishrut? Ask away! ✨"
-                    className={cn(
-                      'flex-1 min-w-0 rounded-full border bg-background/50 px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      !validationState.isValid && 'border-red-500/50 focus-visible:ring-red-500/50'
-                    )}
-                    disabled={isLoading}
-                  />
+                <div className="flex gap-2 items-end">
+                  <div className="relative flex-1">
+                    <textarea
+                      value={input}
+                      onChange={e => {
+                        handleInputValidation(e);
+                        // Auto-adjust height
+                        e.target.style.height = 'inherit';
+                        e.target.style.height = `${e.target.scrollHeight}px`;
+                      }}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleFormSubmit(e);
+                        }
+                      }}
+                      placeholder="Curious about Vishrut? Ask away! ✨"
+                      rows={1}
+                      className={cn(
+                        'flex-1 min-w-0 w-full resize-none overflow-hidden',
+                        'rounded-2xl border bg-background/50 px-4 py-3 text-sm',
+                        'ring-offset-background placeholder:text-muted-foreground',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                        'transition-all duration-200',
+                        'max-h-32',
+                        !validationState.isValid &&
+                          'border-red-500/50 focus-visible:ring-red-500/50'
+                      )}
+                      style={{
+                        minHeight: '44px',
+                      }}
+                      disabled={isLoading}
+                    />
+                  </div>
                   <Button
                     type="submit"
                     size="icon"
                     className={cn(
-                      'h-9 w-9 rounded-full transition-all duration-300 relative overflow-hidden',
+                      'h-9 w-9 rounded-full transition-all duration-300 relative overflow-hidden self-end mb-[3px]',
                       validationState.isValid && input.length > 0
                         ? "bg-[#0A84FF] hover:bg-[#0A84FF]/90 after:content-[''] after:absolute after:inset-0 after:bg-white/10 after:scale-0 after:rounded-full hover:after:scale-100 after:transition-transform after:duration-300"
                         : 'bg-muted hover:bg-muted/90'
