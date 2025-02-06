@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     google: 'YOUR-GOOGLE-SITE-VERIFICATION',
     yandex: 'YOUR-YANDEX-VERIFICATION',
     other: {
-      me: ['mailto:your-email@vishrutjha.com', 'https://github.com/vishrutkmr7'],
+      me: ['mailto:me@vishrutjha.com', 'https://github.com/vishrutkmr7'],
     },
   },
   openGraph: {
