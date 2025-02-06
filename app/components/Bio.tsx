@@ -159,8 +159,8 @@ const Bio = () => {
         {[
           {
             icon: 'email',
-            href: 'mailto:me@vishrutjha.com',
-            title: 'me [at] vishrutjha [dot] com',
+            href: 'mailto:i+website@vishrut.co',
+            title: 'i+website [at] vishrut [dot] co',
             ariaLabel: 'Send email to Vishrut Jha',
           },
           {

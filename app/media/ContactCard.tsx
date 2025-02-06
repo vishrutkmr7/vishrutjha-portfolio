@@ -85,7 +85,10 @@ export default function ContactCard() {
               variant="outline"
               className="w-full hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
             >
-              <a href="mailto:me@vishrutjha.com" className="flex items-center justify-center gap-2">
+              <a
+                href="mailto:i+website@vishrut.co"
+                className="flex items-center justify-center gap-2"
+              >
                 <socialIconMap.email className="h-4 w-4 flex-shrink-0" />
                 Email
               </a>
