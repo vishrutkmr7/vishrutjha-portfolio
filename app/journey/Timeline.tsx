@@ -32,7 +32,7 @@ import type { TimelineItem as TimelineItemType } from '@/app/types/portfolio.typ
 const JourneyTimeline: React.FC = () => {
   const [timelineData, setTimelineData] = useState<TimelineItemType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'work' | 'education'>('all');
+  const [filter, setFilter] = useState<'all' | 'work' | 'education' | 'volunteer'>('all');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   useEffect(() => {
@@ -88,6 +88,15 @@ const JourneyTimeline: React.FC = () => {
               <socialIconMap.education className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               Education
             </Button>
+            <Button
+              variant={filter === 'volunteer' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setFilter('volunteer')}
+              className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
+            >
+              <socialIconMap.heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              Volunteer
+            </Button>
           </div>
           <Separator className="w-full" />
         </div>
@@ -127,9 +136,11 @@ const JourneyTimeline: React.FC = () => {
                             ? item.title.company.includes('Arizona State')
                               ? 'Grad School'
                               : 'College'
-                            : item.title.role.toLowerCase().includes('intern')
-                              ? 'Internship'
-                              : 'Work Experience'
+                            : item.type === 'volunteer'
+                              ? 'Volunteer Experience'
+                              : item.title.role.toLowerCase().includes('intern')
+                                ? 'Internship'
+                                : 'Work Experience'
                         }
                         side="right"
                       >
@@ -138,6 +149,8 @@ const JourneyTimeline: React.FC = () => {
                           <div className="absolute inset-0 flex items-center justify-center">
                             {item.type === 'education' ? (
                               <socialIconMap.education className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                            ) : item.type === 'volunteer' ? (
+                              <socialIconMap.heart className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                             ) : (
                               <socialIconMap.work className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                             )}
@@ -185,7 +198,11 @@ const JourneyTimeline: React.FC = () => {
                                 variant="outline"
                                 className="self-end sm:ml-auto text-[10px] sm:text-xs py-0 px-1.5 sm:px-2"
                               >
-                                {item.type === 'work' ? 'Work' : 'Education'}
+                                {item.type === 'work'
+                                  ? 'Work'
+                                  : item.type === 'volunteer'
+                                    ? 'Volunteer'
+                                    : 'Education'}
                               </Badge>
                             </TimelineTime>
                             <div>

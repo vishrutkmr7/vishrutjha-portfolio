@@ -1,5 +1,16 @@
 [
   {
+    "title": "EngineeringMode",
+    "description": "Contributed MetricKit support to the iOS dev debugging tool that shows Permissions, Push Notifications, UserDefaults and other metrics. Implemented SwiftData persistence for 7-day metric history and visualized performance data using Swift Charts.",
+    "date": "02/07/2025 - Present",
+    "image": "EngineeringMode.png",
+    "link": {
+      "text": "Source Code",
+      "url": "https://github.com/ananay/EngineeringMode"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS", "MetricKit", "SwiftData", "Swift Charts"]
+  },
+  {
     "title": "LlamaStack iOS",
     "description": "An iMessage-style chatbot application providing native messaging experience with on-device AI capabilities.",
     "date": "12/01/2024 - Present",
@@ -88,9 +99,29 @@
     "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
+    "title": "NYX by PNYX.xyz",
+    "description": "A gamified platform for unreleased music A/B testing inspired by 'The Voice' show's blind auditions. Implemented high-performance audio streaming with AVFoundation and custom caching. Integrated dual payment systems with Apple Pay and Web3 (Coinbase API, MetaMask SDK) for blockchain transactions. Built a seamless UX for music discovery and perks redemption while maintaining user anonymity.",
+    "date": "09/01/2023 - 05/01/2024",
+    "image": "pnyx2.jpeg",
+    "link": {
+      "text": "Visit PNYX.xyz",
+      "url": "https://pnyx.xyz"
+    },
+    "tech": [
+      "Swift",
+      "SwiftUI",
+      "iOS",
+      "AVFoundation",
+      "Apple Pay",
+      "Web3",
+      "Coinbase API",
+      "MetaMask SDK"
+    ]
+  },
+  {
     "title": "AppliFly",
     "description": "An open-source collaboration with Kshitij Dhyani to automate the application process for on-campus jobs at ASU.",
-    "date": "11/15/2023 - Present",
+    "date": "11/15/2023 - 03/10/2024",
     "image": "appImage.png",
     "link": {
       "text": "Visit Applifly",

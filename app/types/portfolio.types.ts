@@ -10,7 +10,7 @@ export interface TimelineItem extends TechItem {
   logo: string;
   time: string;
   body: string;
-  type: 'education' | 'work';
+  type: 'work' | 'education' | 'volunteer';
   link?: Link;
   description: string[];
 }

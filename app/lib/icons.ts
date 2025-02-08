@@ -31,6 +31,7 @@ import {
   Briefcase,
   Calendar,
   Webhook,
+  Heart,
 } from 'lucide-react';
 import { FaTwitter, FaInstagram, FaLinkedin, FaPodcast, FaNewspaper } from 'react-icons/fa';
 import {
@@ -151,6 +152,7 @@ export const socialIconMap = {
   education: GraduationCap,
   work: Briefcase,
   calendar: Calendar,
+  heart: Heart,
 } as const;
 
 // Add type definitions to help catch undefined icons at compile time
