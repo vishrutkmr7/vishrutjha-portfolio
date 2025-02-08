@@ -89,7 +89,7 @@ const Bio = () => {
         <span className="text-muted-foreground/60">•</span>
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span>Arizona, USA</span>
-          <TooltipSimple content="United States" side="top">
+          <TooltipSimple content="United States 🫡" side="top">
             <span className="text-lg sm:text-xl">🇺🇸</span>
           </TooltipSimple>
         </div>
