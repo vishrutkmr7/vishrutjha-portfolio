@@ -273,7 +273,7 @@ export default function Chat() {
                       </svg>
                       <span className="font-medium">Perplexity</span>
                     </a>
-                    <span>Sonar</span>
+                    <span>Sonar Pro</span>
                   </div>
                 </div>
               </div>
