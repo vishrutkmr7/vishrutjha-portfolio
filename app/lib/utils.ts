@@ -254,3 +254,24 @@ export async function checkQueryRelevance(query: string): Promise<RelevanceCheck
       : "Please ask questions about Vishrut's professional background, his work at various companies, or his educational background.",
   };
 }
+
+export function parseDateString(dateStr: string): Date {
+  // Handle "Present" case
+  if (dateStr.includes('Present')) {
+    return new Date();
+  }
+
+  // Handle date ranges (take the start date)
+  const startDate = dateStr.split('-')[0].trim();
+
+  // Parse MM/DD/YYYY format
+  if (startDate.includes('/')) {
+    const [month, day, year] = startDate.split('/');
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  }
+
+  // Parse "Month YYYY" format
+  const [month, year] = startDate.split(' ');
+  const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth();
+  return new Date(parseInt(year), monthIndex);
+}

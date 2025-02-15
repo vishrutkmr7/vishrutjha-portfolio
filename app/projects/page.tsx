@@ -4,6 +4,7 @@ import { MotionList, MotionItem, scaleInVariants } from '@/app/components/Motion
 import PageTransition from '@/app/components/PageTransition';
 import { ScrollAnimation } from '@/app/components/ScrollAnimation';
 import { DOMAIN } from '@/app/constants';
+import { parseDateString } from '@/app/lib/utils';
 import projectsData from '@/public/data/projectsData.json';
 
 import { ProjectCard } from './ProjectCard';
@@ -17,6 +18,13 @@ interface ProjectItemData {
   link: { text: string; url: string };
   tech: string[];
 }
+
+// Sort projects by date (most recent first)
+const sortedProjects = [...projectsData].sort((a, b) => {
+  const dateA = parseDateString(a.date);
+  const dateB = parseDateString(b.date);
+  return dateB.getTime() - dateA.getTime();
+});
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -67,7 +75,7 @@ export default function ProjectsPage() {
           </p>
         </div>
         <MotionList className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projectsData.map((project: ProjectItemData, index: number) => (
+          {sortedProjects.map((project: ProjectItemData, index: number) => (
             <ScrollAnimation key={project.title}>
               <MotionItem
                 variants={scaleInVariants}

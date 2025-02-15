@@ -27,6 +27,7 @@ import {
 } from '@/app/components/ui/timeline';
 import { TooltipSimple } from '@/app/components/ui/tooltip';
 import { socialIconMap } from '@/app/lib/icons';
+import { parseDateString } from '@/app/lib/utils';
 import type { TimelineItem as TimelineItemType } from '@/app/types/portfolio.types';
 
 const JourneyTimeline: React.FC = () => {
@@ -39,7 +40,13 @@ const JourneyTimeline: React.FC = () => {
     fetch('/data/timelineData.json')
       .then(response => response.json())
       .then(data => {
-        setTimelineData(data);
+        // Sort timeline data by date (most recent first)
+        const sortedData = [...data].sort((a, b) => {
+          const dateA = parseDateString(a.time);
+          const dateB = parseDateString(b.time);
+          return dateB.getTime() - dateA.getTime();
+        });
+        setTimelineData(sortedData);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -60,43 +67,45 @@ const JourneyTimeline: React.FC = () => {
             <p className="text-sm sm:text-base text-muted-foreground">The path that led me here</p>
           </div>
 
-          <div className="flex flex-wrap gap-2 w-full">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
             <Button
               variant={filter === 'all' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setFilter('all')}
-              className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
+              className="gap-1.5 text-xs sm:text-sm sm:gap-2 w-full sm:w-auto sm:flex-none justify-center"
             >
               <socialIconMap.calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               All
             </Button>
-            <Button
-              variant={filter === 'work' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setFilter('work')}
-              className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
-            >
-              <socialIconMap.work className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              Work
-            </Button>
-            <Button
-              variant={filter === 'education' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setFilter('education')}
-              className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
-            >
-              <socialIconMap.education className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              Education
-            </Button>
-            <Button
-              variant={filter === 'volunteer' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setFilter('volunteer')}
-              className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
-            >
-              <socialIconMap.heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              Volunteer
-            </Button>
+            <div className="flex flex-row gap-2 w-full sm:w-auto">
+              <Button
+                variant={filter === 'work' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setFilter('work')}
+                className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
+              >
+                <socialIconMap.work className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                Work
+              </Button>
+              <Button
+                variant={filter === 'education' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setFilter('education')}
+                className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
+              >
+                <socialIconMap.education className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                Education
+              </Button>
+              <Button
+                variant={filter === 'volunteer' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setFilter('volunteer')}
+                className="gap-1.5 text-xs sm:text-sm sm:gap-2 flex-1 sm:flex-none justify-center"
+              >
+                <socialIconMap.heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                Volunteering
+              </Button>
+            </div>
           </div>
           <Separator className="w-full" />
         </div>
@@ -201,7 +210,7 @@ const JourneyTimeline: React.FC = () => {
                                 {item.type === 'work'
                                   ? 'Work'
                                   : item.type === 'volunteer'
-                                    ? 'Volunteer'
+                                    ? 'Volunteering'
                                     : 'Education'}
                               </Badge>
                             </TimelineTime>
