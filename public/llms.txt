@@ -1,0 +1,40 @@
+# Vishrut Jha's Portfolio
+
+> A modern, responsive portfolio website for Vishrut Jha, a Founding Engineer at Prickly Pear Health Inc., showcasing his professional journey, projects, and expertise in iOS development, full-stack engineering, and software architecture.
+
+I am a software engineer specializing in iOS development, full-stack engineering, and machine learning. Currently based in Phoenix, Arizona, I focus on building innovative healthcare solutions and contributing to open-source projects.
+
+Key areas of expertise:
+- iOS Development (Swift, SwiftUI, UIKit)
+- Full-Stack Development (TypeScript, React, Next.js, Python)
+- Machine Learning and AI Integration
+- Healthcare Technology and HIPAA Compliance
+- System Architecture and Performance Optimization
+
+## Professional Experience
+
+- [Current Role - Prickly Pear Health](https://pricklypear.io): Founding Engineer, leading iOS app development for perimenopausal women's health using SwiftUI and on-device ML
+- [Previous Role - Dhan AI](https://dhan.ai): Software Development Engineer, implementing OAuth migration and real-time data synchronization
+- [Academic Background - ASU](https://asu.edu): M.S. in Computer Science with focus on Cybersecurity (GPA: 3.89/4.00)
+
+## Projects
+
+- [LlamaStack iOS](https://github.com/vishrutkmr7/llama-stack-ios): Native messaging experience with on-device AI capabilities
+- [EngineeringMode](https://github.com/ananay/EngineeringMode): iOS debugging tool with MetricKit support and performance visualization
+- [Portfolio Website](https://vishrutjha.com): Modern Next.js website with dynamic content and animations
+- [FDAlytics](https://www.fdalytics.com): FDA inspection tracking tool with automated data processing
+- [LiveSHIELD](https://www.authbasenetworks.com/shield): Real-time antivirus software with vulnerability scanning
+
+## Media and Publications
+
+- [ASU Ukraine War Impact](https://www.statepress.com/article/2022/03/opinion-asu-and-ukraine): Opinion piece on war impact on Ukrainian students
+- [FIFA World Cup Discussion](https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862): Podcast appearance discussing World Cup and football
+- [ASU Campus Tour](https://www.youtube.com/watch?v=DULKwBtXDQM): Comprehensive campus tour with YouTuber Yudi J
+
+## Optional
+
+- [Rock Paper Scissors Lizard Spock](https://github.com/vishrutkmr7/Rock-Paper-Scissors-Lizard-Spock): Modern take on classic game with haptic feedback
+- [Simple Node Editor](https://github.com/vishrutkmr7/SimpleNodeEditor): Native macOS node editor application
+- [FIFAWC22](https://github.com/vishrutkmr7/FIFAWC2022): World Cup 2022 tracking application
+- [Programming Language Benchmarks](https://github.com/bddicken/languages): Swift performance benchmarking contribution
+- [AppliFly](https://kshitijdhyani.com/appliFLY): Automation tool for ASU on-campus job applications 
