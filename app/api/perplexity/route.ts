@@ -35,6 +35,52 @@ const responseSchema = {
   required: ['response'],
 };
 
+// Validate message sequence to ensure proper alternation
+function validateMessageSequence(messages: { role: string; content: string }[]) {
+  let lastRole = 'system';
+  const filteredMessages = messages.filter(msg => msg.role !== 'system');
+
+  for (let i = 0; i < filteredMessages.length; i++) {
+    const currentRole = filteredMessages[i].role;
+    if (i === 0 && currentRole !== 'user') {
+      return false; // First non-system message must be from user
+    }
+    if (lastRole === 'user' && currentRole !== 'assistant') {
+      return false; // After user must come assistant
+    }
+    if (lastRole === 'assistant' && currentRole !== 'user') {
+      return false; // After assistant must come user
+    }
+    lastRole = currentRole;
+  }
+
+  return lastRole === 'user'; // Must end with user message
+}
+
+// Format messages to ensure proper alternating sequence
+function formatMessages(messages: { role: string; content: string }[]) {
+  const systemMessages = messages.filter(msg => msg.role === 'system');
+  const nonSystemMessages = messages.filter(msg => msg.role !== 'system');
+
+  // Ensure proper alternating sequence
+  const formattedNonSystem = [];
+  for (let i = 0; i < nonSystemMessages.length; i++) {
+    const expectedRole = i % 2 === 0 ? 'user' : 'assistant';
+    formattedNonSystem.push({
+      role: expectedRole,
+      content: nonSystemMessages[i].content,
+    });
+  }
+
+  return [
+    ...systemMessages.map(msg => ({
+      role: 'system' as const,
+      content: msg.content,
+    })),
+    ...formattedNonSystem,
+  ];
+}
+
 export async function POST(req: Request) {
   const { messages, id }: ChatRequest = await req.json();
 
@@ -65,6 +111,36 @@ export async function POST(req: Request) {
     });
   }
 
+  // Initialize messages with system prompt
+  const initialMessages = [
+    {
+      role: 'system' as const,
+      content: systemPrompt,
+    },
+  ];
+
+  // Format and validate message sequence
+  const formattedMessages = formatMessages([
+    ...initialMessages,
+    ...recentMessages.map(msg => ({
+      role: msg.role as 'system' | 'user' | 'assistant',
+      content: msg.content,
+    })),
+  ]);
+
+  // Validate the message sequence
+  if (!validateMessageSequence(formattedMessages)) {
+    return new Response(
+      JSON.stringify({
+        error: 'Invalid message sequence. Messages must alternate between user and assistant.',
+      }),
+      {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
   const response = await fetch('https://api.perplexity.ai/chat/completions', {
     method: 'POST',
     headers: {
@@ -83,13 +159,7 @@ export async function POST(req: Request) {
         type: 'json_schema',
         json_schema: { schema: responseSchema },
       },
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        ...messages,
-      ],
+      messages: formattedMessages,
     }),
   });
 
