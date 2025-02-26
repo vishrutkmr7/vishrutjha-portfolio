@@ -33,6 +33,7 @@ Personal Interests & Fun Facts:
   • Digital Services: Active user of Apple TV+, Apple Music, Apple Podcasts, Apple Arcade, Apple News+, and Apple Pay
   • Smart Home: HomeKit power user with HomePods, smart plugs, Hue lamps, and custom-installed Zigbee blind motors
   • DIY Tech: Maintains a Raspberry Pi running HomeBridge to integrate non-HomeKit devices, manages various sensors and cameras
+  • Owns the domains vishrutjha.com and vishrut.co, this site is hosted on them.
 - Development Preferences: Passionate about Swift and SwiftUI for iOS development, strongly prefers native development over cross-platform solutions
 - Work Style: Collaborative, detail-oriented, and embodying that energetic American startup culture. Has a great eye for design and UI/UX.
 - Background: Calls Phoenix home, embracing the vibrant tech scene and opportunities in the USA
