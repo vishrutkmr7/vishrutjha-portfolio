@@ -5,7 +5,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import PlausibleProvider from 'next-plausible';
 
 import ClientComponents from '@/app/components/ClientComponents';
 import Footer from '@/app/components/Footer';
@@ -123,67 +122,65 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PlausibleProvider domain="vishrutjha.com" trackOutboundLinks={true} trackFileDownloads={true}>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-          <JsonLd />
-          <RouteJsonLd />
-        </head>
-        <body
-          className={`${inter.className} flex min-h-screen flex-col antialiased`}
-          suppressHydrationWarning
-        >
-          <Suspense fallback={null}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-              storageKey="vishrutjha-theme"
-            >
-              <ScrollProgressBar />
-              {/* Google Tag Manager (noscript) */}
-              <noscript>
-                <iframe
-                  src="https://www.googletagmanager.com/ns.html?id=GTM-PVC7X77Z"
-                  height="0"
-                  width="0"
-                  style={{ display: 'none', visibility: 'hidden' }}
-                ></iframe>
-              </noscript>
-              {/* End Google Tag Manager (noscript) */}
-              {/* Google tag (gtag.js) */}
-              <Script
-                strategy="afterInteractive"
-                src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
-              />
-              <Script
-                id="google-analytics"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                  __html: `
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <JsonLd />
+        <RouteJsonLd />
+      </head>
+      <body
+        className={`${inter.className} flex min-h-screen flex-col antialiased`}
+        suppressHydrationWarning
+      >
+        <Suspense fallback={null}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            storageKey="vishrutjha-theme"
+          >
+            <ScrollProgressBar />
+            {/* Google Tag Manager (noscript) */}
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-PVC7X77Z"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              ></iframe>
+            </noscript>
+            {/* End Google Tag Manager (noscript) */}
+            {/* Google tag (gtag.js) */}
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', 'G-EM96FL2J50');
                 `,
-                }}
-              />
-              <ClientComponents />
-              <div className="flex flex-col min-h-[100dvh]">
-                <Header />
-                <main className="flex-grow container py-4 md:py-6 mt-14">{children}</main>
-                <Footer />
-                <Chat />
-              </div>
-              <SpeedInsights />
-            </ThemeProvider>
-          </Suspense>
-        </body>
-      </html>
-    </PlausibleProvider>
+              }}
+            />
+            <ClientComponents />
+            <div className="flex flex-col min-h-[100dvh]">
+              <Header />
+              <main className="flex-grow container py-4 md:py-6 mt-14">{children}</main>
+              <Footer />
+              <Chat />
+            </div>
+            <SpeedInsights />
+          </ThemeProvider>
+        </Suspense>
+      </body>
+    </html>
   );
 }
