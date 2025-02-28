@@ -1,5 +1,25 @@
 [
   {
+    "title": "Discussing ROI of Studying Abroad with Prodigy Finance",
+    "description": "In this episode of the International Student Podcast by Prodigy Finance, I share my journey from India to Arizona State University, discussing the financial and career ROI of US education for international students. Topics include the advantages of STEM degrees, budgeting strategies, networking importance, building a personal brand in the global job market, and how my education led to becoming a founding engineer at a startup. The conversation with Cyndi Satram explores both tangible financial returns and the invaluable personal growth that makes international education a worthwhile investment.",
+    "date": "02/28/2025",
+    "image": "prodigy-pod.png",
+    "link": {
+      "text": "Watch on YouTube",
+      "url": "https://www.youtube.com/watch?v=N19uVgUohsw"
+    }
+  },
+  {
+    "title": "Tour of ASU with YouTuber Yudi J",
+    "description": "A comprehensive campus tour with Yudi (Pritesh Jagani), discussing graduate education at ASU, including my experience as a Teaching Assistant, the benefits of tuition waivers, and insights into campus life and higher education trends.",
+    "date": "04/20/2023",
+    "image": "yudi.png",
+    "link": {
+      "text": "Watch on YouTube",
+      "url": "https://www.youtube.com/watch?v=DULKwBtXDQM"
+    }
+  },
+  {
     "title": "My Opinion on ASU's stance on the war in Ukraine for The State Press",
     "description": "An opinion piece discussing how the war in Ukraine impacted Ukrainian students and faculty at ASU, highlighting the need for enhanced academic flexibility and financial support despite existing university initiatives.",
     "date": "03/01/2022",
@@ -17,16 +37,6 @@
     "link": {
       "text": "Listen on Apple Podcasts",
       "url": "https://podcasts.apple.com/us/podcast/pod-z%C3%A9-bus-the-pzb-podcast/id1567249513?i=1000529057862"
-    }
-  },
-  {
-    "title": "Tour of ASU with YouTuber Yudi J",
-    "description": "A comprehensive campus tour with Yudi (Pritesh Jagani), discussing graduate education at ASU, including my experience as a Teaching Assistant, the benefits of tuition waivers, and insights into campus life and higher education trends.",
-    "date": "04/20/2023",
-    "image": "yudi.png",
-    "link": {
-      "text": "Watch on YouTube",
-      "url": "https://www.youtube.com/watch?v=DULKwBtXDQM"
     }
   }
 ]

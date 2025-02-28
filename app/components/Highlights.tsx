@@ -139,18 +139,18 @@ const Highlights: React.FC = () => {
       altText: journey.title.company,
     },
     {
-      title: 'Latest Update',
-      subtitle: media.title,
-      imageSrc: `/${media.image}`,
-      linkHref: `/media?#${media.title}`,
-      altText: media.title,
-    },
-    {
       title: 'Active Project',
       subtitle: project.title,
       imageSrc: `/${project.image}`,
       linkHref: `/projects?#${project.title}`,
       altText: project.title,
+    },
+    {
+      title: 'Latest Update',
+      subtitle: media.title,
+      imageSrc: `/${media.image}`,
+      linkHref: `/media?#${media.title}`,
+      altText: media.title,
     },
   ];
 
