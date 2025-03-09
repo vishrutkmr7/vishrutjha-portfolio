@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: 'Vishrut Jha Portfolio',
     images: [
       {
-        url: `${DOMAIN}/yudi.png`,
+        url: `${DOMAIN}/prodigy-pod.png`,
         width: 1200,
         height: 630,
         alt: 'Vishrut Jha Media',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Media presence, achievements, and contact information of Vishrut Jha',
     creator: '@vishrutkmr7',
     images: {
-      url: `${DOMAIN}/yudi.png`,
+      url: `${DOMAIN}/prodigy-pod.png`,
       alt: 'Vishrut Jha Media',
       width: 1200,
       height: 630,
