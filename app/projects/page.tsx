@@ -27,7 +27,7 @@ const sortedProjects = [...projectsData].sort((a, b) => {
 });
 
 export const metadata: Metadata = {
-  title: 'Projects',
+  title: 'Projects | Vishrut Jha',
   description: "A collection of projects I've worked on, both personal and professional.",
   alternates: {
     canonical: `${DOMAIN}/projects`,

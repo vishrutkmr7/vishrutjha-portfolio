@@ -36,15 +36,21 @@ export const metadata: Metadata = {
     default: 'Vishrut Jha',
     template: '%s | Vishrut Jha',
   },
-  description: 'iOS, Full-Stack Developer and Software Engineer',
+  description: 'iOS, Full-Stack Developer and Software Engineer based in Phoenix, AZ.',
   keywords: [
+    'Vishrut Jha',
     'iOS Developer',
     'Full-Stack Developer',
     'Software Engineer',
     'Phoenix',
+    'AZ',
     'React',
     'Next.js',
     'TypeScript',
+    'Swift',
+    'SwiftUI',
+    'Python',
+    'Founding Engineer',
   ],
   authors: [{ name: 'Vishrut Jha', url: 'https://vishrutjha.com' }],
   creator: 'Vishrut Jha',
@@ -53,6 +59,12 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
+  },
+  applicationName: 'Vishrut Jha | Portfolio',
+  appleWebApp: {
+    capable: true,
+    title: 'Vishrut Jha',
+    statusBarStyle: 'default',
   },
   alternates: {
     canonical: `${DOMAIN}/`,
@@ -74,23 +86,19 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   icons: {
     icon: [
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any', rel: 'icon' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png' }],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: '/safari-pinned-tab.svg',
-        color: '#5bbad5',
-      },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', type: 'image/png' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#5bbad5' }],
   },
   verification: {
     google: 'YOUR-GOOGLE-SITE-VERIFICATION',
     yandex: 'YOUR-YANDEX-VERIFICATION',
     other: {
       me: ['mailto:i+website@vishrut.co', 'https://github.com/vishrutkmr7'],
+      'msapplication-TileColor': '#da532c',
     },
   },
   openGraph: {
