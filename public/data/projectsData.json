@@ -1,5 +1,16 @@
 [
   {
+    "title": "PassDex",
+    "description": "An app to add any barcode/QR Code to your Apple Wallet, leveraging the latest metadata features introduced in iOS 18.",
+    "date": "03/28/2025 - Present",
+    "image": "passdex.png",
+    "link": {
+      "text": "Coming Soon!",
+      "url": "https://vishrutjha.com/projects?#passdex"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS"]
+  },
+  {
     "title": "EngineeringMode",
     "description": "Contributed MetricKit support to the iOS dev debugging tool that shows Permissions, Push Notifications, UserDefaults and other metrics. Implemented SwiftData persistence for 7-day metric history and visualized performance data using Swift Charts.",
     "date": "02/07/2025 - Present",
@@ -20,17 +31,6 @@
       "url": "https://github.com/vishrutkmr7/llama-stack-ios"
     },
     "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack", "Machine Learning"]
-  },
-  {
-    "title": "PassDex",
-    "description": "An app to add any barcode/QR Code to your Apple Wallet, leveraging the latest metadata features introduced in iOS 18.",
-    "date": "03/28/2025 - Present",
-    "image": "passdex.png",
-    "link": {
-      "text": "Coming Soon!",
-      "url": "https://vishrutjha.com/projects?#passdex"
-    },
-    "tech": ["Swift", "SwiftUI", "iOS"]
   },
   {
     "title": "Programming Language Benchmarks",
@@ -66,17 +66,6 @@
     "tech": ["React", "NextJS", "TypeScript", "TailwindCSS"]
   },
   {
-    "title": "Rock Paper Scissors Lizard Spock",
-    "description": "A modern take on the classic Rock Paper Scissors game with a Big Bang Theory twist, featuring smooth animations and haptic feedback.",
-    "date": "04/22/2024",
-    "image": "rpsls.png",
-    "link": {
-      "text": "Source Code",
-      "url": "https://github.com/vishrutkmr7/Rock-Paper-Scissors-Lizard-Spock"
-    },
-    "tech": ["Swift", "SwiftUI", "iOS"]
-  },
-  {
     "title": "Simple Node Editor",
     "description": "A native node editor application supporting document types and JSON export capabilities.",
     "date": "05/13/2024",
@@ -88,6 +77,17 @@
     "tech": ["Swift", "SwiftUI", "macOS"]
   },
   {
+    "title": "Rock Paper Scissors Lizard Spock",
+    "description": "A modern take on the classic Rock Paper Scissors game with a Big Bang Theory twist, featuring smooth animations and haptic feedback.",
+    "date": "04/22/2024",
+    "image": "rpsls.png",
+    "link": {
+      "text": "Source Code",
+      "url": "https://github.com/vishrutkmr7/Rock-Paper-Scissors-Lizard-Spock"
+    },
+    "tech": ["Swift", "SwiftUI", "iOS"]
+  },
+  {
     "title": "FIFAWC22",
     "description": "An app to track 2022 FIFA World Cup matches, scores, standings, and key statistics in real-time.",
     "date": "04/22/2024",
@@ -97,6 +97,17 @@
       "url": "https://github.com/vishrutkmr7/FIFAWC2022"
     },
     "tech": ["Swift", "SwiftUI", "iOS"]
+  },
+  {
+    "title": "AppliFly",
+    "description": "An open-source collaboration with Kshitij Dhyani to automate the application process for on-campus jobs at ASU.",
+    "date": "11/15/2023 - 03/10/2024",
+    "image": "appImage.png",
+    "link": {
+      "text": "Visit Applifly",
+      "url": "https://kshitijdhyani.com/appliFLY/"
+    },
+    "tech": ["Python", "Selenium"]
   },
   {
     "title": "NYX by PNYX.xyz",
@@ -117,17 +128,6 @@
       "Coinbase API",
       "MetaMask SDK"
     ]
-  },
-  {
-    "title": "AppliFly",
-    "description": "An open-source collaboration with Kshitij Dhyani to automate the application process for on-campus jobs at ASU.",
-    "date": "11/15/2023 - 03/10/2024",
-    "image": "appImage.png",
-    "link": {
-      "text": "Visit Applifly",
-      "url": "https://kshitijdhyani.com/appliFLY/"
-    },
-    "tech": ["Python", "Selenium"]
   },
   {
     "title": "Ziply Fiber",
@@ -168,7 +168,7 @@
     "date": "09/15/2018 - 06/18/2019",
     "image": "LiveShield.gif",
     "link": {
-      "text": "Visit LiveShield",
+      "text": "Visit LiveSHIELD",
       "url": "https://www.authbasenetworks.com/shield"
     },
     "tech": ["Python", "Angular"]
