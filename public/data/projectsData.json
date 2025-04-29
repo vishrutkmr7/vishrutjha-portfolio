@@ -22,13 +22,13 @@
     "tech": ["Swift", "SwiftUI", "iOS", "LlamaStack", "Machine Learning"]
   },
   {
-    "title": "Passifier #BuildInPublic 🚀",
+    "title": "PassDex",
     "description": "An app to add any barcode/QR Code to your Apple Wallet, leveraging the latest metadata features introduced in iOS 18.",
-    "date": "08/02/2024 - Present",
-    "image": "passifier.png",
+    "date": "03/28/2025 - Present",
+    "image": "passdex.png",
     "link": {
       "text": "Coming Soon!",
-      "url": "https://vishrutjha.com/projects?#passifier"
+      "url": "https://vishrutjha.com/projects?#passdex"
     },
     "tech": ["Swift", "SwiftUI", "iOS"]
   },
@@ -49,8 +49,8 @@
     "date": "08/02/2024 - Present",
     "image": "pphealth.jpeg",
     "link": {
-      "text": "TestFlight beta coming soon!",
-      "url": "https://pricklypear.io/"
+      "text": "App Store",
+      "url": "https://apps.apple.com/us/app/prickly-pear/id6654889896"
     },
     "tech": ["SwiftUI", "iOS", "Bun", "Hono", "Machine Learning"]
   },
