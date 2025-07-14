@@ -228,7 +228,7 @@ export default function Chat() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col w-full md:w-96 h-[75vh] md:h-[32rem] bg-background/95 backdrop-blur-sm border rounded-lg shadow-lg"
+            className="flex flex-col w-full md:w-96 h-[75vh] md:h-[32rem] bg-background/95 backdrop-blur-sm border rounded-2xl shadow-lg"
           >
             <div className="flex items-center justify-between p-4 border-b bg-primary/5">
               <div className="flex items-center gap-3">

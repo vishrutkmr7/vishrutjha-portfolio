@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
   const getLinkClass = (href: string) => {
     return cn(
-      'text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 px-3 py-2 rounded-md',
+      'text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 px-3 py-2 rounded-2xl',
       pathname === href ? 'text-primary bg-primary/10' : 'text-muted-foreground'
     );
   };
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
     <>
       <div className="pb-0">
         {/* Mobile buttons */}
-        <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-lg border p-1.5">
+        <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-2xl border p-1.5">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
             <ResumeButton />
           </Button>

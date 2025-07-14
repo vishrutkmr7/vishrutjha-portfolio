@@ -184,10 +184,10 @@ const JourneyTimeline: React.FC = () => {
                       className="cursor-pointer w-full"
                     >
                       <div
-                        className={`bg-card p-3 sm:p-4 rounded-lg border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200 ${selectedItem === item.title.company ? 'ring-2 ring-primary' : ''}`}
+                        className={`bg-card p-3 sm:p-4 rounded-2xl border group hover:shadow-lg hover:bg-muted/50 transition-all duration-200 ${selectedItem === item.title.company ? 'ring-2 ring-primary' : ''}`}
                       >
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 w-full">
-                          <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 overflow-hidden rounded-lg bg-background/50 p-2">
+                          <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 overflow-hidden rounded-2xl bg-background/50 p-2">
                             <Image
                               src={`/${item.logo}`}
                               alt={item.title.company}
