@@ -67,8 +67,11 @@
     "prismjs": "1.30.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,md}": [
+    "*.{js,jsx,ts,tsx,json}": [
       "biome check --write --no-errors-on-unmatched"
+    ],
+    "*.{css,md}": [
+      "biome format --write --no-errors-on-unmatched"
     ]
   }
 }
