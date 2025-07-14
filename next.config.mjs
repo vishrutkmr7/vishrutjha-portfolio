@@ -123,19 +123,7 @@ const nextConfig = {
       }
     ];
   },
-  // Optimize for macOS platform only
-  webpack: (config, { isServer }) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      // Exclude other platform binaries
-      '@next/swc-linux-x64-gnu': false,
-      '@next/swc-linux-x64-musl': false,
-      '@next/swc-win32-x64-msvc': false,
-      '@next/swc-linux-arm64-gnu': false,
-      '@next/swc-linux-arm64-musl': false,
-      '@next/swc-win32-arm64-msvc': false,
-    };
-    return config;
+  turbopack: {
   },
   async rewrites() {
     return [
