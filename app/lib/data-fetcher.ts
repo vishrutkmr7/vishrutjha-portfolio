@@ -3,6 +3,8 @@
 
 import fs from 'fs';
 import path from 'path';
+// Direct API function imports to avoid HTTP requests during SSR
+import { GET as getLeetCodeStats } from '@/app/api/leetcode/route';
 import type { LeetCodeStats } from '@/app/types';
 import type { Achievement, ProjectItem, TimelineItem } from '@/app/types/portfolio.types';
 
@@ -81,14 +83,31 @@ export async function fetchTimelineData(): Promise<TimelineItem[]> {
   }
 }
 
-// Keep API call for LeetCode stats (external API)
+// Improved LeetCode stats fetching with SSR support
 export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
-  const data = await fetchWithCache<LeetCodeStats>(
-    '/api/leetcode',
-    1800, // 30 minutes cache
-    'Failed to fetch LeetCode stats'
-  );
-  return data;
+  try {
+    // During SSR, call the API function directly to avoid HTTP requests
+    if (typeof window === 'undefined') {
+      const response = await getLeetCodeStats();
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch LeetCode stats: ${response.status}`);
+      }
+
+      return await response.json();
+    }
+
+    // On the client side, use the regular fetch
+    const data = await fetchWithCache<LeetCodeStats>(
+      '/api/leetcode',
+      1800, // 30 minutes cache
+      'Failed to fetch LeetCode stats'
+    );
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch LeetCode stats:', error);
+    return null;
+  }
 }
 
 // Combined data fetching for highlights (follows DRY principle)

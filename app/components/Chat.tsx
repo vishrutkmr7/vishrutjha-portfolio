@@ -45,20 +45,27 @@ const ChatBubble = memo(
     isAssistant: boolean;
     confidence?: number;
   }) => {
-    const getConfidenceColor = (confidence?: number) => {
-      if (!confidence) return 'bg-muted';
-      if (confidence >= 0.8) return 'bg-green-500/10 border-green-500/20';
-      if (confidence >= 0.6) return 'bg-yellow-500/10 border-yellow-500/20';
-      return 'bg-red-500/10 border-red-500/20';
+    const getConfidenceIndicator = (confidence?: number) => {
+      if (!confidence) return null;
+      if (confidence >= 0.8) return 'border-l-4 border-l-green-500';
+      if (confidence >= 0.6) return 'border-l-4 border-l-yellow-500';
+      return 'border-l-4 border-l-red-500';
     };
 
     return (
       <div
         className={cn(
-          'relative max-w-[80%] rounded-lg p-3 text-sm transition-all duration-200',
+          'relative max-w-[85%] px-4 py-3 text-sm transition-all duration-200',
           isAssistant
-            ? cn('bg-muted text-foreground', getConfidenceColor(confidence))
-            : 'bg-primary text-primary-foreground'
+            ? cn(
+                'mr-auto ml-0 bg-muted text-foreground border border-border rounded-lg shadow-sm',
+                getConfidenceIndicator(confidence)
+              )
+            : cn(
+                'mr-0 ml-auto bg-primary text-primary-foreground',
+                'rounded-2xl rounded-br-md shadow-md border border-primary/20',
+                'font-medium'
+              )
         )}
       >
         {children}
@@ -79,23 +86,24 @@ const LoadingIndicator = memo(() => {
       exit={{ opacity: 0, y: -10 }}
       className="flex justify-start"
     >
-      <div className="max-w-[80%] rounded-lg bg-muted p-3">
+      <div className="max-w-[85%] rounded-lg bg-muted px-4 py-3 border border-border shadow-sm">
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {[0, 0.2, 0.4].map(delay => (
               <motion.span
                 key={delay}
-                className="h-1 w-1 rounded-full bg-foreground/50"
-                animate={{ scale: [1, 1.5, 1] }}
+                className="h-1.5 w-1.5 rounded-full bg-primary"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                 transition={{
                   duration: isMobile ? 0.8 : 1,
                   repeat: Infinity,
                   delay,
+                  ease: 'easeInOut',
                 }}
               />
             ))}
           </div>
-          <span className="text-muted-foreground text-sm">Thinking</span>
+          <span className="text-muted-foreground text-sm font-medium">Thinking...</span>
         </div>
       </div>
     </motion.div>
@@ -258,13 +266,9 @@ export default function Chat() {
                     onClick={() => setIsOpen(true)}
                     className={cn(
                       'group h-12 w-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl',
-                      'bg-gradient-to-tr from-primary via-primary to-primary/90 hover:from-primary/95 hover:via-primary hover:to-primary',
-                      'dark:from-primary dark:via-primary dark:to-primary/90 dark:hover:from-primary/95 dark:hover:via-primary dark:hover:to-primary',
-                      'bg-opacity-95 backdrop-blur-sm dark:bg-opacity-95',
-                      'border border-primary/20 dark:border-primary/20',
-                      'relative overflow-hidden',
+                      'bg-primary hover:bg-primary/90',
+                      'border border-border',
                       'hover:scale-105 active:scale-100',
-                      'zoom-in-95 animate-in duration-200',
                       'flex items-center justify-center'
                     )}
                   >
@@ -285,7 +289,7 @@ export default function Chat() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="flex w-full flex-col rounded-lg border bg-background shadow-lg md:w-96"
+            className="flex w-full flex-col rounded-lg border bg-card shadow-lg md:w-96"
           >
             {/* Chat header */}
             <div className="flex items-center justify-between border-b p-4">
@@ -311,94 +315,132 @@ export default function Chat() {
             </div>
 
             {/* Messages */}
-            <div className="flex h-96 flex-col space-y-4 overflow-y-auto p-4">
+            <div className="flex h-96 flex-col overflow-y-auto p-4 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30">
               {messages.length === 0 && (
-                <div className="flex h-full flex-col items-center justify-center text-center">
-                  <Info className="mb-2 h-8 w-8 text-muted-foreground" />
-                  <p className="text-muted-foreground text-sm">
-                    Ask me anything about Vishrut's work, projects, or experiences!
-                  </p>
+                <div className="flex h-full flex-col items-center justify-center text-center space-y-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                    <Info className="h-6 w-6 text-muted-foreground" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-medium text-sm">Start a conversation</h3>
+                    <p className="text-muted-foreground text-xs max-w-[280px] leading-relaxed">
+                      Ask me anything about Vishrut's work, projects, or experiences!
+                    </p>
+                  </div>
                 </div>
               )}
 
-              <AnimatePresence initial={false}>
-                {messages.map(message => {
-                  const structuredResponse =
-                    message.role === 'assistant' ? parseResponse(message.content) : null;
+              <div className="flex flex-col space-y-1 min-h-0 flex-1">
+                <AnimatePresence initial={false}>
+                  {messages.map((message, index) => {
+                    const structuredResponse =
+                      message.role === 'assistant' ? parseResponse(message.content) : null;
+                    const isLastMessage = index === messages.length - 1;
 
-                  return (
-                    <motion.div
-                      key={message.id}
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        transition: {
-                          type: 'spring' as const,
-                          stiffness: isMobile ? 300 : 500,
-                          damping: isMobile ? 25 : 30,
-                        },
-                      }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <ChatBubble
-                        isAssistant={message.role === 'assistant'}
-                        confidence={structuredResponse?.response?.confidence}
-                      >
-                        {message.role === 'assistant' && structuredResponse ? (
-                          <div className="space-y-2">
-                            <AnimatedMarkdown
-                              content={structuredResponse.response.content}
-                              isAssistant={true}
-                            />
-                            {structuredResponse.response.sources?.length > 0 && (
-                              <div className="mt-2 border-t pt-2">
-                                <p className="mb-1 text-muted-foreground text-xs">Sources:</p>
-                                <div className="flex flex-wrap gap-1">
-                                  {structuredResponse.response.sources.slice(0, 3).map(source => (
-                                    <a
-                                      key={source.url || source.title}
-                                      href={source.url || '#'}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="flex items-center gap-1 rounded bg-muted px-2 py-1 text-xs transition-colors hover:bg-muted/80"
-                                    >
-                                      <ExternalLink className="h-3 w-3" />
-                                      {source.title}
-                                    </a>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        ) : (
-                          <AnimatedMarkdown
-                            content={message.content}
-                            isAssistant={message.role === 'assistant'}
-                          />
+                    return (
+                      <motion.div
+                        key={message.id}
+                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: {
+                            type: 'spring' as const,
+                            stiffness: isMobile ? 300 : 500,
+                            damping: isMobile ? 25 : 30,
+                            delay: 0.1,
+                          },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          y: -10,
+                          scale: 0.95,
+                          transition: { duration: 0.2 },
+                        }}
+                        className={cn(
+                          'flex w-full',
+                          message.role === 'user' ? 'justify-end' : 'justify-start',
+                          index > 0 && 'mt-6',
+                          isLastMessage && 'mb-2'
                         )}
-                      </ChatBubble>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
+                      >
+                        <ChatBubble
+                          isAssistant={message.role === 'assistant'}
+                          confidence={structuredResponse?.response?.confidence}
+                        >
+                          {message.role === 'assistant' && structuredResponse ? (
+                            <div className="space-y-3">
+                              <AnimatedMarkdown
+                                content={structuredResponse.response.content}
+                                isAssistant={true}
+                              />
+                              {structuredResponse.response.sources?.length > 0 && (
+                                <div className="mt-3 border-t border-border/50 pt-3">
+                                  <p className="mb-2 text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                                    Sources
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    {structuredResponse.response.sources
+                                      .slice(0, 3)
+                                      .map((source, sourceIndex) => (
+                                        <motion.a
+                                          key={source.url || source.title}
+                                          href={source.url || '#'}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          initial={{ opacity: 0, scale: 0.9 }}
+                                          animate={{
+                                            opacity: 1,
+                                            scale: 1,
+                                            transition: { delay: 0.3 + sourceIndex * 0.1 },
+                                          }}
+                                          className={cn(
+                                            'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5',
+                                            'text-xs font-medium transition-colors duration-200',
+                                            'bg-background/80 border-border text-foreground',
+                                            'hover:bg-accent hover:text-accent-foreground hover:shadow-sm',
+                                            'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
+                                          )}
+                                        >
+                                          <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                                          <span className="truncate max-w-[120px]">
+                                            {source.title}
+                                          </span>
+                                        </motion.a>
+                                      ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div className="leading-relaxed">
+                              <AnimatedMarkdown
+                                content={message.content}
+                                isAssistant={message.role === 'assistant'}
+                              />
+                            </div>
+                          )}
+                        </ChatBubble>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
 
-              {isLoading && <LoadingIndicator />}
+                {isLoading && <LoadingIndicator />}
+              </div>
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input form */}
             <motion.form
               onSubmit={handleFormSubmit}
-              className="border-t bg-background/50 p-4 backdrop-blur-sm"
+              className="border-t bg-background/98 p-4 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="flex items-end gap-2">
                   <div className="relative flex-1">
                     <textarea
@@ -410,57 +452,64 @@ export default function Chat() {
                           handleFormSubmit(e);
                         }
                       }}
-                      placeholder="Curious about Vishrut? Ask away! ✨"
+                      placeholder="Ask about Vishrut's work, projects, or experiences..."
                       rows={1}
                       className={cn(
                         'w-full min-w-0 flex-1 resize-none overflow-hidden',
-                        'rounded-2xl border bg-background/50 px-4 py-3 text-sm',
+                        'rounded-2xl border bg-background px-4 py-3 pr-12 text-sm',
                         'ring-offset-background placeholder:text-muted-foreground',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                        'transition-all duration-200',
-                        'max-h-32',
+                        'transition-all duration-200 shadow-sm',
+                        'max-h-32 leading-relaxed scrollbar-thin',
                         !validationState.isValid &&
-                          'border-red-500/50 focus-visible:ring-red-500/50'
+                          'border-destructive focus-visible:ring-destructive'
                       )}
-                      style={{ minHeight: '44px' }}
+                      style={{ minHeight: '52px' }}
                       disabled={isLoading}
                     />
-                  </div>
-                  <Button
-                    type="submit"
-                    disabled={isLoading || !input.trim() || !validationState.isValid}
-                    className="relative h-11 w-11 rounded-2xl bg-[#0A84FF] hover:bg-[#0A84FF]/90 disabled:bg-muted disabled:opacity-50"
-                  >
-                    {isLoading ? (
-                      <motion.div
-                        className="absolute inset-0 flex items-center justify-center bg-[#0A84FF]"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.2 }}
+                    <div className="absolute right-2 bottom-2">
+                      <Button
+                        type="submit"
+                        size="icon"
+                        disabled={isLoading || !input.trim() || !validationState.isValid}
+                        className={cn(
+                          'relative h-8 w-8 rounded-xl shadow-sm',
+                          'bg-primary hover:bg-primary/90 disabled:bg-muted disabled:opacity-50',
+                          'transition-all duration-200 hover:scale-105 active:scale-95'
+                        )}
                       >
-                        <motion.div
-                          className="h-1.5 w-1.5 rounded-full bg-white"
-                          animate={{
-                            scale: [1, 1.5, 1],
-                            opacity: [1, 0.5, 1],
-                          }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
-                        />
-                      </motion.div>
-                    ) : (
-                      <Send className="h-4 w-4 text-white" />
-                    )}
-                  </Button>
+                        {isLoading ? (
+                          <motion.div
+                            className="absolute inset-0 flex items-center justify-center"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <motion.div
+                              className="h-1.5 w-1.5 rounded-full bg-primary-foreground"
+                              animate={{
+                                scale: [1, 1.2, 1],
+                                opacity: [0.5, 1, 0.5],
+                              }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                              }}
+                            />
+                          </motion.div>
+                        ) : (
+                          <Send className="h-3.5 w-3.5 text-primary-foreground" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
                 {!validationState.isValid && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="px-4 text-red-500 text-xs"
+                    className="px-1 text-destructive text-xs font-medium"
                   >
                     {validationState.message}
                   </motion.div>

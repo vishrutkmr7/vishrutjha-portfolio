@@ -54,7 +54,7 @@ function TooltipSimple({
   return (
     <TooltipProvider delayDuration={delayDuration}>
       <Tooltip>
-        <TooltipTrigger asChild className={className}>
+        <TooltipTrigger asChild className={className} suppressHydrationWarning>
           {children}
         </TooltipTrigger>
         <TooltipContent side={side} align={align} className={contentClassName}>
