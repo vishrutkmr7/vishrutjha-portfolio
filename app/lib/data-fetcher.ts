@@ -1,10 +1,12 @@
 // Shared data fetching utility following DRY principles
 // Single Responsibility: Handle all data fetching with consistent caching and error handling
 
+import fs from 'fs';
+import path from 'path';
 import type { LeetCodeStats } from '@/app/types';
 import type { Achievement, ProjectItem, TimelineItem } from '@/app/types/portfolio.types';
 
-// Base fetch configuration following DRY principle
+// Base fetch configuration for API calls only
 const BASE_CONFIG = {
   cache: 'force-cache' as const,
   headers: {
@@ -12,7 +14,7 @@ const BASE_CONFIG = {
   },
 };
 
-// Generic fetch function with error handling and caching
+// Generic fetch function with error handling and caching (for API calls only)
 async function fetchWithCache<T>(
   url: string,
   revalidateSeconds: number = 3600,
@@ -36,34 +38,50 @@ async function fetchWithCache<T>(
   }
 }
 
-// Specific data fetching functions following Single Responsibility Principle
+// Helper function to read JSON files from the filesystem
+function readJsonFile<T>(filePath: string): T | null {
+  try {
+    const fullPath = path.join(process.cwd(), 'public', 'data', filePath);
+    const fileContent = fs.readFileSync(fullPath, 'utf8');
+    return JSON.parse(fileContent) as T;
+  } catch (error) {
+    console.error(`Failed to read ${filePath}:`, error);
+    return null;
+  }
+}
+
+// Direct JSON data access functions - no HTTP requests needed
 export async function fetchMediaData(): Promise<Achievement[]> {
-  const data = await fetchWithCache<Achievement[]>(
-    '/data/mediaData.json',
-    3600, // 1 hour cache
-    'Failed to fetch media data'
-  );
-  return data || [];
+  try {
+    const data = readJsonFile<Achievement[]>('mediaData.json');
+    return data || [];
+  } catch (error) {
+    console.error('Failed to fetch media data:', error);
+    return [];
+  }
 }
 
 export async function fetchProjectsData(): Promise<ProjectItem[]> {
-  const data = await fetchWithCache<ProjectItem[]>(
-    '/data/projectsData.json',
-    3600, // 1 hour cache
-    'Failed to fetch projects data'
-  );
-  return data || [];
+  try {
+    const data = readJsonFile<ProjectItem[]>('projectsData.json');
+    return data || [];
+  } catch (error) {
+    console.error('Failed to fetch projects data:', error);
+    return [];
+  }
 }
 
 export async function fetchTimelineData(): Promise<TimelineItem[]> {
-  const data = await fetchWithCache<TimelineItem[]>(
-    '/data/timelineData.json',
-    3600, // 1 hour cache
-    'Failed to fetch timeline data'
-  );
-  return data || [];
+  try {
+    const data = readJsonFile<TimelineItem[]>('timelineData.json');
+    return data || [];
+  } catch (error) {
+    console.error('Failed to fetch timeline data:', error);
+    return [];
+  }
 }
 
+// Keep API call for LeetCode stats (external API)
 export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
   const data = await fetchWithCache<LeetCodeStats>(
     '/api/leetcode',
