@@ -7,10 +7,10 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 
 import ClientComponents from '@/app/components/ClientComponents';
+import ClientRouteJsonLd from '@/app/components/ClientRouteJsonLd';
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import JsonLd from '@/app/components/JsonLd';
-import RouteJsonLd from '@/app/components/RouteJsonLd';
 import { ScrollProgressBar } from '@/app/components/ScrollAnimation';
 import { ThemeProvider } from '@/app/components/theme-provider';
 import { DOMAIN } from '@/app/constants';
@@ -26,7 +26,7 @@ export const viewport: Viewport = {
   userScalable: true,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
   ],
 };
 
@@ -135,8 +135,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for theme initialization
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('vishrutjha-theme');
+                  var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  var appliedTheme = theme === 'system' || !theme ? systemTheme : theme;
+                  
+                  if (appliedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                  
+                  // Set meta theme-color immediately
+                  var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+                  if (metaThemeColor) {
+                    metaThemeColor.content = appliedTheme === 'dark' ? '#0A0A0A' : '#ffffff';
+                  }
+                } catch (e) {
+                  // Fallback to light theme if there's an error
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
         <JsonLd />
-        <RouteJsonLd />
+        <ClientRouteJsonLd />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col antialiased`}

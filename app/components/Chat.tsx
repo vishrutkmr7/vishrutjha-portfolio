@@ -2,9 +2,10 @@
 
 import { useChat } from 'ai/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, Info, Sparkles, X } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ExternalLink, Info, Send, Sparkles, X } from 'lucide-react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useIsMobile } from '@/app/lib/hooks';
 import { cn } from '@/app/lib/utils';
 
 import { AnimatedMarkdown } from './AnimatedMarkdown';
@@ -33,38 +34,74 @@ interface ValidationState {
   message?: string;
 }
 
-function ChatBubble({
-  children,
-  isAssistant,
-  confidence,
-}: {
-  children: React.ReactNode;
-  isAssistant: boolean;
-  confidence?: number;
-}) {
-  const getConfidenceColor = (confidence?: number) => {
-    if (!confidence || !isAssistant) return null;
-    if (confidence >= 0.8) return 'bg-green-500';
-    if (confidence >= 0.5) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
+// Memoized chat bubble component
+const ChatBubble = memo(
+  ({
+    children,
+    isAssistant,
+    confidence,
+  }: {
+    children: React.ReactNode;
+    isAssistant: boolean;
+    confidence?: number;
+  }) => {
+    const getConfidenceColor = (confidence?: number) => {
+      if (!confidence) return 'bg-muted';
+      if (confidence >= 0.8) return 'bg-green-500/10 border-green-500/20';
+      if (confidence >= 0.6) return 'bg-yellow-500/10 border-yellow-500/20';
+      return 'bg-red-500/10 border-red-500/20';
+    };
 
-  return (
-    <div className="relative">
-      <div className={cn('w-fit max-w-[85%]', isAssistant ? 'mr-auto ml-0' : 'mr-0 ml-auto')}>
+    return (
+      <div
+        className={cn(
+          'relative max-w-[80%] rounded-lg p-3 text-sm transition-all duration-200',
+          isAssistant
+            ? cn('bg-muted text-foreground', getConfidenceColor(confidence))
+            : 'bg-primary text-primary-foreground'
+        )}
+      >
         {children}
       </div>
-      {isAssistant && confidence && (
-        <div
-          className={cn(
-            '-bottom-1 absolute left-4 h-1 w-1 rounded-full',
-            getConfidenceColor(confidence)
-          )}
-        />
-      )}
-    </div>
+    );
+  }
+);
+ChatBubble.displayName = 'ChatBubble';
+
+// Memoized loading indicator
+const LoadingIndicator = memo(() => {
+  const isMobile = useIsMobile();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="flex justify-start"
+    >
+      <div className="max-w-[80%] rounded-lg bg-muted p-3">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1">
+            {[0, 0.2, 0.4].map(delay => (
+              <motion.span
+                key={delay}
+                className="h-1 w-1 rounded-full bg-foreground/50"
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{
+                  duration: isMobile ? 0.8 : 1,
+                  repeat: Infinity,
+                  delay,
+                }}
+              />
+            ))}
+          </div>
+          <span className="text-muted-foreground text-sm">Thinking</span>
+        </div>
+      </div>
+    </motion.div>
   );
-}
+});
+LoadingIndicator.displayName = 'LoadingIndicator';
 
 export default function Chat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +115,7 @@ export default function Chat() {
       .substring(0, 7);
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
     api: '/api/perplexity',
@@ -104,77 +142,112 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
+  // Combined useEffect for better performance
   useEffect(() => {
     if (!isOpen) {
       setMessages([]);
+    } else {
+      scrollToBottom();
     }
-  }, [isOpen, setMessages]);
+  }, [isOpen, setMessages, scrollToBottom]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [scrollToBottom]); // Scroll on new messages
-
-  const parseResponse = (content: string): StructuredResponse | null => {
+  // Memoized response parser
+  const parseResponse = useCallback((content: string): StructuredResponse | null => {
     try {
-      // If it's already a JSON string, parse it
       const parsed = JSON.parse(content);
       if (parsed.response?.content) {
-        // Ensure markdown formatting is preserved
         return {
           response: {
             ...parsed.response,
-            // Convert **text** to proper markdown bold syntax if not already
             content: parsed.response.content.replace(/\*\*([^*]+)\*\*/g, '**$1**'),
           },
         };
       }
       return null;
     } catch {
-      // If it's not JSON, return null
       return null;
     }
-  };
+  }, []);
 
-  const handleInputValidation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const value = e.target.value;
-
-    // Reset validation state when input changes
-    setValidationState({ isValid: true });
-
-    // Basic client-side validation for obviously off-topic queries
-    const offTopicPatterns = [
+  // Memoized validation patterns
+  const offTopicPatterns = useMemo(
+    () => [
       /\b(private|family|relationship|age|salary|money|politics|religion)\b/i,
       /\b(where do you live|are you single|what do you think about|how old)\b/i,
       /\b(chatgpt|openai|help me with|can you|general question)\b/i,
-    ];
+    ],
+    []
+  );
 
-    if (offTopicPatterns.some(pattern => pattern.test(value))) {
-      setValidationState({
-        isValid: false,
-        message:
-          "Let's keep things professional but fun! Ask about Vishrut's work, interests, or experiences.",
-      });
-    }
+  const handleInputValidation = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const value = e.target.value;
+      setValidationState({ isValid: true });
 
-    handleInputChange(e as React.ChangeEvent<HTMLInputElement>);
-  };
+      if (offTopicPatterns.some(pattern => pattern.test(value))) {
+        setValidationState({
+          isValid: false,
+          message:
+            "Let's keep things professional but fun! Ask about Vishrut's work, interests, or experiences.",
+        });
+      }
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validationState.isValid) {
-      return;
-    }
-    handleSubmit(e);
-  };
+      handleInputChange(e as React.ChangeEvent<HTMLInputElement>);
+    },
+    [handleInputChange, offTopicPatterns]
+  );
+
+  const handleFormSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!validationState.isValid) {
+        return;
+      }
+      handleSubmit(e);
+    },
+    [validationState.isValid, handleSubmit]
+  );
+
+  // Memoized animation variants
+  const buttonVariants = useMemo(
+    () => ({
+      closed: { scale: 0, opacity: 0 },
+      open: { scale: 1, opacity: 1 },
+    }),
+    []
+  );
+
+  const chatVariants = useMemo(
+    () => ({
+      closed: {
+        opacity: 0,
+        scale: 0.95,
+        y: isMobile ? 20 : 10,
+        transition: { duration: 0.2 },
+      },
+      open: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          type: 'spring' as const,
+          stiffness: 300,
+          damping: 30,
+        },
+      },
+    }),
+    [isMobile]
+  );
 
   return (
     <div className="fixed right-0 bottom-20 z-[100] w-full px-4 md:right-4 md:bottom-4 md:w-auto md:px-0">
       <AnimatePresence>
         {!isOpen ? (
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            variants={buttonVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
             transition={{ duration: 0.2 }}
             className="flex w-full justify-end md:w-auto"
           >
@@ -190,124 +263,64 @@ export default function Chat() {
                       'bg-opacity-95 backdrop-blur-sm dark:bg-opacity-95',
                       'border border-primary/20 dark:border-primary/20',
                       'relative overflow-hidden',
-                      'after:absolute after:inset-0 after:bg-gradient-to-tr after:from-white/10 after:via-transparent after:to-transparent after:content-[""]',
                       'hover:scale-105 active:scale-100',
-                      'zoom-in-95 animate-in duration-200'
+                      'zoom-in-95 animate-in duration-200',
+                      'flex items-center justify-center'
                     )}
                   >
-                    <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15),transparent_70%)]" />
-                    <motion.div
-                      initial={{ rotate: 0 }}
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-0 opacity-30"
-                    >
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.4),transparent_60%)]" />
-                    </motion.div>
-                    <Sparkles
-                      className={cn(
-                        'relative z-10 h-6 w-6 transition-transform duration-300 group-hover:scale-110',
-                        'fill-current stroke-[1.75]',
-                        'text-primary-foreground',
-                        'drop-shadow-[0_0_3px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_3px_rgba(255,255,255,0.3)]',
-                        'brightness-110 filter'
-                      )}
-                    />
+                    <div className="flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 shrink-0 text-primary-foreground" />
+                    </div>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="left" className="font-medium text-sm">
-                  <p>Ask AI about Vishrut&apos;s experience and projects</p>
+                <TooltipContent side="left" className="bg-popover">
+                  <p className="text-sm">Ask me about Vishrut!</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
           </motion.div>
         ) : (
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex h-[75vh] w-full flex-col rounded-2xl border bg-background/95 shadow-lg backdrop-blur-sm md:h-[32rem] md:w-96"
+            variants={chatVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="flex w-full flex-col rounded-lg border bg-background shadow-lg md:w-96"
           >
-            <div className="flex items-center justify-between border-b bg-primary/5 p-4">
-              <div className="flex items-center gap-3">
-                <div
-                  className={cn(
-                    'flex h-10 w-10 items-center justify-center rounded-full',
-                    'bg-primary/10 dark:bg-white/10',
-                    'relative overflow-hidden'
-                  )}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-primary/5 to-transparent dark:from-white/10 dark:via-white/5" />
-                  <Sparkles
-                    className={cn(
-                      'relative z-10 h-5 w-5',
-                      'fill-current stroke-[1.75]',
-                      'text-primary-foreground dark:text-primary'
-                    )}
-                  />
+            {/* Chat header */}
+            <div className="flex items-center justify-between border-b p-4">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary">
+                  <Sparkles className="h-4 w-4 shrink-0 text-primary-foreground" />
                 </div>
-                <div className="space-y-1">
-                  <h2 className="font-semibold text-base leading-none">Ask AI about Vishrut</h2>
-                  <div className="flex items-center gap-1.5 pt-1.5 text-[11px] text-muted-foreground">
-                    <span>Powered by</span>
-                    <a
-                      href="https://perplexity.ai"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[#20808D] transition-colors hover:text-[#20808D]/90"
-                    >
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 400 400"
-                        role="img"
-                        aria-label="Perplexity Logo"
-                        className="text-[#20808D]"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M235.8 116.6h-37.3V22l-90.9 84.7V22h-15.1v84.7L1.6 22v94.6h-37.3v136.3h37.2v85l91-81v81h15.1v-81l91 81v-85h37.2V116.6ZM183.3 56.8v59.8h-64.1l64.1-59.8ZM16.7 56.8l64.1 59.8H16.7V56.8ZM-20.6 237.8v-106h101.2l-79.1 72.7v33.3h-22ZM16.6 211.1l75.9-69.7v95.3l-75.9 67.5v-93.1ZM183.4 304.2l-75.9-67.5v-95.3l75.9 69.7v93.1ZM220.6 237.8h-22v-33.3l-79.1-72.7h101.2v106Z"
-                        />
-                      </svg>
-                      <span className="font-medium">Perplexity</span>
-                    </a>
-                    <span>Sonar Pro</span>
-                  </div>
+                <div>
+                  <h3 className="font-semibold text-sm">Chat with Vishrut</h3>
+                  <p className="text-muted-foreground text-xs">
+                    Ask about work, projects, or interests
+                  </p>
                 </div>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => {
-                  setIsOpen(false);
-                  setMessages([]);
-                }}
-                className="h-8 w-8 hover:bg-primary/10"
+                onClick={() => setIsOpen(false)}
+                className="h-8 w-8"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <div className="flex-1 space-y-4 overflow-y-auto bg-gradient-to-b from-background/50 to-background p-4">
+
+            {/* Messages */}
+            <div className="flex h-96 flex-col space-y-4 overflow-y-auto p-4">
               {messages.length === 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="py-8 text-center text-muted-foreground"
-                >
-                  <div className="mb-2 flex items-center justify-center gap-2 text-2xl">
-                    <span className="animate-wave">👋</span>
-                    <span className="animate-pulse">🎵</span>
-                  </div>
-                  <p className="mb-2 text-sm">
-                    Hey! I'm here to fill you in on everything about Vishrut!
+                <div className="flex h-full flex-col items-center justify-center text-center">
+                  <Info className="mb-2 h-8 w-8 text-muted-foreground" />
+                  <p className="text-muted-foreground text-sm">
+                    Ask me anything about Vishrut's work, projects, or experiences!
                   </p>
-                  <p className="text-muted-foreground/80 text-xs">
-                    From his tech projects to his favorite Travis Scott tracks, I've got the inside
-                    scoop. What would you like to know? ✨
-                  </p>
-                </motion.div>
+                </div>
               )}
+
               <AnimatePresence initial={false}>
                 {messages.map(message => {
                   const structuredResponse =
@@ -322,148 +335,62 @@ export default function Chat() {
                         y: 0,
                         scale: 1,
                         transition: {
-                          type: 'spring',
-                          stiffness: 500,
-                          damping: 30,
+                          type: 'spring' as const,
+                          stiffness: isMobile ? 300 : 500,
+                          damping: isMobile ? 25 : 30,
                         },
                       }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
                       className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      {message.role === 'user' ? (
-                        <ChatBubble isAssistant={false}>
-                          <div
-                            className={cn(
-                              'whitespace-pre-wrap text-sm leading-relaxed',
-                              'rounded-[20px] bg-primary px-4 py-2.5 text-primary-foreground',
-                              'relative',
-                              'before:absolute before:right-[-8px] before:bottom-0 before:h-[20px] before:w-[15px] before:rounded-bl-[16px] before:bg-primary before:content-[""]',
-                              'after:absolute after:right-[-20px] after:bottom-0 after:h-[20px] after:w-[20px] after:rounded-bl-[10px] after:border-transparent after:border-b after:border-l after:bg-background after:content-[""]'
-                            )}
-                          >
-                            {message.content}
-                          </div>
-                        </ChatBubble>
-                      ) : structuredResponse ? (
-                        <div className="max-w-[90%] space-y-3">
-                          <ChatBubble
-                            isAssistant={true}
-                            confidence={structuredResponse.response.confidence}
-                          >
-                            <div
-                              className={cn(
-                                'prose prose-sm max-w-none',
-                                'prose-neutral dark:prose-invert'
-                              )}
-                            >
-                              <AnimatedMarkdown
-                                content={structuredResponse.response.content}
-                                isAssistant={true}
-                              />
-                            </div>
-                          </ChatBubble>
-                          {structuredResponse.response.sources.length > 0 && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              transition={{ duration: 0.3, delay: 0.2 }}
-                              className="space-y-2"
-                            >
-                              <p className="font-medium text-muted-foreground text-xs">Sources:</p>
-                              <div className="grid gap-2">
-                                {structuredResponse.response.sources.map((source, index) => (
-                                  <motion.div
-                                    key={`${source.title}-${source.url || source.type}`}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.2, delay: 0.1 * (index + 1) }}
-                                    className="flex items-start gap-2 rounded bg-muted/50 p-2 text-xs"
-                                  >
-                                    <div className="flex-1">
-                                      <p className="font-medium">{source.title}</p>
-                                      {source.description && (
-                                        <p className="mt-0.5 text-muted-foreground">
-                                          {source.description}
-                                        </p>
-                                      )}
-                                      {source.date && (
-                                        <p className="mt-0.5 text-muted-foreground">
-                                          {source.date}
-                                        </p>
-                                      )}
-                                    </div>
-                                    {source.url && (
-                                      <a
-                                        href={source.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-primary hover:text-primary/90"
-                                      >
-                                        <ExternalLink className="h-3 w-3" />
-                                      </a>
-                                    )}
-                                  </motion.div>
-                                ))}
+                      <ChatBubble
+                        isAssistant={message.role === 'assistant'}
+                        confidence={structuredResponse?.response?.confidence}
+                      >
+                        {message.role === 'assistant' && structuredResponse ? (
+                          <div className="space-y-2">
+                            <AnimatedMarkdown
+                              content={structuredResponse.response.content}
+                              isAssistant={true}
+                            />
+                            {structuredResponse.response.sources?.length > 0 && (
+                              <div className="mt-2 border-t pt-2">
+                                <p className="mb-1 text-muted-foreground text-xs">Sources:</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {structuredResponse.response.sources.slice(0, 3).map(source => (
+                                    <a
+                                      key={source.url || source.title}
+                                      href={source.url || '#'}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center gap-1 rounded bg-muted px-2 py-1 text-xs transition-colors hover:bg-muted/80"
+                                    >
+                                      <ExternalLink className="h-3 w-3" />
+                                      {source.title}
+                                    </a>
+                                  ))}
+                                </div>
                               </div>
-                            </motion.div>
-                          )}
-                          {structuredResponse && !structuredResponse.response.isRelevant && (
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="rounded-lg border border-yellow-300/30 bg-yellow-100/20 p-3 text-sm text-yellow-300"
-                            >
-                              <Info className="mr-2 inline h-4 w-4" />
-                              Let's focus on Vishrut's professional background. Ask about projects,
-                              skills, or experience.
-                            </motion.div>
-                          )}
-                        </div>
-                      ) : (
-                        <ChatBubble isAssistant={true}>
-                          <div className="rounded-lg bg-muted p-3">
-                            <p className="whitespace-pre-wrap text-sm">{message.content}</p>
+                            )}
                           </div>
-                        </ChatBubble>
-                      )}
+                        ) : (
+                          <AnimatedMarkdown
+                            content={message.content}
+                            isAssistant={message.role === 'assistant'}
+                          />
+                        )}
+                      </ChatBubble>
                     </motion.div>
                   );
                 })}
               </AnimatePresence>
-              {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex justify-start"
-                >
-                  <div className="max-w-[80%] rounded-lg bg-muted p-3">
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1">
-                        <motion.span
-                          className="h-1 w-1 rounded-full bg-foreground/50"
-                          animate={{ scale: [1, 1.5, 1] }}
-                          transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                        />
-                        <motion.span
-                          className="h-1 w-1 rounded-full bg-foreground/50"
-                          animate={{ scale: [1, 1.5, 1] }}
-                          transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                        />
-                        <motion.span
-                          className="h-1 w-1 rounded-full bg-foreground/50"
-                          animate={{ scale: [1, 1.5, 1] }}
-                          transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                        />
-                      </div>
-                      <span className="text-muted-foreground text-sm">Thinking</span>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
+
+              {isLoading && <LoadingIndicator />}
               <div ref={messagesEndRef} />
             </div>
+
+            {/* Input form */}
             <motion.form
               onSubmit={handleFormSubmit}
               className="border-t bg-background/50 p-4 backdrop-blur-sm"
@@ -476,12 +403,7 @@ export default function Chat() {
                   <div className="relative flex-1">
                     <textarea
                       value={input}
-                      onChange={e => {
-                        handleInputValidation(e);
-                        // Auto-adjust height
-                        e.target.style.height = 'inherit';
-                        e.target.style.height = `${e.target.scrollHeight}px`;
-                      }}
+                      onChange={handleInputValidation}
                       onKeyDown={e => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();
@@ -500,34 +422,16 @@ export default function Chat() {
                         !validationState.isValid &&
                           'border-red-500/50 focus-visible:ring-red-500/50'
                       )}
-                      style={{
-                        minHeight: '44px',
-                      }}
+                      style={{ minHeight: '44px' }}
                       disabled={isLoading}
                     />
                   </div>
                   <Button
                     type="submit"
-                    size="icon"
-                    className={cn(
-                      'relative mb-[3px] h-9 w-9 self-end overflow-hidden rounded-full transition-all duration-300',
-                      validationState.isValid && input.length > 0
-                        ? 'bg-[#0A84FF] after:absolute after:inset-0 after:scale-0 after:rounded-full after:bg-white/10 after:transition-transform after:duration-300 after:content-[""] hover:bg-[#0A84FF]/90 hover:after:scale-100'
-                        : 'bg-muted hover:bg-muted/90'
-                    )}
-                    disabled={isLoading || !validationState.isValid}
+                    disabled={isLoading || !input.trim() || !validationState.isValid}
+                    className="relative h-11 w-11 rounded-2xl bg-[#0A84FF] hover:bg-[#0A84FF]/90 disabled:bg-muted disabled:opacity-50"
                   >
-                    <span
-                      className={cn(
-                        'font-medium text-lg transition-all duration-300',
-                        validationState.isValid && input.length > 0
-                          ? '-translate-y-[1px] scale-100 transform text-white'
-                          : 'scale-90 text-primary-foreground/50'
-                      )}
-                    >
-                      ↑
-                    </span>
-                    {isLoading && (
+                    {isLoading ? (
                       <motion.div
                         className="absolute inset-0 flex items-center justify-center bg-[#0A84FF]"
                         initial={{ scale: 0 }}
@@ -547,6 +451,8 @@ export default function Chat() {
                           }}
                         />
                       </motion.div>
+                    ) : (
+                      <Send className="h-4 w-4 text-white" />
                     )}
                   </Button>
                 </div>

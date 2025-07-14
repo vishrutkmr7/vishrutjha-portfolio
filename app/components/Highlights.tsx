@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import type { Achievement, ProjectItem, TimelineItem } from '@/app/types/portfolio.types';
 
@@ -30,7 +29,7 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.2 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }} // Reduced delay for better performance
   >
     <Link href={linkHref} className="group block h-full">
       <Card className="h-full transform transition-all duration-300 hover:scale-[1.02]">
@@ -59,59 +58,35 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
   </motion.div>
 );
 
+export interface HighlightData {
+  journey: TimelineItem | null;
+  media: Achievement | null;
+  project: ProjectItem | null;
+}
+
 const HighlightSkeleton = () => (
   <Card className="h-full">
     <CardHeader className="p-6">
       <div className="flex gap-4">
-        <Skeleton className="aspect-square w-20 flex-shrink-0 rounded-full" />
-        <div className="flex flex-grow flex-col justify-center">
-          <Skeleton className="mb-2 h-4 w-3/4" />
-          <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-20 w-20 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-1/2" />
         </div>
       </div>
     </CardHeader>
   </Card>
 );
 
-interface HighlightData {
-  journey: TimelineItem | null;
-  media: Achievement | null;
-  project: ProjectItem | null;
+// Client component that receives data as props
+interface HighlightsProps {
+  highlightData: HighlightData;
 }
 
-const Highlights: React.FC = () => {
-  const [highlights, setHighlights] = useState<HighlightData>({
-    journey: null,
-    media: null,
-    project: null,
-  });
-  const [loading, setLoading] = useState(true);
+const Highlights: React.FC<HighlightsProps> = ({ highlightData }) => {
+  const { journey, media, project } = highlightData;
 
-  useEffect(() => {
-    const fetchHighlights = async () => {
-      try {
-        const [journeyData, mediaData, projectsData] = await Promise.all([
-          fetch('/data/timelineData.json').then(res => res.json()),
-          fetch('/data/mediaData.json').then(res => res.json()),
-          fetch('/data/projectsData.json').then(res => res.json()),
-        ]);
-
-        setHighlights({
-          journey: journeyData[0],
-          media: mediaData[0],
-          project: projectsData[0],
-        });
-      } catch (error) {
-        console.error('Error fetching highlights:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHighlights();
-  }, []);
-
-  if (loading) {
+  if (!journey || !media || !project) {
     return (
       <div className="mx-auto mt-8 w-full max-w-4xl">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -122,12 +97,6 @@ const Highlights: React.FC = () => {
         </div>
       </div>
     );
-  }
-
-  const { journey, media, project } = highlights;
-
-  if (!journey || !media || !project) {
-    return null;
   }
 
   const highlightCards = [

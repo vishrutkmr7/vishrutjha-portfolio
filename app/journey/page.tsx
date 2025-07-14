@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type React from 'react';
 
 import { DOMAIN } from '@/app/constants';
+import { fetchTimelineData, sortTimelineByDate } from '@/app/lib/data-fetcher';
 
 import JourneyTimeline from './Timeline';
 
@@ -38,12 +39,12 @@ export const metadata: Metadata = {
   },
 };
 
-const JourneyPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4">
-      <JourneyTimeline />
-    </div>
-  );
+const JourneyPage: React.FC = async () => {
+  // Fetch and sort timeline data at build time
+  const timelineData = await fetchTimelineData();
+  const sortedTimelineData = sortTimelineByDate(timelineData);
+
+  return <JourneyTimeline timelineData={sortedTimelineData} />;
 };
 
 export default JourneyPage;

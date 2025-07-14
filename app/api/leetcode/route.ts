@@ -88,6 +88,8 @@ export async function GET() {
         query,
         variables: { username: LEETCODE_USERNAME },
       }),
+      // Cache for 30 minutes
+      next: { revalidate: 1800 },
     });
 
     if (!response.ok) {
@@ -180,7 +182,14 @@ export async function GET() {
         })) || [],
     };
 
-    return NextResponse.json(stats);
+    const jsonResponse = NextResponse.json(stats);
+
+    // Add cache headers
+    jsonResponse.headers.set('Cache-Control', 'public, max-age=1800, stale-while-revalidate=3600');
+    jsonResponse.headers.set('CDN-Cache-Control', 'public, max-age=1800');
+    jsonResponse.headers.set('Vercel-CDN-Cache-Control', 'public, max-age=1800');
+
+    return jsonResponse;
   } catch (error) {
     console.error('Error fetching LeetCode stats:', error);
     return NextResponse.json({ error: 'Failed to fetch LeetCode stats' }, { status: 500 });

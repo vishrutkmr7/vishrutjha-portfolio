@@ -1,13 +1,11 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
-
 import { DOMAIN } from '@/app/constants';
 
-export default function RouteJsonLd() {
-  const pathname = usePathname();
+interface RouteJsonLdProps {
+  pathname: string;
+}
 
-  const getRouteSchema = () => {
+export default function RouteJsonLd({ pathname }: RouteJsonLdProps) {
+  const getRouteSchema = (pathname: string) => {
     const baseSchema = {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
@@ -45,7 +43,7 @@ export default function RouteJsonLd() {
     }
   };
 
-  const schema = getRouteSchema();
+  const schema = getRouteSchema(pathname);
   if (!schema) return null;
 
   return (

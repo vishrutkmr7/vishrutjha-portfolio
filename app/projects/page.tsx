@@ -4,27 +4,14 @@ import { MotionItem, MotionList, scaleInVariants } from '@/app/components/Motion
 import PageTransition from '@/app/components/PageTransition';
 import { ScrollAnimation } from '@/app/components/ScrollAnimation';
 import { DOMAIN } from '@/app/constants';
-import { parseDateString } from '@/app/lib/utils';
-import projectsData from '@/public/data/projectsData.json';
+import { fetchProjectsData, sortProjectsByDate } from '@/app/lib/data-fetcher';
+import type { ProjectItem as ProjectItemData } from '@/app/types/portfolio.types';
 
 import { ProjectCard } from './ProjectCard';
 
-// Update ProjectItem interface to match the actual data structure
-interface ProjectItemData {
-  title: string;
-  description: string;
-  image: string;
-  date: string;
-  link: { text: string; url: string };
-  tech: string[];
-}
-
-// Sort projects by date (most recent first)
-const sortedProjects = [...projectsData].sort((a, b) => {
-  const dateA = parseDateString(a.date);
-  const dateB = parseDateString(b.date);
-  return dateB.getTime() - dateA.getTime();
-});
+// Pre-fetch data at build time
+const projects = await fetchProjectsData();
+const sortedProjects = sortProjectsByDate(projects);
 
 export const metadata: Metadata = {
   title: 'Projects | Vishrut Jha',

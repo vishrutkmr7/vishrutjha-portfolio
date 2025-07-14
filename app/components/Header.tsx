@@ -4,29 +4,23 @@ import { FileDown, FolderGit2, Home, Image as ImageIcon, Map as MapIcon } from '
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
+import { useMemo } from 'react';
 
 import { ThemeToggle } from '@/app/components/theme-toggle';
 import { Button } from '@/app/components/ui/button';
 import { cn } from '@/app/lib/utils';
 
-const Header: React.FC = () => {
-  const pathname = usePathname();
+// Memoized navigation items to prevent recreation on every render
+const navigationItems = [
+  { href: '/', icon: Home, label: 'Home' },
+  { href: '/journey', icon: MapIcon, label: 'Journey' },
+  { href: '/projects', icon: FolderGit2, label: 'Projects' },
+  { href: '/media', icon: ImageIcon, label: 'Media' },
+] as const;
 
-  const getLinkClass = (href: string) => {
-    return cn(
-      'text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 px-3 py-2 rounded-2xl',
-      pathname === href ? 'text-primary bg-primary/10' : 'text-muted-foreground'
-    );
-  };
-
-  const getMobileLinkClass = (href: string) => {
-    return cn(
-      'flex flex-col items-center justify-center transition-colors hover:text-primary w-full',
-      pathname === href ? 'text-primary' : 'text-muted-foreground'
-    );
-  };
-
-  const ResumeButton = React.forwardRef<HTMLAnchorElement>((props, ref) => (
+// Memoized resume button component
+const ResumeButton = React.memo(
+  React.forwardRef<HTMLAnchorElement>((props, ref) => (
     <a
       {...props}
       ref={ref}
@@ -40,8 +34,71 @@ const Header: React.FC = () => {
       <FileDown className="h-5 w-5" aria-hidden="true" />
       <span className="sr-only">Download Resume</span>
     </a>
-  ));
-  ResumeButton.displayName = 'ResumeButton';
+  ))
+);
+ResumeButton.displayName = 'ResumeButton';
+
+// Memoized navigation link component
+const NavigationLink = React.memo(
+  ({
+    href,
+    icon: Icon,
+    label,
+    isActive,
+    isMobile = false,
+  }: {
+    href: string;
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    isActive: boolean;
+    isMobile?: boolean;
+  }) => {
+    const linkClass = useMemo(() => {
+      if (isMobile) {
+        return cn(
+          'flex flex-col items-center justify-center transition-colors hover:text-primary w-full',
+          isActive ? 'text-primary' : 'text-muted-foreground'
+        );
+      }
+      return cn(
+        'text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 px-3 py-2 rounded-2xl',
+        isActive ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+      );
+    }, [isActive, isMobile]);
+
+    if (isMobile) {
+      return (
+        <Link href={href} className={linkClass}>
+          <Icon className="h-5 w-5" aria-hidden="true" />
+          <span className="mt-0.5 text-[10px]">{label}</span>
+        </Link>
+      );
+    }
+
+    return (
+      <Link href={href} className={linkClass}>
+        <span className="flex items-center gap-2">
+          <Icon className="h-4 w-4" aria-hidden="true" />
+          {label}
+        </span>
+      </Link>
+    );
+  }
+);
+NavigationLink.displayName = 'NavigationLink';
+
+const Header: React.FC = () => {
+  const pathname = usePathname();
+
+  // Memoize the navigation items with active state
+  const navigationWithActiveState = useMemo(
+    () =>
+      navigationItems.map(item => ({
+        ...item,
+        isActive: pathname === item.href,
+      })),
+    [pathname]
+  );
 
   return (
     <>
@@ -58,30 +115,15 @@ const Header: React.FC = () => {
           <div className="container flex h-14 items-center">
             <div className="mr-4 flex">
               <nav className="flex items-center space-x-2 font-medium text-sm">
-                <Link href="/" className={getLinkClass('/')}>
-                  <span className="flex items-center gap-2">
-                    <Home className="h-4 w-4" aria-hidden="true" />
-                    Home
-                  </span>
-                </Link>
-                <Link href="/journey" className={getLinkClass('/journey')}>
-                  <span className="flex items-center gap-2">
-                    <MapIcon className="h-4 w-4" aria-hidden="true" />
-                    Journey
-                  </span>
-                </Link>
-                <Link href="/projects" className={getLinkClass('/projects')}>
-                  <span className="flex items-center gap-2">
-                    <FolderGit2 className="h-4 w-4" aria-hidden="true" />
-                    Projects
-                  </span>
-                </Link>
-                <Link href="/media" className={getLinkClass('/media')}>
-                  <span className="flex items-center gap-2">
-                    <ImageIcon className="h-4 w-4" aria-hidden="true" />
-                    Media
-                  </span>
-                </Link>
+                {navigationWithActiveState.map(({ href, icon, label, isActive }) => (
+                  <NavigationLink
+                    key={href}
+                    href={href}
+                    icon={icon}
+                    label={label}
+                    isActive={isActive}
+                  />
+                ))}
               </nav>
             </div>
             <div className="flex flex-1 items-center justify-end">
@@ -99,26 +141,20 @@ const Header: React.FC = () => {
       {/* Mobile Bottom Navigation Bar */}
       <div className="fixed right-0 bottom-0 left-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
         <nav className="mx-auto flex w-full max-w-md justify-between px-3 py-2">
-          <Link href="/" className={getMobileLinkClass('/')}>
-            <Home className="h-5 w-5" aria-hidden="true" />
-            <span className="mt-0.5 text-[10px]">Home</span>
-          </Link>
-          <Link href="/journey" className={getMobileLinkClass('/journey')}>
-            <MapIcon className="h-5 w-5" aria-hidden="true" />
-            <span className="mt-0.5 text-[10px]">Journey</span>
-          </Link>
-          <Link href="/projects" className={getMobileLinkClass('/projects')}>
-            <FolderGit2 className="h-5 w-5" aria-hidden="true" />
-            <span className="mt-0.5 text-[10px]">Projects</span>
-          </Link>
-          <Link href="/media" className={getMobileLinkClass('/media')}>
-            <ImageIcon className="h-5 w-5" aria-hidden="true" />
-            <span className="mt-0.5 text-[10px]">Media</span>
-          </Link>
+          {navigationWithActiveState.map(({ href, icon, label, isActive }) => (
+            <NavigationLink
+              key={href}
+              href={href}
+              icon={icon}
+              label={label}
+              isActive={isActive}
+              isMobile={true}
+            />
+          ))}
         </nav>
       </div>
     </>
   );
 };
 
-export default Header;
+export default React.memo(Header);
