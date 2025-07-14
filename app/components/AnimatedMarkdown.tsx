@@ -99,7 +99,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
       {hasCodeBlock ? (
         <div
           className={cn(
-            'prose prose-sm max-w-none',
+            'prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
             isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
           )}
         >
@@ -121,7 +121,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               p: ({ children }) => (
                 <p
                   className={cn(
-                    'my-2 leading-7',
+                    'my-1 leading-6',
                     isAssistant ? 'text-foreground' : 'text-primary-foreground'
                   )}
                 >
@@ -129,12 +129,12 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                 </p>
               ),
               ul: ({ children }) => (
-                <ul className="my-2 list-inside list-disc space-y-1">{children}</ul>
+                <ul className="my-1 list-inside list-disc space-y-0.5">{children}</ul>
               ),
               ol: ({ children }) => (
-                <ol className="my-2 list-inside list-decimal space-y-1">{children}</ol>
+                <ol className="my-1 list-inside list-decimal space-y-0.5">{children}</ol>
               ),
-              li: ({ children }) => <li className="leading-7">{children}</li>,
+              li: ({ children }) => <li className="leading-6">{children}</li>,
               a: ({ href, children }) => (
                 <a
                   href={href}
@@ -148,7 +148,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
               em: ({ children }) => <em className="italic">{children}</em>,
               blockquote: ({ children }) => (
-                <blockquote className="my-2 border-muted border-l-4 pl-4 italic">
+                <blockquote className="my-1 border-muted border-l-4 pl-4 italic">
                   {children}
                 </blockquote>
               ),
@@ -161,13 +161,13 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
         <ChatBubble isAssistant={isAssistant}>
           <div
             className={cn(
-              'prose prose-sm max-w-none',
+              'prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
               isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
             )}
           >
             <ReactMarkdown
               components={{
-                p: ({ children }) => <div className="m-0">{children}</div>,
+                p: ({ children }) => <div className="m-0 leading-6">{children}</div>,
                 code: ({ className, children = '', inline }: CodeComponentProps) => {
                   if (inline) {
                     return (

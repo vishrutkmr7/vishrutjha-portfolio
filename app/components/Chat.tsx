@@ -55,14 +55,14 @@ const ChatBubble = memo(
     return (
       <div
         className={cn(
-          'relative max-w-[85%] px-4 py-3 text-sm transition-all duration-200',
+          'relative px-3 py-2 text-sm transition-all duration-200',
           isAssistant
             ? cn(
-                'mr-auto ml-0 bg-muted text-foreground border border-border rounded-lg shadow-sm',
+                'bg-muted text-foreground border border-border rounded-lg shadow-sm',
                 getConfidenceIndicator(confidence)
               )
             : cn(
-                'mr-0 ml-auto bg-primary text-primary-foreground',
+                'bg-primary text-primary-foreground',
                 'rounded-2xl rounded-br-md shadow-md border border-primary/20',
                 'font-medium'
               )
@@ -86,24 +86,26 @@ const LoadingIndicator = memo(() => {
       exit={{ opacity: 0, y: -10 }}
       className="flex justify-start"
     >
-      <div className="max-w-[85%] rounded-lg bg-muted px-4 py-3 border border-border shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1">
-            {[0, 0.2, 0.4].map(delay => (
-              <motion.span
-                key={delay}
-                className="h-1.5 w-1.5 rounded-full bg-primary"
-                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{
-                  duration: isMobile ? 0.8 : 1,
-                  repeat: Infinity,
-                  delay,
-                  ease: 'easeInOut',
-                }}
-              />
-            ))}
+      <div className="max-w-[85%] mr-auto ml-0">
+        <div className="rounded-lg bg-muted px-3 py-2 border border-border shadow-sm">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              {[0, 0.2, 0.4].map(delay => (
+                <motion.span
+                  key={delay}
+                  className="h-1.5 w-1.5 rounded-full bg-primary"
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{
+                    duration: isMobile ? 0.8 : 1,
+                    repeat: Infinity,
+                    delay,
+                    ease: 'easeInOut',
+                  }}
+                />
+              ))}
+            </div>
+            <span className="text-muted-foreground text-sm font-medium">Thinking...</span>
           </div>
-          <span className="text-muted-foreground text-sm font-medium">Thinking...</span>
         </div>
       </div>
     </motion.div>
@@ -330,7 +332,7 @@ export default function Chat() {
                 </div>
               )}
 
-              <div className="flex flex-col space-y-1 min-h-0 flex-1">
+              <div className="flex flex-col min-h-0 flex-1">
                 <AnimatePresence initial={false}>
                   {messages.map((message, index) => {
                     const structuredResponse =
@@ -361,67 +363,74 @@ export default function Chat() {
                         className={cn(
                           'flex w-full',
                           message.role === 'user' ? 'justify-end' : 'justify-start',
-                          index > 0 && 'mt-6',
+                          index > 0 && 'mt-3',
                           isLastMessage && 'mb-2'
                         )}
                       >
-                        <ChatBubble
-                          isAssistant={message.role === 'assistant'}
-                          confidence={structuredResponse?.response?.confidence}
-                        >
-                          {message.role === 'assistant' && structuredResponse ? (
-                            <div className="space-y-3">
-                              <AnimatedMarkdown
-                                content={structuredResponse.response.content}
-                                isAssistant={true}
-                              />
-                              {structuredResponse.response.sources?.length > 0 && (
-                                <div className="mt-3 border-t border-border/50 pt-3">
-                                  <p className="mb-2 text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                                    Sources
-                                  </p>
-                                  <div className="flex flex-wrap gap-2">
-                                    {structuredResponse.response.sources
-                                      .slice(0, 3)
-                                      .map((source, sourceIndex) => (
-                                        <motion.a
-                                          key={source.url || source.title}
-                                          href={source.url || '#'}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          initial={{ opacity: 0, scale: 0.9 }}
-                                          animate={{
-                                            opacity: 1,
-                                            scale: 1,
-                                            transition: { delay: 0.3 + sourceIndex * 0.1 },
-                                          }}
-                                          className={cn(
-                                            'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5',
-                                            'text-xs font-medium transition-colors duration-200',
-                                            'bg-background/80 border-border text-foreground',
-                                            'hover:bg-accent hover:text-accent-foreground hover:shadow-sm',
-                                            'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
-                                          )}
-                                        >
-                                          <ExternalLink className="h-3 w-3 flex-shrink-0" />
-                                          <span className="truncate max-w-[120px]">
-                                            {source.title}
-                                          </span>
-                                        </motion.a>
-                                      ))}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <div className="leading-relaxed">
-                              <AnimatedMarkdown
-                                content={message.content}
-                                isAssistant={message.role === 'assistant'}
-                              />
-                            </div>
+                        <div
+                          className={cn(
+                            'max-w-[85%]',
+                            message.role === 'assistant' ? 'mr-auto ml-0' : 'mr-0 ml-auto'
                           )}
-                        </ChatBubble>
+                        >
+                          <ChatBubble
+                            isAssistant={message.role === 'assistant'}
+                            confidence={structuredResponse?.response?.confidence}
+                          >
+                            {message.role === 'assistant' && structuredResponse ? (
+                              <div className="space-y-1">
+                                <AnimatedMarkdown
+                                  content={structuredResponse.response.content}
+                                  isAssistant={true}
+                                />
+                                {structuredResponse.response.sources?.length > 0 && (
+                                  <div className="mt-1.5 border-t border-border/50 pt-1.5">
+                                    <p className="mb-2 text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                                      Sources
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                      {structuredResponse.response.sources
+                                        .slice(0, 3)
+                                        .map((source, sourceIndex) => (
+                                          <motion.a
+                                            key={source.url || source.title}
+                                            href={source.url || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{
+                                              opacity: 1,
+                                              scale: 1,
+                                              transition: { delay: 0.3 + sourceIndex * 0.1 },
+                                            }}
+                                            className={cn(
+                                              'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5',
+                                              'text-xs font-medium transition-colors duration-200',
+                                              'bg-background/80 border-border text-foreground',
+                                              'hover:bg-accent hover:text-accent-foreground hover:shadow-sm',
+                                              'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
+                                            )}
+                                          >
+                                            <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                                            <span className="truncate max-w-[120px]">
+                                              {source.title}
+                                            </span>
+                                          </motion.a>
+                                        ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <div className="leading-6">
+                                <AnimatedMarkdown
+                                  content={message.content}
+                                  isAssistant={message.role === 'assistant'}
+                                />
+                              </div>
+                            )}
+                          </ChatBubble>
+                        </div>
                       </motion.div>
                     );
                   })}
@@ -452,7 +461,7 @@ export default function Chat() {
                           handleFormSubmit(e);
                         }
                       }}
-                      placeholder="Ask about Vishrut's work, projects, or experiences..."
+                      placeholder="Ask me anything about Vishrut!"
                       rows={1}
                       className={cn(
                         'w-full min-w-0 flex-1 resize-none overflow-hidden',
