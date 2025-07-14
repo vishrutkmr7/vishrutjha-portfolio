@@ -1,10 +1,10 @@
 import './globals.css';
-import { Suspense } from 'react';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 import ClientComponents from '@/app/components/ClientComponents';
 import Footer from '@/app/components/Footer';
@@ -158,17 +158,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 height="0"
                 width="0"
                 style={{ display: 'none', visibility: 'hidden' }}
+                title="Google Tag Manager"
               ></iframe>
             </noscript>
             {/* End Google Tag Manager (noscript) */}
             {/* Google tag (gtag.js) */}
             <Script
               strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50`}
+              src={'https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50'}
             />
             <Script
               id="google-analytics"
               strategy="afterInteractive"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for Google Analytics tracking
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
@@ -179,9 +181,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
             <ClientComponents />
-            <div className="flex flex-col min-h-[100dvh]">
+            <div className="flex min-h-[100dvh] flex-col">
               <Header />
-              <main className="flex-grow container py-4 md:py-6 mt-14">{children}</main>
+              <main className="container mt-14 flex-grow py-4 md:py-6">{children}</main>
               <Footer />
               <Chat />
             </div>

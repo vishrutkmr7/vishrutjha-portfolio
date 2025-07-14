@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { MoveLeft, Unlink } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 
 import { Button } from '@/app/components/ui/button';
@@ -28,15 +27,15 @@ export default function NotFound() {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center min-h-[80vh] bg-background text-foreground px-4 sm:px-6 ${styles.notFound}`}
+      className={`flex min-h-[80vh] flex-col items-center justify-center bg-background px-4 text-foreground sm:px-6 ${styles.notFound}`}
     >
-      <div className="space-y-4 sm:space-y-6 text-center w-full max-w-lg">
+      <div className="w-full max-w-lg space-y-4 text-center sm:space-y-6">
         {/* Animated 404 Text */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 relative">
-          <Unlink className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 text-muted-foreground/80 animate-pulse" />
-          <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold relative">
+        <div className="relative flex items-center justify-center gap-2 sm:gap-4">
+          <Unlink className="h-10 w-10 animate-pulse text-muted-foreground/80 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+          <h1 className="relative font-bold text-6xl sm:text-8xl md:text-9xl">
             <span
-              className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent inline-block transition-transform duration-200"
+              className="inline-block bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent transition-transform duration-200"
               style={{
                 transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
               }}
@@ -44,7 +43,7 @@ export default function NotFound() {
               4
             </span>
             <span
-              className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent inline-block transition-transform duration-200"
+              className="inline-block bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent transition-transform duration-200"
               style={{
                 transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`,
               }}
@@ -52,7 +51,7 @@ export default function NotFound() {
               0
             </span>
             <span
-              className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent inline-block transition-transform duration-200"
+              className="inline-block bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent transition-transform duration-200"
               style={{
                 transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
               }}
@@ -63,7 +62,7 @@ export default function NotFound() {
         </div>
 
         {/* Animated Typing Text */}
-        <div className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
+        <div className="font-medium text-lg text-muted-foreground sm:text-xl md:text-2xl">
           <TypeAnimation
             sequence={[
               'Page not found 😕',
@@ -81,7 +80,7 @@ export default function NotFound() {
         </div>
 
         {/* Description */}
-        <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md mx-auto space-y-1">
+        <p className="mx-auto max-w-md space-y-1 text-muted-foreground text-sm sm:text-base md:text-lg">
           <span>Look! Schrödinger&rsquo;s page 🐱✨</span>
           <br />
           <span>Instead, let&rsquo;s take a path that definitely exists!</span>
@@ -93,7 +92,7 @@ export default function NotFound() {
             <Button
               asChild
               size="lg"
-              className="gap-2 hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+              className="w-full gap-2 transition-all duration-300 hover:scale-105 sm:w-auto"
             >
               <Link href="/">
                 <MoveLeft className="h-4 w-4" />

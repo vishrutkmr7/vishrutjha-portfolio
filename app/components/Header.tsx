@@ -1,10 +1,9 @@
 'use client';
 
-import * as React from 'react';
-
-import { Home, Map, FolderGit2, Image as ImageIcon, FileDown } from 'lucide-react';
+import { FileDown, FolderGit2, Home, Image as ImageIcon, Map as MapIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import * as React from 'react';
 
 import { ThemeToggle } from '@/app/components/theme-toggle';
 import { Button } from '@/app/components/ui/button';
@@ -48,17 +47,17 @@ const Header: React.FC = () => {
     <>
       <div className="pb-0">
         {/* Mobile buttons */}
-        <div className="md:hidden fixed top-3 right-3 z-50 flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-2xl border p-1.5">
+        <div className="fixed top-3 right-3 z-50 flex items-center gap-2 rounded-2xl border bg-background/95 p-1.5 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
             <ResumeButton />
           </Button>
           <ThemeToggle />
         </div>
 
-        <header className="fixed top-0 left-0 right-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:block hidden">
+        <header className="fixed top-0 right-0 left-0 z-50 hidden w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:block">
           <div className="container flex h-14 items-center">
             <div className="mr-4 flex">
-              <nav className="flex items-center space-x-2 text-sm font-medium">
+              <nav className="flex items-center space-x-2 font-medium text-sm">
                 <Link href="/" className={getLinkClass('/')}>
                   <span className="flex items-center gap-2">
                     <Home className="h-4 w-4" aria-hidden="true" />
@@ -67,7 +66,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link href="/journey" className={getLinkClass('/journey')}>
                   <span className="flex items-center gap-2">
-                    <Map className="h-4 w-4" aria-hidden="true" />
+                    <MapIcon className="h-4 w-4" aria-hidden="true" />
                     Journey
                   </span>
                 </Link>
@@ -98,23 +97,23 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t z-50">
-        <nav className="flex justify-between px-3 py-2 max-w-md mx-auto w-full">
+      <div className="fixed right-0 bottom-0 left-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
+        <nav className="mx-auto flex w-full max-w-md justify-between px-3 py-2">
           <Link href="/" className={getMobileLinkClass('/')}>
             <Home className="h-5 w-5" aria-hidden="true" />
-            <span className="text-[10px] mt-0.5">Home</span>
+            <span className="mt-0.5 text-[10px]">Home</span>
           </Link>
           <Link href="/journey" className={getMobileLinkClass('/journey')}>
-            <Map className="h-5 w-5" aria-hidden="true" />
-            <span className="text-[10px] mt-0.5">Journey</span>
+            <MapIcon className="h-5 w-5" aria-hidden="true" />
+            <span className="mt-0.5 text-[10px]">Journey</span>
           </Link>
           <Link href="/projects" className={getMobileLinkClass('/projects')}>
             <FolderGit2 className="h-5 w-5" aria-hidden="true" />
-            <span className="text-[10px] mt-0.5">Projects</span>
+            <span className="mt-0.5 text-[10px]">Projects</span>
           </Link>
           <Link href="/media" className={getMobileLinkClass('/media')}>
             <ImageIcon className="h-5 w-5" aria-hidden="true" />
-            <span className="text-[10px] mt-0.5">Media</span>
+            <span className="mt-0.5 text-[10px]">Media</span>
           </Link>
         </nav>
       </div>

@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef, useState } from 'react';
-
 import { motion, useInView } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
+import { useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -36,11 +35,12 @@ function CodeBlock({ language, value }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group my-4">
-      <div className="absolute left-2 top-2 text-xs text-gray-400">{language}</div>
+    <div className="group relative my-4">
+      <div className="absolute top-2 left-2 text-gray-400 text-xs">{language}</div>
       <button
+        type="button"
         onClick={handleCopy}
-        className="absolute right-2 top-2 p-2 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 rounded-lg bg-white/10 p-2 opacity-0 transition-opacity group-hover:opacity-100"
         aria-label={copied ? 'Copied!' : 'Copy code'}
       >
         {copied ? (
@@ -53,7 +53,7 @@ function CodeBlock({ language, value }: CodeBlockProps) {
         style={oneDark}
         language={language}
         PreTag="div"
-        className="rounded-md !mt-0 pt-8"
+        className="!mt-0 rounded-md pt-8"
         showLineNumbers={true}
       >
         {value}
@@ -72,10 +72,10 @@ function ChatBubble({
   return (
     <div
       className={cn(
-        'px-4 py-2 rounded-lg max-w-[85%] w-fit',
+        'w-fit max-w-[85%] rounded-lg px-4 py-2',
         isAssistant
-          ? 'bg-muted text-foreground ml-0 mr-auto rounded-bl-none'
-          : 'bg-primary text-primary-foreground ml-auto mr-0 rounded-br-none'
+          ? 'mr-auto ml-0 rounded-bl-none bg-muted text-foreground'
+          : 'mr-0 ml-auto rounded-br-none bg-primary text-primary-foreground'
       )}
     >
       {children}
@@ -108,7 +108,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               code: ({ className, children = '', inline }: CodeComponentProps) => {
                 if (inline) {
                   return (
-                    <code className={cn('bg-muted px-1 py-0.5 rounded text-sm', className)}>
+                    <code className={cn('rounded bg-muted px-1 py-0.5 text-sm', className)}>
                       {children}
                     </code>
                   );
@@ -129,10 +129,10 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                 </p>
               ),
               ul: ({ children }) => (
-                <ul className="list-disc list-inside space-y-1 my-2">{children}</ul>
+                <ul className="my-2 list-inside list-disc space-y-1">{children}</ul>
               ),
               ol: ({ children }) => (
-                <ol className="list-decimal list-inside space-y-1 my-2">{children}</ol>
+                <ol className="my-2 list-inside list-decimal space-y-1">{children}</ol>
               ),
               li: ({ children }) => <li className="leading-7">{children}</li>,
               a: ({ href, children }) => (
@@ -140,7 +140,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/90 underline underline-offset-4"
+                  className="text-primary underline underline-offset-4 hover:text-primary/90"
                 >
                   {children}
                 </a>
@@ -148,7 +148,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
               em: ({ children }) => <em className="italic">{children}</em>,
               blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-muted pl-4 italic my-2">
+                <blockquote className="my-2 border-muted border-l-4 pl-4 italic">
                   {children}
                 </blockquote>
               ),
@@ -171,7 +171,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                 code: ({ className, children = '', inline }: CodeComponentProps) => {
                   if (inline) {
                     return (
-                      <code className={cn('bg-muted px-1 py-0.5 rounded text-sm', className)}>
+                      <code className={cn('rounded bg-muted px-1 py-0.5 text-sm', className)}>
                         {children}
                       </code>
                     );

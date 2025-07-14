@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-
 import { useChat } from 'ai/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Info, Sparkles } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ExternalLink, Info, Sparkles, X } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/app/lib/utils';
 
@@ -52,13 +51,13 @@ function ChatBubble({
 
   return (
     <div className="relative">
-      <div className={cn('max-w-[85%] w-fit', isAssistant ? 'ml-0 mr-auto' : 'ml-auto mr-0')}>
+      <div className={cn('w-fit max-w-[85%]', isAssistant ? 'mr-auto ml-0' : 'mr-0 ml-auto')}>
         {children}
       </div>
       {isAssistant && confidence && (
         <div
           className={cn(
-            'absolute -bottom-1 left-4 w-1 h-1 rounded-full',
+            '-bottom-1 absolute left-4 h-1 w-1 rounded-full',
             getConfidenceColor(confidence)
           )}
         />
@@ -101,9 +100,9 @@ export default function Chat() {
     },
   });
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -113,7 +112,7 @@ export default function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]); // Scroll on new messages
+  }, [scrollToBottom]); // Scroll on new messages
 
   const parseResponse = (content: string): StructuredResponse | null => {
     try {
@@ -169,7 +168,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="fixed bottom-20 md:bottom-4 right-0 md:right-4 z-[100] w-full md:w-auto px-4 md:px-0">
+    <div className="fixed right-0 bottom-20 z-[100] w-full px-4 md:right-4 md:bottom-4 md:w-auto md:px-0">
       <AnimatePresence>
         {!isOpen ? (
           <motion.div
@@ -177,7 +176,7 @@ export default function Chat() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex justify-end w-full md:w-auto"
+            className="flex w-full justify-end md:w-auto"
           >
             <TooltipProvider>
               <Tooltip>
@@ -185,15 +184,15 @@ export default function Chat() {
                   <Button
                     onClick={() => setIsOpen(true)}
                     className={cn(
-                      'group h-12 w-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300',
+                      'group h-12 w-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl',
                       'bg-gradient-to-tr from-primary via-primary to-primary/90 hover:from-primary/95 hover:via-primary hover:to-primary',
                       'dark:from-primary dark:via-primary dark:to-primary/90 dark:hover:from-primary/95 dark:hover:via-primary dark:hover:to-primary',
-                      'backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95',
+                      'bg-opacity-95 backdrop-blur-sm dark:bg-opacity-95',
                       'border border-primary/20 dark:border-primary/20',
                       'relative overflow-hidden',
-                      "after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-tr after:from-white/10 after:via-transparent after:to-transparent",
+                      'after:absolute after:inset-0 after:bg-gradient-to-tr after:from-white/10 after:via-transparent after:to-transparent after:content-[""]',
                       'hover:scale-105 active:scale-100',
-                      'animate-in zoom-in-95 duration-200'
+                      'zoom-in-95 animate-in duration-200'
                     )}
                   >
                     <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15),transparent_70%)]" />
@@ -207,16 +206,16 @@ export default function Chat() {
                     </motion.div>
                     <Sparkles
                       className={cn(
-                        'relative z-10 transition-transform duration-300 group-hover:scale-110 w-6 h-6',
+                        'relative z-10 h-6 w-6 transition-transform duration-300 group-hover:scale-110',
                         'fill-current stroke-[1.75]',
                         'text-primary-foreground',
                         'drop-shadow-[0_0_3px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_3px_rgba(255,255,255,0.3)]',
-                        'filter brightness-110'
+                        'brightness-110 filter'
                       )}
                     />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="left" className="text-sm font-medium">
+                <TooltipContent side="left" className="font-medium text-sm">
                   <p>Ask AI about Vishrut&apos;s experience and projects</p>
                 </TooltipContent>
               </Tooltip>
@@ -228,13 +227,13 @@ export default function Chat() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col w-full md:w-96 h-[75vh] md:h-[32rem] bg-background/95 backdrop-blur-sm border rounded-2xl shadow-lg"
+            className="flex h-[75vh] w-full flex-col rounded-2xl border bg-background/95 shadow-lg backdrop-blur-sm md:h-[32rem] md:w-96"
           >
-            <div className="flex items-center justify-between p-4 border-b bg-primary/5">
+            <div className="flex items-center justify-between border-b bg-primary/5 p-4">
               <div className="flex items-center gap-3">
                 <div
                   className={cn(
-                    'w-10 h-10 flex items-center justify-center rounded-full',
+                    'flex h-10 w-10 items-center justify-center rounded-full',
                     'bg-primary/10 dark:bg-white/10',
                     'relative overflow-hidden'
                   )}
@@ -242,21 +241,21 @@ export default function Chat() {
                   <span className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-primary/5 to-transparent dark:from-white/10 dark:via-white/5" />
                   <Sparkles
                     className={cn(
-                      'relative z-10 w-5 h-5',
+                      'relative z-10 h-5 w-5',
                       'fill-current stroke-[1.75]',
                       'text-primary-foreground dark:text-primary'
                     )}
                   />
                 </div>
                 <div className="space-y-1">
-                  <h2 className="text-base font-semibold leading-none">Ask AI about Vishrut</h2>
-                  <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground pt-1.5">
+                  <h2 className="font-semibold text-base leading-none">Ask AI about Vishrut</h2>
+                  <div className="flex items-center gap-1.5 pt-1.5 text-[11px] text-muted-foreground">
                     <span>Powered by</span>
                     <a
                       href="https://perplexity.ai"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[#20808D] hover:text-[#20808D]/90 transition-colors"
+                      className="inline-flex items-center gap-1 text-[#20808D] transition-colors hover:text-[#20808D]/90"
                     >
                       <svg
                         width="12"
@@ -289,21 +288,21 @@ export default function Chat() {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-background/50 to-background">
+            <div className="flex-1 space-y-4 overflow-y-auto bg-gradient-to-b from-background/50 to-background p-4">
               {messages.length === 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center text-muted-foreground py-8"
+                  className="py-8 text-center text-muted-foreground"
                 >
-                  <div className="mb-2 text-2xl flex items-center justify-center gap-2">
+                  <div className="mb-2 flex items-center justify-center gap-2 text-2xl">
                     <span className="animate-wave">👋</span>
                     <span className="animate-pulse">🎵</span>
                   </div>
-                  <p className="text-sm mb-2">
+                  <p className="mb-2 text-sm">
                     Hey! I'm here to fill you in on everything about Vishrut!
                   </p>
-                  <p className="text-xs text-muted-foreground/80">
+                  <p className="text-muted-foreground/80 text-xs">
                     From his tech projects to his favorite Travis Scott tracks, I've got the inside
                     scoop. What would you like to know? ✨
                   </p>
@@ -336,11 +335,11 @@ export default function Chat() {
                         <ChatBubble isAssistant={false}>
                           <div
                             className={cn(
-                              'text-sm whitespace-pre-wrap leading-relaxed',
-                              'bg-primary text-primary-foreground rounded-[20px] px-4 py-2.5',
+                              'whitespace-pre-wrap text-sm leading-relaxed',
+                              'rounded-[20px] bg-primary px-4 py-2.5 text-primary-foreground',
                               'relative',
-                              "before:content-[''] before:absolute before:right-[-8px] before:bottom-0 before:w-[15px] before:h-[20px] before:bg-primary before:rounded-bl-[16px]",
-                              "after:content-[''] after:absolute after:right-[-20px] after:bottom-0 after:w-[20px] after:h-[20px] after:bg-background after:rounded-bl-[10px] after:border-b after:border-l after:border-transparent"
+                              'before:absolute before:right-[-8px] before:bottom-0 before:h-[20px] before:w-[15px] before:rounded-bl-[16px] before:bg-primary before:content-[""]',
+                              'after:absolute after:right-[-20px] after:bottom-0 after:h-[20px] after:w-[20px] after:rounded-bl-[10px] after:border-transparent after:border-b after:border-l after:bg-background after:content-[""]'
                             )}
                           >
                             {message.content}
@@ -371,25 +370,25 @@ export default function Chat() {
                               transition={{ duration: 0.3, delay: 0.2 }}
                               className="space-y-2"
                             >
-                              <p className="text-xs text-muted-foreground font-medium">Sources:</p>
+                              <p className="font-medium text-muted-foreground text-xs">Sources:</p>
                               <div className="grid gap-2">
                                 {structuredResponse.response.sources.map((source, index) => (
                                   <motion.div
-                                    key={index}
+                                    key={`${source.title}-${source.url || source.type}`}
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.2, delay: 0.1 * (index + 1) }}
-                                    className="text-xs bg-muted/50 rounded p-2 flex items-start gap-2"
+                                    className="flex items-start gap-2 rounded bg-muted/50 p-2 text-xs"
                                   >
                                     <div className="flex-1">
                                       <p className="font-medium">{source.title}</p>
                                       {source.description && (
-                                        <p className="text-muted-foreground mt-0.5">
+                                        <p className="mt-0.5 text-muted-foreground">
                                           {source.description}
                                         </p>
                                       )}
                                       {source.date && (
-                                        <p className="text-muted-foreground mt-0.5">
+                                        <p className="mt-0.5 text-muted-foreground">
                                           {source.date}
                                         </p>
                                       )}
@@ -413,9 +412,9 @@ export default function Chat() {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="p-3 bg-yellow-100/20 rounded-lg border border-yellow-300/30 text-sm text-yellow-300"
+                              className="rounded-lg border border-yellow-300/30 bg-yellow-100/20 p-3 text-sm text-yellow-300"
                             >
-                              <Info className="h-4 w-4 inline mr-2" />
+                              <Info className="mr-2 inline h-4 w-4" />
                               Let's focus on Vishrut's professional background. Ask about projects,
                               skills, or experience.
                             </motion.div>
@@ -423,8 +422,8 @@ export default function Chat() {
                         </div>
                       ) : (
                         <ChatBubble isAssistant={true}>
-                          <div className="bg-muted rounded-lg p-3">
-                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                          <div className="rounded-lg bg-muted p-3">
+                            <p className="whitespace-pre-wrap text-sm">{message.content}</p>
                           </div>
                         </ChatBubble>
                       )}
@@ -439,26 +438,26 @@ export default function Chat() {
                   exit={{ opacity: 0, y: -10 }}
                   className="flex justify-start"
                 >
-                  <div className="max-w-[80%] rounded-lg p-3 bg-muted">
+                  <div className="max-w-[80%] rounded-lg bg-muted p-3">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-1">
                         <motion.span
-                          className="w-1 h-1 bg-foreground/50 rounded-full"
+                          className="h-1 w-1 rounded-full bg-foreground/50"
                           animate={{ scale: [1, 1.5, 1] }}
                           transition={{ duration: 1, repeat: Infinity, delay: 0 }}
                         />
                         <motion.span
-                          className="w-1 h-1 bg-foreground/50 rounded-full"
+                          className="h-1 w-1 rounded-full bg-foreground/50"
                           animate={{ scale: [1, 1.5, 1] }}
                           transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
                         />
                         <motion.span
-                          className="w-1 h-1 bg-foreground/50 rounded-full"
+                          className="h-1 w-1 rounded-full bg-foreground/50"
                           animate={{ scale: [1, 1.5, 1] }}
                           transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
                         />
                       </div>
-                      <span className="text-sm text-muted-foreground">Thinking</span>
+                      <span className="text-muted-foreground text-sm">Thinking</span>
                     </div>
                   </div>
                 </motion.div>
@@ -467,13 +466,13 @@ export default function Chat() {
             </div>
             <motion.form
               onSubmit={handleFormSubmit}
-              className="p-4 border-t bg-background/50 backdrop-blur-sm"
+              className="border-t bg-background/50 p-4 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
             >
               <div className="space-y-2">
-                <div className="flex gap-2 items-end">
+                <div className="flex items-end gap-2">
                   <div className="relative flex-1">
                     <textarea
                       value={input}
@@ -492,7 +491,7 @@ export default function Chat() {
                       placeholder="Curious about Vishrut? Ask away! ✨"
                       rows={1}
                       className={cn(
-                        'flex-1 min-w-0 w-full resize-none overflow-hidden',
+                        'w-full min-w-0 flex-1 resize-none overflow-hidden',
                         'rounded-2xl border bg-background/50 px-4 py-3 text-sm',
                         'ring-offset-background placeholder:text-muted-foreground',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
@@ -511,32 +510,32 @@ export default function Chat() {
                     type="submit"
                     size="icon"
                     className={cn(
-                      'h-9 w-9 rounded-full transition-all duration-300 relative overflow-hidden self-end mb-[3px]',
+                      'relative mb-[3px] h-9 w-9 self-end overflow-hidden rounded-full transition-all duration-300',
                       validationState.isValid && input.length > 0
-                        ? "bg-[#0A84FF] hover:bg-[#0A84FF]/90 after:content-[''] after:absolute after:inset-0 after:bg-white/10 after:scale-0 after:rounded-full hover:after:scale-100 after:transition-transform after:duration-300"
+                        ? 'bg-[#0A84FF] after:absolute after:inset-0 after:scale-0 after:rounded-full after:bg-white/10 after:transition-transform after:duration-300 after:content-[""] hover:bg-[#0A84FF]/90 hover:after:scale-100'
                         : 'bg-muted hover:bg-muted/90'
                     )}
                     disabled={isLoading || !validationState.isValid}
                   >
                     <span
                       className={cn(
-                        'text-lg font-medium transition-all duration-300',
+                        'font-medium text-lg transition-all duration-300',
                         validationState.isValid && input.length > 0
-                          ? 'text-white scale-100 transform -translate-y-[1px]'
-                          : 'text-primary-foreground/50 scale-90'
+                          ? '-translate-y-[1px] scale-100 transform text-white'
+                          : 'scale-90 text-primary-foreground/50'
                       )}
                     >
                       ↑
                     </span>
                     {isLoading && (
                       <motion.div
-                        className="absolute inset-0 bg-[#0A84FF] flex items-center justify-center"
+                        className="absolute inset-0 flex items-center justify-center bg-[#0A84FF]"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 0.2 }}
                       >
                         <motion.div
-                          className="w-1.5 h-1.5 bg-white rounded-full"
+                          className="h-1.5 w-1.5 rounded-full bg-white"
                           animate={{
                             scale: [1, 1.5, 1],
                             opacity: [1, 0.5, 1],
@@ -555,7 +554,7 @@ export default function Chat() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-xs text-red-500 px-4"
+                    className="px-4 text-red-500 text-xs"
                   >
                     {validationState.message}
                   </motion.div>

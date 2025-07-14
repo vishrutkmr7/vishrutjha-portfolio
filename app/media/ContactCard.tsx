@@ -5,9 +5,9 @@ import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/app/components/ui/card';
 import { socialIconMap } from '@/app/lib/icons';
 
@@ -21,10 +21,10 @@ export default function ContactCard() {
       variants={dragVariants}
       className="h-full"
     >
-      <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
+      <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <CardHeader className="flex-none pb-2">
           <div className="space-y-1.5">
-            <CardTitle className="line-clamp-2 flex items-center gap-2 min-h-[2rem]">
+            <CardTitle className="line-clamp-2 flex min-h-[2rem] items-center gap-2">
               <socialIconMap.email className="h-5 w-5 flex-shrink-0" />
               Get in Touch
             </CardTitle>
@@ -34,11 +34,11 @@ export default function ContactCard() {
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Button
               asChild
               variant="outline"
-              className="w-full hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              className="w-full transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
             >
               <a
                 href="https://github.com/vishrutkmr7"
@@ -53,7 +53,7 @@ export default function ContactCard() {
             <Button
               asChild
               variant="outline"
-              className="w-full hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              className="w-full transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
             >
               <a
                 href="https://linkedin.com/in/vishrutkmr7"
@@ -68,7 +68,7 @@ export default function ContactCard() {
             <Button
               asChild
               variant="outline"
-              className="w-full hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              className="w-full transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
             >
               <a
                 href="https://twitter.com/vishrutkmr7"
@@ -83,7 +83,7 @@ export default function ContactCard() {
             <Button
               asChild
               variant="outline"
-              className="w-full hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              className="w-full transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
             >
               <a
                 href="mailto:i+website@vishrut.co"

@@ -182,7 +182,7 @@ export async function checkQueryRelevance(query: string): Promise<RelevanceCheck
   }
 
   // Check for obvious off-topic indicators
-  const offTopicPatterns = [
+  const _offTopicPatterns = [
     /\b(personal|private|family|relationship|age|salary|money|politics|religion)\b/i,
     /\b(where do you live|are you single|what do you think about|how old)\b/i,
     /\b(chatgpt|openai|general question)\b/i,
@@ -231,11 +231,11 @@ export async function checkQueryRelevance(query: string): Promise<RelevanceCheck
   let totalScore = 0;
   let matchedTerms = 0;
 
-  for (const [category, data] of Object.entries(relevanceTerms)) {
+  for (const [_category, data] of Object.entries(relevanceTerms)) {
     const matches = data.terms.filter(term => {
       // Use word boundary for exact matches and handle multi-word terms
       const pattern = term.includes(' ')
-        ? new RegExp(term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i')
+        ? new RegExp(term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i')
         : new RegExp(`\\b${term}\\b`, 'i');
       return pattern.test(normalizedQuery);
     });

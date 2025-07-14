@@ -10,7 +10,7 @@ const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
       <div
         ref={ref}
         className={cn(
-          'relative space-y-10 before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:-translate-x-px before:bg-border/50',
+          'before:-translate-x-px relative space-y-10 before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-border/50',
           className
         )}
         {...props}
@@ -64,7 +64,7 @@ const TimelineTitle = React.forwardRef<HTMLHeadingElement, TimelineTitleProps>(
     return (
       <h3
         ref={ref}
-        className={cn('font-semibold leading-none tracking-tight text-foreground', className)}
+        className={cn('font-semibold text-foreground leading-none tracking-tight', className)}
         {...props}
       >
         {children}
@@ -79,7 +79,7 @@ interface TimelineTimeProps extends React.HTMLAttributes<HTMLDivElement> {}
 const TimelineTime = React.forwardRef<HTMLDivElement, TimelineTimeProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props}>
+      <div ref={ref} className={cn('text-muted-foreground text-sm', className)} {...props}>
         {children}
       </div>
     );

@@ -1,4 +1,4 @@
-import { ChatMessage } from '@/app/types/chat.types';
+import type { ChatMessage } from '@/app/types/chat.types';
 
 import { getStructuredPromptData } from './dataLoader';
 

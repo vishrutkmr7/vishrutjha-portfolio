@@ -1,7 +1,7 @@
-export * from './common.types';
-export * from './portfolio.types';
 export * from './chat.types';
+export * from './common.types';
 export * from './leetcode.types';
+export * from './portfolio.types';
 
 export interface ProjectItem {
   title: string;

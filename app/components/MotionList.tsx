@@ -1,8 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
-
-import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 interface MotionListProps {
   children: ReactNode;
@@ -45,7 +44,7 @@ export const fadeInVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 50,
       damping: 8,
     },
@@ -65,7 +64,7 @@ export const scaleInVariants = {
     opacity: 1,
     scale: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 50,
       damping: 8,
     },
@@ -89,7 +88,7 @@ export const dragVariants = {
   drag: {
     scale: 1.01,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 200,
       damping: 15,
     },
@@ -97,7 +96,7 @@ export const dragVariants = {
   hover: {
     scale: 1.02,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 200,
       damping: 15,
     },

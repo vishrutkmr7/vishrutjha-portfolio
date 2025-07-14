@@ -1,5 +1,3 @@
-import { MetadataRoute } from 'next';
-
 export async function GET() {
   // Add your dynamic routes here
   const routes = ['', '/media', '/journey', '/projects', '/resume', '/hey'];

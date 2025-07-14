@@ -1,7 +1,5 @@
-import * as React from 'react';
-
 import { cva, type VariantProps } from 'class-variance-authority';
-import { LucideIcon } from 'lucide-react';
+import type * as React from 'react';
 
 import { techIconMap } from '@/app/lib/icons';
 import { cn } from '@/app/lib/utils';

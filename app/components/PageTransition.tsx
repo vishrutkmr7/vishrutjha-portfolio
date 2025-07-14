@@ -1,8 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
-
 import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -15,7 +14,7 @@ const pageVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 260,
       damping: 20,
     },

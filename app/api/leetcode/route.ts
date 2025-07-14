@@ -1,5 +1,26 @@
 import { NextResponse } from 'next/server';
 
+// LeetCode API response interfaces
+interface SubmissionStat {
+  difficulty: string;
+  count: number;
+}
+
+interface LanguageProblemCount {
+  languageName: string;
+  problemsSolved: number;
+}
+
+interface Badge {
+  displayName: string;
+  icon: string;
+}
+
+interface BeatsStats {
+  difficulty: string;
+  percentage: number;
+}
+
 const LEETCODE_API_ENDPOINT = 'https://leetcode.com/graphql';
 const LEETCODE_USERNAME = 'vishrutjha';
 
@@ -82,8 +103,8 @@ export async function GET() {
     const { matchedUser, allQuestionsCount } = data.data;
 
     // Helper function to safely get counts
-    const getCount = (arr: any[], difficulty: string) =>
-      arr.find((item: any) => item.difficulty.toUpperCase() === difficulty)?.count || 0;
+    const getCount = (arr: SubmissionStat[], difficulty: string) =>
+      arr.find((item: SubmissionStat) => item.difficulty.toUpperCase() === difficulty)?.count || 0;
 
     // Get individual difficulty counts
     const easySolved = getCount(matchedUser.submitStats.acSubmissionNum, 'EASY');
@@ -110,7 +131,7 @@ export async function GET() {
     // Get beats percentage for each difficulty
     const getBeatsPercentage = (difficulty: string) =>
       matchedUser.problemsSolvedBeatsStats?.find(
-        (item: any) => item.difficulty.toUpperCase() === difficulty
+        (item: BeatsStats) => item.difficulty.toUpperCase() === difficulty
       )?.percentage || 0;
 
     const stats = {
@@ -130,7 +151,7 @@ export async function GET() {
       reputation: matchedUser.profile.reputation || 0,
       solutionCount: matchedUser.profile.solutionCount || 0,
       languages:
-        matchedUser.languageProblemCount?.map((lang: any) => ({
+        matchedUser.languageProblemCount?.map((lang: LanguageProblemCount) => ({
           name: lang.languageName,
           solved: lang.problemsSolved,
         })) || [],
@@ -153,7 +174,7 @@ export async function GET() {
         linkedin: matchedUser.linkedinUrl || '',
       },
       badges:
-        matchedUser.badges?.map((badge: any) => ({
+        matchedUser.badges?.map((badge: Badge) => ({
           name: badge.displayName,
           icon: badge.icon,
         })) || [],

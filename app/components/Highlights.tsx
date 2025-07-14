@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import type { TimelineItem, Achievement, ProjectItem } from '@/app/types/portfolio.types';
+import type { Achievement, ProjectItem, TimelineItem } from '@/app/types/portfolio.types';
 
 import { Card, CardDescription, CardHeader } from './ui/card';
 import { Skeleton } from './ui/skeleton';
@@ -33,11 +32,11 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
   >
-    <Link href={linkHref} className="block h-full group">
+    <Link href={linkHref} className="group block h-full">
       <Card className="h-full transform transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="p-6">
           <div className="flex gap-4">
-            <div className="relative w-20 h-full aspect-square rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300 flex-shrink-0">
+            <div className="relative aspect-square h-full w-20 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40">
               <Image
                 src={imageSrc}
                 alt={altText}
@@ -47,9 +46,9 @@ const HighlightCard: React.FC<HighlightCardProps> = ({
                 sizes="80px"
               />
             </div>
-            <div className="flex flex-col justify-center flex-grow">
-              <h2 className="text-lg font-semibold tracking-tight line-clamp-1 mb-2">{title}</h2>
-              <CardDescription className="text-sm leading-snug line-clamp-2">
+            <div className="flex flex-grow flex-col justify-center">
+              <h2 className="mb-2 line-clamp-1 font-semibold text-lg tracking-tight">{title}</h2>
+              <CardDescription className="line-clamp-2 text-sm leading-snug">
                 {subtitle}
               </CardDescription>
             </div>
@@ -64,9 +63,9 @@ const HighlightSkeleton = () => (
   <Card className="h-full">
     <CardHeader className="p-6">
       <div className="flex gap-4">
-        <Skeleton className="w-20 aspect-square rounded-full flex-shrink-0" />
-        <div className="flex flex-col justify-center flex-grow">
-          <Skeleton className="h-4 w-3/4 mb-2" />
+        <Skeleton className="aspect-square w-20 flex-shrink-0 rounded-full" />
+        <div className="flex flex-grow flex-col justify-center">
+          <Skeleton className="mb-2 h-4 w-3/4" />
           <Skeleton className="h-3 w-full" />
         </div>
       </div>
@@ -114,10 +113,11 @@ const Highlights: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="mt-8 w-full max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="mx-auto mt-8 w-full max-w-4xl">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {[...Array(3)].map((_, i) => (
-            <HighlightSkeleton key={i} />
+            // biome-ignore lint/suspicious/noArrayIndexKey: Using index for skeleton loading placeholders is acceptable
+            <HighlightSkeleton key={`highlight-skeleton-${i}`} />
           ))}
         </div>
       </div>
@@ -155,8 +155,8 @@ const Highlights: React.FC = () => {
   ];
 
   return (
-    <div className="mt-8 w-full max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="mx-auto mt-8 w-full max-w-4xl">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {highlightCards.map((card, index) => (
           <HighlightCard key={card.title} {...card} index={index} />
         ))}

@@ -1,6 +1,6 @@
 import { generateSystemPrompt } from '@/app/lib/prompts';
 import { checkQueryRelevance } from '@/app/lib/utils';
-import { ChatRequest, ChatResponse } from '@/app/types/chat.types';
+import type { ChatRequest, ChatResponse } from '@/app/types/chat.types';
 
 export const runtime = 'edge';
 const model = 'sonar-pro';
@@ -82,7 +82,7 @@ function formatMessages(messages: { role: string; content: string }[]) {
 }
 
 export async function POST(req: Request) {
-  const { messages, id }: ChatRequest = await req.json();
+  const { messages }: ChatRequest = await req.json();
 
   // Get the last few messages for context (limit to prevent token overflow)
   const recentMessages = messages.slice(-5); // Keep last 5 messages for context

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { MotionList, MotionItem, scaleInVariants } from '@/app/components/MotionList';
+import { MotionItem, MotionList, scaleInVariants } from '@/app/components/MotionList';
 import PageTransition from '@/app/components/PageTransition';
 import { ScrollAnimation } from '@/app/components/ScrollAnimation';
 import { DOMAIN } from '@/app/constants';
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <PageTransition>
-      <div className="space-y-6 container mx-auto p-4 pt-6 md:pt-4">
+      <div className="container mx-auto space-y-6 p-4 pt-6 md:pt-4">
         <div className="flex flex-col items-start gap-2">
-          <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
+          <h1 className="font-bold text-3xl leading-tight tracking-tighter md:text-4xl">
             Projects
           </h1>
           <p className="text-muted-foreground">

@@ -7,10 +7,10 @@ import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/app/components/ui/card';
 import { TooltipSimple } from '@/app/components/ui/tooltip';
 import { socialIconMap } from '@/app/lib/icons';
@@ -26,15 +26,15 @@ export default function AchievementCard({ title, description, date, image, link 
       variants={dragVariants}
       className="h-full"
     >
-      <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
+      <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <CardHeader className="flex-none p-0">
           {image && (
-            <div className="relative w-full aspect-[16/9] overflow-hidden">
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
               <Image
                 src={`/${image}`}
                 alt={title}
                 fill
-                className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-200"
+                className="rounded-t-lg object-cover transition-transform duration-200 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
                 loading="lazy"
@@ -43,8 +43,8 @@ export default function AchievementCard({ title, description, date, image, link 
               />
             </div>
           )}
-          <div className="p-6 pb-2 space-y-1.5">
-            <CardTitle className="line-clamp-3 sm:line-clamp-2 min-h-[4.5rem] sm:min-h-[3.5rem]">
+          <div className="space-y-1.5 p-6 pb-2">
+            <CardTitle className="line-clamp-3 min-h-[4.5rem] sm:line-clamp-2 sm:min-h-[3.5rem]">
               {title}
             </CardTitle>
             <CardDescription className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export default function AchievementCard({ title, description, date, image, link 
           <p className="text-muted-foreground">{description}</p>
         </CardContent>
         {link && (
-          <CardFooter className="flex-none mt-auto pt-0 pb-6">
+          <CardFooter className="mt-auto flex-none pt-0 pb-6">
             <TooltipSimple
               content={
                 link.text === 'Read Article'

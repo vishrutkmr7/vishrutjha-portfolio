@@ -9,13 +9,12 @@ import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/app/components/ui/card';
-import { TooltipSimple } from '@/app/components/ui/tooltip';
-import { techIconMap, socialIconMap } from '@/app/lib/icons';
+import { socialIconMap, techIconMap } from '@/app/lib/icons';
 
 interface ProjectCardProps {
   title: string;
@@ -40,15 +39,15 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
       variants={dragVariants}
       className="h-full"
     >
-      <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
+      <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <div className="flex-none">
           {image && (
-            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-lg">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-lg">
               <Image
                 src={`/${image}`}
                 alt={title}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-200"
+                className="object-cover transition-transform duration-200 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
                 loading="lazy"
@@ -61,25 +60,25 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
         </div>
         <CardHeader className="flex-none space-y-1.5 p-6 pb-2">
           <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
-          <CardDescription className="flex items-center gap-2 h-6">
+          <CardDescription className="flex h-6 items-center gap-2">
             <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
             {date}
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex-grow flex flex-col gap-4 p-6 pt-2">
-          <p className="text-muted-foreground line-clamp-3 min-h-[4.5rem]">{description}</p>
+        <CardContent className="flex flex-grow flex-col gap-4 p-6 pt-2">
+          <p className="line-clamp-3 min-h-[4.5rem] text-muted-foreground">{description}</p>
           <div className="relative">
-            <div className="flex overflow-x-auto pb-2 gap-2 no-scrollbar mask-fade-right">
-              {tech.map((tech, techIndex) => {
-                const TechIcon = techIconMap[tech as keyof typeof techIconMap];
+            <div className="no-scrollbar mask-fade-right flex gap-2 overflow-x-auto pb-2">
+              {tech.map((techName, _techIndex) => {
+                const TechIcon = techIconMap[techName as keyof typeof techIconMap];
                 return (
                   <Badge
-                    key={techIndex}
+                    key={`${techName}-${title}`}
                     variant="secondary"
-                    className="flex items-center gap-1.5 hover:bg-primary/10 transition-colors duration-200 flex-shrink-0"
+                    className="flex flex-shrink-0 items-center gap-1.5 transition-colors duration-200 hover:bg-primary/10"
                   >
                     {TechIcon && <TechIcon className="h-3.5 w-3.5 flex-shrink-0" />}
-                    {tech}
+                    {techName}
                   </Badge>
                 );
               })}
@@ -88,7 +87,7 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
         </CardContent>
         {link && (
           <CardFooter className="flex-none p-6 pt-0">
-            <Button asChild variant="default" className="w-full h-10">
+            <Button asChild variant="default" className="h-10 w-full">
               <Link
                 href={link.url}
                 target="_blank"

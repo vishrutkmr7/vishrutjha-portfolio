@@ -7,7 +7,7 @@ module.exports = {
   priority: 0.7,
   exclude: ['/api/*', '/server-sitemap.xml'],
   // Add additional paths to be included
-  additionalPaths: async config => {
+  additionalPaths: async _config => {
     const result = [];
     result.push({
       loc: '/llms.txt',

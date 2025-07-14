@@ -1,4 +1,4 @@
-import { BaseItem, Link, TechItem } from './common.types';
+import type { BaseItem, Link, TechItem } from './common.types';
 
 export interface ProjectItem extends BaseItem, TechItem {}
 

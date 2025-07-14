@@ -37,7 +37,7 @@ Welcome to my portfolio website repository! Visit [vishrutjha.com](https://vishr
 - **Charts**: Chart.js with react-chartjs-2
 - **Animations**: Framer Motion and react-type-animation
 - **Icons**: Lucide React and React Icons
-- **Code Quality**: ESLint, Prettier, Husky, lint-staged
+- **Code Quality**: Biome, Husky, lint-staged
 - **Analytics**: Vercel Analytics and Speed Insights
 - **Deployment**: [Vercel](https://vercel.com/)
 

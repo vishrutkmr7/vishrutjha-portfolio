@@ -1,8 +1,7 @@
 'use client';
 
+import { ArcElement, Chart as ChartJS, Legend, Tooltip, type TooltipItem } from 'chart.js';
 import { useEffect, useState } from 'react';
-
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, TooltipItem } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 import { DraggableCard, dragVariants } from '@/app/components/MotionList';
@@ -17,7 +16,7 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { Separator } from '@/app/components/ui/separator';
-import { socialIconMap, Icons, techIconMap } from '@/app/lib/icons';
+import { Icons, socialIconMap, techIconMap } from '@/app/lib/icons';
 import type { LeetCodeStats } from '@/app/types/leetcode.types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -110,23 +109,23 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
       variants={dragVariants}
       className="h-full"
     >
-      <Card className="flex flex-col h-full group hover:shadow-lg transition-all duration-300">
+      <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <CardHeader className="flex-none pb-2">
           <div className="space-y-1.5">
-            <CardTitle className="line-clamp-1 flex items-center gap-2 min-h-[2rem]">
+            <CardTitle className="line-clamp-1 flex min-h-[2rem] items-center gap-2">
               <CodeIcon className="h-5 w-5 flex-shrink-0" />
               LeetCode Stats
             </CardTitle>
             <CardDescription className="flex flex-col gap-1">
               <span>Because apparently this matters...</span>
-              <span className="text-xs text-muted-foreground">(Spoiler: It doesn&apos;t)</span>
+              <span className="text-muted-foreground text-xs">(Spoiler: It doesn&apos;t)</span>
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent className="flex-grow pb-6">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="space-y-3 flex-grow">
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+              <div className="flex-grow space-y-3">
                 <div className="flex items-center gap-2">
                   <Badge variant="default" className="text-sm">
                     Total: {stats.totalSolved}/{stats.totalQuestions}
@@ -146,11 +145,11 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
                     Hard: {stats.hardSolved}/{stats.totalHard}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   Acceptance Rate: {(stats.acceptanceRate || 0).toFixed(1)}%
                 </p>
               </div>
-              <div className="w-28 h-28 flex-shrink-0">
+              <div className="h-28 w-28 flex-shrink-0">
                 <Doughnut data={getLeetCodeChartData(stats)} options={chartOptions} />
               </div>
             </div>
@@ -174,13 +173,13 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
                 </Badge>
               </div>
               {topLanguages.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-sm">
                   <span>Top languages:</span>
                   {topLanguages.map(lang => {
                     const { displayName, Icon } = getLanguageInfo(lang);
                     return (
                       <Badge key={lang.name} variant="outline" className="text-xs">
-                        <Icon className="h-3 w-3 mr-1" />
+                        <Icon className="mr-1 h-3 w-3" />
                         {displayName} ({lang.solved})
                       </Badge>
                     );
@@ -190,7 +189,7 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex-none mt-auto pt-0 pb-6">
+        <CardFooter className="mt-auto flex-none pt-0 pb-6">
           <Button asChild variant="default" className="w-full">
             <a
               href="https://leetcode.com/vishrutjha"
