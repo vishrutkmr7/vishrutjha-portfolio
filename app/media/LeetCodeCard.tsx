@@ -119,7 +119,35 @@ function LeetCodeChart({ stats }: { stats: LeetCodeStats }) {
 }
 
 const getLanguageInfo = (lang: { name: string; solved: number }) => {
-  const iconKey = lang.name.toLowerCase();
+  // Normalize language name to match our icon mapping
+  const normalizedName = lang.name
+    .toLowerCase()
+    .replace(/\s+/g, '') // Remove spaces
+    .replace(/\./g, '') // Remove dots
+    .replace(/\+/g, 'plus'); // Replace + with 'plus' for c++ -> cplus
+
+  // Try exact match first
+  let iconKey = normalizedName;
+
+  // Handle special cases and variations
+  if (normalizedName.includes('python')) {
+    iconKey = 'python';
+  } else if (
+    normalizedName === 'cplusplus' ||
+    normalizedName === 'cplus' ||
+    normalizedName === 'c++'
+  ) {
+    iconKey = 'c++';
+  } else if (normalizedName === 'csharp' || normalizedName === 'c#') {
+    iconKey = 'c#';
+  } else if (normalizedName === 'javascript' || normalizedName === 'js') {
+    iconKey = 'javascript';
+  } else if (normalizedName === 'typescript' || normalizedName === 'ts') {
+    iconKey = 'typescript';
+  } else if (normalizedName === 'golang') {
+    iconKey = 'go';
+  }
+
   const IconComponent = techIconMap[iconKey as keyof typeof techIconMap] || Icons.code;
   return { IconComponent, name: lang.name, solved: lang.solved };
 };
@@ -240,15 +268,18 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
               <div>
                 <h4 className="mb-2 font-medium text-sm">Languages Used</h4>
                 <div className="flex flex-wrap gap-1">
-                  {stats.languages.slice(0, 6).map(lang => {
-                    const { IconComponent, name, solved } = getLanguageInfo(lang);
-                    return (
-                      <Badge key={name} variant="outline" className="text-xs">
-                        <IconComponent className="mr-1 h-3 w-3" />
-                        {name} ({solved})
-                      </Badge>
-                    );
-                  })}
+                  {stats.languages
+                    .sort((a, b) => b.solved - a.solved) // Sort by problems solved (descending)
+                    .slice(0, 6)
+                    .map(lang => {
+                      const { IconComponent, name, solved } = getLanguageInfo(lang);
+                      return (
+                        <Badge key={name} variant="outline" className="text-xs">
+                          <IconComponent className="mr-1 h-3 w-3" />
+                          {name} ({solved})
+                        </Badge>
+                      );
+                    })}
                 </div>
               </div>
             </>
