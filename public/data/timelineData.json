@@ -17,7 +17,7 @@
     "time": "September 2023 - May 2024",
     "title": {
       "company": "PNYX.xyz",
-      "role": "iOS Developer (Volunteer)"
+      "role": "iOS Developer"
     },
     "body": "Contributed to NYX, a gamified platform for unreleased music A/B testing and pre-release campaigns, inspired by 'The Voice' show's blind auditions concept. Implemented high-performance audio streaming playback using AVFoundation and custom caching mechanisms. Integrated dual payment systems: Apple Pay for traditional transactions and Web3 payments using Coinbase API and MetaMask SDK for blockchain transactions. Developed a seamless user experience for music discovery and artist perks redemption (Spotify pre-saves, merchandise, show tickets) while maintaining user anonymity during blind testing phases.",
     "link": {
