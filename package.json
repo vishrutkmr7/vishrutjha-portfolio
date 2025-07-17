@@ -48,7 +48,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.1",
+    "@biomejs/biome": "^2.1.2",
     "@types/node": "^20.19.8",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
