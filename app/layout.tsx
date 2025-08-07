@@ -213,14 +213,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
             <ClientComponents />
-            {/* Foreground content wrapper */}
-            <div className="relative z-10">
-              <div className="flex min-h-[100dvh] flex-col">
-                <Header />
-                <main className="container mt-14 flex-grow py-4 md:py-6">{children}</main>
-                <Footer />
-                <Chat />
-              </div>
+            {/* Foreground content */}
+            <div className="flex min-h-[100dvh] flex-col">
+              <Header />
+              <main className="container mt-14 flex-grow py-4 md:py-6">{children}</main>
+              <Footer />
+              <Chat />
             </div>
             <SpeedInsights />
           </ThemeProvider>
