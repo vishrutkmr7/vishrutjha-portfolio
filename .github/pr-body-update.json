@@ -1,0 +1,3 @@
+{
+  "body": "### UI updates\n- Static purple → black background on all pages\n- Multi-stop alpha gradient using CSS variables; DRY and theme-aware\n- Very faint grain overlay to reduce banding\n- Z-index layering: fixed background at z-0; content wrapper z-10; header/progress/chat keep their z-50/100 values\n\n### Build/Tooling\n- Bun-only (`packageManager: bun@1.2.19`); removed yarn.lock, added to .gitignore\n\n### Checks\n- Built with Bun; no issues\n- Mobile and desktop verified"
+}
