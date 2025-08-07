@@ -65,6 +65,12 @@ const SocialLinks = memo(() => {
         icon: socialIconMap.Twitter,
         label: 'Twitter',
       },
+      // Insert Instagram between Twitter and Email
+      {
+        href: 'https://www.instagram.com/vishrutkmr7',
+        icon: socialIconMap.Instagram,
+        label: 'Instagram',
+      },
       {
         href: 'mailto:i@vishrut.co',
         icon: socialIconMap.email,
