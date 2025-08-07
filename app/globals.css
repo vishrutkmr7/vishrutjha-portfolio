@@ -59,10 +59,19 @@
 
     --radius: 0.5rem;
 
-    /* Static background gradient tokens */
-    --bg-static-start: #7c3aed; /* violet-600 */
-    --bg-static-end: #000000;   /* black */
-    --bg-split: 50%;            /* top half purple -> bottom black */
+    /* Static background gradient tokens (subtle overlay for readability) */
+    --bg-start-rgb: 124 58 237; /* violet-600 */
+    --bg-end-rgb: 0 0 0;        /* black */
+    --bg-start-alpha-1: 0.10;   /* at 0% */
+    --bg-start-alpha-2: 0.06;   /* at top stop */
+    --bg-end-alpha-1: 0.06;     /* at bottom start */
+    --bg-end-alpha-2: 0.10;     /* at 100% */
+    --bg-top-stop: 40%;
+    --bg-bottom-start: 62%;
+
+    /* Grain amount for banding reduction */
+    --bg-grain-alpha: 0.015;
+    --bg-grain-size: 3px;
   }
 
   .dark {
@@ -94,9 +103,15 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
-    /* Slightly deeper purple in dark */
-    --bg-static-start: #6d28d9; /* violet-700 */
-    --bg-static-end: #000000;
+    /* Slightly deeper overlay in dark for contrast */
+    --bg-start-rgb: 109 40 217; /* violet-700 */
+    --bg-end-rgb: 0 0 0;
+    --bg-start-alpha-1: 0.14;
+    --bg-start-alpha-2: 0.08;
+    --bg-end-alpha-1: 0.08;
+    --bg-end-alpha-2: 0.14;
+
+    --bg-grain-alpha: 0.02;
   }
 }
 
@@ -109,7 +124,7 @@
   }
 }
 
-/* Static, theme-aware background (purple -> black) */
+/* Static, theme-aware background (subtle purple → black overlay) */
 @layer utilities {
   .site-background {
     position: fixed;
@@ -118,10 +133,30 @@
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      var(--bg-static-start) 0%,
-      var(--bg-static-start) var(--bg-split),
-      var(--bg-static-end) 100%
+      rgb(var(--bg-start-rgb) / var(--bg-start-alpha-1)) 0%,
+      rgb(var(--bg-start-rgb) / var(--bg-start-alpha-2)) var(--bg-top-stop),
+      rgb(var(--bg-end-rgb) / var(--bg-end-alpha-1)) var(--bg-bottom-start),
+      rgb(var(--bg-end-rgb) / var(--bg-end-alpha-2)) 100%
     );
     background-repeat: no-repeat;
+  }
+
+  /* Very faint grain to reduce gradient banding on some displays */
+  .site-background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgb(255 255 255 / var(--bg-grain-alpha)) 0 var(--bg-grain-size),
+        transparent var(--bg-grain-size) calc(var(--bg-grain-size) * 2)
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgb(0 0 0 / calc(var(--bg-grain-alpha) * 0.7)) 0 var(--bg-grain-size),
+        transparent var(--bg-grain-size) calc(var(--bg-grain-size) * 2)
+      );
+    mix-blend-mode: overlay;
+    pointer-events: none;
   }
 }
