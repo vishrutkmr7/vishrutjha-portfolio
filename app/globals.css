@@ -58,6 +58,11 @@
     --ring: 240 5.9% 10%;
 
     --radius: 0.5rem;
+
+    /* Gradient background tokens */
+    --bg-aurora-1: hsl(var(--primary) / 0.12);
+    --bg-aurora-2: hsl(var(--accent) / 0.12);
+    --bg-aurora-3: hsl(var(--muted) / 0.10);
   }
 
   .dark {
@@ -88,6 +93,11 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+
+    /* Slightly stronger in dark for better contrast */
+    --bg-aurora-1: hsl(var(--primary) / 0.18);
+    --bg-aurora-2: hsl(var(--accent) / 0.18);
+    --bg-aurora-3: hsl(var(--muted) / 0.14);
   }
 }
 
@@ -97,5 +107,76 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Animated, theme-aware background that works on desktop and mobile */
+@layer utilities {
+  .site-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(600px 400px at 15% 20%, var(--bg-aurora-1), transparent 60%),
+      radial-gradient(600px 400px at 85% 25%, var(--bg-aurora-2), transparent 60%),
+      radial-gradient(700px 500px at 50% 85%, var(--bg-aurora-3), transparent 60%);
+    background-repeat: no-repeat;
+    background-size: 140% 140%, 140% 140%, 140% 140%;
+    animation: site-gradient-move 28s ease-in-out infinite alternate;
+    will-change: background-position, transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    filter: saturate(115%);
+  }
+
+  .site-background::before {
+    content: '';
+    position: absolute;
+    inset: -10% -10% -20% -10%;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 0 70%, var(--bg-aurora-2) 86%, transparent 100%);
+    opacity: 0.5;
+    filter: blur(32px);
+    animation: site-gradient-spin 60s linear infinite;
+  }
+
+  @keyframes site-gradient-move {
+    0% {
+      background-position: 0% 0%, 100% 0%, 50% 100%;
+    }
+    50% {
+      background-position: 100% 50%, 0% 100%, 50% 0%;
+    }
+    100% {
+      background-position: 0% 0%, 100% 0%, 50% 100%;
+    }
+  }
+
+  @keyframes site-gradient-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-background {
+      background:
+        radial-gradient(420px 300px at 20% 18%, var(--bg-aurora-1), transparent 60%),
+        radial-gradient(420px 300px at 80% 24%, var(--bg-aurora-2), transparent 60%),
+        radial-gradient(520px 380px at 50% 86%, var(--bg-aurora-3), transparent 60%);
+      background-size: 200% 200%, 200% 200%, 200% 200%;
+      animation-duration: 34s;
+    }
+
+    .site-background::before {
+      opacity: 0.4;
+      filter: blur(26px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-background, .site-background::before {
+      animation: none !important;
+    }
   }
 }

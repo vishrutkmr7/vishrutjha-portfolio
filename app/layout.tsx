@@ -179,6 +179,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             disableTransitionOnChange
             storageKey="vishrutjha-theme"
           >
+            {/* Animated background layer */}
+            <div className="site-background" aria-hidden="true" />
+
             <ScrollProgressBar />
             {/* Google Tag Manager (noscript) */}
             <noscript>
@@ -210,11 +213,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
             <ClientComponents />
-            <div className="flex min-h-[100dvh] flex-col">
-              <Header />
-              <main className="container mt-14 flex-grow py-4 md:py-6">{children}</main>
-              <Footer />
-              <Chat />
+            {/* Foreground content wrapper */}
+            <div className="relative z-10">
+              <div className="flex min-h-[100dvh] flex-col">
+                <Header />
+                <main className="container mt-14 flex-grow py-4 md:py-6">{children}</main>
+                <Footer />
+                <Chat />
+              </div>
             </div>
             <SpeedInsights />
           </ThemeProvider>
