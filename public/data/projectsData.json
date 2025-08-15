@@ -1,5 +1,24 @@
 [
   {
+    "title": "TestFlight PM - Enhanced Issue Management",
+    "description": "An intelligent GitHub Action that processes TestFlight feedback using AI-powered enhancement. Automatically creates issues in GitHub and Linear from crash reports and user feedback using the new App Store Connect API 4.0. Features smart duplicate detection, cost controls, and multi-LLM support (OpenAI, Anthropic, Google Gemini).",
+    "date": "07/14/2025 - Present",
+    "image": "testflight-pm.png",
+    "link": {
+      "text": "GitHub Marketplace",
+      "url": "https://github.com/marketplace/actions/testflight-pm-enhanced-issue-management"
+    },
+    "tech": [
+      "GitHub Actions",
+      "TypeScript",
+      "AI/ML",
+      "App Store Connect API",
+      "OpenAI",
+      "Anthropic",
+      "Google Gemini"
+    ]
+  },
+  {
     "title": "PassDex",
     "description": "An app to add any barcode/QR Code to your Apple Wallet, leveraging the latest metadata features introduced in iOS 18.",
     "date": "03/28/2025 - Present",
