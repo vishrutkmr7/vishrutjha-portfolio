@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Briefcase, Calendar, GraduationCap, Grid3x3, Heart } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
@@ -181,22 +181,28 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ timelineData }) => {
                         </div>
 
                         {/* Expandable content */}
-                        {selectedItem === item.title.company && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-4 pb-4 md:px-6 md:pb-6">
-                              <Separator className="mb-4" />
-                              <TimelineBody className="text-sm leading-relaxed">
-                                {item.body}
-                              </TimelineBody>
-                            </div>
-                          </motion.div>
-                        )}
+                        <AnimatePresence mode="wait">
+                          {selectedItem === item.title.company && (
+                            <motion.div
+                              key={`expand-${item.title.company}`}
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{
+                                duration: 0.3,
+                                ease: 'easeInOut',
+                              }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-4 pb-4 md:px-6 md:pb-6">
+                                <Separator className="mb-4" />
+                                <TimelineBody className="text-sm leading-relaxed">
+                                  {item.body}
+                                </TimelineBody>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     </DraggableCard>
                   </TimelineContent>
