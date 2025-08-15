@@ -98,7 +98,7 @@ export async function POST(req: Request) {
       response: {
         content:
           relevanceCheck.reason ||
-          "Please keep questions focused on Vishrut's professional background.",
+          "I'd love to chat about work, interests, and experiences! What would you like to know?",
         sources: [],
         confidence: 1.0,
         isRelevant: false,

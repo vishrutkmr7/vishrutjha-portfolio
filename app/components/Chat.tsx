@@ -2,7 +2,7 @@
 
 import { useChat } from 'ai/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, Info, Send, Sparkles, X } from 'lucide-react';
+import { Info, Send, Sparkles, X } from 'lucide-react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useIsMobile } from '@/app/lib/hooks';
@@ -34,7 +34,7 @@ interface ValidationState {
   message?: string;
 }
 
-// Memoized chat bubble component
+// Clean chat bubble component
 const ChatBubble = memo(
   ({
     children,
@@ -55,14 +55,14 @@ const ChatBubble = memo(
     return (
       <div
         className={cn(
-          'relative px-3 py-2 text-sm transition-all duration-200',
+          'relative text-sm leading-relaxed transition-all duration-200 max-w-[280px] break-words',
           isAssistant
             ? cn(
-                'bg-muted text-foreground border border-border rounded-lg shadow-sm',
+                'bg-muted text-foreground border border-border rounded-lg shadow-sm px-2 py-1.5',
                 getConfidenceIndicator(confidence)
               )
             : cn(
-                'bg-primary text-primary-foreground',
+                'bg-primary text-primary-foreground px-2 py-1.5',
                 'rounded-2xl rounded-br-md shadow-md border border-primary/20',
                 'font-medium'
               )
@@ -92,7 +92,7 @@ const LoadingIndicator = memo(() => {
             <div className="flex gap-1">
               {[0, 0.2, 0.4].map(delay => (
                 <motion.span
-                  key={delay}
+                  key={`loading-dot-${delay}`}
                   className="h-1.5 w-1.5 rounded-full bg-primary"
                   animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{
@@ -125,6 +125,7 @@ export default function Chat() {
       .substring(0, 7);
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const isMobile = useIsMobile();
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
@@ -142,7 +143,7 @@ export default function Chat() {
       if (response.status === 400) {
         setValidationState({
           isValid: false,
-          message: "Please ask questions about Vishrut's professional work.",
+          message: "I'd prefer to keep our conversation focused on topics I can help with.",
         });
       }
     },
@@ -150,6 +151,14 @@ export default function Chat() {
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  // Auto-resize textarea
+  const adjustTextareaHeight = useCallback(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${Math.min(inputRef.current.scrollHeight, 120)}px`;
+    }
   }, []);
 
   // Combined useEffect for better performance
@@ -160,6 +169,10 @@ export default function Chat() {
       scrollToBottom();
     }
   }, [isOpen, setMessages, scrollToBottom]);
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [adjustTextareaHeight]);
 
   // Memoized response parser
   const parseResponse = useCallback((content: string): StructuredResponse | null => {
@@ -179,30 +192,29 @@ export default function Chat() {
     }
   }, []);
 
-  // Memoized validation patterns
+  // Memoized validation patterns - only block truly inappropriate content
   const offTopicPatterns = useMemo(
     () => [
-      /\b(private|family|relationship|age|salary|money|politics|religion)\b/i,
-      /\b(where do you live|are you single|what do you think about|how old)\b/i,
-      /\b(chatgpt|openai|help me with|can you|general question)\b/i,
+      /\b(salary|income|wage|bank account|social security|password|credit card)\b/i,
+      /\b(exact address|home address|phone number|personal email)\b/i,
     ],
     []
   );
 
   const handleInputValidation = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const value = e.target.value;
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const { value } = e.target;
       setValidationState({ isValid: true });
 
       if (offTopicPatterns.some(pattern => pattern.test(value))) {
         setValidationState({
           isValid: false,
           message:
-            "Let's keep things professional but fun! Ask about Vishrut's work, interests, or experiences.",
+            'Please avoid sharing sensitive personal information like financial details or addresses.',
         });
       }
 
-      handleInputChange(e as React.ChangeEvent<HTMLInputElement>);
+      handleInputChange({ target: { value } } as React.ChangeEvent<HTMLInputElement>);
     },
     [handleInputChange, offTopicPatterns]
   );
@@ -210,12 +222,16 @@ export default function Chat() {
   const handleFormSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (!validationState.isValid) {
+      if (!validationState.isValid || !input.trim() || isLoading) {
         return;
       }
       handleSubmit(e);
+      // Reset textarea height
+      if (inputRef.current) {
+        inputRef.current.style.height = 'auto';
+      }
     },
-    [validationState.isValid, handleSubmit]
+    [validationState.isValid, handleSubmit, input, isLoading]
   );
 
   // Memoized animation variants
@@ -274,9 +290,7 @@ export default function Chat() {
                       'flex items-center justify-center'
                     )}
                   >
-                    <div className="flex items-center justify-center">
-                      <Sparkles className="h-5 w-5 shrink-0 text-primary-foreground" />
-                    </div>
+                    <Sparkles className="h-5 w-5 shrink-0 text-primary-foreground" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="left" className="bg-popover">
@@ -317,7 +331,18 @@ export default function Chat() {
             </div>
 
             {/* Messages */}
-            <div className="flex h-96 flex-col overflow-y-auto p-4 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30">
+            <div
+              className="flex h-96 flex-col overflow-y-auto p-4 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30"
+              style={{
+                background: `linear-gradient(
+                     to bottom,
+                     rgb(var(--bg-start-rgb) / var(--bg-start-alpha-1)) 0%,
+                     rgb(var(--bg-start-rgb) / var(--bg-start-alpha-2)) var(--bg-top-stop),
+                     rgb(var(--bg-end-rgb) / var(--bg-end-alpha-1)) var(--bg-bottom-start),
+                     rgb(var(--bg-end-rgb) / var(--bg-end-alpha-2)) 100%
+                   )`,
+              }}
+            >
               {messages.length === 0 && (
                 <div className="flex h-full flex-col items-center justify-center text-center space-y-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
@@ -332,112 +357,56 @@ export default function Chat() {
                 </div>
               )}
 
-              <div className="flex flex-col min-h-0 flex-1">
-                <AnimatePresence initial={false}>
-                  {messages.map((message, index) => {
-                    const structuredResponse =
-                      message.role === 'assistant' ? parseResponse(message.content) : null;
-                    const isLastMessage = index === messages.length - 1;
+              <AnimatePresence initial={false}>
+                {messages.map(message => {
+                  const structuredResponse =
+                    message.role === 'assistant' ? parseResponse(message.content) : null;
+                  const isUser = message.role === 'user';
 
-                    return (
-                      <motion.div
-                        key={message.id}
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                        animate={{
-                          opacity: 1,
-                          y: 0,
-                          scale: 1,
-                          transition: {
-                            type: 'spring' as const,
-                            stiffness: isMobile ? 300 : 500,
-                            damping: isMobile ? 25 : 30,
-                            delay: 0.1,
-                          },
-                        }}
-                        exit={{
-                          opacity: 0,
-                          y: -10,
-                          scale: 0.95,
-                          transition: { duration: 0.2 },
-                        }}
-                        className={cn(
-                          'flex w-full',
-                          message.role === 'user' ? 'justify-end' : 'justify-start',
-                          index > 0 && 'mt-3',
-                          isLastMessage && 'mb-2'
-                        )}
+                  return (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: {
+                          type: 'spring',
+                          stiffness: 400,
+                          damping: 25,
+                          delay: 0.05,
+                        },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: -10,
+                        scale: 0.95,
+                        transition: { duration: 0.2 },
+                      }}
+                      className={cn('flex w-full mb-2', isUser ? 'justify-end' : 'justify-start')}
+                    >
+                      <ChatBubble
+                        isAssistant={!isUser}
+                        confidence={structuredResponse?.response?.confidence}
                       >
-                        <div
-                          className={cn(
-                            'max-w-[85%]',
-                            message.role === 'assistant' ? 'mr-auto ml-0' : 'mr-0 ml-auto'
-                          )}
-                        >
-                          <ChatBubble
-                            isAssistant={message.role === 'assistant'}
-                            confidence={structuredResponse?.response?.confidence}
-                          >
-                            {message.role === 'assistant' && structuredResponse ? (
-                              <div className="space-y-1">
-                                <AnimatedMarkdown
-                                  content={structuredResponse.response.content}
-                                  isAssistant={true}
-                                />
-                                {structuredResponse.response.sources?.length > 0 && (
-                                  <div className="mt-1.5 border-t border-border/50 pt-1.5">
-                                    <p className="mb-2 text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                                      Sources
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                      {structuredResponse.response.sources
-                                        .slice(0, 3)
-                                        .map((source, sourceIndex) => (
-                                          <motion.a
-                                            key={source.url || source.title}
-                                            href={source.url || '#'}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            initial={{ opacity: 0, scale: 0.9 }}
-                                            animate={{
-                                              opacity: 1,
-                                              scale: 1,
-                                              transition: { delay: 0.3 + sourceIndex * 0.1 },
-                                            }}
-                                            className={cn(
-                                              'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5',
-                                              'text-xs font-medium transition-colors duration-200',
-                                              'bg-background/80 border-border text-foreground',
-                                              'hover:bg-accent hover:text-accent-foreground hover:shadow-sm',
-                                              'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
-                                            )}
-                                          >
-                                            <ExternalLink className="h-3 w-3 flex-shrink-0" />
-                                            <span className="truncate max-w-[120px]">
-                                              {source.title}
-                                            </span>
-                                          </motion.a>
-                                        ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            ) : (
-                              <div className="leading-6">
-                                <AnimatedMarkdown
-                                  content={message.content}
-                                  isAssistant={message.role === 'assistant'}
-                                />
-                              </div>
-                            )}
-                          </ChatBubble>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
+                        {!isUser && structuredResponse ? (
+                          <AnimatedMarkdown
+                            content={structuredResponse.response.content}
+                            isAssistant={true}
+                          />
+                        ) : (
+                          <div className="leading-relaxed">
+                            <AnimatedMarkdown content={message.content} isAssistant={!isUser} />
+                          </div>
+                        )}
+                      </ChatBubble>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
 
-                {isLoading && <LoadingIndicator />}
-              </div>
+              {isLoading && <LoadingIndicator />}
               <div ref={messagesEndRef} />
             </div>
 
@@ -453,6 +422,7 @@ export default function Chat() {
                 <div className="flex items-end gap-2">
                   <div className="relative flex-1">
                     <textarea
+                      ref={inputRef}
                       value={input}
                       onChange={handleInputValidation}
                       onKeyDown={e => {
@@ -476,7 +446,7 @@ export default function Chat() {
                       style={{ minHeight: '52px' }}
                       disabled={isLoading}
                     />
-                    <div className="absolute right-2 bottom-2">
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2">
                       <Button
                         type="submit"
                         size="icon"

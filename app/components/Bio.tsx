@@ -27,7 +27,7 @@ const TypeAnimation = dynamic(
 // Memoized profile image component
 const ProfileImage = memo(() => (
   <TooltipSimple content="That's me! 👋" side="bottom">
-    <div className="relative mb-6 h-44 w-44">
+    <div className="relative mb-6 h-44 w-44 md:mb-2">
       <Image
         src="/pfp.png"
         alt="Vishrut Jha"
@@ -46,7 +46,7 @@ ProfileImage.displayName = 'ProfileImage';
 
 // Memoized greeting component
 const Greeting = memo(() => (
-  <div className="mb-4 text-center">
+  <div className="mb-4 text-center md:mb-2">
     <h1 className="mb-3 flex flex-wrap items-center justify-center font-bold text-3xl sm:text-4xl md:text-5xl">
       <div className="flex items-center gap-2 sm:gap-3">
         <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
@@ -96,7 +96,7 @@ Greeting.displayName = 'Greeting';
 
 // Memoized location component
 const Location = memo(() => (
-  <div className="mb-6 flex items-center justify-center gap-2 text-muted-foreground">
+  <div className="mb-6 flex items-center justify-center gap-2 text-muted-foreground md:mb-4">
     <svg
       className="h-4 w-4"
       fill="none"
@@ -126,7 +126,7 @@ Location.displayName = 'Location';
 
 // Memoized action buttons component
 const ActionButtons = memo(() => (
-  <div className="mb-8 grid w-full max-w-md gap-4 sm:grid-cols-2">
+  <div className="mb-8 grid w-full max-w-md gap-4 sm:grid-cols-2 md:mb-5">
     <TooltipSimple content="View my professional journey" side="top">
       <Button
         asChild
@@ -164,7 +164,7 @@ ActionButtons.displayName = 'ActionButtons';
 
 // Memoized social links component
 const SocialLinks = memo(() => (
-  <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
+  <div className="mb-8 flex flex-wrap items-center justify-center gap-4 md:mb-5">
     <TooltipSimple content="GitHub" side="top">
       <Link
         href="https://github.com/vishrutkmr7"
@@ -223,7 +223,7 @@ interface BioProps {
 
 const Bio = memo(({ children }: BioProps) => {
   return (
-    <div className="container mx-auto flex flex-col items-center px-4 py-8">
+    <div className="container mx-auto flex flex-col items-center px-4 py-8 md:py-0">
       <ProfileImage />
       <Greeting />
       <Location />

@@ -34,6 +34,11 @@ const relevanceTerms: RelevanceTerms = {
       'position',
       'career',
       'achievement',
+      'volunteer',
+      'volunteering',
+      'volunteered',
+      'contributed',
+      'contribution',
       'do',
       'did',
       'does',
@@ -113,6 +118,18 @@ const relevanceTerms: RelevanceTerms = {
       'compliance',
       'group',
       'applifly',
+      'pnyx',
+      'pnyx.xyz',
+      'nyx',
+      'music platform',
+      'gamified platform',
+      'prickly pear',
+      'prickly pear health',
+      'dhan',
+      'dhan ai',
+      'authbase',
+      'nuclear fuel complex',
+      'hcl',
       'university',
       'arizona',
       'arizona state',
@@ -162,6 +179,64 @@ const relevanceTerms: RelevanceTerms = {
       'describe',
     ],
   },
+  personalInterests: {
+    weight: 1.0,
+    terms: [
+      'favorite',
+      'like',
+      'enjoy',
+      'hobby',
+      'hobbies',
+      'interest',
+      'interests',
+      'passion',
+      'fan',
+      'support',
+      'soccer',
+      'football',
+      'barca',
+      'barcelona',
+      'team',
+      'sport',
+      'sports',
+      'music',
+      'movie',
+      'movies',
+      'book',
+      'books',
+      'game',
+      'games',
+      'travel',
+      'food',
+      'coffee',
+      'preference',
+      'prefer',
+    ],
+  },
+  conversational: {
+    weight: 1.0,
+    terms: [
+      'hello',
+      'hi',
+      'hey',
+      'how are you',
+      'what is',
+      'what are',
+      'do you',
+      'are you',
+      'can you',
+      'will you',
+      'would you',
+      'tell me',
+      'show me',
+      'help',
+      'question',
+      'ask',
+      'wondering',
+      'curious',
+      'know more',
+    ],
+  },
 };
 
 export async function checkQueryRelevance(query: string): Promise<RelevanceCheckResult> {
@@ -181,11 +256,10 @@ export async function checkQueryRelevance(query: string): Promise<RelevanceCheck
     };
   }
 
-  // Check for obvious off-topic indicators
+  // Only block truly sensitive information requests
   const _offTopicPatterns = [
-    /\b(personal|private|family|relationship|age|salary|money|politics|religion)\b/i,
-    /\b(where do you live|are you single|what do you think about|how old)\b/i,
-    /\b(chatgpt|openai|general question)\b/i,
+    /\b(salary|income|wage|bank account|social security|password|credit card)\b/i,
+    /\b(exact address|home address|phone number|personal email)\b/i,
   ];
 
   // Special handling for company-related questions
@@ -243,15 +317,15 @@ export async function checkQueryRelevance(query: string): Promise<RelevanceCheck
     matchedTerms += matches.length;
   }
 
-  // More lenient threshold for relevance
-  const isRelevant = totalScore >= 0.5 || matchedTerms >= 1;
+  // Very lenient threshold for relevance - allow most conversational questions
+  const isRelevant = totalScore >= 0.2 || matchedTerms >= 1;
 
   return {
     isRelevant,
     confidence: Math.min(totalScore / 3, 1),
     reason: isRelevant
       ? undefined
-      : "Please ask questions about Vishrut's professional background, his work at various companies, or his educational background.",
+      : "I'd prefer to chat about topics I can help with - feel free to ask about work, interests, or experiences!",
   };
 }
 

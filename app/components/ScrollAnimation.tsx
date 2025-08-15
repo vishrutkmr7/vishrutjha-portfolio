@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { type ReactNode, useRef } from 'react';
 
 import { useIsMobile } from '@/app/lib/hooks';
@@ -54,9 +55,12 @@ export const ScrollAnimation = ({ children, className }: ScrollAnimationProps) =
 // Progress bar component that grows as you scroll
 export const ScrollProgressBar = () => {
   const prefersReducedMotion = useReducedMotion();
+  const pathname = usePathname();
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
 
-  if (prefersReducedMotion) {
+  // Hide on home page only in desktop mode (mobile users may still need to scroll)
+  if (prefersReducedMotion || (pathname === '/' && !isMobile)) {
     return null;
   }
 
