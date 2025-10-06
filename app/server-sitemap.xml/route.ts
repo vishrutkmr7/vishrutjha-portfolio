@@ -1,6 +1,6 @@
 export async function GET() {
   // Add your dynamic routes here
-  const routes = ['', '/media', '/journey', '/projects', '/resume', '/hey'];
+  const routes = ['', '/media', '/journey', '/projects', '/resume', '/hey', '/referrals'];
 
   // Transform routes into sitemap entries
   const entries = routes.map(route => ({

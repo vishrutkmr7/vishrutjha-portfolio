@@ -6,7 +6,12 @@ import path from 'path';
 // Direct API function imports to avoid HTTP requests during SSR
 import { GET as getLeetCodeStats } from '@/app/api/leetcode/route';
 import type { LeetCodeStats } from '@/app/types';
-import type { Achievement, ProjectItem, TimelineItem } from '@/app/types/portfolio.types';
+import type {
+  Achievement,
+  ProjectItem,
+  ReferralItem,
+  TimelineItem,
+} from '@/app/types/portfolio.types';
 
 // Base fetch configuration for API calls only
 const BASE_CONFIG = {
@@ -83,6 +88,43 @@ export async function fetchTimelineData(): Promise<TimelineItem[]> {
   }
 }
 
+export async function fetchReferralsData(): Promise<ReferralItem[]> {
+  try {
+    const data = readJsonFile<ReferralItem[]>('referrals.json');
+    if (!data) {
+      return [];
+    }
+
+    // Import metadata fetcher dynamically to avoid issues
+    const { fetchReferralMetadata } = await import('./metadata-fetcher');
+
+    // Enrich each referral with metadata from its URL
+    return await Promise.all(
+      data.map(async referral => {
+        try {
+          const metadata = await fetchReferralMetadata(referral.url);
+          return {
+            ...referral,
+            image: metadata.favicon,
+            description: metadata.description,
+          };
+        } catch (error) {
+          console.error(`Failed to fetch metadata for ${referral.url}:`, error);
+          // Return with fallback values
+          return {
+            ...referral,
+            image: '/favicon.png',
+            description: `Check out ${referral.title}`,
+          };
+        }
+      })
+    );
+  } catch (error) {
+    console.error('Failed to fetch referrals data:', error);
+    return [];
+  }
+}
+
 // Improved LeetCode stats fetching with SSR support
 export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
   try {
@@ -98,12 +140,11 @@ export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
     }
 
     // On the client side, use the regular fetch
-    const data = await fetchWithCache<LeetCodeStats>(
+    return await fetchWithCache<LeetCodeStats>(
       '/api/leetcode',
       1800, // 30 minutes cache
       'Failed to fetch LeetCode stats'
     );
-    return data;
   } catch (error) {
     console.error('Failed to fetch LeetCode stats:', error);
     return null;

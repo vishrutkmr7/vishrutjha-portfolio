@@ -16,3 +16,14 @@ export interface TimelineItem extends TechItem {
 }
 
 export interface Achievement extends BaseItem {}
+
+export interface ReferralItem {
+  title: string;
+  slug: string;
+  url: string;
+  category: string;
+  featured?: boolean;
+  // These fields are dynamically fetched from the URL
+  description?: string;
+  image?: string;
+}

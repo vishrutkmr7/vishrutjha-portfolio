@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Perplexity Comet",
+    "slug": "comet",
+    "url": "https://perplexity.ai/browser/claim/EJZCCXTJNL",
+    "category": "Software",
+    "featured": true
+  },
+  {
+    "title": "Warp Terminal",
+    "slug": "warp",
+    "url": "https://app.warp.dev/referral/6PZ9QK",
+    "category": "Software",
+    "featured": false
+  },
+  {
+    "title": "Discover Credit Card",
+    "slug": "discover",
+    "url": "https://refer.discover.com/s/vishrutkmr71?advocate.partner_share_id=8628747253",
+    "category": "Credit Cards",
+    "featured": false
+  },
+  {
+    "title": "Chase Sapphire",
+    "slug": "chase-sapphire",
+    "url": "https://www.referyourchasecard.com/19u/28I1SLNALZ",
+    "category": "Credit Cards",
+    "featured": true
+  },
+  {
+    "title": "AmEx Blue Cash Preferred",
+    "slug": "amex-blue-cash",
+    "url": "https://americanexpress.com/en-us/referral/blue-cash-preferred-credit-card?ref=VISHRJGTpA&XL=MIANS",
+    "category": "Credit Cards",
+    "featured": true
+  }
+]
