@@ -136,9 +136,6 @@ const nextConfig = {
       },
     ];
   },
-  turbopack: {
-    root: "/Users/vishrutjha/Developer/vishrutjha-portfolio",
-  },
   async rewrites() {
     return [
       {

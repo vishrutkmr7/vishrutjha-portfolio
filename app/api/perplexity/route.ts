@@ -2,7 +2,6 @@ import { generateSystemPrompt } from '@/app/lib/prompts';
 import { checkQueryRelevance } from '@/app/lib/utils';
 import type { ChatRequest, ChatResponse } from '@/app/types/chat.types';
 
-export const runtime = 'edge';
 const model = 'sonar-pro';
 
 const responseSchema = {
