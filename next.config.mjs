@@ -33,6 +33,12 @@ const nextConfig = {
         port: "",
         pathname: "/s2/favicons/**",
       },
+      {
+        protocol: "https",
+        hostname: "t3.gstatic.com",
+        port: "",
+        pathname: "/faviconV2/**",
+      },
     ],
     // Enable image optimization
     minimumCacheTTL: 60,
@@ -51,7 +57,7 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.cloudflareinsights.com https://*.vercel-scripts.com https://plausible.io",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
-              "font-src 'self' https://fonts.gstatic.com",
+              "font-src 'self' https://fonts.gstatic.com https://r2cdn.perplexity.ai",
               "connect-src 'self' https: wss:",
               "frame-src 'self' https://*.doubleclick.net",
               "frame-ancestors 'none'",

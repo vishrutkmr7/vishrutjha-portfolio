@@ -25,7 +25,13 @@ interface ReferralsContentProps {
   referrals: ReferralItem[];
 }
 
-function ReferralCard({ referral }: { referral: ReferralItem }) {
+function ReferralCard({
+  referral,
+  isPriority = false,
+}: {
+  referral: ReferralItem;
+  isPriority?: boolean;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,6 +51,7 @@ function ReferralCard({ referral }: { referral: ReferralItem }) {
                   fill
                   className="object-contain"
                   sizes="56px"
+                  priority={isPriority}
                   unoptimized
                 />
               </div>
@@ -175,42 +182,44 @@ export default function ReferralsContent({ referrals }: ReferralsContentProps) {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap items-center gap-2">
-          {/* Featured Filter - Prioritized */}
-          <Button
-            variant={showOnlyFeatured ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setShowOnlyFeatured(!showOnlyFeatured)}
-            className="gap-1.5 transition-all duration-300"
-          >
-            <Star className={cn('h-3.5 w-3.5', showOnlyFeatured && 'fill-current')} />
-            Featured ({featuredCount})
-          </Button>
-
-          {/* Category Filter */}
-          {categories.map(category => (
+        <div className="-mx-4 overflow-x-auto px-4 pb-2 md:mx-0 md:px-0">
+          <div className="flex min-w-max items-center gap-2 md:min-w-0 md:flex-wrap">
+            {/* Featured Filter - Prioritized */}
             <Button
-              key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
+              variant={showOnlyFeatured ? 'default' : 'outline'}
               size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className="capitalize transition-all duration-300"
+              onClick={() => setShowOnlyFeatured(!showOnlyFeatured)}
+              className="flex-shrink-0 gap-1.5 transition-all duration-300"
             >
-              {category} (
-              {category === 'all'
-                ? referrals.length
-                : referrals.filter(r => r.category === category).length}
-              )
+              <Star className={cn('h-3.5 w-3.5', showOnlyFeatured && 'fill-current')} />
+              Featured ({featuredCount})
             </Button>
-          ))}
+
+            {/* Category Filter */}
+            {categories.map(category => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className="flex-shrink-0 capitalize transition-all duration-300"
+              >
+                {category} (
+                {category === 'all'
+                  ? referrals.length
+                  : referrals.filter(r => r.category === category).length}
+                )
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* Referrals Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {sortedReferrals.length > 0 ? (
-              sortedReferrals.map(referral => (
-                <ReferralCard key={referral.slug} referral={referral} />
+              sortedReferrals.map((referral, index) => (
+                <ReferralCard key={referral.slug} referral={referral} isPriority={index < 6} />
               ))
             ) : (
               <motion.div

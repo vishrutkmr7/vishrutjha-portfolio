@@ -11,11 +11,53 @@ interface ReferralMetadata {
  * Fetches favicon and meta description from a URL
  * Uses Google's favicon service for reliable favicon fetching
  */
+/**
+ * Extract root domain from a URL or map to brand domain for favicons
+ * Maps known referral domains to their brand domains for better favicon results
+ */
+function getRootDomain(hostname: string): string {
+  // Mapping of referral domains to brand domains for favicon lookup
+  const domainMapping: Record<string, string> = {
+    'referrals.uber.com': 'uber.com',
+    'get.venmo.com': 'venmo.com',
+    'join.robinhood.com': 'robinhood.com',
+    'refer.discover.com': 'discover.com',
+    'referyourchasecard.com': 'chase.com',
+    'drd.sh': 'doordash.com',
+    'waymo.smart.link': 'waymo.com',
+    'bilt.page': 'bilt.com',
+    'app.warp.dev': 'warp.dev',
+    'app.privacy.com': 'privacy.com',
+  };
+
+  // Check if we have a direct mapping
+  if (domainMapping[hostname]) {
+    return domainMapping[hostname];
+  }
+
+  // Strip 'www.' only if present
+  if (hostname.startsWith('www.')) {
+    const withoutWww = hostname.slice(4);
+    // Check if the non-www version has a mapping
+    if (domainMapping[withoutWww]) {
+      return domainMapping[withoutWww];
+    }
+    // For most cases, stripping www is fine
+    return withoutWww;
+  }
+
+  // Return as-is for everything else
+  return hostname;
+}
+
 export async function fetchReferralMetadata(url: string): Promise<ReferralMetadata> {
   try {
-    // Get domain for favicon
-    const domain = new URL(url).hostname;
-    const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    // Get domain for favicon and extract root domain
+    const { hostname } = new URL(url);
+    const rootDomain = getRootDomain(hostname);
+
+    // Use Google's faviconV2 API which is more reliable
+    const favicon = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${rootDomain}&size=128`;
 
     // Fetch the page HTML to get meta description
     let description = '';
@@ -59,7 +101,7 @@ export async function fetchReferralMetadata(url: string): Promise<ReferralMetada
 
     return {
       favicon,
-      description: description || `Check out this service at ${domain}`,
+      description: description || `Check out this service at ${rootDomain}`,
       title,
     };
   } catch (error) {
