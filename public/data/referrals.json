@@ -32,6 +32,97 @@
     "slug": "amex-blue-cash",
     "url": "https://americanexpress.com/en-us/referral/blue-cash-preferred-credit-card?ref=VISHRJGTpA&XL=MIANS",
     "category": "Credit Cards",
+    "featured": false
+  },
+  {
+    "title": "Robinhood",
+    "slug": "robinhood",
+    "url": "https://join.robinhood.com/vishruj-0a1867",
+    "category": "Investing",
     "featured": true
+  },
+  {
+    "title": "Uber",
+    "slug": "uber",
+    "url": "https://referrals.uber.com/refer?id=se8g67wyrct9",
+    "category": "Transportation",
+    "featured": true
+  },
+  {
+    "title": "DoorDash",
+    "slug": "doordash",
+    "url": "https://drd.sh/kL7eop4qWXpY5sTf",
+    "category": "Food Delivery",
+    "featured": false
+  },
+  {
+    "title": "Lyft",
+    "slug": "lyft",
+    "url": "https://www.lyft.com/i/VISHRUT83884?utm_medium=2pi_iacc",
+    "category": "Transportation",
+    "featured": false
+  },
+  {
+    "title": "Waymo",
+    "slug": "waymo",
+    "url": "https://waymo.smart.link/4pcoqniy5?code=VISHRUXQZ6",
+    "category": "Transportation",
+    "featured": true
+  },
+  {
+    "title": "Bilt Mastercard",
+    "slug": "bilt",
+    "url": "https://bilt.page/r/B6TD-LCCX",
+    "category": "Credit Cards",
+    "featured": false
+  },
+  {
+    "title": "Venmo",
+    "slug": "venmo",
+    "url": "https://get.venmo.com/Ty1K2E7xeXb",
+    "category": "Payments",
+    "featured": false
+  },
+  {
+    "title": "SoFi Student Loan Refinance",
+    "slug": "sofi",
+    "url": "https://www.sofi.com/invite/student-loans?gcp=1debb8de-9609-41af-a889-e67925f284dc&isAliasGcp=false",
+    "category": "Student Loans",
+    "featured": true
+  },
+  {
+    "title": "Privacy.com",
+    "slug": "privacy",
+    "url": "https://app.privacy.com/join/TRYES",
+    "category": "Payments",
+    "featured": true
+  },
+  {
+    "title": "Copilot Money",
+    "slug": "copilot",
+    "url": "https://copilot.money/download",
+    "category": "Finance",
+    "featured": true
+  },
+  {
+    "title": "Coinbase",
+    "slug": "coinbase",
+    "url": "https://coinbase.com/join/UWRP7YH?src=ios-link",
+    "category": "Crypto",
+    "featured": true
+  },
+  {
+    "title": "Apple Card",
+    "slug": "apple-card",
+    "url": "https://apple.co/referdailycash",
+    "category": "Credit Cards",
+    "featured": true
+  },
+  {
+    "title": "Worldcoin",
+    "slug": "worldcoin",
+    "url": "https://worldcoin.org/join/KVZOAW8",
+    "category": "Crypto",
+    "featured": false
   }
 ]

@@ -34,49 +34,55 @@ function ReferralCard({ referral }: { referral: ReferralItem }) {
       transition={{ duration: 0.3 }}
       layout
     >
-      <Card className="group h-full transition-all duration-300 hover:shadow-lg">
-        <CardHeader className="pb-3">
-          <div className="flex items-start gap-4">
+      <Card className="group h-full overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 hover:shadow-xl">
+        <CardHeader className="pb-4">
+          <div className="flex items-start gap-3">
             {referral.image && (
-              <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+              <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border bg-gradient-to-br from-background to-muted p-2 shadow-sm transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={referral.image}
                   alt={referral.title}
                   fill
-                  className="object-contain p-2"
-                  sizes="48px"
+                  className="object-contain"
+                  sizes="56px"
                   unoptimized
                 />
               </div>
             )}
-            <div className="flex-1 space-y-1">
-              <div className="flex items-center gap-2">
-                <CardTitle className="text-lg">{referral.title}</CardTitle>
-                {referral.featured && (
-                  <TooltipSimple content="Featured referral" side="top">
-                    <Badge variant="default" className="gap-1 text-xs">
-                      <Gift className="h-3 w-3" />
-                      Featured
-                    </Badge>
-                  </TooltipSimple>
-                )}
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="gap-1 text-xs">
-                  <Tag className="h-3 w-3" />
-                  {referral.category}
-                </Badge>
+            <div className="min-w-0 flex-1 space-y-2">
+              <div className="flex flex-col gap-1.5">
+                <CardTitle className="line-clamp-1 text-lg leading-tight">
+                  {referral.title}
+                </CardTitle>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <Badge variant="outline" className="gap-1 text-xs">
+                    <Tag className="h-3 w-3" />
+                    {referral.category}
+                  </Badge>
+                  {referral.featured && (
+                    <TooltipSimple content="Featured referral" side="top">
+                      <Badge variant="default" className="gap-1 text-xs">
+                        <Gift className="h-3 w-3" />
+                        Featured
+                      </Badge>
+                    </TooltipSimple>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <CardDescription className="leading-relaxed">
-            {referral.description || 'Discover this amazing service'}
+        <CardContent className="pb-4">
+          <CardDescription className="line-clamp-2 text-sm leading-relaxed">
+            {referral.description || 'Discover this amazing service and get exclusive benefits.'}
           </CardDescription>
         </CardContent>
         <CardFooter className="pt-0">
-          <Button asChild variant="default" className="w-full">
+          <Button
+            asChild
+            variant="default"
+            className="w-full transition-all duration-300 group-hover:bg-primary group-hover:shadow-md"
+          >
             <Link
               href={referral.url}
               target="_blank"
@@ -84,7 +90,7 @@ function ReferralCard({ referral }: { referral: ReferralItem }) {
               className="flex items-center justify-center gap-2"
             >
               Get Started
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </Button>
         </CardFooter>
@@ -140,35 +146,47 @@ export default function ReferralsContent({ referrals }: ReferralsContentProps) {
 
   return (
     <PageTransition>
-      <div className="container mx-auto space-y-6 p-4 pt-6 md:pt-4">
+      <div className="container mx-auto space-y-8 p-4 pt-6 md:pt-4">
         {/* Header */}
-        <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-col items-start gap-3">
           <h1 className="font-bold text-3xl leading-tight tracking-tighter md:text-4xl">
             Referrals
           </h1>
-          <p className="text-muted-foreground">
-            Discover my favorite products and services. Use these links to get started!
+          <p className="text-base text-muted-foreground md:text-lg">
+            Discover my favorite products and services. Use these links to get exclusive benefits!
           </p>
         </div>
 
         {/* Search Bar */}
         <div className="relative">
-          <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-5 w-5 text-muted-foreground" />
+          <Search className="-translate-y-1/2 absolute top-1/2 left-4 h-5 w-5 text-muted-foreground transition-colors" />
           <input
             type="text"
-            placeholder="Search referrals..."
+            placeholder="Search by name, category, or description..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className={cn(
-              'w-full rounded-2xl border bg-background py-3 pr-4 pl-10 text-sm shadow-sm',
+              'w-full rounded-2xl border bg-background py-3.5 pr-4 pl-12 text-sm shadow-sm',
               'ring-offset-background transition-all duration-200 placeholder:text-muted-foreground',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+              'focus-visible:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              'hover:border-primary/50'
             )}
           />
         </div>
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-2">
+          {/* Featured Filter - Prioritized */}
+          <Button
+            variant={showOnlyFeatured ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setShowOnlyFeatured(!showOnlyFeatured)}
+            className="gap-1.5 transition-all duration-300"
+          >
+            <Star className={cn('h-3.5 w-3.5', showOnlyFeatured && 'fill-current')} />
+            Featured ({featuredCount})
+          </Button>
+
           {/* Category Filter */}
           {categories.map(category => (
             <Button
@@ -176,7 +194,7 @@ export default function ReferralsContent({ referrals }: ReferralsContentProps) {
               variant={selectedCategory === category ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedCategory(category)}
-              className="capitalize"
+              className="capitalize transition-all duration-300"
             >
               {category} (
               {category === 'all'
@@ -185,17 +203,6 @@ export default function ReferralsContent({ referrals }: ReferralsContentProps) {
               )
             </Button>
           ))}
-
-          {/* Featured Filter */}
-          <Button
-            variant={showOnlyFeatured ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setShowOnlyFeatured(!showOnlyFeatured)}
-            className="gap-1"
-          >
-            <Star className={cn('h-4 w-4', showOnlyFeatured && 'fill-current')} />
-            Featured ({featuredCount})
-          </Button>
         </div>
 
         {/* Referrals Grid */}
@@ -207,15 +214,30 @@ export default function ReferralsContent({ referrals }: ReferralsContentProps) {
               ))
             ) : (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="col-span-full flex flex-col items-center justify-center py-12 text-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="col-span-full flex flex-col items-center justify-center rounded-2xl border border-dashed bg-muted/20 py-16 text-center"
               >
-                <Search className="mb-4 h-12 w-12 text-muted-foreground/50" />
-                <h3 className="mb-2 font-semibold text-lg">No referrals found</h3>
-                <p className="text-muted-foreground text-sm">
-                  Try adjusting your search or filter criteria
+                <div className="mb-4 rounded-full bg-muted p-4">
+                  <Search className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="mb-2 font-semibold text-xl">No referrals found</h3>
+                <p className="mb-4 max-w-sm text-muted-foreground text-sm">
+                  Try adjusting your search or filter criteria to find what you're looking for
                 </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('all');
+                    setShowOnlyFeatured(false);
+                  }}
+                  className="gap-2"
+                >
+                  Clear all filters
+                </Button>
               </motion.div>
             )}
           </AnimatePresence>
