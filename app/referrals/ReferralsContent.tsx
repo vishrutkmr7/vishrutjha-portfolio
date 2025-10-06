@@ -42,7 +42,7 @@ function ReferralCard({
       transition={{ duration: 0.3 }}
       layout
     >
-      <Card className="group h-full overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 hover:shadow-xl">
+      <Card className="group flex h-full flex-col overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 hover:shadow-xl">
         <CardHeader className="pb-4">
           <div className="flex items-start gap-3">
             {referral.image && (
@@ -87,12 +87,12 @@ function ReferralCard({
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pb-4">
+        <CardContent className="flex-grow pb-4">
           <CardDescription className="line-clamp-2 text-sm leading-relaxed">
             {referral.description || 'Discover this amazing service and get exclusive benefits.'}
           </CardDescription>
         </CardContent>
-        <CardFooter className="pt-0">
+        <CardFooter className="mt-auto pt-0">
           <Button
             asChild
             variant="default"
@@ -104,7 +104,7 @@ function ReferralCard({
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2"
             >
-              Get Started
+              Claim Offer
               <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </Button>
