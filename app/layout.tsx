@@ -23,7 +23,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   minimumScale: 1,
+  maximumScale: 5, // iOS 26 compatibility
   userScalable: true,
+  viewportFit: 'cover', // iOS 26 Safari - support for liquid glass address bar
+  interactiveWidget: 'resizes-content', // iOS 26 Safari - handle dynamic viewport changes
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
@@ -200,6 +203,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               src={'https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50'}
             />
             <Script
+              // biome-ignore lint/correctness/useUniqueElementIds: Google Analytics requires static ID
               id="google-analytics"
               strategy="afterInteractive"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for Google Analytics tracking

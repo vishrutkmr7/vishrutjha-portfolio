@@ -46,26 +46,32 @@ const ChatBubble = memo(
     confidence?: number;
   }) => {
     const getConfidenceIndicator = (confidence?: number) => {
-      if (!confidence) return null;
-      if (confidence >= 0.8) return 'border-l-4 border-l-green-500';
-      if (confidence >= 0.6) return 'border-l-4 border-l-yellow-500';
+      if (!confidence) {
+        return null;
+      }
+      if (confidence >= 0.8) {
+        return 'border-l-4 border-l-green-500';
+      }
+      if (confidence >= 0.6) {
+        return 'border-l-4 border-l-yellow-500';
+      }
       return 'border-l-4 border-l-red-500';
     };
 
     return (
       <div
         className={cn(
-          'relative text-sm leading-relaxed transition-all duration-200 max-w-[280px] break-words',
+          'relative max-w-[280px] break-words text-sm leading-relaxed transition-all duration-200',
           isAssistant
             ? cn(
-                'bg-muted text-foreground border border-border rounded-lg shadow-sm px-2 py-1.5',
-                getConfidenceIndicator(confidence)
-              )
+              'rounded-2xl border border-border bg-muted px-2 py-1.5 text-foreground shadow-sm',
+              getConfidenceIndicator(confidence)
+            )
             : cn(
-                'bg-primary text-primary-foreground px-2 py-1.5',
-                'rounded-2xl rounded-br-md shadow-md border border-primary/20',
-                'font-medium'
-              )
+              'bg-primary px-2 py-1.5 text-primary-foreground',
+              'rounded-2xl rounded-br-md border border-primary/20 shadow-md',
+              'font-medium'
+            )
         )}
       >
         {children}
@@ -86,8 +92,8 @@ const LoadingIndicator = memo(() => {
       exit={{ opacity: 0, y: -10 }}
       className="flex justify-start"
     >
-      <div className="max-w-[85%] mr-auto ml-0">
-        <div className="rounded-lg bg-muted px-3 py-2 border border-border shadow-sm">
+      <div className="mr-auto ml-0 max-w-[85%]">
+        <div className="rounded-2xl border border-border bg-muted px-3 py-2 shadow-sm">
           <div className="flex items-center gap-2">
             <div className="flex gap-1">
               {[0, 0.2, 0.4].map(delay => (
@@ -104,7 +110,7 @@ const LoadingIndicator = memo(() => {
                 />
               ))}
             </div>
-            <span className="text-muted-foreground text-sm font-medium">Thinking...</span>
+            <span className="font-medium text-muted-foreground text-sm">Thinking...</span>
           </div>
         </div>
       </div>
@@ -305,7 +311,7 @@ export default function Chat() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="flex w-full flex-col rounded-lg border bg-card shadow-lg md:w-96"
+            className="floating-layer flex w-full flex-col rounded-2xl border bg-card/70 shadow-lg backdrop-blur-xl md:w-96"
           >
             {/* Chat header */}
             <div className="flex items-center justify-between border-b p-4">
@@ -332,7 +338,7 @@ export default function Chat() {
 
             {/* Messages */}
             <div
-              className="flex h-96 flex-col overflow-y-auto p-4 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30"
+              className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30 flex h-96 flex-col overflow-y-auto scroll-smooth p-4"
               style={{
                 background: `linear-gradient(
                      to bottom,
@@ -344,13 +350,13 @@ export default function Chat() {
               }}
             >
               {messages.length === 0 && (
-                <div className="flex h-full flex-col items-center justify-center text-center space-y-3">
+                <div className="flex h-full flex-col items-center justify-center space-y-3 text-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                     <Info className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="space-y-1">
                     <h3 className="font-medium text-sm">Start a conversation</h3>
-                    <p className="text-muted-foreground text-xs max-w-[280px] leading-relaxed">
+                    <p className="max-w-[280px] text-muted-foreground text-xs leading-relaxed">
                       Ask me anything about Vishrut's work, projects, or experiences!
                     </p>
                   </div>
@@ -384,7 +390,7 @@ export default function Chat() {
                         scale: 0.95,
                         transition: { duration: 0.2 },
                       }}
-                      className={cn('flex w-full mb-2', isUser ? 'justify-end' : 'justify-start')}
+                      className={cn('mb-2 flex w-full', isUser ? 'justify-end' : 'justify-start')}
                     >
                       <ChatBubble
                         isAssistant={!isUser}
@@ -438,21 +444,21 @@ export default function Chat() {
                         'rounded-2xl border bg-background px-4 py-3 pr-12 text-sm',
                         'ring-offset-background placeholder:text-muted-foreground',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                        'transition-all duration-200 shadow-sm',
-                        'max-h-32 leading-relaxed scrollbar-thin',
+                        'shadow-sm transition-all duration-200',
+                        'scrollbar-thin max-h-32 leading-relaxed',
                         !validationState.isValid &&
-                          'border-destructive focus-visible:ring-destructive'
+                        'border-destructive focus-visible:ring-destructive'
                       )}
                       style={{ minHeight: '52px' }}
                       disabled={isLoading}
                     />
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                    <div className="-translate-y-1/2 absolute top-1/2 right-2">
                       <Button
                         type="submit"
                         size="icon"
                         disabled={isLoading || !input.trim() || !validationState.isValid}
                         className={cn(
-                          'relative h-8 w-8 rounded-xl shadow-sm',
+                          'relative h-8 w-8 rounded-2xl shadow-sm',
                           'bg-primary hover:bg-primary/90 disabled:bg-muted disabled:opacity-50',
                           'transition-all duration-200 hover:scale-105 active:scale-95'
                         )}
@@ -488,7 +494,7 @@ export default function Chat() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="px-1 text-destructive text-xs font-medium"
+                    className="px-1 font-medium text-destructive text-xs"
                   >
                     {validationState.message}
                   </motion.div>

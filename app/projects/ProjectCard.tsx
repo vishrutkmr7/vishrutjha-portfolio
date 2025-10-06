@@ -42,7 +42,7 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
       <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <div className="flex-none">
           {image && (
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-lg">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl">
               <Image
                 src={`/${image}`}
                 alt={title}

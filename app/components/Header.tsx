@@ -104,15 +104,15 @@ const Header: React.FC = () => {
   return (
     <>
       <div className="pb-0">
-        {/* Mobile buttons */}
-        <div className="fixed top-3 right-3 z-50 flex items-center gap-2 rounded-2xl border bg-background/95 p-1.5 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
+        {/* Mobile buttons - iOS 26 Liquid Glass */}
+        <div className="floating-layer fixed top-3 right-3 z-50 flex items-center gap-2 rounded-2xl border bg-background/70 p-1.5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
             <ResumeButton />
           </Button>
           <ThemeToggle />
         </div>
 
-        <header className="fixed top-0 right-0 left-0 z-50 hidden w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:block">
+        <header className="floating-layer fixed top-0 right-0 left-0 z-50 hidden w-full border-b bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:block">
           <div className="container flex h-14 items-center">
             <div className="mr-4 flex">
               <nav className="flex items-center space-x-2 font-medium text-sm">
@@ -139,8 +139,8 @@ const Header: React.FC = () => {
         </header>
       </div>
 
-      {/* Mobile Bottom Navigation Bar */}
-      <div className="fixed right-0 bottom-0 left-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
+      {/* Mobile Bottom Navigation Bar - iOS 26 Liquid Glass with safe area */}
+      <div className="floating-layer fixed right-0 bottom-0 left-0 z-50 border-t bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden" style={{paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))'}}>
         <nav className="mx-auto flex w-full max-w-md justify-between px-3 py-2">
           {navigationWithActiveState.map(({ href, icon, label, isActive }) => (
             <NavigationLink

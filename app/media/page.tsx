@@ -17,7 +17,7 @@ function LoadingSkeleton({ count = 3 }: { count?: number }) {
         <div
           // biome-ignore lint/suspicious/noArrayIndexKey: Using index for skeleton loading placeholders is acceptable
           key={`loading-skeleton-${index}`}
-          className="h-[400px] animate-pulse rounded-lg bg-muted"
+          className="h-[400px] animate-pulse rounded-2xl bg-muted"
         />
       ))}
     </div>
@@ -39,7 +39,7 @@ async function MediaContent() {
               </MotionItem>
             ))}
             <MotionItem variants={scaleInVariants}>
-              <Suspense fallback={<div className="h-[400px] animate-pulse rounded-lg bg-muted" />}>
+              <Suspense fallback={<div className="h-[400px] animate-pulse rounded-2xl bg-muted" />}>
                 <LeetCodeCard stats={leetCodeStats} />
               </Suspense>
             </MotionItem>

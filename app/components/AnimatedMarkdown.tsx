@@ -40,7 +40,7 @@ function CodeBlock({ language, value }: CodeBlockProps) {
       <button
         type="button"
         onClick={handleCopy}
-        className="absolute top-2 right-2 rounded-lg bg-white/10 p-2 opacity-0 transition-opacity group-hover:opacity-100"
+        className="absolute top-2 right-2 rounded-2xl bg-white/10 p-2 opacity-0 transition-opacity group-hover:opacity-100"
         aria-label={copied ? 'Copied!' : 'Copy code'}
       >
         {copied ? (
@@ -53,7 +53,7 @@ function CodeBlock({ language, value }: CodeBlockProps) {
         style={oneDark}
         language={language}
         PreTag="div"
-        className="!mt-0 rounded-md pt-8"
+        className="!mt-0 rounded-2xl pt-8"
         showLineNumbers={true}
       >
         {value}
@@ -72,7 +72,7 @@ function ChatBubble({
   return (
     <div
       className={cn(
-        'w-fit max-w-[85%] rounded-lg px-4 py-2',
+        'w-fit max-w-[85%] rounded-2xl px-4 py-2',
         isAssistant
           ? 'mr-auto ml-0 rounded-bl-none bg-muted text-foreground'
           : 'mr-0 ml-auto rounded-br-none bg-primary text-primary-foreground'
@@ -108,7 +108,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               code: ({ className, children = '', inline }: CodeComponentProps) => {
                 if (inline) {
                   return (
-                    <code className={cn('rounded bg-muted px-1 py-0.5 text-sm', className)}>
+                    <code className={cn('rounded-2xl bg-muted px-1 py-0.5 text-sm', className)}>
                       {children}
                     </code>
                   );
@@ -171,7 +171,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
                 code: ({ className, children = '', inline }: CodeComponentProps) => {
                   if (inline) {
                     return (
-                      <code className={cn('rounded bg-muted px-1 py-0.5 text-sm', className)}>
+                      <code className={cn('rounded-2xl bg-muted px-1 py-0.5 text-sm', className)}>
                         {children}
                       </code>
                     );

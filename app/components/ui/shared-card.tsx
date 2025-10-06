@@ -62,7 +62,7 @@ export const SharedCardImage = forwardRef<HTMLDivElement, CardImageProps>(
       <div
         ref={ref}
         className={cn(
-          'relative w-full overflow-hidden rounded-t-lg',
+          'relative w-full overflow-hidden rounded-t-2xl',
           aspectClasses[aspectRatio],
           className
         )}

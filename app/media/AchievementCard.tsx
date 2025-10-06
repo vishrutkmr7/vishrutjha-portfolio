@@ -34,7 +34,7 @@ export default function AchievementCard({ title, description, date, image, link 
                 src={`/${image}`}
                 alt={title}
                 fill
-                className="rounded-t-lg object-cover transition-transform duration-200 group-hover:scale-105"
+                className="rounded-t-2xl object-cover transition-transform duration-200 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
                 loading="lazy"

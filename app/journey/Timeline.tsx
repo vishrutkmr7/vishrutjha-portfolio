@@ -143,13 +143,13 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ timelineData }) => {
                         )
                       }
                     >
-                      <div className="rounded-lg border bg-card shadow-sm transition-all duration-200 hover:bg-accent/50 hover:shadow-md">
+                      <div className="rounded-2xl border bg-card shadow-sm transition-all duration-200 hover:bg-accent/50 hover:shadow-md">
                         {/* Mobile-optimized card content */}
                         <div className="p-4 md:p-6">
                           {/* Header section with logo and title */}
                           <div className="flex items-start gap-3 md:gap-4">
                             {/* Logo - responsive sizing */}
-                            <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg ring-2 ring-border md:h-14 md:w-14">
+                            <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-2xl ring-2 ring-border md:h-14 md:w-14">
                               <Image
                                 src={`/${item.logo}`}
                                 alt={`${item.title.company} logo`}
@@ -163,16 +163,16 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ timelineData }) => {
                             <div className="min-w-0 flex-1">
                               {/* Title and company */}
                               <div className="space-y-1">
-                                <TimelineTitle className="font-semibold leading-tight md:text-lg text-base">
+                                <TimelineTitle className="font-semibold text-base leading-tight md:text-lg">
                                   {item.title.role}
                                 </TimelineTitle>
-                                <p className="font-medium text-sm text-muted-foreground">
+                                <p className="font-medium text-muted-foreground text-sm">
                                   {item.title.company}
                                 </p>
                               </div>
 
                               {/* Date - positioned better for mobile */}
-                              <TimelineTime className="mt-2 flex items-center gap-1 font-medium text-xs text-muted-foreground">
+                              <TimelineTime className="mt-2 flex items-center gap-1 font-medium text-muted-foreground text-xs">
                                 <Calendar className="h-3 w-3 flex-shrink-0" />
                                 <span className="line-clamp-1">{item.time}</span>
                               </TimelineTime>

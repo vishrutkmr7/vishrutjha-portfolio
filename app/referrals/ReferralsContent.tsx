@@ -46,7 +46,7 @@ function ReferralCard({
         <CardHeader className="pb-4">
           <div className="flex items-start gap-3">
             {referral.image && (
-              <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border bg-gradient-to-br from-background to-muted p-2 shadow-sm transition-transform duration-300 group-hover:scale-110">
+              <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl border bg-gradient-to-br from-background to-muted p-2 shadow-sm transition-transform duration-300 group-hover:scale-110">
                 {!imageLoaded && <div className="absolute inset-0 animate-pulse bg-muted" />}
                 <Image
                   src={referral.image}

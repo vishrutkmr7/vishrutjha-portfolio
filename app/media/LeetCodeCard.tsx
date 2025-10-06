@@ -167,7 +167,7 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
         <Card className="h-full border-2 border-muted-foreground/25 border-dashed bg-muted/30">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#FFA500]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-2xl bg-[#FFA500]">
                 <Icons.code className="h-4 w-4 text-white" />
               </div>
               <div>
@@ -203,7 +203,7 @@ export default function LeetCodeCard({ stats }: LeetCodeCardProps) {
       <Card className="h-full border-l-4 border-l-[#FFA500] bg-gradient-to-br from-background to-muted/20">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#FFA500]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-2xl bg-[#FFA500]">
               <Icons.code className="h-4 w-4 text-white" />
             </div>
             <div>

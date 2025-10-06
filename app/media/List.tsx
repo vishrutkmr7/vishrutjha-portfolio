@@ -16,7 +16,7 @@ export function MediaItem({ title, description, image, link }: Achievement) {
               src={`/${image}`}
               alt={title}
               fill
-              className="rounded-lg object-cover"
+              className="rounded-2xl object-cover"
               sizes="(max-width: 768px) 100vw, 192px"
             />
           </div>
