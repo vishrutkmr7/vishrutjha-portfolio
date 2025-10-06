@@ -1,5 +1,6 @@
 import mediaData from '../../public/data/mediaData.json';
 import projectsData from '../../public/data/projectsData.json';
+import referralsData from '../../public/data/referrals.json';
 import timelineData from '../../public/data/timelineData.json';
 
 export function getStructuredPromptData() {
@@ -19,6 +20,12 @@ export function getStructuredPromptData() {
       title: m.title,
       type: m.link.text.includes('Podcast') ? 'podcast' : 'article',
       date: m.date,
+    })),
+    referrals: referralsData.map(r => ({
+      title: r.title,
+      category: r.category,
+      featured: r.featured,
+      url: r.url,
     })),
     workExperience: workExperience.map(t => ({
       role: t.title.role,
@@ -47,6 +54,7 @@ export function getStructuredPromptData() {
         timeline: '/data/timelineData.json',
         projects: '/data/projectsData.json',
         media: '/data/mediaData.json',
+        referrals: '/data/referrals.json',
       },
       social: {
         twitter: 'https://twitter.com/vishrutkmr7',

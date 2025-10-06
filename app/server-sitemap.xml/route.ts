@@ -1,13 +1,21 @@
 export async function GET() {
-  // Add your dynamic routes here
-  const routes = ['', '/media', '/journey', '/projects', '/resume', '/hey', '/referrals'];
+  // Add your dynamic routes here with their priorities
+  const routes = [
+    { path: '', priority: 1.0 },
+    { path: '/media', priority: 0.8 },
+    { path: '/journey', priority: 0.8 },
+    { path: '/projects', priority: 0.8 },
+    { path: '/referrals', priority: 0.8 },
+    { path: '/resume', priority: 0.7 },
+    { path: '/hey', priority: 0.5 },
+  ];
 
   // Transform routes into sitemap entries
-  const entries = routes.map(route => ({
-    url: `https://vishrutjha.com${route}`,
+  const entries = routes.map(({ path, priority }) => ({
+    url: `https://vishrutjha.com${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority,
   }));
 
   // Return the sitemap XML
