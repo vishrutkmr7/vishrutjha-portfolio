@@ -202,11 +202,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               strategy="afterInteractive"
               src={'https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50'}
             />
+            {/* biome-ignore lint/correctness/useUniqueElementIds: Next.js Script component requires static id for deduplication */}
             <Script
-              // biome-ignore lint/correctness/useUniqueElementIds: Google Analytics requires static ID
               id="google-analytics"
               strategy="afterInteractive"
-              // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for Google Analytics tracking
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for Google Analytics inline script
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];

@@ -1,3 +1,7 @@
+// Mark this route as static for build-time generation
+export const dynamic = 'force-static';
+export const revalidate = 86400; // Revalidate once per day
+
 export async function GET() {
   // Add your dynamic routes here with their priorities
   const routes = [
@@ -10,10 +14,13 @@ export async function GET() {
     { path: '/hey', priority: 0.5 },
   ];
 
+  // Use a fixed date for build-time consistency, or current date will be cached per revalidation
+  const buildDate = new Date().toISOString();
+
   // Transform routes into sitemap entries
   const entries = routes.map(({ path, priority }) => ({
     url: `https://vishrutjha.com${path}`,
-    lastModified: new Date(),
+    lastModified: buildDate,
     changeFrequency: 'weekly' as const,
     priority,
   }));
@@ -27,7 +34,7 @@ export async function GET() {
           entry => `
         <url>
           <loc>${entry.url}</loc>
-          <lastmod>${entry.lastModified.toISOString()}</lastmod>
+          <lastmod>${entry.lastModified}</lastmod>
           <changefreq>${entry.changeFrequency}</changefreq>
           <priority>${entry.priority}</priority>
         </url>

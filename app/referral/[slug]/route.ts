@@ -4,6 +4,17 @@ import path from 'path';
 
 import type { ReferralItem } from '@/app/types/portfolio.types';
 
+// Pre-generate all referral routes at build time
+export async function generateStaticParams() {
+  const filePath = path.join(process.cwd(), 'public', 'data', 'referrals.json');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const referrals = JSON.parse(fileContent) as ReferralItem[];
+
+  return referrals.map(referral => ({
+    slug: referral.slug,
+  }));
+}
+
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
