@@ -164,7 +164,7 @@ ActionButtons.displayName = 'ActionButtons';
 
 // Memoized social links component
 const SocialLinks = memo(() => (
-  <div className="mb-8 flex flex-wrap items-center justify-center gap-4 md:mb-5">
+  <div className="mb-8 flex items-center justify-center gap-4 md:mb-5">
     <TooltipSimple content="GitHub" side="top">
       <Link
         href="https://github.com/vishrutkmr7"
