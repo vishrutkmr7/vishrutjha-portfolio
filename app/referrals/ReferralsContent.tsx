@@ -32,6 +32,8 @@ function ReferralCard({
   referral: ReferralItem;
   isPriority?: boolean;
 }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,14 +47,20 @@ function ReferralCard({
           <div className="flex items-start gap-3">
             {referral.image && (
               <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border bg-gradient-to-br from-background to-muted p-2 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                {!imageLoaded && <div className="absolute inset-0 animate-pulse bg-muted" />}
                 <Image
                   src={referral.image}
                   alt={referral.title}
                   fill
-                  className="object-contain"
+                  className={cn(
+                    'object-contain transition-opacity duration-300',
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  )}
                   sizes="56px"
+                  loading={isPriority ? 'eager' : 'lazy'}
                   priority={isPriority}
                   unoptimized
+                  onLoad={() => setImageLoaded(true)}
                 />
               </div>
             )}

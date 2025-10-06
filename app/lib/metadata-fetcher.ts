@@ -65,13 +65,15 @@ export async function fetchReferralMetadata(url: string): Promise<ReferralMetada
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout (reduced from 5)
 
       const response = await fetch(url, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'Mozilla/5.0 (compatible; MetadataBot/1.0; +https://vishrutjha.com)',
         },
+        // Add cache control to speed up repeated fetches
+        cache: 'force-cache',
       });
 
       clearTimeout(timeoutId);
