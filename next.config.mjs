@@ -17,8 +17,6 @@ const nextConfig = {
       "lucide-react",
       "react-icons",
     ],
-    useDeploymentId: true,
-    useDeploymentIdServerActions: true,
   },
   reactStrictMode: true,
   images: {
@@ -126,7 +124,9 @@ const nextConfig = {
       },
     ];
   },
-  turbopack: {},
+  turbopack: {
+    root: "/Users/vishrutjha/Developer/vishrutjha-portfolio",
+  },
   async rewrites() {
     return [
       {
