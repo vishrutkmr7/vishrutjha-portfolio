@@ -64,14 +64,14 @@ const ChatBubble = memo(
           'relative max-w-[280px] break-words text-sm leading-relaxed transition-all duration-200',
           isAssistant
             ? cn(
-              'rounded-2xl border border-border bg-muted px-2 py-1.5 text-foreground shadow-sm',
-              getConfidenceIndicator(confidence)
-            )
+                'rounded-2xl border border-border bg-muted px-2 py-1.5 text-foreground shadow-sm',
+                getConfidenceIndicator(confidence)
+              )
             : cn(
-              'bg-primary px-2 py-1.5 text-primary-foreground',
-              'rounded-2xl rounded-br-md border border-primary/20 shadow-md',
-              'font-medium'
-            )
+                'bg-primary px-2 py-1.5 text-primary-foreground',
+                'rounded-2xl rounded-br-md border border-primary/20 shadow-md',
+                'font-medium'
+              )
         )}
       >
         {children}
@@ -447,7 +447,7 @@ export default function Chat() {
                         'shadow-sm transition-all duration-200',
                         'scrollbar-thin max-h-32 leading-relaxed',
                         !validationState.isValid &&
-                        'border-destructive focus-visible:ring-destructive'
+                          'border-destructive focus-visible:ring-destructive'
                       )}
                       style={{ minHeight: '52px' }}
                       disabled={isLoading}

@@ -15,7 +15,9 @@ const ProjectsCarousel = async () => {
         {sortedProjects.map(project => {
           // Get project link icon
           const getLinkIcon = () => {
-            if (!project.link) return null;
+            if (!project.link) {
+              return null;
+            }
 
             switch (project.link.text) {
               case 'Source Code':

@@ -140,7 +140,10 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Navigation Bar - iOS 26 Liquid Glass with safe area */}
-      <div className="floating-layer fixed right-0 bottom-0 left-0 z-50 border-t bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden" style={{paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))'}}>
+      <div
+        className="floating-layer fixed right-0 bottom-0 left-0 z-50 border-t bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden"
+        style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}
+      >
         <nav className="mx-auto flex w-full max-w-md justify-between px-3 py-2">
           {navigationWithActiveState.map(({ href, icon, label, isActive }) => (
             <NavigationLink

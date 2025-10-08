@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 export function useIsMobile() {
   const [isMobile, setIsMobile] = useState(() => {
     // Only run on client side
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') {
+      return false;
+    }
     return window.innerWidth < 768 || 'ontouchstart' in window;
   });
 
@@ -49,7 +51,9 @@ export function useIsMobile() {
 // Shared reduced motion hook
 export function useReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') {
+      return false;
+    }
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 
@@ -79,7 +83,9 @@ export function useIntersectionObserver(
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {

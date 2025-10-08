@@ -1,8 +1,8 @@
 // Shared data fetching utility following DRY principles
 // Single Responsibility: Handle all data fetching with consistent caching and error handling
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 // Direct API function imports to avoid HTTP requests during SSR
 import { GET as getLeetCodeStats } from '@/app/api/leetcode/route';
 import type { LeetCodeStats } from '@/app/types';

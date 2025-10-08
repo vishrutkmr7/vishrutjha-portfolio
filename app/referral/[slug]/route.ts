@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
 import { NextResponse } from 'next/server';
-import path from 'path';
 
 import type { ReferralItem } from '@/app/types/portfolio.types';
 

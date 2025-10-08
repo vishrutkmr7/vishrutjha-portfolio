@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 // Suppress the punycode deprecation warning
-process.removeAllListeners("warning");
+process.removeAllListeners('warning');
 
 const nextConfig = {
   typescript: {
@@ -12,32 +12,28 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   experimental: {
-    optimizePackageImports: [
-      "@radix-ui/react-icons",
-      "lucide-react",
-      "react-icons",
-    ],
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'react-icons'],
   },
   reactStrictMode: true,
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "www.google.com",
-        port: "",
-        pathname: "/s2/favicons/**",
+        protocol: 'https',
+        hostname: 'www.google.com',
+        port: '',
+        pathname: '/s2/favicons/**',
       },
       {
-        protocol: "https",
-        hostname: "t3.gstatic.com",
-        port: "",
-        pathname: "/faviconV2/**",
+        protocol: 'https',
+        hostname: 't3.gstatic.com',
+        port: '',
+        pathname: '/faviconV2/**',
       },
     ],
     // Enable image optimization
@@ -48,10 +44,10 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*",
+        source: '/:path*',
         headers: [
           {
-            key: "Content-Security-Policy",
+            key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.cloudflareinsights.com https://*.vercel-scripts.com https://plausible.io",
@@ -63,74 +59,74 @@ const nextConfig = {
               "frame-ancestors 'none'",
               "object-src 'none'",
               "base-uri 'self'",
-            ].join("; "),
+            ].join('; '),
           },
           {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
-            key: "X-Frame-Options",
-            value: "DENY",
+            key: 'X-Frame-Options',
+            value: 'DENY',
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
           },
         ],
       },
       // Cache static assets
       {
-        source: "/images/:path*",
+        source: '/images/:path*',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
       {
-        source: "/_next/image/:path*",
+        source: '/_next/image/:path*',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
       {
-        source: "/static/:path*",
+        source: '/static/:path*',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
       {
-        source: "/:path*.{jpg,jpeg,png,gif,webp,ico,svg}",
+        source: '/:path*.{jpg,jpeg,png,gif,webp,ico,svg}',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
       {
-        source: "/:path*.{js,css}",
+        source: '/:path*.{js,css}',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
       {
-        source: "/fonts/:path*",
+        source: '/fonts/:path*',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -139,16 +135,16 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/resume",
-        destination: "/resume.pdf",
+        source: '/resume',
+        destination: '/resume.pdf',
       },
     ];
   },
   async redirects() {
     return [
       {
-        source: "/hey",
-        destination: "https://nohello.net",
+        source: '/hey',
+        destination: 'https://nohello.net',
         permanent: true,
       },
     ];

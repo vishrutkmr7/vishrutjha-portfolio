@@ -1,21 +1,26 @@
 /** biome-ignore-all assist/source/organizeImports: <no need to organize imports> */
+import { useIsMobile } from '@/app/lib/hooks';
+import { cn } from '@/app/lib/utils';
+import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { forwardRef, type ReactNode } from 'react';
+import { DraggableCard, dragVariants, mobileDragVariants } from '../MotionList';
 import { Badge } from './badge';
 import { Button } from './button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card';
-import { cn } from '@/app/lib/utils';
-import { DraggableCard, dragVariants, mobileDragVariants } from '../MotionList';
-import { ExternalLink } from 'lucide-react';
-import { forwardRef, type ReactNode } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useIsMobile } from '@/app/lib/hooks';
 
 // Base interfaces following Interface Segregation Principle
 interface BaseCardProps {
   className?: string;
   children?: ReactNode;
   isDraggable?: boolean;
-  dragConstraints?: { left: number; right: number; top: number; bottom: number };
+  dragConstraints?: {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  };
 }
 
 interface CardImageProps {
@@ -36,7 +41,7 @@ interface CardHeaderProps {
 
 interface CardTechBadgesProps {
   tech: string[];
-  techIconMap?: Record<string, ReactNode>;
+  techIconMap?: Record<string, React.ComponentType<{ className?: string }>>;
   className?: string;
 }
 
@@ -110,16 +115,16 @@ export const SharedTechBadges = forwardRef<HTMLDivElement, CardTechBadgesProps>(
     <div ref={ref} className={cn('relative', className)}>
       <div className="no-scrollbar mask-fade-right flex gap-2 overflow-x-auto pb-2">
         {tech.map(techName => {
-          const techIcon = techIconMap?.[techName];
+          const TechIcon = techIconMap?.[techName];
           return (
             <Badge
               key={techName}
               variant="secondary"
               className="flex flex-shrink-0 items-center gap-1.5 transition-colors duration-200 hover:bg-primary/10"
             >
-              {techIcon && (
+              {TechIcon && (
                 <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center">
-                  {techIcon}
+                  <TechIcon className="h-3.5 w-3.5" />
                 </span>
               )}
               {techName}
@@ -208,7 +213,7 @@ interface FlexibleCardProps extends BaseCardProps {
   };
   content?: ReactNode;
   tech?: string[];
-  techIconMap?: Record<string, ReactNode>;
+  techIconMap?: Record<string, React.ComponentType<{ className?: string }>>;
   actions?: {
     text: string;
     url: string;
@@ -284,9 +289,9 @@ FlexibleCard.displayName = 'FlexibleCard';
 // Export all components for easy import
 export type {
   BaseCardProps,
-  CardImageProps,
-  CardHeaderProps,
-  CardTechBadgesProps,
   CardActionButtonProps,
+  CardHeaderProps,
+  CardImageProps,
+  CardTechBadgesProps,
   FlexibleCardProps,
 };

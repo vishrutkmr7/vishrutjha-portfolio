@@ -44,7 +44,9 @@ export default function RouteJsonLd({ pathname }: RouteJsonLdProps) {
   };
 
   const schema = getRouteSchema(pathname);
-  if (!schema) return null;
+  if (!schema) {
+    return null;
+  }
 
   return (
     <script

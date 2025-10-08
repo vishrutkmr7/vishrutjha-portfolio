@@ -61,11 +61,11 @@
 
     /* Static background gradient tokens (subtle overlay for readability) */
     --bg-start-rgb: 124 58 237; /* violet-600 */
-    --bg-end-rgb: 0 0 0;        /* black */
-    --bg-start-alpha-1: 0.10;   /* at 0% */
-    --bg-start-alpha-2: 0.06;   /* at top stop */
-    --bg-end-alpha-1: 0.06;     /* at bottom start */
-    --bg-end-alpha-2: 0.10;     /* at 100% */
+    --bg-end-rgb: 0 0 0; /* black */
+    --bg-start-alpha-1: 0.1; /* at 0% */
+    --bg-start-alpha-2: 0.06; /* at top stop */
+    --bg-end-alpha-1: 0.06; /* at bottom start */
+    --bg-end-alpha-2: 0.1; /* at 100% */
     --bg-top-stop: 40%;
     --bg-bottom-start: 62%;
 
@@ -147,10 +147,11 @@
 
   /* Very faint grain to reduce gradient banding on some displays */
   .site-background::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(
+    background-image:
+      repeating-linear-gradient(
         0deg,
         rgb(255 255 255 / var(--bg-grain-alpha)) 0 var(--bg-grain-size),
         transparent var(--bg-grain-size) calc(var(--bg-grain-size) * 2)
@@ -185,12 +186,14 @@
 
   /* Floating layer effect for iOS 26 */
   .floating-layer {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
-                0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   .dark .floating-layer {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2);
   }
 }
