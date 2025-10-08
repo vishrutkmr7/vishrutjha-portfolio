@@ -66,7 +66,7 @@
     "title": "Prickly Pear Health",
     "description": "Building the next generation of healthcare tools for improving the mental health of perimenopausal women using MVVM+Coordinator pattern, implementing RAG and on-device inference, achieving 98% crash-free rate and processing 10,000+ daily journals with wearable integrations.",
     "date": "08/02/2024 - Present",
-    "image": "pphealth.jpeg",
+    "image": "pphealth.png",
     "link": {
       "text": "App Store",
       "url": "https://apps.apple.com/us/app/prickly-pear/id6654889896"

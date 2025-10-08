@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Vishrut Jha Portfolio',
     images: [
       {
-        url: `${DOMAIN}/pphealth.jpeg`,
+        url: `${DOMAIN}/pphealth.png`,
         width: 1200,
         height: 630,
         alt: 'Vishrut Jha Journey',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description: 'My professional journey and career milestones',
     creator: '@vishrutkmr7',
     images: {
-      url: `${DOMAIN}/pphealth.jpeg`,
+      url: `${DOMAIN}/pphealth.png`,
       alt: 'Vishrut Jha Journey',
       width: 1200,
       height: 630,
