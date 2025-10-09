@@ -7,6 +7,14 @@
     "featured": true
   },
   {
+    "title": "OpenAI Sora 2",
+    "slug": "sora-2",
+    "url": "https://apps.apple.com/app/id6744034028",
+    "category": "Software",
+    "featured": true,
+    "description": "Transform text prompts and images into hyperreal videos with AI. Use invite code: NZZ2VN"
+  },
+  {
     "title": "Warp Terminal",
     "slug": "warp",
     "url": "https://app.warp.dev/referral/6PZ9QK",
