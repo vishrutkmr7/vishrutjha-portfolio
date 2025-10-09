@@ -24,7 +24,7 @@ export default function ContactCard() {
       <Card className="group flex h-full flex-col transition-all duration-300 hover:shadow-lg">
         <CardHeader className="flex-none pb-2">
           <div className="space-y-1.5">
-            <CardTitle className="line-clamp-2 flex min-h-[2rem] items-center gap-2">
+            <CardTitle className="flex items-center gap-2 sm:line-clamp-2 sm:min-h-[2rem]">
               <socialIconMap.email className="h-5 w-5 flex-shrink-0" />
               Get in Touch
             </CardTitle>

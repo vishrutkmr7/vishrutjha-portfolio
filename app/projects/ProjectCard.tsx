@@ -59,7 +59,7 @@ export function ProjectCard({ title, description, image, date, link, tech }: Pro
           )}
         </div>
         <CardHeader className="flex-none space-y-1.5 p-6 pb-2">
-          <CardTitle className="line-clamp-2 min-h-[3.5rem]">{title}</CardTitle>
+          <CardTitle className="sm:line-clamp-2 sm:min-h-[3.5rem]">{title}</CardTitle>
           <CardDescription className="flex h-6 items-center gap-2">
             <socialIconMap.calendar className="h-4 w-4 flex-shrink-0" />
             {date}

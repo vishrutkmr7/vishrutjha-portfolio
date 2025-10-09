@@ -94,7 +94,7 @@ SharedCardImage.displayName = 'SharedCardImage';
 export const SharedCardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ title, description, icon, date, className }, ref) => (
     <CardHeader ref={ref} className={cn('flex-none space-y-1.5 p-6 pb-2', className)}>
-      <CardTitle className="line-clamp-2 flex min-h-[2rem] items-center gap-2">
+      <CardTitle className="flex items-center gap-2 sm:line-clamp-2 sm:min-h-[2rem]">
         {icon}
         {title}
       </CardTitle>

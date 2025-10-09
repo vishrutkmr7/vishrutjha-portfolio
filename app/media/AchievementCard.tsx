@@ -44,9 +44,7 @@ export default function AchievementCard({ title, description, date, image, link 
             </div>
           )}
           <div className="space-y-1.5 p-6 pb-2">
-            <CardTitle className="line-clamp-3 min-h-[4.5rem] sm:line-clamp-2 sm:min-h-[3.5rem]">
-              {title}
-            </CardTitle>
+            <CardTitle className="sm:line-clamp-2 sm:min-h-[3.5rem]">{title}</CardTitle>
             <CardDescription className="flex items-center gap-2">
               <TooltipSimple content="Date" side="right">
                 <div className="flex items-center gap-2">
