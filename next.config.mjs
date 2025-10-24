@@ -4,6 +4,9 @@
 process.removeAllListeners('warning');
 
 const nextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -13,6 +16,13 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'react-icons'],
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
   reactStrictMode: true,
   images: {
