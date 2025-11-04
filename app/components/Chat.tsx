@@ -362,7 +362,7 @@ export default function Chat() {
             {/* Input form */}
             <div className="border-t border-border/50 bg-background/60 p-4 backdrop-blur-md">
               <form onSubmit={handleFormSubmit} className="space-y-2">
-                <div className="relative">
+                <div className="relative flex items-start gap-2">
                   <textarea
                     ref={inputRef}
                     value={input}
@@ -376,51 +376,49 @@ export default function Chat() {
                     placeholder="Ask me anything about Vishrut..."
                     rows={1}
                     className={cn(
-                      'w-full resize-none overflow-hidden rounded-2xl border px-4 py-3 pr-12 text-sm',
+                      'flex-1 resize-none overflow-hidden rounded-2xl border px-4 py-2.5 text-sm leading-normal',
                       'bg-background/80 placeholder:text-muted-foreground',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0',
                       'shadow-sm transition-all duration-200 hover:border-border',
-                      'scrollbar-thin max-h-32 leading-relaxed',
+                      'scrollbar-thin max-h-32',
                       !validationState.isValid && 'border-destructive focus-visible:ring-destructive'
                     )}
-                    style={{ minHeight: '48px' }}
+                    style={{ minHeight: '40px' }}
                     disabled={isLoading}
                   />
-                  <div className="-translate-y-1/2 absolute top-1/2 right-2">
-                    <Button
-                      type="submit"
-                      size="icon"
-                      disabled={isLoading || !input.trim() || !validationState.isValid}
-                      className={cn(
-                        'h-9 w-9 rounded-full shadow-md',
-                        'bg-primary hover:bg-primary/90 disabled:bg-muted disabled:opacity-50',
-                        'transition-all duration-200 hover:scale-105 active:scale-95'
-                      )}
-                    >
-                      {isLoading ? (
+                  <Button
+                    type="submit"
+                    size="icon"
+                    disabled={isLoading || !input.trim() || !validationState.isValid}
+                    className={cn(
+                      'h-10 w-10 shrink-0 rounded-full shadow-md',
+                      'bg-primary hover:bg-primary/90 disabled:bg-muted disabled:opacity-50',
+                      'transition-all duration-200 hover:scale-105 active:scale-95'
+                    )}
+                  >
+                    {isLoading ? (
+                      <motion.div
+                        className="flex items-center justify-center"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                      >
                         <motion.div
-                          className="flex items-center justify-center"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                        >
-                          <motion.div
-                            className="h-2 w-2 rounded-full bg-primary-foreground"
-                            animate={{
-                              scale: [1, 1.3, 1],
-                              opacity: [0.4, 1, 0.4],
-                            }}
-                            transition={{
-                              duration: 1.2,
-                              repeat: Infinity,
-                              ease: 'easeInOut',
-                            }}
-                          />
-                        </motion.div>
-                      ) : (
-                        <Send className="h-4 w-4 text-primary-foreground" />
-                      )}
-                    </Button>
-                  </div>
+                          className="h-2 w-2 rounded-full bg-primary-foreground"
+                          animate={{
+                            scale: [1, 1.3, 1],
+                            opacity: [0.4, 1, 0.4],
+                          }}
+                          transition={{
+                            duration: 1.2,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
+                        />
+                      </motion.div>
+                    ) : (
+                      <Send className="h-4 w-4 text-primary-foreground" />
+                    )}
+                  </Button>
                 </div>
                 {!validationState.isValid && (
                   <motion.div
