@@ -10,6 +10,7 @@ import { cn } from '@/app/lib/utils';
 
 import { AnimatedMarkdown } from './AnimatedMarkdown';
 import { Button } from './ui/button';
+import { GlassCard, GlassMessageBubble } from './ui/glass-card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 interface Source {
@@ -36,18 +37,16 @@ interface ValidationState {
 
 // Message bubble component
 const MessageBubble = memo(
-  ({ children, isUser }: { children: React.ReactNode; isUser: boolean }) => (
-    <div
-      className={cn(
-        'w-fit max-w-[85%] break-words rounded-2xl px-3.5 py-2 text-sm md:max-w-[75%]',
-        isUser
-          ? 'ml-auto bg-primary text-primary-foreground shadow-sm'
-          : 'mr-auto glass-effect floating-layer text-foreground'
-      )}
-    >
-      {children}
-    </div>
-  )
+  ({ children, isUser }: { children: React.ReactNode; isUser: boolean }) =>
+    isUser ? (
+      <div className="ml-auto w-fit max-w-[85%] break-words rounded-2xl bg-primary px-3.5 py-2 text-sm text-primary-foreground shadow-sm md:max-w-[75%]">
+        {children}
+      </div>
+    ) : (
+      <GlassMessageBubble className="mr-auto w-fit max-w-[85%] break-words rounded-2xl px-3.5 py-2 text-sm text-foreground md:max-w-[75%]">
+        {children}
+      </GlassMessageBubble>
+    )
 );
 MessageBubble.displayName = 'MessageBubble';
 
@@ -59,7 +58,7 @@ const LoadingIndicator = memo(() => {
   );
 
   return (
-    <div className="glass-effect floating-layer mr-auto w-fit max-w-[85%] rounded-2xl px-3.5 py-2.5 md:max-w-[75%]">
+    <GlassMessageBubble className="mr-auto w-fit max-w-[85%] rounded-2xl px-3.5 py-2.5 md:max-w-[75%]">
       <div className="flex items-center gap-2">
         <div className="flex gap-1">
           {[0, 0.15, 0.3].map(delay => (
@@ -85,7 +84,7 @@ const LoadingIndicator = memo(() => {
         </div>
         <span className="text-xs text-muted-foreground">Thinking...</span>
       </div>
-    </div>
+    </GlassMessageBubble>
   );
 });
 LoadingIndicator.displayName = 'LoadingIndicator';
@@ -277,12 +276,13 @@ export default function Chat() {
             </TooltipProvider>
           </motion.div>
         ) : (
-          <motion.div
+          <GlassCard
+            as={motion.div}
             variants={chatVariants}
             initial="closed"
             animate="open"
             exit="closed"
-            className="glass-effect floating-layer flex w-full flex-col overflow-hidden rounded-2xl shadow-2xl md:w-[400px]"
+            className="flex w-full flex-col overflow-hidden rounded-2xl shadow-2xl md:w-[400px]"
           >
             {/* Chat header */}
             <div className="flex items-center justify-between border-b border-border/50 bg-background/40 p-4 backdrop-blur-sm">
@@ -322,14 +322,15 @@ export default function Chat() {
             >
               {messages.length === 0 && (
                 <div className="flex h-full flex-col items-center justify-center space-y-4 px-6 text-center">
-                  <motion.div
+                  <GlassMessageBubble
+                    as={motion.div}
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="glass-effect floating-layer flex h-16 w-16 items-center justify-center rounded-2xl"
+                    className="flex h-16 w-16 items-center justify-center rounded-2xl"
                   >
                     <MessageCircle className="h-8 w-8 text-primary" />
-                  </motion.div>
+                  </GlassMessageBubble>
                   <motion.div
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -435,7 +436,7 @@ export default function Chat() {
                 )}
               </form>
             </div>
-          </motion.div>
+          </GlassCard>
         )}
       </AnimatePresence>
     </div>
