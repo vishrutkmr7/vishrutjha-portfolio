@@ -37,7 +37,7 @@ const ChatBubble = memo(
         className={cn(
           'relative max-w-[85%] break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed md:max-w-[75%]',
           isAssistant
-            ? 'glass-effect floating-layer border border-border/50 text-foreground'
+            ? 'glass-effect floating-layer text-foreground'
             : 'bg-primary text-primary-foreground shadow-md'
         )}
       >
@@ -57,7 +57,7 @@ const LoadingIndicator = memo(() => {
       exit={{ opacity: 0, y: -10 }}
       className="flex justify-start"
     >
-      <div className="glass-effect floating-layer max-w-[85%] rounded-2xl border border-border/50 px-4 py-3 md:max-w-[75%]">
+      <div className="glass-effect floating-layer max-w-[85%] rounded-2xl px-4 py-3 md:max-w-[75%]">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
             {[0, 0.15, 0.3].map(delay => (
@@ -277,7 +277,7 @@ export default function Chat() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="glass-effect floating-layer flex w-full flex-col overflow-hidden rounded-2xl border border-border/50 shadow-2xl md:w-[400px]"
+            className="glass-effect floating-layer flex w-full flex-col overflow-hidden rounded-2xl shadow-2xl md:w-[400px]"
           >
             {/* Chat header */}
             <div className="flex items-center justify-between border-b border-border/50 bg-background/40 p-4 backdrop-blur-sm">
@@ -321,7 +321,7 @@ export default function Chat() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="glass-effect floating-layer flex h-16 w-16 items-center justify-center rounded-2xl border border-border/50"
+                    className="glass-effect floating-layer flex h-16 w-16 items-center justify-center rounded-2xl"
                   >
                     <MessageCircle className="h-8 w-8 text-primary" />
                   </motion.div>
