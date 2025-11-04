@@ -1,8 +1,7 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -62,132 +61,77 @@ function CodeBlock({ language, value }: CodeBlockProps) {
   );
 }
 
-function ChatBubble({
-  children,
-  isAssistant,
-}: {
-  children: React.ReactNode;
-  isAssistant: boolean;
-}) {
+export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkdownProps) {
   return (
     <div
       className={cn(
-        'w-fit max-w-[85%] rounded-2xl px-4 py-2',
-        isAssistant
-          ? 'mr-auto ml-0 rounded-bl-none bg-muted text-foreground'
-          : 'mr-0 ml-auto rounded-br-none bg-primary text-primary-foreground'
+        'prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+        isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
       )}
     >
-      {children}
-    </div>
-  );
-}
-
-export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkdownProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  const hasCodeBlock = content.includes('```');
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-    >
-      {hasCodeBlock ? (
-        <div
-          className={cn(
-            'prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
-            isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
-          )}
-        >
-          <ReactMarkdown
-            components={{
-              code: ({ className, children = '', inline }: CodeComponentProps) => {
-                if (inline) {
-                  return (
-                    <code className={cn('rounded-2xl bg-muted px-1 py-0.5 text-sm', className)}>
-                      {children}
-                    </code>
-                  );
-                }
-                const match = /language-(\w+)/.exec(className || '');
-                const language = match ? match[1] : '';
-                const value = String(children).replace(/\n$/, '');
-                return <CodeBlock language={language} value={value} />;
-              },
-              p: ({ children }) => (
-                <p
+      <ReactMarkdown
+        components={{
+          code: ({ className, children = '', inline }: CodeComponentProps) => {
+            if (inline) {
+              return (
+                <code
                   className={cn(
-                    'my-1 leading-6',
-                    isAssistant ? 'text-foreground' : 'text-primary-foreground'
+                    'rounded bg-muted px-1.5 py-0.5 font-mono text-xs',
+                    className
                   )}
                 >
                   {children}
-                </p>
-              ),
-              ul: ({ children }) => (
-                <ul className="my-1 list-inside list-disc space-y-0.5">{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ol className="my-1 list-inside list-decimal space-y-0.5">{children}</ol>
-              ),
-              li: ({ children }) => <li className="leading-6">{children}</li>,
-              a: ({ href, children }) => (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary underline underline-offset-4 hover:text-primary/90"
-                >
-                  {children}
-                </a>
-              ),
-              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-              em: ({ children }) => <em className="italic">{children}</em>,
-              blockquote: ({ children }) => (
-                <blockquote className="my-1 border-muted border-l-4 pl-4 italic">
-                  {children}
-                </blockquote>
-              ),
-            }}
-          >
-            {content}
-          </ReactMarkdown>
-        </div>
-      ) : (
-        <ChatBubble isAssistant={isAssistant}>
-          <div
-            className={cn(
-              'prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
-              isAssistant ? 'prose-neutral dark:prose-invert' : 'prose-primary'
-            )}
-          >
-            <ReactMarkdown
-              components={{
-                p: ({ children }) => <div className="m-0 leading-6">{children}</div>,
-                code: ({ className, children = '', inline }: CodeComponentProps) => {
-                  if (inline) {
-                    return (
-                      <code className={cn('rounded-2xl bg-muted px-1 py-0.5 text-sm', className)}>
-                        {children}
-                      </code>
-                    );
-                  }
-                  const match = /language-(\w+)/.exec(className || '');
-                  const language = match ? match[1] : '';
-                  const value = String(children).replace(/\n$/, '');
-                  return <CodeBlock language={language} value={value} />;
-                },
-              }}
+                </code>
+              );
+            }
+            const match = /language-(\w+)/.exec(className || '');
+            const language = match ? match[1] : '';
+            const value = String(children).replace(/\n$/, '');
+            return <CodeBlock language={language} value={value} />;
+          },
+          p: ({ children }) => (
+            <p
+              className={cn(
+                'my-1 leading-relaxed',
+                isAssistant ? 'text-foreground' : 'text-primary-foreground'
+              )}
             >
-              {content}
-            </ReactMarkdown>
-          </div>
-        </ChatBubble>
-      )}
-    </motion.div>
+              {children}
+            </p>
+          ),
+          ul: ({ children }) => (
+            <ul className="my-2 ml-4 list-disc space-y-1">{children}</ul>
+          ),
+          ol: ({ children }) => (
+            <ol className="my-2 ml-4 list-decimal space-y-1">{children}</ol>
+          ),
+          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+          a: ({ href, children }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                'underline underline-offset-2 transition-colors',
+                isAssistant
+                  ? 'text-primary hover:text-primary/80'
+                  : 'text-primary-foreground/90 hover:text-primary-foreground'
+              )}
+            >
+              {children}
+            </a>
+          ),
+          strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+          em: ({ children }) => <em className="italic">{children}</em>,
+          blockquote: ({ children }) => (
+            <blockquote className="my-2 border-l-2 border-muted-foreground/30 pl-3 italic">
+              {children}
+            </blockquote>
+          ),
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
   );
 }

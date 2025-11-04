@@ -12,10 +12,18 @@ import { AnimatedMarkdown } from './AnimatedMarkdown';
 import { Button } from './ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
+interface Source {
+  type: 'project' | 'experience' | 'education' | 'media';
+  title: string;
+  description?: string;
+  date?: string;
+  url?: string;
+}
+
 interface StructuredResponse {
   response: {
     content: string;
-    sources: unknown[];
+    sources: Source[];
     confidence: number;
     isRelevant: boolean;
   };
@@ -26,61 +34,58 @@ interface ValidationState {
   message?: string;
 }
 
-// Modern chat bubble with liquid glass effect
-const ChatBubble = memo(
-  ({ children, isAssistant }: { children: React.ReactNode; isAssistant: boolean }) => {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-        className={cn(
-          'relative max-w-[85%] break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed md:max-w-[75%]',
-          isAssistant
-            ? 'glass-effect floating-layer text-foreground'
-            : 'bg-primary text-primary-foreground shadow-md'
-        )}
-      >
-        {children}
-      </motion.div>
-    );
-  }
-);
-ChatBubble.displayName = 'ChatBubble';
-
-// Modern loading indicator with glass effect
-const LoadingIndicator = memo(() => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      className="flex justify-start"
+// Message bubble component
+const MessageBubble = memo(
+  ({ children, isUser }: { children: React.ReactNode; isUser: boolean }) => (
+    <div
+      className={cn(
+        'w-fit max-w-[85%] break-words rounded-2xl px-3.5 py-2 text-sm md:max-w-[75%]',
+        isUser
+          ? 'ml-auto bg-primary text-primary-foreground shadow-sm'
+          : 'mr-auto glass-effect floating-layer text-foreground'
+      )}
     >
-      <div className="glass-effect floating-layer max-w-[85%] rounded-2xl px-4 py-3 md:max-w-[75%]">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            {[0, 0.15, 0.3].map(delay => (
-              <motion.div
-                key={`loading-dot-${delay}`}
-                className="h-2 w-2 rounded-full bg-primary"
-                animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.4, 1, 0.4],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  delay,
-                  ease: 'easeInOut',
-                }}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-muted-foreground">Thinking...</span>
+      {children}
+    </div>
+  )
+);
+MessageBubble.displayName = 'MessageBubble';
+
+// Loading indicator
+const LoadingIndicator = memo(() => {
+  const prefersReducedMotion = useMemo(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  );
+
+  return (
+    <div className="glass-effect floating-layer mr-auto w-fit max-w-[85%] rounded-2xl px-3.5 py-2.5 md:max-w-[75%]">
+      <div className="flex items-center gap-2">
+        <div className="flex gap-1">
+          {[0, 0.15, 0.3].map(delay => (
+            <motion.div
+              key={delay}
+              className="h-1.5 w-1.5 rounded-full bg-primary"
+              animate={
+                prefersReducedMotion
+                  ? { opacity: 0.7 }
+                  : {
+                      scale: [1, 1.2, 1],
+                      opacity: [0.4, 1, 0.4],
+                    }
+              }
+              transition={{
+                duration: prefersReducedMotion ? 0 : 1.2,
+                repeat: prefersReducedMotion ? 0 : Infinity,
+                delay: prefersReducedMotion ? 0 : delay,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
         </div>
+        <span className="text-xs text-muted-foreground">Thinking...</span>
       </div>
-    </motion.div>
+    </div>
   );
 });
 LoadingIndicator.displayName = 'LoadingIndicator';
@@ -304,7 +309,7 @@ export default function Chat() {
 
             {/* Messages */}
             <div
-              className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30 flex h-[400px] flex-col gap-1 overflow-y-auto scroll-smooth p-4 md:h-[450px]"
+              className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30 flex h-[400px] flex-col gap-2.5 overflow-y-auto scroll-smooth p-4 md:h-[450px]"
               style={{
                 background: `linear-gradient(
                      to bottom,
@@ -339,34 +344,18 @@ export default function Chat() {
                 </div>
               )}
 
-              <AnimatePresence initial={false}>
-                {messages.map(message => {
-                  const structuredResponse =
-                    message.role === 'assistant' ? parseResponse(message.content) : null;
-                  const isUser = message.role === 'user';
+              {messages.map(message => {
+                const structuredResponse =
+                  message.role === 'assistant' ? parseResponse(message.content) : null;
+                const isUser = message.role === 'user';
+                const content = structuredResponse?.response?.content || message.content;
 
-                  return (
-                    <div
-                      key={message.id}
-                      className={cn(
-                        'mb-3 flex w-full',
-                        isUser ? 'justify-end' : 'justify-start'
-                      )}
-                    >
-                      <ChatBubble isAssistant={!isUser}>
-                        {!isUser && structuredResponse ? (
-                          <AnimatedMarkdown
-                            content={structuredResponse.response.content}
-                            isAssistant={true}
-                          />
-                        ) : (
-                          <AnimatedMarkdown content={message.content} isAssistant={!isUser} />
-                        )}
-                      </ChatBubble>
-                    </div>
-                  );
-                })}
-              </AnimatePresence>
+                return (
+                  <MessageBubble key={message.id} isUser={isUser}>
+                    <AnimatedMarkdown content={content} isAssistant={!isUser} />
+                  </MessageBubble>
+                );
+              })}
 
               {isLoading && <LoadingIndicator />}
               <div ref={messagesEndRef} />
