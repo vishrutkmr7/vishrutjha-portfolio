@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle, Send, X } from 'lucide-react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useIsMobile } from '@/app/lib/hooks';
+import { useIsMobile, useReducedMotion } from '@/app/lib/hooks';
 import { cn } from '@/app/lib/utils';
 
 import { AnimatedMarkdown } from './AnimatedMarkdown';
@@ -50,12 +50,9 @@ const MessageBubble = memo(
 );
 MessageBubble.displayName = 'MessageBubble';
 
-// Loading indicator
+// Loading indicator with SSR-safe motion preference detection
 const LoadingIndicator = memo(() => {
-  const prefersReducedMotion = useMemo(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    []
-  );
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <GlassMessageBubble className="mr-auto w-fit max-w-[85%] rounded-2xl px-3.5 py-2.5 md:max-w-[75%]">
