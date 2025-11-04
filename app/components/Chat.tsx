@@ -239,7 +239,7 @@ export default function Chat() {
   );
 
   return (
-    <div className="fixed right-4 bottom-4 z-[100] w-[calc(100vw-2rem)] md:w-auto">
+    <div className="fixed right-4 bottom-20 z-[100] w-[calc(100vw-2rem)] md:bottom-4 md:w-auto">
       <AnimatePresence>
         {!isOpen ? (
           <motion.div
