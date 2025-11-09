@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 
 import { ThemeToggle } from '@/app/components/theme-toggle';
 import { Button } from '@/app/components/ui/button';
+import { GlassCard } from '@/app/components/ui/glass-card';
 import { cn } from '@/app/lib/utils';
 
 // Memoized navigation items to prevent recreation on every render
@@ -104,15 +105,18 @@ const Header: React.FC = () => {
     <>
       <div className="pb-0">
         {/* Mobile buttons - iOS 26 Liquid Glass */}
-        <div className="floating-layer fixed top-3 right-3 z-50 flex items-center gap-2 rounded-2xl border bg-background/70 p-1.5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden">
+        <GlassCard
+          className="fixed top-3 right-3 z-50 flex items-center gap-2 rounded-2xl p-1.5 md:hidden"
+          withBorder
+        >
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" asChild>
             <ResumeButton />
           </Button>
           <ThemeToggle />
-        </div>
+        </GlassCard>
 
-        <header className="floating-layer fixed top-0 right-0 left-0 z-50 hidden w-full border-b bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:block">
-          <div className="container flex h-14 items-center">
+        <GlassCard className="fixed top-0 right-0 left-0 z-50 hidden w-full border-b md:block">
+          <header className="container flex h-14 items-center">
             <div className="mr-4 flex">
               <nav className="flex items-center space-x-2 font-medium text-sm">
                 {navigationWithActiveState.map(({ href, icon, label, isActive }) => (
@@ -134,13 +138,13 @@ const Header: React.FC = () => {
                 <ThemeToggle />
               </nav>
             </div>
-          </div>
-        </header>
+          </header>
+        </GlassCard>
       </div>
 
       {/* Mobile Bottom Navigation Bar - iOS 26 Liquid Glass with safe area */}
-      <div
-        className="floating-layer fixed right-0 bottom-0 left-0 z-50 border-t bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden"
+      <GlassCard
+        className="fixed right-0 bottom-0 left-0 z-50 border-t md:hidden"
         style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}
       >
         <nav className="mx-auto flex w-full max-w-md justify-between px-3 py-2">
@@ -155,7 +159,7 @@ const Header: React.FC = () => {
             />
           ))}
         </nav>
-      </div>
+      </GlassCard>
     </>
   );
 };
