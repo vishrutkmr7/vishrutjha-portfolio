@@ -1,5 +1,6 @@
 'use client';
 
+import { Gift } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { memo, useMemo } from 'react';
@@ -15,7 +16,7 @@ const Copyright = memo(() => {
 
   return (
     <div className="text-center text-muted-foreground text-xs md:text-sm">
-      <span>© {currentYear} Vishrut Jha</span>
+      <span suppressHydrationWarning>© {currentYear} Vishrut Jha</span>
     </div>
   );
 });
@@ -54,27 +55,37 @@ const SocialLinks = memo(() => {
         href: 'https://github.com/vishrutkmr7',
         icon: socialIconMap.github,
         label: 'GitHub',
+        external: true,
       },
       {
         href: 'https://linkedin.com/in/vishrutjha',
         icon: socialIconMap.LinkedIn,
         label: 'LinkedIn',
+        external: true,
       },
       {
         href: 'https://twitter.com/vishrutkmr7',
         icon: socialIconMap.Twitter,
         label: 'Twitter',
+        external: true,
       },
-      // Insert Instagram between Twitter and Email
       {
         href: 'https://www.instagram.com/vishrutkmr7',
         icon: socialIconMap.Instagram,
         label: 'Instagram',
+        external: true,
       },
       {
         href: 'mailto:i@vishrut.co',
         icon: socialIconMap.email,
         label: 'Email',
+        external: false,
+      },
+      {
+        href: '/referrals',
+        icon: Gift,
+        label: 'Referrals',
+        external: false,
       },
     ],
     []
@@ -82,7 +93,7 @@ const SocialLinks = memo(() => {
 
   return (
     <div className="flex items-center gap-2">
-      {socialLinks.map(({ href, icon: Icon, label }) => (
+      {socialLinks.map(({ href, icon: Icon, label, external }) => (
         <TooltipSimple key={label} content={label} side="top">
           <Button
             variant="ghost"
@@ -92,8 +103,7 @@ const SocialLinks = memo(() => {
           >
             <Link
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
               aria-label={`Visit ${label}`}
             >
               <Icon className="h-4 w-4" />

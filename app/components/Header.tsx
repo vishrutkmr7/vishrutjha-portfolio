@@ -1,6 +1,6 @@
 'use client';
 
-import { FileDown, FolderGit2, Gift, Home, Image as ImageIcon, Map as MapIcon } from 'lucide-react';
+import { FileDown, FolderGit2, Home, Image as ImageIcon, Map as MapIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
@@ -17,7 +17,6 @@ const navigationItems = [
   { href: '/journey', icon: MapIcon, label: 'Journey' },
   { href: '/projects', icon: FolderGit2, label: 'Projects' },
   { href: '/media', icon: ImageIcon, label: 'Media' },
-  { href: '/referrals', icon: Gift, label: 'Referrals' },
 ] as const;
 
 // Memoized resume button component
