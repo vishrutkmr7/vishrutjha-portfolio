@@ -1,29 +1,27 @@
-'use client';
-
 import { Gift } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { memo, useMemo } from 'react';
 
 import { socialIconMap } from '@/app/lib/icons';
 
 import { Button } from './ui/button';
 import { TooltipSimple } from './ui/tooltip';
 
-// Memoized copyright component
-const Copyright = memo(() => {
-  const currentYear = useMemo(() => new Date().getFullYear(), []);
+// Server component - static copyright
+const Copyright = () => {
+  // Using static year to avoid prerender issues with Date.now()
+  // Update manually when needed
+  const currentYear = 2025;
 
   return (
     <div className="text-center text-muted-foreground text-xs md:text-sm">
-      <span suppressHydrationWarning>© {currentYear} Vishrut Jha</span>
+      <span>© {currentYear} Vishrut Jha</span>
     </div>
   );
-});
-Copyright.displayName = 'Copyright';
+};
 
-// Memoized Barcelona component
-const BarcelonaSection = memo(() => (
+// Server component
+const BarcelonaSection = () => (
   <div className="flex items-center gap-2 md:gap-3">
     <TooltipSimple content="Més que un Club 🔵🔴" side="top">
       <span className="group flex cursor-help items-center gap-1.5 text-muted-foreground text-xs transition-colors duration-200 hover:text-primary md:text-sm">
@@ -44,52 +42,48 @@ const BarcelonaSection = memo(() => (
       </span>
     </TooltipSimple>
   </div>
-));
-BarcelonaSection.displayName = 'BarcelonaSection';
+);
 
-// Memoized social links component
-const SocialLinks = memo(() => {
-  const socialLinks = useMemo(
-    () => [
-      {
-        href: 'https://github.com/vishrutkmr7',
-        icon: socialIconMap.github,
-        label: 'GitHub',
-        external: true,
-      },
-      {
-        href: 'https://linkedin.com/in/vishrutjha',
-        icon: socialIconMap.LinkedIn,
-        label: 'LinkedIn',
-        external: true,
-      },
-      {
-        href: 'https://twitter.com/vishrutkmr7',
-        icon: socialIconMap.Twitter,
-        label: 'Twitter',
-        external: true,
-      },
-      {
-        href: 'https://www.instagram.com/vishrutkmr7',
-        icon: socialIconMap.Instagram,
-        label: 'Instagram',
-        external: true,
-      },
-      {
-        href: 'mailto:i@vishrut.co',
-        icon: socialIconMap.email,
-        label: 'Email',
-        external: false,
-      },
-      {
-        href: '/referrals',
-        icon: Gift,
-        label: 'Referrals',
-        external: false,
-      },
-    ],
-    []
-  );
+// Server component - static data
+const SocialLinks = () => {
+  const socialLinks = [
+    {
+      href: 'https://github.com/vishrutkmr7',
+      icon: socialIconMap.github,
+      label: 'GitHub',
+      external: true,
+    },
+    {
+      href: 'https://linkedin.com/in/vishrutjha',
+      icon: socialIconMap.LinkedIn,
+      label: 'LinkedIn',
+      external: true,
+    },
+    {
+      href: 'https://twitter.com/vishrutkmr7',
+      icon: socialIconMap.Twitter,
+      label: 'Twitter',
+      external: true,
+    },
+    {
+      href: 'https://www.instagram.com/vishrutkmr7',
+      icon: socialIconMap.Instagram,
+      label: 'Instagram',
+      external: true,
+    },
+    {
+      href: 'mailto:i@vishrut.co',
+      icon: socialIconMap.email,
+      label: 'Email',
+      external: false,
+    },
+    {
+      href: '/referrals',
+      icon: Gift,
+      label: 'Referrals',
+      external: false,
+    },
+  ];
 
   return (
     <div className="flex items-center gap-2">
@@ -113,10 +107,10 @@ const SocialLinks = memo(() => {
       ))}
     </div>
   );
-});
-SocialLinks.displayName = 'SocialLinks';
+};
 
-const Footer = memo(() => {
+// Server Component - no client-side state needed
+export default function Footer() {
   return (
     <footer className="border-t bg-background">
       <div className="container flex flex-col items-center space-y-3 py-4 pb-[72px] md:space-y-4 md:py-6 md:pb-6">
@@ -128,7 +122,4 @@ const Footer = memo(() => {
       </div>
     </footer>
   );
-});
-Footer.displayName = 'Footer';
-
-export default Footer;
+}

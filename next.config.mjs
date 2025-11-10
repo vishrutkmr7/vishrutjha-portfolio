@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 
+import bundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 // Suppress the punycode deprecation warning
 process.removeAllListeners('warning');
 
@@ -14,6 +20,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  cacheComponents: true, // Enable Partial Prerendering (PPR) for better TTFB
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'react-icons'],
     serverActions: {
@@ -161,4 +168,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

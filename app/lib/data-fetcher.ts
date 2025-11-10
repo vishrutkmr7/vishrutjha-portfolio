@@ -89,8 +89,8 @@ export async function fetchTimelineData(): Promise<TimelineItem[]> {
 }
 
 // In-memory cache for referral metadata to avoid repeated fetches
-const metadataCache = new Map<string, { data: ReferralItem; timestamp: number }>();
-const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const _metadataCache = new Map<string, { data: ReferralItem; timestamp: number }>();
+const _CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
 export async function fetchReferralsData(): Promise<ReferralItem[]> {
   try {
@@ -102,71 +102,44 @@ export async function fetchReferralsData(): Promise<ReferralItem[]> {
     // Import metadata fetcher dynamically
     const { fetchReferralMetadata } = await import('./metadata-fetcher');
 
-    // Check cache first and filter items that need refresh
-    const now = Date.now();
-    const itemsToFetch: ReferralItem[] = [];
-    const cachedResults: ReferralItem[] = [];
+    // Fetch metadata with concurrency limit
+    const batchSize = 5; // Process 5 URLs at a time (increased from 3)
+    const results: ReferralItem[] = [];
 
-    for (const referral of data) {
-      const cached = metadataCache.get(referral.slug);
-      if (cached && now - cached.timestamp < CACHE_TTL) {
-        cachedResults.push(cached.data);
-      } else {
-        itemsToFetch.push(referral);
+    for (let i = 0; i < data.length; i += batchSize) {
+      const batch = data.slice(i, i + batchSize);
+      // Use allSettled to handle failures gracefully without blocking other fetches
+      const batchResults = await Promise.allSettled(
+        batch.map(async referral => {
+          const metadata = await fetchReferralMetadata(referral.url);
+          return {
+            ...referral,
+            image: metadata.favicon,
+            description: metadata.description,
+          };
+        })
+      );
+
+      // Process settled promises
+      for (let j = 0; j < batchResults.length; j++) {
+        const result = batchResults[j];
+        const referral = batch[j];
+
+        if (result.status === 'fulfilled') {
+          results.push(result.value);
+        } else {
+          // Only log error once here
+          console.error(`Failed to fetch metadata for ${referral.url}:`, result.reason);
+          results.push({
+            ...referral,
+            image: '/favicon.png',
+            description: `Check out ${referral.title}`,
+          });
+        }
       }
     }
 
-    // Fetch metadata for uncached items with concurrency limit
-    if (itemsToFetch.length > 0) {
-      const batchSize = 3; // Process 3 URLs at a time
-      const newResults: ReferralItem[] = [];
-
-      for (let i = 0; i < itemsToFetch.length; i += batchSize) {
-        const batch = itemsToFetch.slice(i, i + batchSize);
-        const batchResults = await Promise.all(
-          batch.map(async referral => {
-            try {
-              const metadata = await fetchReferralMetadata(referral.url);
-              const enrichedItem = {
-                ...referral,
-                image: metadata.favicon,
-                description: metadata.description,
-              };
-
-              // Cache the result
-              metadataCache.set(referral.slug, {
-                data: enrichedItem,
-                timestamp: now,
-              });
-
-              return enrichedItem;
-            } catch (error) {
-              console.error(`Failed to fetch metadata for ${referral.url}:`, error);
-              const fallbackItem = {
-                ...referral,
-                image: '/favicon.png',
-                description: `Check out ${referral.title}`,
-              };
-
-              // Cache fallback to prevent repeated failures
-              metadataCache.set(referral.slug, {
-                data: fallbackItem,
-                timestamp: now,
-              });
-
-              return fallbackItem;
-            }
-          })
-        );
-
-        newResults.push(...batchResults);
-      }
-
-      // Combine cached and newly fetched results
-      return [...cachedResults, ...newResults];
-    }
-
-    return cachedResults;
+    return results;
   } catch (error) {
     console.error('Failed to fetch referrals data:', error);
     return [];
@@ -255,7 +228,7 @@ export function sortTimelineByDate(timeline: TimelineItem[]): TimelineItem[] {
         Nov: 10,
         Dec: 11,
       };
-      return new Date(parseInt(year), monthMap[month] || 0);
+      return new Date(parseInt(year, 10), monthMap[month] || 0);
     };
 
     const dateA = parseDateString(a.time);

@@ -5,19 +5,23 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Suspense } from 'react';
-
 import ClientComponents from '@/app/components/ClientComponents';
 import ClientRouteJsonLd from '@/app/components/ClientRouteJsonLd';
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import JsonLd from '@/app/components/JsonLd';
+import Chat from '@/app/components/LazyChat';
 import { ScrollProgressBar } from '@/app/components/ScrollAnimation';
 import { ThemeProvider } from '@/app/components/theme-provider';
 import { DOMAIN } from '@/app/constants';
 
-import Chat from './components/Chat';
-
-const inter = Inter({ subsets: ['latin'], display: 'swap', preload: true });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+  adjustFontFallback: true, // Optimize CLS
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -135,9 +139,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for theme initialization
           dangerouslySetInnerHTML={{
@@ -197,15 +198,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ></iframe>
             </noscript>
             {/* End Google Tag Manager (noscript) */}
-            {/* Google tag (gtag.js) */}
+            {/* Google tag (gtag.js) - Deferred for better FCP/LCP */}
             <Script
-              strategy="afterInteractive"
+              strategy="lazyOnload"
               src={'https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50'}
             />
             {/* biome-ignore lint/correctness/useUniqueElementIds: Next.js Script component requires static id for deduplication */}
             <Script
               id="google-analytics"
-              strategy="afterInteractive"
+              strategy="lazyOnload"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for Google Analytics inline script
               dangerouslySetInnerHTML={{
                 __html: `

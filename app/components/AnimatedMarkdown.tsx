@@ -74,12 +74,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
           code: ({ className, children = '', inline }: CodeComponentProps) => {
             if (inline) {
               return (
-                <code
-                  className={cn(
-                    'rounded bg-muted px-1.5 py-0.5 font-mono text-xs',
-                    className
-                  )}
-                >
+                <code className={cn('rounded bg-muted px-1.5 py-0.5 font-mono text-xs', className)}>
                   {children}
                 </code>
               );
@@ -99,12 +94,8 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
               {children}
             </p>
           ),
-          ul: ({ children }) => (
-            <ul className="my-2 ml-4 list-disc space-y-1">{children}</ul>
-          ),
-          ol: ({ children }) => (
-            <ol className="my-2 ml-4 list-decimal space-y-1">{children}</ol>
-          ),
+          ul: ({ children }) => <ul className="my-2 ml-4 list-disc space-y-1">{children}</ul>,
+          ol: ({ children }) => <ol className="my-2 ml-4 list-decimal space-y-1">{children}</ol>,
           li: ({ children }) => <li className="leading-relaxed">{children}</li>,
           a: ({ href, children }) => (
             <a
@@ -124,7 +115,7 @@ export function AnimatedMarkdown({ content, isAssistant = false }: AnimatedMarkd
           strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
           em: ({ children }) => <em className="italic">{children}</em>,
           blockquote: ({ children }) => (
-            <blockquote className="my-2 border-l-2 border-muted-foreground/30 pl-3 italic">
+            <blockquote className="my-2 border-muted-foreground/30 border-l-2 pl-3 italic">
               {children}
             </blockquote>
           ),

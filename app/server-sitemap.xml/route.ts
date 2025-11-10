@@ -1,7 +1,4 @@
-// Mark this route as static for build-time generation
-export const dynamic = 'force-static';
-export const revalidate = 86400; // Revalidate once per day
-
+// Note: With cacheComponents enabled, caching is handled automatically
 export async function GET() {
   // Add your dynamic routes here with their priorities
   const routes = [

@@ -33,6 +33,7 @@ const ProfileImage = memo(() => (
         alt="Vishrut Jha"
         fill
         priority
+        fetchPriority="high"
         quality={90}
         className="rounded-full object-cover ring-2 ring-primary/20 transition-transform duration-300 hover:scale-105"
         sizes="(max-width: 768px) 176px, 176px"
@@ -64,7 +65,8 @@ const Greeting = memo(() => (
           height={40}
           quality={85}
           className="ml-2 inline-block h-8 w-8 animate-wave sm:ml-3 sm:h-10 sm:w-10 md:h-12 md:w-12"
-          loading="eager"
+          priority
+          fetchPriority="high"
         />
       </TooltipSimple>
     </h1>

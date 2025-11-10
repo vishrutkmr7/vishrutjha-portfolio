@@ -29,7 +29,9 @@ export interface GlassCardBaseProps {
   as?: React.ElementType;
 }
 
-export type GlassCardProps = GlassCardBaseProps & React.HTMLAttributes<HTMLDivElement> & Record<string, any>;
+export type GlassCardProps = GlassCardBaseProps &
+  React.HTMLAttributes<HTMLDivElement> &
+  Record<string, any>;
 
 /**
  * GlassCard - Reusable glassmorphism/liquid glass component
@@ -97,9 +99,10 @@ export interface GlassMessageBubbleProps extends React.HTMLAttributes<HTMLDivEle
   as?: React.ElementType;
 }
 
-export const GlassMessageBubble = React.forwardRef<HTMLDivElement, GlassMessageBubbleProps & Record<string, any>>(
-  ({ className, as: Component = 'div', ...props }, ref) => (
-    <Component ref={ref} className={cn('glass-effect floating-layer', className)} {...props} />
-  )
-);
+export const GlassMessageBubble = React.forwardRef<
+  HTMLDivElement,
+  GlassMessageBubbleProps & Record<string, any>
+>(({ className, as: Component = 'div', ...props }, ref) => (
+  <Component ref={ref} className={cn('glass-effect floating-layer', className)} {...props} />
+));
 GlassMessageBubble.displayName = 'GlassMessageBubble';

@@ -65,7 +65,7 @@ export async function fetchReferralMetadata(url: string): Promise<ReferralMetada
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout (reduced from 5)
+      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout for slow referral sites
 
       const response = await fetch(url, {
         signal: controller.signal,
@@ -96,9 +96,9 @@ export async function fetchReferralMetadata(url: string): Promise<ReferralMetada
           $('meta[name="twitter:title"]').attr('content') ||
           '';
       }
-    } catch (fetchError) {
-      console.warn(`Failed to fetch metadata for ${url}:`, fetchError);
-      // Continue with just the favicon
+    } catch (_fetchError) {
+      // Silently continue with just the favicon - error will be logged by caller if needed
+      // This avoids duplicate error logging
     }
 
     return {

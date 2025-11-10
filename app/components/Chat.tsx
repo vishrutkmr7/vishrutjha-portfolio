@@ -39,11 +39,11 @@ interface ValidationState {
 const MessageBubble = memo(
   ({ children, isUser }: { children: React.ReactNode; isUser: boolean }) =>
     isUser ? (
-      <div className="ml-auto w-fit max-w-[85%] break-words rounded-2xl bg-primary px-3.5 py-2 text-sm text-primary-foreground shadow-sm md:max-w-[75%]">
+      <div className="ml-auto w-fit max-w-[85%] break-words rounded-2xl bg-primary px-3.5 py-2 text-primary-foreground text-sm shadow-sm md:max-w-[75%]">
         {children}
       </div>
     ) : (
-      <GlassMessageBubble className="mr-auto w-fit max-w-[85%] break-words rounded-2xl px-3.5 py-2 text-sm text-foreground md:max-w-[75%]">
+      <GlassMessageBubble className="mr-auto w-fit max-w-[85%] break-words rounded-2xl px-3.5 py-2 text-foreground text-sm md:max-w-[75%]">
         {children}
       </GlassMessageBubble>
     )
@@ -79,7 +79,7 @@ const LoadingIndicator = memo(() => {
             />
           ))}
         </div>
-        <span className="text-xs text-muted-foreground">Thinking...</span>
+        <span className="text-muted-foreground text-xs">Thinking...</span>
       </div>
     </GlassMessageBubble>
   );
@@ -282,16 +282,14 @@ export default function Chat() {
             className="flex w-full flex-col overflow-hidden rounded-2xl shadow-2xl md:w-[400px]"
           >
             {/* Chat header */}
-            <div className="flex items-center justify-between border-b border-border/50 bg-background/40 p-4 backdrop-blur-sm">
+            <div className="flex items-center justify-between border-border/50 border-b bg-background/40 p-4 backdrop-blur-sm">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 shadow-md">
                   <MessageCircle className="h-5 w-5 shrink-0 text-primary-foreground" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-base">Ask About Vishrut</h3>
-                  <p className="text-muted-foreground text-xs">
-                    Powered by Perplexity Sonar
-                  </p>
+                  <p className="text-muted-foreground text-xs">Powered by Perplexity Sonar</p>
                 </div>
               </div>
               <Button
@@ -336,7 +334,9 @@ export default function Chat() {
                   >
                     <h3 className="font-semibold text-base">Welcome!</h3>
                     <p className="max-w-[280px] text-muted-foreground text-sm leading-relaxed">
-                      I'm an AI assistant powered by Perplexity Sonar. Ask me anything about Vishrut's work, projects, skills, or experiences—whether it's on this website, LinkedIn, or other sources online.
+                      I'm an AI assistant powered by Perplexity Sonar. Ask me anything about
+                      Vishrut's work, projects, skills, or experiences—whether it's on this website,
+                      LinkedIn, or other sources online.
                     </p>
                   </motion.div>
                 </div>
@@ -360,7 +360,7 @@ export default function Chat() {
             </div>
 
             {/* Input form */}
-            <div className="border-t border-border/50 bg-background/60 p-4 backdrop-blur-md">
+            <div className="border-border/50 border-t bg-background/60 p-4 backdrop-blur-md">
               <form onSubmit={handleFormSubmit} className="space-y-2">
                 <div className="relative flex items-start gap-2">
                   <textarea
@@ -381,7 +381,8 @@ export default function Chat() {
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0',
                       'shadow-sm transition-all duration-200 hover:border-border',
                       'scrollbar-thin max-h-32',
-                      !validationState.isValid && 'border-destructive focus-visible:ring-destructive'
+                      !validationState.isValid &&
+                        'border-destructive focus-visible:ring-destructive'
                     )}
                     style={{ minHeight: '40px' }}
                     disabled={isLoading}

@@ -1,6 +1,17 @@
 {
   "permissions": {
-    "allow": ["Bash(git merge:*)"],
+    "allow": [
+      "Bash(git merge:*)",
+      "WebSearch",
+      "Bash(bun run build:*)",
+      "Bash(bun add:*)",
+      "Bash(sourcery review:*)",
+      "Bash(bun run check:fix:*)",
+      "Bash(bun biome check:*)",
+      "Bash(bun biome:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
     "deny": [],
     "ask": []
   }

@@ -341,11 +341,11 @@ export function parseDateString(dateStr: string): Date {
   // Parse MM/DD/YYYY format
   if (startDate.includes('/')) {
     const [month, day, year] = startDate.split('/');
-    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    return new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
   }
 
   // Parse "Month YYYY" format
   const [month, year] = startDate.split(' ');
   const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth();
-  return new Date(parseInt(year), monthIndex);
+  return new Date(parseInt(year, 10), monthIndex);
 }
