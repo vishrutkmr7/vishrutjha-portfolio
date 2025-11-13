@@ -124,5 +124,12 @@
     "url": "https://worldcoin.org/join/KVZOAW8",
     "category": "Crypto",
     "featured": false
+  },
+  {
+    "title": "Google Fi Wireless",
+    "slug": "google-fi",
+    "url": "https://g.co/fi/r/1VMFWM",
+    "category": "Mobile Service",
+    "featured": false
   }
 ]
