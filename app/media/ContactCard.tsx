@@ -71,7 +71,7 @@ export default function ContactCard() {
               className="w-full transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
             >
               <a
-                href="https://twitter.com/vishrutkmr7"
+                href="https://x.com/vishrutkmr7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2"

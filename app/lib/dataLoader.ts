@@ -57,7 +57,7 @@ export function getStructuredPromptData() {
         referrals: '/data/referrals.json',
       },
       social: {
-        twitter: 'https://twitter.com/vishrutkmr7',
+        twitter: 'https://x.com/vishrutkmr7',
         instagram: 'https://instagram.com/vishrutkmr7',
         linkedin: 'https://linkedin.com/in/vishrutjha',
         github: 'https://github.com/vishrutkmr7',

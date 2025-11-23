@@ -12,7 +12,7 @@ export default function JsonLd() {
     url: DOMAIN,
     sameAs: [
       'https://github.com/vishrutkmr7',
-      'https://twitter.com/vishrutkmr7',
+      'https://x.com/vishrutkmr7',
       // Add other social profile URLs
     ],
     image: {

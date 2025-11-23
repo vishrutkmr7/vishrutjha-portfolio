@@ -189,7 +189,7 @@ const SocialLinks = memo(() => (
     </TooltipSimple>
     <TooltipSimple content="Twitter" side="top">
       <Link
-        href="https://twitter.com/vishrutkmr7"
+        href="https://x.com/vishrutkmr7"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center rounded-full bg-muted p-3 text-muted-foreground transition-all duration-300 hover:scale-105 hover:bg-primary hover:text-primary-foreground"

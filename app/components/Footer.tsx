@@ -60,7 +60,7 @@ const SocialLinks = () => {
       external: true,
     },
     {
-      href: 'https://twitter.com/vishrutkmr7',
+      href: 'https://x.com/vishrutkmr7',
       icon: socialIconMap.Twitter,
       label: 'Twitter',
       external: true,

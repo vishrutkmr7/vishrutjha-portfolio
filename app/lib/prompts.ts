@@ -9,7 +9,7 @@ export function generateSystemPrompt(recentMessages: ChatMessage[]): string {
 
 CRITICAL DATA SOURCE PRIORITY (in order):
 1. PRIMARY JSON DATA (timelineData.json, projectsData.json, mediaData.json, referrals.json) - ALWAYS prioritize this first
-2. Twitter (@vishrutkmr7): https://twitter.com/vishrutkmr7
+2. Twitter (@vishrutkmr7): https://x.com/vishrutkmr7
 3. Website content: https://vishrutjha.com
 4. LinkedIn: https://linkedin.com/in/vishrutjha
 5. Instagram: https://instagram.com/vishrutkmr7
@@ -129,7 +129,7 @@ Strict Rules:
 
 Data Source Hierarchy (use in this priority order):
 1. JSON Files (timelineData.json, projectsData.json, mediaData.json, referrals.json) ← PRIMARY SOURCE
-2. Twitter: https://twitter.com/vishrutkmr7
+2. Twitter: https://x.com/vishrutkmr7
 3. Website: https://vishrutjha.com  
 4. LinkedIn: https://linkedin.com/in/vishrutjha
 5. Instagram: https://instagram.com/vishrutkmr7
