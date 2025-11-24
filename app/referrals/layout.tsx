@@ -66,19 +66,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@vishrutkmr7',
-    creator: '@vishrutkmr7',
     title: 'Referrals | Vishrut Jha',
     description:
       'Discover and share my favorite products, services, and tools. Get exclusive referral links for software, credit cards, and more.',
-    images: [
-      {
-        url: `${DOMAIN}/favicon.png`,
-        alt: 'Vishrut Jha Referrals - Get exclusive benefits on software, credit cards, crypto, and more',
-        width: 1080,
-        height: 1080,
-      },
-    ],
+    creator: '@vishrutkmr7',
+    images: [`${DOMAIN}/pfp.png`],
   },
   alternates: {
     canonical: `${DOMAIN}/referrals`,
