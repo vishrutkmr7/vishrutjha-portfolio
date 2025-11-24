@@ -13,11 +13,12 @@ export default function JsonLd() {
     sameAs: [
       'https://github.com/vishrutkmr7',
       'https://x.com/vishrutkmr7',
-      // Add other social profile URLs
+      'https://www.linkedin.com/in/vishrutkmr7/',
+      'https://www.instagram.com/vishrutkmr7',
     ],
     image: {
       '@type': 'ImageObject',
-      url: `${DOMAIN}/favicon.png`,
+      url: `${DOMAIN}/pfp.png`,
       width: 1080,
       height: 1080,
     },

@@ -118,7 +118,7 @@ export const metadata: Metadata = {
       'Portfolio of Vishrut Jha, an experienced iOS and Full-Stack Developer based in Phoenix, AZ.',
     images: [
       {
-        url: `${DOMAIN}/favicon.png`,
+        url: `${DOMAIN}/pfp.png`,
         width: 1080,
         height: 1080,
         alt: 'Vishrut Jha',
@@ -130,7 +130,7 @@ export const metadata: Metadata = {
     title: 'Vishrut Jha - iOS & Full-Stack Developer',
     description:
       'Portfolio of Vishrut Jha, an experienced iOS and Full-Stack Developer based in Phoenix, AZ.',
-    images: [`${DOMAIN}/favicon.png`],
+    images: [`${DOMAIN}/pfp.png`],
     creator: '@vishrutkmr7',
   },
 };
@@ -203,7 +203,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               strategy="lazyOnload"
               src={'https://www.googletagmanager.com/gtag/js?id=G-EM96FL2J50'}
             />
-            {/* biome-ignore lint/correctness/useUniqueElementIds: Next.js Script component requires static id for deduplication */}
             <Script
               id="google-analytics"
               strategy="lazyOnload"

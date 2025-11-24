@@ -23,20 +23,20 @@ export default function RouteJsonLd({ pathname }: RouteJsonLdProps) {
       case '/media':
         return {
           ...baseSchema,
-          name: "Vishrut Jha's Media Appearances",
-          description: 'Media appearances, articles, and publications by Vishrut Jha',
+          name: "Vishrut's Media Appearances",
+          description: 'Media appearances, articles, and publications',
         };
       case '/journey':
         return {
           ...baseSchema,
-          name: "Vishrut Jha's Professional Journey",
-          description: 'Professional experience and career milestones of Vishrut Jha',
+          name: "Vishrut's Professional Journey",
+          description: 'Professional experience and career milestones',
         };
       case '/projects':
         return {
           ...baseSchema,
-          name: "Vishrut Jha's Projects",
-          description: 'Portfolio of projects and applications developed by Vishrut Jha',
+          name: "Vishrut's Projects",
+          description: 'Portfolio of projects and applications',
         };
       default:
         return null;
